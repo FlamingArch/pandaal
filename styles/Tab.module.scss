@@ -1,0 +1,50 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1.5rem;
+  border-radius: 2rem;
+  background-color: rgba(var(--primary-sheet));
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(var(--dark-primary-sheet));
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  align-items: center;
+  background-color: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  path {
+    fill: #42434f;
+    @media (prefers-color-scheme: dark) {
+      fill: white;
+    }
+  }
+}
+
+.selected {
+  color: rgb(var(--primary-color)) !important;
+  @media (prefers-color-scheme: dark) {
+    color: rgb(var(--dark-primary-color)) !important;
+  }
+  path {
+    fill: rgb(var(--primary-color));
+    @media (prefers-color-scheme: dark) {
+      fill: rgb(var(--dark-primary-color));
+    }
+  }
+}

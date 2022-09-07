@@ -1,6 +1,6 @@
 export const NavigationItem = ({ Icon, label, active }) => {
   return (
-    <div className="flex flex-row p-4 text-xl cursor-pointer place-items-center font-medium gap-4">
+    <div className="flex flex-row gap-4 p-4 text-xl font-medium cursor-pointer place-items-center">
       <Icon
         className={"w-8 h-8 " + (active ? "fill-blue-700" : "fill-gray-700")}
       />

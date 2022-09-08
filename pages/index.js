@@ -30,10 +30,10 @@ export default function Home() {
         ]}
       />
       <Tab.View>
-        <h1>Page 1</h1>
-        <h1>Page 2</h1>
-        <h1>Page 3</h1>
-        <h1>Page 4</h1>
+        <h1>Home</h1>
+        <h1>Favourites</h1>
+        <h1>Bookings</h1>
+        <h1>Notifications</h1>
       </Tab.View>
     </Tab.Controller>
   );

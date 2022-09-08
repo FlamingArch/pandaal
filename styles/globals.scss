@@ -29,3 +29,9 @@ html,
     background: black;
   }
 }
+
+@media screen and (max-width: 666px) {
+  .hidden-mobile {
+    display: none;
+  }
+}

@@ -4,20 +4,34 @@ import {
   IconHome,
   IconNotifications,
 } from "../components/Icons";
-import { NavigationItem, NavigationSelector } from "../components/Navigation";
+import { Tab } from "../components";
 import Logo from "./Logo";
 
-const Sidebar = () => {
+const AppSidebar = () => {
+  const navigationItems = [
+    {
+      icon: IconHome,
+      label: "Home",
+    },
+    {
+      icon: IconFavorites,
+      label: "Favourites",
+    },
+    {
+      icon: IconBookings,
+      label: "Bookings",
+    },
+    {
+      icon: IconNotifications,
+      label: "Notifications",
+    },
+  ];
   return (
     <div className="flex flex-col">
-      <Logo />
-      <NavigationSelector>
-        <NavigationItem active={true} Icon={IconHome} label="Home" />
-        <NavigationItem Icon={IconFavorites} label="Favourites" />
-        <NavigationItem Icon={IconBookings} label="Bookings" />
-        <NavigationItem Icon={IconNotifications} label="Notifications" />
-      </NavigationSelector>
+      <Logo className="hidden-mobile" />
+      <Tab.Bar items={navigationItems} />
     </div>
   );
 };
-export default Sidebar;
+
+export default AppSidebar;

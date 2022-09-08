@@ -5,30 +5,12 @@ import {
   IconNotifications,
 } from "../components/Icons";
 import { Tab, Page } from "../components";
+import { AppSidebar } from "../fragments";
 
 export default function Home() {
-  const navigationItems = [
-    {
-      icon: IconHome,
-      label: "Home",
-    },
-    {
-      icon: IconFavorites,
-      label: "Favourites",
-    },
-    {
-      icon: IconBookings,
-      label: "Bookings",
-    },
-    {
-      icon: IconNotifications,
-      label: "Notifications",
-    },
-  ];
-
   return (
     <Tab.Controller>
-      <Page appBar={<Tab.Bar items={navigationItems} />}>
+      <Page appBar={<AppSidebar />}>
         <Tab.View>
           <h1>Home</h1>
           <h1>Favourites</h1>

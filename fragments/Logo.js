@@ -1,13 +1,11 @@
 const Logo = ({ className }) => {
   return (
-    <div
-      className={
-        "flex place-items-center text-3xl font-bold text-blue-600 m-6 h-12 " +
-        className
-      }
+    <p
+      style={{ color: "#3F4882" }}
+      className={`text-2xl font-bold text-[#3F4882] ${className}`}
     >
       pandaal
-    </div>
+    </p>
   );
 };
 

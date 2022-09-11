@@ -1,34 +1,22 @@
-import {
-  IconBookings,
-  IconFavorites,
-  IconHome,
-  IconNotifications,
-} from "../components/Icons";
 import { Tab, Page } from "../components";
-import { AppSidebar } from "../fragments";
+import { AppSidebar, AppHead } from "../fragments";
+import PageBookings from "./bookings";
+import PageFavourites from "./favourites";
+import PageNotifications from "./notifications";
+import PageHome from "./_home";
 
 export default function Home() {
   return (
     <Tab.Controller>
+      <AppHead />
       <Page appBar={<AppSidebar />}>
         <Tab.View>
-          <h1>Home</h1>
-          <h1>Favourites</h1>
-          <h1>Bookings</h1>
-          <h1>Notifications</h1>
+          <PageHome />
+          <PageFavourites />
+          <PageBookings />
+          <PageNotifications />
         </Tab.View>
       </Page>
     </Tab.Controller>
   );
 }
-
-// <>
-//   <AppHead />
-//   <div
-//     className="grid w-screen h-screen overflow-hidden"
-//     style={{ gridTemplateColumns: "auto 1fr" }}
-//   >
-//     <AppSidebar />
-//     <PageHome />
-//   </div>
-// </>;

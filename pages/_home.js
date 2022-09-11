@@ -1,23 +1,20 @@
-import { EventCard } from "../components/Index";
 import { IconLocationEdit } from "../components/Icons";
+import { EventCard, List } from "../components";
 
 const PageHome = () => (
-  <div className="overflow-scroll content">
-    <flex className="flex flex-row justify-end w-full p-6">
-      <div className="w-16 h-16 bg-blue-700 rounded-full"></div>
-    </flex>
-    <section className="flex flex-col gap-4 p-6">
-      <div className="text-2xl font-light">Hey Harsh,</div>
-      <p className="text-4xl font-bold">Showing all the getaway spots near</p>
-      <div className="flex p-4 text-4xl font-bold text-pink-600 transition-colors duration-300 cursor-pointer rounded-3xl w-fit hover:bg-pink-50">
-        Greater Noida
-        <IconLocationEdit className="w-12 h-12 fill-pink-600" />
-      </div>
-    </section>
-
-    <section className="grid grid-flow-row gap-4 p-6">
-      <div className="text-2xl">In Your City</div>
-      <div className="flex flex-row w-screen gap-4 overflow-scroll">
+  <List.View>
+    <div className="flex flex-row justify-end w-full p-6">
+      <div className="w-12 h-12 bg-blue-700 rounded-full"></div>
+    </div>
+    <div className="flex flex-col gap-6 overflow-scroll content">
+      <List.Section heading="Hey Harsh,">
+        <p className="text-4xl font-bold">Showing all the getaway spots near</p>
+        <div className="flex p-4 text-4xl font-bold text-pink-600 transition-colors duration-300 cursor-pointer rounded-3xl w-fit hover:bg-pink-50 dark:hover:bg-pink-900">
+          Greater Noida
+          <IconLocationEdit className="w-12 h-12 fill-pink-600" />
+        </div>
+      </List.Section>
+      <List.Section orientation="row" heading="In Your City">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => (
           <EventCard
             key={i}
@@ -27,12 +24,9 @@ const PageHome = () => (
             address="Greater Noida"
           />
         ))}
-      </div>
-    </section>
+      </List.Section>
 
-    <section className="grid grid-flow-row gap-4 p-6">
-      <div className="text-2xl">Online</div>
-      <div className="flex flex-row w-screen gap-4 overflow-scroll">
+      <List.Section orientation="row" heading="Online">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => (
           <EventCard
             key={i}
@@ -42,12 +36,9 @@ const PageHome = () => (
             address="Greater Noida"
           />
         ))}
-      </div>
-    </section>
+      </List.Section>
 
-    <section className="grid grid-flow-row gap-4 p-6">
-      <div className="text-2xl">Gaming Tournaments</div>
-      <div className="flex flex-row w-screen gap-4 overflow-scroll">
+      <List.Section orientation="row" heading="Gaming Tournaments">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => (
           <EventCard
             key={i}
@@ -57,12 +48,9 @@ const PageHome = () => (
             address="Greater Noida"
           />
         ))}
-      </div>
-    </section>
+      </List.Section>
 
-    <section className="grid grid-flow-row gap-4 p-6">
-      <div className="text-2xl">Workshops</div>
-      <div className="flex flex-row w-screen gap-4 overflow-scroll">
+      <List.Section orientation="row" heading="Workshops">
         {[1].map((_, i) => (
           <EventCard
             key={i}
@@ -72,9 +60,9 @@ const PageHome = () => (
             address="Greater Noida"
           />
         ))}
-      </div>
-    </section>
-  </div>
+      </List.Section>
+    </div>
+  </List.View>
 );
 
 export default PageHome;

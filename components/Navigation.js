@@ -1,24 +1,64 @@
-export const NavigationItem = ({ Icon, label, active }) => {
+import { createContext, useContext, useState } from "react";
+import styles from "../styles/Navigation.module.scss";
+
+const Context = createContext();
+
+const Provider = ({ children }) => {
+  const [index, setIndex] = useState(0);
+
   return (
-    <div className="flex flex-row gap-4 p-4 text-xl font-medium cursor-pointer place-items-center">
-      <Icon
-        className={"w-8 h-8 " + (active ? "fill-blue-700" : "fill-gray-700")}
-      />
-      <p
-        className={
-          "font-medium text-xl " + (active ? "text-blue-700" : "text-gray-700")
-        }
-      >
-        {label}
-      </p>
+    <Context.Provider value={{ index: index, setIndex: setIndex }}>
+      {children}
+    </Context.Provider>
+  );
+};
+
+const Item = ({ Icon, children, trailing, onClick, index, active }) => {
+  return (
+    <div
+      className={
+        active == index ? `${styles.item} ${styles.selected}` : styles.item
+      }
+      onClick={onClick}
+    >
+      {Icon && <Icon className={styles.icon} />}
+      {children}
+      {trailing}
     </div>
   );
 };
 
-export const NavigationSelector = ({ children }) => {
+const View = ({ children }) => {
+  const { index } = useContext(Context);
+  return children[index];
+};
+
+const Bar = ({ items }) => {
+  const { index, setIndex } = useContext(Context);
   return (
-    <div className="bg-blue-50 flex flex-col p-4 rounded-[2rem] m-6">
-      {children}
+    <div className={styles.navbar}>
+      {items.map((e, i) => (
+        <Item
+          key={i}
+          Icon={e.icon}
+          xw
+          onClick={() => setIndex(i)}
+          index={i}
+          active={index}
+        >
+          {e.label}
+        </Item>
+      ))}
     </div>
   );
 };
+
+const Navigation = {
+  Context: Context,
+  Controller: Provider,
+  View: View,
+  Bar: Bar,
+  Item: Item,
+};
+
+export default Navigation;

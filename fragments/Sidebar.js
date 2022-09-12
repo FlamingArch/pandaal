@@ -4,7 +4,7 @@ import {
   IconHome,
   IconNotifications,
 } from "../components/Icons";
-import { Tab } from "../components";
+import { Navigation } from "../components";
 import Logo from "./Logo";
 
 const navigationItems = [
@@ -30,7 +30,7 @@ const AppSidebar = () => {
   return (
     <div className="flex flex-col gap-4 p-6">
       <Logo className="hidden-mobile" />
-      <Tab.Bar items={navigationItems} />
+      <Navigation.Bar items={navigationItems} />
     </div>
   );
 };

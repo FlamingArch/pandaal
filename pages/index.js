@@ -1,4 +1,4 @@
-import { Navigation, ion, Page } from "../components";
+import { Navigation, ion, Scaffold } from "../components";
 import { AppSidebar, AppHead } from "../fragments";
 import PageBookings from "./bookings";
 import PageFavourites from "./favourites";
@@ -9,14 +9,14 @@ export default function Home() {
   return (
     <Navigation.Controller>
       <AppHead />
-      <Page appBar={<AppSidebar />}>
+      <Scaffold appBar={<AppSidebar />}>
         <Navigation.View>
           <PageHome />
           <PageFavourites />
           <PageBookings />
           <PageNotifications />
         </Navigation.View>
-      </Page>
+      </Scaffold>
     </Navigation.Controller>
   );
 }

@@ -1,6 +1,6 @@
-import styles from "../styles/Page.module.scss";
+import styles from "../styles/Scaffold.module.scss";
 
-const Page = ({ children, appBar }) => {
+const Scaffold = ({ children, appBar }) => {
   return (
     <div className={styles.page}>
       <div className={styles.appBar}>{appBar}</div>
@@ -9,4 +9,4 @@ const Page = ({ children, appBar }) => {
   );
 };
 
-export default Page;
+export default Scaffold;

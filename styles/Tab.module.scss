@@ -1,11 +1,13 @@
-/*Material Design Tab Bar*/
-
 .tabbar {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #fff;
+  background-color: white;
+  cursor: pointer;
+  @media (prefers-color-scheme: dark) {
+    background-color: black;
+  }
 }
 
 .tab {
@@ -13,11 +15,14 @@
   padding: 1rem;
   text-align: center;
   text-transform: uppercase;
-  color: var(--primary-color);
   color: rgb(var(--primary-color));
   margin-bottom: 2px;
   opacity: 0.8;
   border-bottom: 2px solid transparent;
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
 }
 
 .selected {

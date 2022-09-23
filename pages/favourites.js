@@ -1,4 +1,4 @@
-import { EventCard, List } from "../components";
+import { List, Page } from "../components";
 import { IconFavorites } from "../components/Icons";
 
 const footer = (
@@ -13,12 +13,14 @@ const footer = (
 
 const PageFavourites = () => {
   return (
-    <List.View>
-      <List.Heading>Favorites</List.Heading>
-      <List.Section heading="Upcoming" orientation="row" description={footer}>
-        {/* {fakeContent} */}
-      </List.Section>
-    </List.View>
+    <Page>
+      <List.View>
+        <List.Heading>Favorites</List.Heading>
+        <List.Section heading="Upcoming" orientation="row" description={footer}>
+          {/* {fakeContent} */}
+        </List.Section>
+      </List.View>
+    </Page>
   );
 };
 

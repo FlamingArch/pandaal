@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { List } from "../components";
+import { List, Page } from "../components";
 import nonotif from "../res/no-notif.svg";
 
 const PageNotificationsEmptyBanner = () => {
@@ -13,10 +13,12 @@ const PageNotificationsEmptyBanner = () => {
 
 const PageNotifications = () => {
   return (
-    <List.View>
-      <List.Heading>Notifications</List.Heading>
-      <PageNotificationsEmptyBanner />
-    </List.View>
+    <Page>
+      <List.View>
+        <List.Heading>Notifications</List.Heading>
+        <PageNotificationsEmptyBanner />
+      </List.View>
+    </Page>
   );
 };
 

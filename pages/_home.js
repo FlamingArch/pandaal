@@ -1,5 +1,6 @@
 import { IconLocationEdit } from "../components/Icons";
 import { EventCard, List } from "../components";
+import { Page } from "../components";
 
 const Sections = {
   "In Your City": [1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => ({
@@ -28,30 +29,37 @@ const Sections = {
   })),
 };
 
-const PageHome = () => (
-  <List.View>
-    <List.Section heading="Hey Harsh,">
-      <p className="text-4xl font-bold">Showing all the getaway spots near</p>
-      <div className="flex p-4 text-4xl font-bold text-pink-600 transition-colors duration-300 cursor-pointer rounded-3xl w-fit hover:bg-pink-50 dark:hover:bg-pink-900">
-        Greater Noida
-        <IconLocationEdit className="w-12 h-12 fill-pink-600" />
+const AppBar = (user) => {
+  return (
+    <div className="flex flex-row p-6 bg-white backdrop-filter backdrop-blur-lg dark:bg-black bg-opacity-60 dark:bg-opacity-60">
+      <p className="font-bold text-[2rem] flex-grow"></p>
+      <div className="grid w-12 h-12 bg-indigo-600 rounded-full aspect-square place-content-center">
+        S
       </div>
-    </List.Section>
+    </div>
+  );
+};
 
-    {Object.keys(Sections).map((title, i) => (
-      <List.Section key={i} heading={title} orientation="row">
-        {Sections[title].map((e, i) => (
-          <EventCard
-            key={i}
-            date="Mon, 26 Sep 2022,"
-            title="The Ultimate Battle Royal in VR"
-            image="https://source.unsplash.com/random"
-            address="Greater Noida"
-          />
-        ))}
+const PageHome = () => (
+  <Page appbar={<AppBar />} paddingBottom={10}>
+    <List.View>
+      <List.Section heading="Hey Harsh,">
+        <p className="text-4xl font-bold">Showing all the getaway spots near</p>
+        <div className="flex p-4 text-4xl font-bold text-pink-600 transition-colors duration-300 cursor-pointer rounded-3xl w-fit hover:bg-pink-50 dark:hover:bg-pink-900">
+          Greater Noida
+          <IconLocationEdit className="w-12 h-12 fill-pink-600" />
+        </div>
       </List.Section>
-    ))}
-  </List.View>
+
+      {Object.keys(Sections).map((title, i) => (
+        <List.Section key={i} heading={title} orientation="row">
+          {Sections[title].map((e, i) => (
+            <EventCard key={i} {...e} />
+          ))}
+        </List.Section>
+      ))}
+    </List.View>
+  </Page>
 );
 
 export default PageHome;

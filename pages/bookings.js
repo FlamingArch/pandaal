@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { List, Navigation } from "../components";
-import Tab from "../components/Tab";
+import { Tab } from "../components";
 import illustration from "../res/events.svg";
 
 const PageBookings = () => {

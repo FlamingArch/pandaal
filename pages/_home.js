@@ -62,7 +62,7 @@ const PageHome = () => {
       }
       paddingBottom={10}
     >
-      <List.View>
+      <List.View gap={2}>
         <List.Section heading="Hey Harsh,">
           <p className="text-4xl font-bold">
             Showing all the getaway spots near
@@ -74,7 +74,7 @@ const PageHome = () => {
         </List.Section>
 
         {Object.keys(events).map((title, i) => (
-          <List.Section key={i} heading={title} orientation="row">
+          <List.Section gap={1.5} key={i} heading={title} orientation="row">
             {events[title].map((e, i) => (
               <EventCard key={i} {...e} />
             ))}

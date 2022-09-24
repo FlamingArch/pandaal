@@ -1,18 +1,19 @@
 import styles from "../styles/List.module.scss";
 
-const View = ({ children, orientation }) => {
+const View = ({ children, orientation, gap }) => {
   return (
     <div
       className={`${styles.list} ${
         orientation && orientation == "row" ? styles.row : null
       }`}
+      style={{ gap: gap * 16 }}
     >
       {children}
     </div>
   );
 };
 
-const Section = ({ heading, children, description, orientation }) => {
+const Section = ({ heading, children, description, orientation, gap }) => {
   return (
     <section className={styles.section}>
       {heading && <p className={styles.sectionHeading}>{heading}</p>}
@@ -20,6 +21,7 @@ const Section = ({ heading, children, description, orientation }) => {
         className={`${styles.sectionContent} ${
           orientation && orientation == "row" ? styles.row : null
         }`}
+        style={{ gap: gap * 16 }}
       >
         {children}
       </div>

@@ -1,6 +1,6 @@
 const EventCard = ({ date, title, image, address }) => {
   return (
-    <div className="flex flex-col gap-1" style={{ flex: "0 0 12rem" }}>
+    <div className="flex flex-col gap-2" style={{ flex: "0 0 10rem" }}>
       <img
         src="https://source.unsplash.com/random"
         className="rounded-[2rem] aspect-[9/12] object-cover w-full"

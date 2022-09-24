@@ -1,10 +1,11 @@
 import { createContext } from "react";
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuthh, signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
+import { getFirestore, collection } from "firebase/firestore";
 
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const Context = createContext();
 
@@ -21,21 +22,38 @@ const Provider = ({ children }) => {
 
   const app = initializeApp(config);
 
-  const analytics = getAnalytics(app);
-
   const auth = getAuth(app);
-  const [user, signInLoading, signInError] = useAuthState(auth);
+  const [user, userLoading, userError] = useAuthState(auth);
+
+  const firestore = getFirestore(app);
+  const [eventsSnapshot, eventsLoading, eventsError] = useCollectionData(
+    collection(firestore, "Events")
+  );
+
+  const signOutUser = () => {
+    signOut(auth);
+  };
 
   return (
     <Context.Provider
       value={{
-        analytics: analytics,
-        app: app,
-        auth: auth,
-        config: config,
-        signInLoading: signInLoading,
-        signInError: signInError,
-        user: user,
+        objects: {
+          app: app,
+          auth: auth,
+          firestore: firestore,
+          config: config,
+        },
+        authentication: {
+          loading: userLoading,
+          error: userError,
+          user: user,
+          signOut: signOutUser,
+        },
+        events: {
+          snapshot: eventsSnapshot,
+          loading: eventsLoading,
+          error: eventsError,
+        },
       }}
     >
       {children}

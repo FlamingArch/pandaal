@@ -5,3 +5,4 @@ export { default as Scaffold } from "./Scaffold";
 export { default as List } from "./List";
 export { default as Page } from "./Page";
 export { default as Tab } from "./Tab";
+export { default as AppBar } from "./AppBar";

@@ -1,5 +1,5 @@
 import { IconLocationEdit } from "../components/Icons";
-import { EventCard, List } from "../components";
+import { AppBar, EventCard, List } from "../components";
 import { Page } from "../components";
 
 const Sections = {
@@ -29,19 +29,17 @@ const Sections = {
   })),
 };
 
-const AppBar = (user) => {
-  return (
-    <div className="flex flex-row p-6 bg-white backdrop-filter backdrop-blur-lg dark:bg-black bg-opacity-60 dark:bg-opacity-60">
-      <p className="font-bold text-[2rem] flex-grow"></p>
-      <div className="grid w-12 h-12 bg-indigo-600 rounded-full aspect-square place-content-center">
-        S
-      </div>
-    </div>
-  );
-};
-
 const PageHome = () => (
-  <Page appbar={<AppBar />} paddingBottom={10}>
+  <Page
+    appbar={
+      <AppBar heading="Home">
+        <div className="grid w-12 h-12 bg-indigo-600 rounded-full aspect-square place-content-center">
+          H
+        </div>
+      </AppBar>
+    }
+    paddingBottom={10}
+  >
     <List.View>
       <List.Section heading="Hey Harsh,">
         <p className="text-4xl font-bold">Showing all the getaway spots near</p>

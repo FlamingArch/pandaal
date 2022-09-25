@@ -9,7 +9,23 @@
     grid-template-rows: 1fr;
   }
 }
+
+.primarySection {
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 666px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 .appBar {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigationBar {
   @media screen and (max-width: 666px) {
     position: absolute;
     bottom: 0;

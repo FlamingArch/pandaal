@@ -13,7 +13,14 @@ const View = ({ children, orientation, gap }) => {
   );
 };
 
-const Section = ({ heading, children, description, orientation, gap }) => {
+const Section = ({
+  heading,
+  children,
+  description,
+  orientation,
+  gap,
+  padding,
+}) => {
   return (
     <section className={styles.section}>
       {heading && <p className={styles.sectionHeading}>{heading}</p>}
@@ -21,7 +28,7 @@ const Section = ({ heading, children, description, orientation, gap }) => {
         className={`${styles.sectionContent} ${
           orientation && orientation == "row" ? styles.row : null
         }`}
-        style={{ gap: gap * 16 }}
+        style={{ gap: gap * 16, padding: padding || "0 1.5rem" }}
       >
         {children}
       </div>

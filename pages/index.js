@@ -1,4 +1,4 @@
-import { Navigation, Scaffold, Modal, Button } from "../components-legacy";
+import { Navigation, Scaffold, Modal, Button } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
 import { AppHead } from "../fragments";
 import PageBookings from "./bookings";
@@ -14,7 +14,7 @@ import {
   IconFavorites,
   IconHome,
   IconNotifications,
-} from "../components-legacy/Icons";
+} from "../legacy/components/Icons";
 
 const navigationItems = [
   {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { List, Page } from "../components-legacy";
+import { List, Page } from "../legacy/components";
 import nonotif from "../res/no-notif.svg";
 
 const PageNotificationsEmptyBanner = () => {

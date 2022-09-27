@@ -1,4 +1,4 @@
-import styles from "../styles-legacy/TextField.module.scss";
+import styles from "../styles/TextField.module.scss";
 
 const TextField = ({ value, onChange, Icon, label, className, classNames }) => {
   return (

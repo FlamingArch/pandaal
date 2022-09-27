@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { IconLocationEdit } from "../components-legacy/Icons";
-import { AppBar, EventCard, List, Page } from "../components-legacy";
+import { IconLocationEdit } from "../legacy/components/Icons";
+import { AppBar, EventCard, List, Page } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
 
 const PageHome = ({ actionButton }) => {

@@ -1,4 +1,4 @@
-import styles from "../styles-legacy/Modal.module.scss";
+import styles from "../styles/Modal.module.scss";
 
 const Modal = ({ isPresented, parentRef, children, className, classNames }) => {
   console.log(parentRef.current);

@@ -1,4 +1,4 @@
-import styles from "../styles-legacy/AppBar.module.scss";
+import styles from "../styles/AppBar.module.scss";
 import { IconBack } from "./Icons";
 
 const AppBar = ({

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import styles from "../styles/Navigation.module.scss";
+import styles from "../styles-legacy/Navigation.module.scss";
 
 const Context = createContext();
 

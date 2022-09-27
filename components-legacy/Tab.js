@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import styles from "../styles/Tab.module.scss";
+import styles from "../styles-legacy/Tab.module.scss";
 
 const Context = createContext();
 

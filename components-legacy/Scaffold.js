@@ -1,4 +1,4 @@
-import styles from "../styles/Scaffold.module.scss";
+import styles from "../styles-legacy/Scaffold.module.scss";
 
 const Scaffold = ({
   children,

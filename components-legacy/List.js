@@ -1,4 +1,4 @@
-import styles from "../styles/List.module.scss";
+import styles from "../styles-legacy/List.module.scss";
 
 const View = ({ children, orientation, gap, className }) => {
   return (

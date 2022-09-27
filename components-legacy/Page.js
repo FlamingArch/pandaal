@@ -1,4 +1,4 @@
-import styles from "../styles/Page.module.scss";
+import styles from "../styles-legacy/Page.module.scss";
 
 const Page = ({
   appbar,

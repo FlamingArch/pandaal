@@ -16,7 +16,10 @@ const AppBar = ({
       }
     >
       {backFunction && (
-        <div className="cursor-pointer flex flex-row gap-3 fill-[#3F4882] text-[#3F4882] items-center w-fit">
+        <div
+          className="cursor-pointer flex flex-row gap-3 fill-[#3F4882] text-[#3F4882] items-center w-fit"
+          onClick={backFunction}
+        >
           <div className="rounded-[0.8rem] bg-[#F4F8FD] p-4 w-fit h-fit">
             <IconBack className="w-4 h-4" />
           </div>

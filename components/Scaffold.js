@@ -7,10 +7,13 @@ const Scaffold = ({
   primaryCTA,
   className,
   classNames,
+  ref,
+  modalPresented,
 }) => {
   return (
     <div
-      className={`${styles.page} ${
+      ref={ref}
+      className={`${styles.page} ${modalPresented ? styles.backstage : null} ${
         classNames && classNames.page
       } ${className} page`}
     >

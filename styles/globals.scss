@@ -30,8 +30,18 @@ html,
   }
 }
 
+@media screen and (min-width: 666px) {
+  .hidden-desktop {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 666px) {
   .hidden-mobile {
     display: none;
   }
+}
+
+body {
+  background-color: black;
 }

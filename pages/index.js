@@ -1,12 +1,15 @@
-import { Navigation, Scaffold } from "../components";
+import { Navigation, Scaffold, Modal, Button } from "../components";
 import FirebaseIntegration from "../components/Firebase";
 import { AppHead } from "../fragments";
 import PageBookings from "./bookings";
 import PageFavourites from "./favourites";
 import PageNotifications from "./notifications";
 import PageHome from "./_home";
+import PageNewEvent from "./newevent";
 import Logo from "../fragments/Logo";
+import { useRef, useState } from "react";
 import {
+  IconAdd,
   IconBookings,
   IconFavorites,
   IconHome,
@@ -33,26 +36,41 @@ const navigationItems = [
 ];
 
 export default function Home() {
+  const [newScreenVisible, setNewScreenVisible] = useState(false);
+  const scaffoldRef = useRef(null);
+
   return (
     <FirebaseIntegration.Provider>
       <Navigation.Controller>
         <AppHead />
         <Scaffold
+          modalPresented={newScreenVisible}
           navigationBar={<Navigation.Bar items={navigationItems} />}
-          branding={<Logo className="m-6 mb-0 hidden-mobile" />}
+          branding={<Logo.Text className="m-6 mb-0 hidden-mobile" />}
           primaryCTA={
-            <div className="p-4 mt-4 mr-4 text-lg font-bold text-center text-white transition duration-200 ease-in-out bg-blue-500 rounded cursor-pointer hidden-mobile full hover:bg-blue-600">
-              Create New Event
-            </div>
+            <Button
+              onClick={() => setNewScreenVisible(true)}
+              className="hidden-mobile"
+            />
           }
         >
           <Navigation.View>
-            <PageHome />
+            <PageHome
+              actionButton={
+                <Button
+                  onClick={() => setNewScreenVisible(true)}
+                  className="hidden-desktop"
+                />
+              }
+            />
             <PageFavourites />
             <PageBookings />
             <PageNotifications />
           </Navigation.View>
         </Scaffold>
+        <Modal isPresented={newScreenVisible} parentRef={scaffoldRef}>
+          <PageNewEvent backFunction={() => setNewScreenVisible(false)} />
+        </Modal>
       </Navigation.Controller>
     </FirebaseIntegration.Provider>
   );

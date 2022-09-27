@@ -3,7 +3,7 @@ import { IconLocationEdit } from "../components/Icons";
 import { AppBar, EventCard, List, Page } from "../components";
 import FirebaseIntegration from "../components/Firebase";
 
-const PageHome = () => {
+const PageHome = ({ actionButton }) => {
   const [events, setEvents] = useState({
     "In Your City": [1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => ({
       date: "Mon, 26 Sep 2022,",
@@ -60,6 +60,7 @@ const PageHome = () => {
           </div>
         </AppBar>
       }
+      actionButton={actionButton}
       paddingBottom={10}
     >
       <List.View gap={2}>

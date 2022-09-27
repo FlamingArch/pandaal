@@ -2,6 +2,7 @@ import styles from "../styles/Page.module.scss";
 
 const Page = ({
   appbar,
+  actionButton,
   children,
   paddingBottom,
   margin,
@@ -10,6 +11,13 @@ const Page = ({
 }) => {
   return (
     <div className={`${classNames && classNames.page} ${className}`}>
+      <div
+        className={`${styles.actionButton} ${
+          classNames && classNames.actionButton
+        } actionButton`}
+      >
+        {actionButton}
+      </div>
       <div
         className={`${styles.appbar} ${classNames && classNames.appBar} appBar`}
       >

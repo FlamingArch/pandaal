@@ -2,3 +2,10 @@
   position: sticky;
   top: 0;
 }
+
+.actionButton {
+  position: absolute;
+  bottom: 128px;
+  right: 16px;
+  z-index: 100;
+}

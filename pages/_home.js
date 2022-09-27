@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { IconLocationEdit } from "../components/Icons";
-import { AppBar, EventCard, List, Page } from "../components";
-import FirebaseIntegration from "../components/Firebase";
+import { IconLocationEdit } from "../components-legacy/Icons";
+import { AppBar, EventCard, List, Page } from "../components-legacy";
+import FirebaseIntegration from "../fragments/Firebase";
 
 const PageHome = ({ actionButton }) => {
   const [events, setEvents] = useState({

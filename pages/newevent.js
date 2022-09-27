@@ -1,5 +1,5 @@
-import { AppBar, List, Page, TextField } from "../components";
-import { IconBack } from "../components/Icons";
+import { AppBar, List, Page, TextField } from "../components-legacy";
+import { IconBack } from "../components-legacy/Icons";
 
 export default function PageNewEvent({ backFunction }) {
   return (

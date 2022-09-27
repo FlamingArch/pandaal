@@ -1,5 +1,5 @@
-import { List, Page } from "../components";
-import { IconFavorites } from "../components/Icons";
+import { List, Page } from "../components-legacy";
+import { IconFavorites } from "../components-legacy/Icons";
 
 const footer = (
   <>

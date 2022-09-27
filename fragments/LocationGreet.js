@@ -1,5 +1,5 @@
-import { List } from "../components";
-import { IconLocationEdit } from "../components/Icons";
+import { List } from "../components-legacy";
+import { IconLocationEdit } from "../components-legacy/Icons";
 
 const LocationGreet = () => {
   return (

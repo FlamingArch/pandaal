@@ -1,5 +1,5 @@
-import { Navigation, Scaffold, Modal, Button } from "../components";
-import FirebaseIntegration from "../components/Firebase";
+import { Navigation, Scaffold, Modal, Button } from "../components-legacy";
+import FirebaseIntegration from "../fragments/Firebase";
 import { AppHead } from "../fragments";
 import PageBookings from "./bookings";
 import PageFavourites from "./favourites";
@@ -14,7 +14,7 @@ import {
   IconFavorites,
   IconHome,
   IconNotifications,
-} from "../components/Icons";
+} from "../components-legacy/Icons";
 
 const navigationItems = [
   {

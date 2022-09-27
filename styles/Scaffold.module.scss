@@ -9,6 +9,9 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
   }
+  @media (prefers-color-scheme: dark) {
+    background-color: black;
+  }
   transition: transform 250ms ease-in, border-radius 250ms ease-in;
 }
 
@@ -32,6 +35,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
+  @media screen and (max-width: 666px) {
+    display: none;
+  }
 }
 
 .navigationBar {

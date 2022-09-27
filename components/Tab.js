@@ -13,11 +13,11 @@ const Provider = ({ children }) => {
   );
 };
 
-const Bar = ({ items }) => {
+const Bar = ({ items, className }) => {
   const { index, setIndex } = useContext(Context);
 
   return (
-    <div className={styles.tabbar}>
+    <div className={`${styles.tabbar} ${className}`}>
       {items.map((e, i) => (
         <div
           key={i}
@@ -33,9 +33,9 @@ const Bar = ({ items }) => {
   );
 };
 
-const View = ({ children }) => {
+const View = ({ children, className }) => {
   const { index } = useContext(Context);
-  return children[index];
+  return <div className={className}>{children[index]}</div>;
 };
 
 const Tab = {

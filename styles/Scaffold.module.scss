@@ -25,6 +25,13 @@
   flex-direction: column;
 }
 
+.primaryCTA {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
 .navigationBar {
   @media screen and (max-width: 666px) {
     position: absolute;

@@ -13,30 +13,43 @@ const Provider = ({ children }) => {
   );
 };
 
-const Item = ({ Icon, children, trailing, onClick, index, active }) => {
+const Item = ({
+  Icon,
+  children,
+  trailing,
+  onClick,
+  index,
+  active,
+  className,
+  classNames,
+}) => {
   return (
     <div
-      className={
-        active == index ? `${styles.item} ${styles.selected}` : styles.item
-      }
+      className={`${styles.item} ${
+        classNames && classNames.item
+      } ${className} ${active == index && ` ${styles.selected}`}`}
       onClick={onClick}
     >
-      {Icon && <Icon className={styles.icon} />}
+      {Icon && (
+        <Icon
+          className={`${styles.icon} ${classNames && classNames.icon} icon`}
+        />
+      )}
       {children}
       {trailing}
     </div>
   );
 };
 
-const View = ({ children }) => {
+const View = ({ children, className }) => {
   const { index } = useContext(Context);
-  return children[index];
+  return <div className={`${className}`}>{children[index]}</div>;
 };
 
-const Bar = ({ items }) => {
+const Bar = ({ items, className }) => {
   const { index, setIndex } = useContext(Context);
   return (
-    <div className={styles.navbar}>
+    <div className={`${styles.navbar} ${className}`}>
       {items.map((e, i) => (
         <Item
           key={i}

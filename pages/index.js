@@ -1,4 +1,4 @@
-import { Navigation, Scaffold, Modal, Button } from "../legacy/components";
+import { Navigation, Modal, Button } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
 import { AppHead } from "../fragments";
 import PageBookings from "./bookings";
@@ -8,6 +8,9 @@ import PageHome from "./_home";
 import PageNewEvent from "./newevent";
 import Logo from "../fragments/Logo";
 import { useRef, useState } from "react";
+
+import { Scaffold } from "../components";
+
 import {
   IconAdd,
   IconBookings,
@@ -40,38 +43,9 @@ export default function Home() {
   const scaffoldRef = useRef(null);
 
   return (
-    <FirebaseIntegration.Provider>
-      <Navigation.Controller>
-        <AppHead />
-        <Scaffold
-          modalPresented={newScreenVisible}
-          navigationBar={<Navigation.Bar items={navigationItems} />}
-          branding={<Logo.Text className="m-6 mb-0 hidden-mobile" />}
-          primaryCTA={
-            <Button
-              onClick={() => setNewScreenVisible(true)}
-              className="hidden-mobile"
-            />
-          }
-        >
-          <Navigation.View>
-            <PageHome
-              actionButton={
-                <Button
-                  onClick={() => setNewScreenVisible(true)}
-                  className="hidden-desktop"
-                />
-              }
-            />
-            <PageFavourites />
-            <PageBookings />
-            <PageNotifications />
-          </Navigation.View>
-        </Scaffold>
-        <Modal isPresented={newScreenVisible} parentRef={scaffoldRef}>
-          <PageNewEvent backFunction={() => setNewScreenVisible(false)} />
-        </Modal>
-      </Navigation.Controller>
-    </FirebaseIntegration.Provider>
+    <>
+      <AppHead />
+      <Scaffold></Scaffold>
+    </>
   );
 }

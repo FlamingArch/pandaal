@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  background-color: red;
+  padding: 1.5rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.primary {
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  flex-grow: 1;
+}

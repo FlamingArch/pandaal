@@ -13,6 +13,10 @@
   gap: 1rem;
   background-color: rgb(var(--color-primary-extralight));
   border-radius: 2rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(var(--color-primary-dark));
+  }
 }
 
 .tabBar {
@@ -24,6 +28,7 @@
 .navigationItem {
   cursor: pointer;
   display: flex;
+  position: relative;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
@@ -46,7 +51,7 @@
     &,
     svg,
     path {
-      fill: rgba(var(--color-primary-light));
+      fill: rgba(var(--color-primary-light), 0.8);
     }
   }
 
@@ -54,6 +59,43 @@
     font-size: 0;
     gap: 0;
     min-width: 0px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:hover {
+      color: rgba(white, 0.8);
+      &,
+      svg,
+      path {
+        fill: rgba(white, 0.8);
+      }
+    }
+    color: rgb(var(--color-primary-extralight), 0.5);
+    &,
+    svg,
+    path {
+      fill: rgb(var(--color-primary-extralight), 0.5);
+    }
+  }
+
+  &::after {
+    z-index: -99;
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%), scale(0);
+    display: block;
+    width: 192px;
+    height: 192px;
+    opacity: 0;
+    border-radius: 999px;
+    filter: blur(2rem);
+    background: radial-gradient(
+      circle,
+      rgba(white, 0.5) 0%,
+      rgba(white, 0) 100%
+    );
   }
 }
 
@@ -63,6 +105,19 @@
   svg,
   path {
     fill: rgba(var(--color-primary));
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+    &,
+    svg,
+    path {
+      fill: white;
+    }
+  }
+
+  &::after {
+    animation: inkwell 450ms ease-out forwards;
   }
 
   animation: selectionChanged 250ms ease-in;
@@ -100,6 +155,7 @@
 
 .tabItem.selected {
   border-bottom: 2px solid rgba(var(--color-primary));
+  animation: selectionChangedTab 250ms ease-in;
 }
 
 @keyframes selectionChanged {
@@ -111,5 +167,32 @@
   }
   100% {
     transform: none;
+  }
+}
+
+@keyframes selectionChangedTab {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.64;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes inkwell {
+  0% {
+    transform: translate(-50%, -50%), scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%), scale(10);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%), scale(0);
+    opacity: 0;
   }
 }

@@ -3,6 +3,7 @@ import { IconLocationEdit } from "../legacy/components/Icons";
 import { Page, AppBar } from "../components";
 import { EventCard, List } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
+import Link from "next/link";
 
 const PageHome = ({ actionButton }) => {
   const [events, setEvents] = useState({
@@ -56,9 +57,11 @@ const PageHome = ({ actionButton }) => {
     <Page
       appBar={
         <AppBar title="Home">
-          <div className="grid w-12 h-12 bg-indigo-600 rounded-full aspect-square place-content-center">
-            H
-          </div>
+          <Link href="/settings">
+            <div className="grid w-12 h-12 bg-indigo-600 rounded-full cursor-pointer aspect-square place-content-center">
+              H
+            </div>
+          </Link>
         </AppBar>
       }
       primaryActionButton={actionButton}

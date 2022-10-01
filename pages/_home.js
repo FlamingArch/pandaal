@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { IconLocationEdit } from "../legacy/components/Icons";
-import { AppBar, EventCard, List, Page } from "../legacy/components";
+import { Page, AppBar } from "../components";
+import { EventCard, List } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
 
 const PageHome = ({ actionButton }) => {
@@ -53,15 +54,14 @@ const PageHome = ({ actionButton }) => {
 
   return (
     <Page
-      appbar={
-        <AppBar heading="Home">
+      appBar={
+        <AppBar title="Home">
           <div className="grid w-12 h-12 bg-indigo-600 rounded-full aspect-square place-content-center">
             H
           </div>
         </AppBar>
       }
-      actionButton={actionButton}
-      paddingBottom={10}
+      primaryActionButton={actionButton}
     >
       <List.View gap={2}>
         <List.Section heading="Hey Harsh,">
@@ -81,6 +81,7 @@ const PageHome = ({ actionButton }) => {
             ))}
           </List.Section>
         ))}
+        <div className="h-32" />
       </List.View>
     </Page>
   );

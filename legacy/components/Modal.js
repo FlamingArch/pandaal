@@ -1,8 +1,13 @@
 import styles from "../styles/Modal.module.scss";
 
-const Modal = ({ isPresented, parentRef, children, className, classNames }) => {
-  console.log(parentRef.current);
-
+const Modal = ({
+  isPresented,
+  onDismiss,
+  parentRef,
+  children,
+  className,
+  classNames,
+}) => {
   return (
     isPresented && (
       <div

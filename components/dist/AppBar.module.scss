@@ -1,10 +1,10 @@
 .container {
   width: 100%;
-  background-color: red;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   gap: 1rem;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(1rem);
 }
 
 .primary {
@@ -14,4 +14,6 @@
 
 .title {
   flex-grow: 1;
+  font-size: 2rem;
+  font-weight: 700;
 }

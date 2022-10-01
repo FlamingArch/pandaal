@@ -9,3 +9,7 @@
   right: 16px;
   z-index: 100;
 }
+
+.container {
+  overscroll-behavior: contain;
+}

@@ -6,9 +6,10 @@ export default function Scaffold({
   leading,
   trailing,
   middle,
+  dim,
 }) {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${dim && styles.dim}`}>
       <div className={styles.sidebar}>
         {logo && <div className={styles.logo}>{logo}</div>}
         {leading && <div className={styles.leading}>{leading}</div>}

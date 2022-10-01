@@ -46,6 +46,7 @@
   width: 100vw;
   overflow: hidden;
   background: white;
+  transition: transform 150ms ease-out, border-radius 150ms ease-out;
 
   @media screen and (max-width: 666px) {
     display: flex;
@@ -61,4 +62,11 @@
   display: grid;
   flex-direction: row;
   height: 100vh;
+}
+
+.dim {
+  @media screen and (max-width: 666px) {
+    transform: scale(0.95);
+    border-radius: 1.5rem;
+  }
 }

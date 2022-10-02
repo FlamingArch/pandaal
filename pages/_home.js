@@ -4,54 +4,11 @@ import { Page, AppBar } from "../components";
 import { EventCard, List } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
 import Link from "next/link";
+import { useEffect } from "react";
+import _ from "lodash";
 
 const PageHome = ({ actionButton }) => {
-  const [events, setEvents] = useState({
-    "In Your City": [1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => ({
-      date: "Mon, 26 Sep 2022,",
-      title: "The Ultimate Battle Royal in VR",
-      image: "https://source.unsplash.com/random",
-      address: "Greater Noida",
-    })),
-    Online: [1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => ({
-      date: "Mon, 26 Sep 2022,",
-      title: "The Ultimate Battle Royal in VR",
-      image: "https://source.unsplash.com/random",
-      address: "Greater Noida",
-    })),
-    "Gaming Tournaments": [1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => ({
-      date: "Mon, 26 Sep 2022,",
-      title: "The Ultimate Battle Royal in VR",
-      image: "https://source.unsplash.com/random",
-      address: "Greater Noida",
-    })),
-    Workshops: [1, 2].map((_, i) => ({
-      date: "Mon, 26 Sep 2022,",
-      title: "The Ultimate Battle Royal in VR",
-      image: "https://source.unsplash.com/random",
-      address: "Greater Noida",
-    })),
-  });
-
-  const Firebase = useContext(FirebaseIntegration.Context);
-
-  if (Firebase.events.loading) {
-    return "Loading events";
-  }
-
-  if (Firebase.events.error) {
-    return "Error loading events";
-  }
-
-  const Sections = {};
-  Firebase.events.snapshot.forEach((element) => {
-    if (Sections[element.category] == undefined) {
-      Sections[element.category] = [element];
-    }
-    Sections[element.Category] = [Sections[element.Category], element].flat();
-  });
-
-  console.log(Sections);
+  const FirebaseEnv = useContext(FirebaseIntegration.Context);
 
   return (
     <Page
@@ -77,14 +34,19 @@ const PageHome = ({ actionButton }) => {
           </div>
         </List.Section>
 
-        {Object.keys(events).map((title, i) => (
+        {Object.keys(FirebaseEnv.events.fetchedEvents).map((title, i) => (
           <List.Section gap={1.5} key={i} heading={title} orientation="row">
-            {events[title].map((e, i) => (
-              <EventCard key={i} {...e} />
+            {FirebaseEnv.events.fetchedEvents[title].map((e, i) => (
+              <EventCard
+                key={i}
+                title={_.truncate(e.Title, { length: 50 })}
+                date={e.startDate}
+                image={e.bannerURL}
+              />
             ))}
           </List.Section>
         ))}
-        <div className="h-32" />
+        <div className="h-48" />
       </List.View>
     </Page>
   );

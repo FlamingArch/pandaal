@@ -15,7 +15,7 @@ const PageBookings = () => {
               <Image
                 src={illustration}
                 alt=""
-                className="h-[50vh] scale-75 aspect-square"
+                className="h-[50vmin] scale-75 aspect-square"
               />
               <p className="text-xl font-bold center">No upcoming bookings.</p>
               <p className="text-xl center">

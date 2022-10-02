@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState, useEffect } from "react";
 
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
@@ -29,6 +29,19 @@ const Provider = ({ children }) => {
   const [eventsSnapshot, eventsLoading, eventsError] = useCollectionData(
     collection(firestore, "Events")
   );
+  const [events, setEvents] = useState({});
+
+  useEffect(() => {
+    if (eventsSnapshot) {
+      const events = {};
+      eventsSnapshot.forEach((e) => {
+        if (e.Category in events) events[e.Category].push(e);
+        else events[e.Category] = [e];
+      });
+      console.log(events);
+      setEvents(events);
+    }
+  }, [eventsSnapshot]);
 
   const signOutUser = () => {
     signOut(auth);
@@ -53,6 +66,7 @@ const Provider = ({ children }) => {
           snapshot: eventsSnapshot,
           loading: eventsLoading,
           error: eventsError,
+          fetchedEvents: events,
         },
       }}
     >
@@ -61,6 +75,9 @@ const Provider = ({ children }) => {
   );
 };
 
-const FirebaseIntegration = { Context: Context, Provider: Provider };
+const FirebaseIntegration = {
+  Context: Context,
+  Provider: Provider,
+};
 
 export default FirebaseIntegration;

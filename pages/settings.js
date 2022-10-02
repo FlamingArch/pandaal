@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useContext } from "react";
 import { Page, Scaffold } from "../components";
+import FirebaseIntegration from "../fragments/Firebase";
 import { List } from "../legacy/components";
 import { IconAdd, IconBack } from "../legacy/components/Icons";
 
@@ -73,7 +75,10 @@ export default function settings() {
               </List.Section>
             </div>
             <div className="grid p-6 place-content-center">
-              <div className="px-12 py-6 rounded-[1.5rem] font-bold text-primary cursor-pointer bg-[#c7dbf5]">
+              <div
+                className="px-12 py-6 rounded-[1.5rem] font-bold text-primary cursor-pointer bg-[#c7dbf5]"
+                onClick={Firebase.authentication.signOut}
+              >
                 Sign-out
               </div>
             </div>

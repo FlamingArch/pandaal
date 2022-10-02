@@ -7,7 +7,7 @@ import PageNewEvent from "./newevent";
 import Logo from "../fragments/Logo";
 import { useRef, useState } from "react";
 
-import { Scaffold, Navigation } from "../components";
+import { Scaffold, Navigation, Page } from "../components";
 
 import {
   IconAdd,
@@ -18,9 +18,13 @@ import {
 } from "../legacy/components/Icons";
 import FirebaseIntegration from "../fragments/Firebase";
 import { Modal } from "../legacy/components";
+import { PageEvent } from "./eventPage";
 
 export default function Home() {
   const [newScreenVisible, setNewScreenVisible] = useState(false);
+
+  const [page, setPage] = useState();
+
   const scaffoldRef = useRef(null);
   const actionButton = (
     <div
@@ -59,15 +63,18 @@ export default function Home() {
           }
         >
           <Navigation.View>
-            <PageHome actionButton={actionButton} />
+            <PageHome actionButton={actionButton} createPage={setPage} />
             <PageFavourites />
             <PageBookings />
             <PageNotifications />
           </Navigation.View>
         </Scaffold>
-        <Modal isPresented={newScreenVisible}>
+
+        <Modal.Partial isPresented={newScreenVisible}>
           <PageNewEvent backFunction={() => setNewScreenVisible(false)} />
-        </Modal>
+        </Modal.Partial>
+
+        <Modal.Full isPresented={!!page}>{page}</Modal.Full>
       </FirebaseIntegration.Provider>
     </Navigation.Provider>
   );

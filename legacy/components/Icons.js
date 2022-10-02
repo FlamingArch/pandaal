@@ -95,3 +95,17 @@ export const IconAdd = ({ className }) => {
     </svg>
   );
 };
+
+export const IconClock = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      width="25"
+      height="24"
+      viewBox="0 0 25 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12.5 20C16.9 20 20.5 16.4 20.5 12C20.5 7.6 16.9 4 12.5 4C8.1 4 4.5 7.6 4.5 12C4.5 16.4 8.1 20 12.5 20ZM12.5 2C18 2 22.5 6.5 22.5 12C22.5 17.5 18 22 12.5 22C7 22 2.5 17.5 2.5 12C2.5 6.5 7 2 12.5 2ZM17.5 13.9L16.8 15.2L11.5 12.3V7H13V11.4L17.5 13.9Z" />
+    </svg>
+  );
+};

@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  cursor: pointer;
+  transition: scale 150ms ease-in-out;
+  &:hover {
+    scale: 0.96;
+  }
 }
 
 .image {

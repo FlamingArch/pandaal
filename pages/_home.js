@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import _ from "lodash";
 
-const PageHome = ({ actionButton }) => {
+const PageHome = ({ actionButton, createPage }) => {
   const FirebaseEnv = useContext(FirebaseIntegration.Context);
 
   return (
@@ -37,12 +37,7 @@ const PageHome = ({ actionButton }) => {
         {Object.keys(FirebaseEnv.events.fetchedEvents).map((title, i) => (
           <List.Section gap={1.5} key={i} heading={title} orientation="row">
             {FirebaseEnv.events.fetchedEvents[title].map((e, i) => (
-              <EventCard
-                key={i}
-                title={_.truncate(e.Title, { length: 50 })}
-                date={e.startDate}
-                image={e.bannerURL}
-              />
+              <EventCard event={e} setPage={createPage} key={i} />
             ))}
           </List.Section>
         ))}

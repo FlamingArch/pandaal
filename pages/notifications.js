@@ -33,6 +33,7 @@ const PageNotifications = () => {
               />
               Sign in to view your bookings.
               <div
+                id="signin"
                 onClick={() => setPage(<SignIn />)}
                 className="px-12 py-3 text-center text-white cursor-pointer w-fit rounded-xl bg-primary"
               >

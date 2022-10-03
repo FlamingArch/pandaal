@@ -1,11 +1,13 @@
 import { createContext, useState, useEffect } from "react";
 
 import { initializeApp } from "firebase/app";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, RecaptchaVerifier, signOut } from "firebase/auth";
 import { getFirestore, collection } from "firebase/firestore";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+
+const test_env = false;
 
 const Context = createContext();
 
@@ -23,11 +25,46 @@ const Provider = ({ children }) => {
   const app = initializeApp(config);
 
   const auth = getAuth(app);
+
+  const getSignIn = (phoneNumber) => {
+    window.rqecaptchaVerifier = new RecaptchaVerifier("recaptcha-container", {
+      size: "invisible",
+    });
+    return signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+  };
+
+  const signIn = (phoneNumber) => {
+    return;
+    getSignIn(phoneNumber)
+      .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        const code = window.prompt("Enter OTP");
+        confirmationResult
+          .confirm(code)
+          .then((result) => {
+            // User signed in successfully.
+            const user = result.user;
+            // ...
+          })
+
+          .catch((error) => {
+            // User couldn't sign in (bad verification code?)
+            // ...
+          });
+      })
+
+      .catch((error) => {
+        // Error; SMS not sent
+        // ...
+      });
+  };
+
   const [user, userLoading, userError] = useAuthState(auth);
 
   const firestore = getFirestore(app);
   const [eventsSnapshot, eventsLoading, eventsError] = useCollectionData(
-    collection(firestore, "testEvents")
+    collection(firestore, test_env ? "testEvents" : "events")
   );
   const [events, setEvents] = useState({});
 
@@ -57,6 +94,7 @@ const Provider = ({ children }) => {
           config: config,
         },
         authentication: {
+          signIn: signIn,
           loading: userLoading,
           error: userError,
           user: user,

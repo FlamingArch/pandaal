@@ -6,7 +6,9 @@ import illustration2 from "../res/welcome.svg";
 import illustration3 from "../res/welcome.svg";
 import { TextField } from "../legacy/components";
 import { IconAdd, IconBack } from "../legacy/components/Icons";
-import React from "react";
+import React, { useContext } from "react";
+import FirebaseIntegration from "../fragments/Firebase";
+import { RecaptchaVerifier } from "firebase/auth";
 
 export default function PageSignIn() {
   const [selectedItem, setSelectedItem] = React.useState(0);
@@ -105,27 +107,42 @@ const TipGrowing = () => {
   );
 };
 
-const PhonePrompt = ({ next, phone, change }) => (
-  <div className="grid gap-4 h-screen px-[10vw] w-full place-content-center">
-    <Text0>Enter your Phone Number</Text0>
-    <Text2>
-      We need to validate your phone number by sending a 6 digit OTP
-    </Text2>
-    <TextField
-      className="mt-6"
-      Icon={IconAdd}
-      label="Phone Number"
-      value={phone}
-      onChange={change}
-    />
-    <div
-      className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold"
-      onClick={next}
-    >
-      Send OTP
+const PhonePrompt = ({ next, phone, change }) => {
+  const Firebase = useContext(FirebaseIntegration.Context);
+  let verify = new RecaptchaVerifier(
+    
+    "recaptcha-container",
+    {},
+    Firebase.authentication.auth
+  );
+
+  return (
+    <div className="grid gap-4 h-screen px-[10vw] w-full place-content-center">
+      <Text0>Enter your Phone Number</Text0>
+      <Text2>
+        We need to validate your phone number by sending a 6 digit OTP
+      </Text2>
+      <TextField
+        className="mt-6"
+        Icon={IconAdd}
+        label="Phone Number"
+        value={phone}
+        onChange={change}
+      />
+      <div className="recaptcha-container"></div>
+      <div
+        className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold"
+        onClick={() => {
+          Firebase.authentication.signIn(_.toInteger(phone), () => {
+            next();
+          });
+        }}
+      >
+        Send OTP
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const OTPPrompt = ({ back }) => (
   <div className="grid gap-4 h-screen px-[10vw] w-full place-content-center">

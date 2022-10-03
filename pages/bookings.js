@@ -55,6 +55,7 @@ const PageBookings = ({ setPage }) => {
                 Sign in to view your bookings.
                 <div
                   onClick={() => setPage(<SignIn />)}
+                  id="signin"
                   className="px-12 py-3 text-center text-white cursor-pointer w-fit rounded-xl bg-primary"
                 >
                   Sign In

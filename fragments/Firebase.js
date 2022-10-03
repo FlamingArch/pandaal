@@ -27,7 +27,7 @@ const Provider = ({ children }) => {
 
   const firestore = getFirestore(app);
   const [eventsSnapshot, eventsLoading, eventsError] = useCollectionData(
-    collection(firestore, "Events")
+    collection(firestore, "testEvents")
   );
   const [events, setEvents] = useState({});
 

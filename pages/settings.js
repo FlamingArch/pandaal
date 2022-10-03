@@ -6,6 +6,8 @@ import { List } from "../legacy/components";
 import { IconAdd, IconBack } from "../legacy/components/Icons";
 
 export default function settings() {
+  const Firebase = useContext(FirebaseIntegration.Context);
+
   return (
     <div
       style={{}}
@@ -77,7 +79,7 @@ export default function settings() {
             <div className="grid p-6 place-content-center">
               <div
                 className="px-12 py-6 rounded-[1.5rem] font-bold text-primary cursor-pointer bg-[#c7dbf5]"
-                onClick={Firebase.authentication.signOut}
+                onClick={() => {}}
               >
                 Sign-out
               </div>

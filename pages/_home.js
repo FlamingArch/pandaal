@@ -4,21 +4,30 @@ import { Page, AppBar } from "../components";
 import { EventCard, List } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
 import Link from "next/link";
-import { useEffect } from "react";
+import SignIn from "./signin";
 import _ from "lodash";
 
-const PageHome = ({ actionButton, createPage }) => {
-  const FirebaseEnv = useContext(FirebaseIntegration.Context);
+const PageHome = ({ actionButton, setPage }) => {
+  const Firebase = useContext(FirebaseIntegration.Context);
 
   return (
     <Page
       appBar={
         <AppBar title="Home">
-          <Link href="/settings">
-            <div className="grid w-12 h-12 bg-indigo-600 rounded-full cursor-pointer aspect-square place-content-center">
-              H
+          {Firebase.authentication.user ? (
+            <Link href="/settings">
+              <div className="grid w-12 h-12 bg-indigo-600 rounded-full cursor-pointer aspect-square place-content-center">
+                H
+              </div>
+            </Link>
+          ) : (
+            <div
+              onClick={() => setPage(<SignIn />)}
+              className="px-6 py-3 text-center text-white cursor-pointer w-fit rounded-xl bg-primary"
+            >
+              Sign In
             </div>
-          </Link>
+          )}
         </AppBar>
       }
       primaryActionButton={actionButton}
@@ -34,10 +43,10 @@ const PageHome = ({ actionButton, createPage }) => {
           </div>
         </List.Section>
 
-        {Object.keys(FirebaseEnv.events.fetchedEvents).map((title, i) => (
+        {Object.keys(Firebase.events.fetchedEvents).map((title, i) => (
           <List.Section gap={1.5} key={i} heading={title} orientation="row">
-            {FirebaseEnv.events.fetchedEvents[title].map((e, i) => (
-              <EventCard event={e} setPage={createPage} key={i} />
+            {Firebase.events.fetchedEvents[title].map((e, i) => (
+              <EventCard event={e} setPage={setPage} key={i} />
             ))}
           </List.Section>
         ))}

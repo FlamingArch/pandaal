@@ -63,9 +63,9 @@ export default function Home() {
           }
         >
           <Navigation.View>
-            <PageHome actionButton={actionButton} createPage={setPage} />
+            <PageHome actionButton={actionButton} setPage={setPage} />
             <PageFavourites />
-            <PageBookings />
+            <PageBookings setPage={setPage} />
             <PageNotifications />
           </Navigation.View>
         </Scaffold>

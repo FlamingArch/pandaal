@@ -8,37 +8,108 @@ import { TextField } from "../legacy/components";
 import { IconAdd, IconBack } from "../legacy/components/Icons";
 import React, { useContext } from "react";
 import FirebaseIntegration from "../fragments/Firebase";
-import { RecaptchaVerifier } from "firebase/auth";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 export default function PageSignIn() {
   const [selectedItem, setSelectedItem] = React.useState(0);
-  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const Firebase = useContext(FirebaseIntegration.Context);
+
+  const generateRecaptchaVerifier = () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "invisible",
+        callback: (response) => {
+          setSelectedItem(1);
+        },
+      },
+      Firebase.authentication.auth
+    );
+  };
+
+  const requestOTP = () => {
+    console.log(Firebase.authentication.auth);
+    if (phone.length >= 12) {
+      generateRecaptchaVerifier();
+      let appVerifier = window.recaptchaVerifier;
+      signInWithPhoneNumber(Firebase.authentication.auth, phone, appVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+        })
+        .catch((e) => console.log(`Error Generating OTP: ${e}`));
+    }
+  };
 
   return (
     <div className="grid w-screen h-screen grid-cols-1 bg-white md:grid-cols-2 dark:bg-black">
       <Carousel
+        showThumbs={false}
         autoPlay={true}
         infiniteLoop={true}
         showStatus={false}
-        className="hidden-mobile"
+        className="bg-white dark:bg-black hidden-mobile"
       >
         <TipExplore />
         <TipBuild />
         <TipGrowing />
       </Carousel>
       <Carousel
+        showThumbs={false}
         selectedItem={selectedItem}
         showIndicators={false}
         showStatus={false}
+        className="bg-white dark:bg-black"
       >
-        <PhonePrompt
-          next={() => setSelectedItem(1)}
-          phone={phoneNumber}
-          change={(val) => {
-            setPhoneNumber(val.value);
-          }}
-        />
-        <OTPPrompt back={() => setSelectedItem(0)} />
+        <div className="grid gap-4 h-screen px-[10vw] w-full place-content-center">
+          <Text0>Enter your Phone Number</Text0>
+          <Text2>
+            We need to validate your phone number by sending a 6 digit OTP
+          </Text2>
+          <TextField
+            className="mt-6"
+            Icon={IconAdd}
+            label="Phone Number"
+            value={phone}
+            onChange={(e) => {
+              setPhone(`${e.target.value}`);
+            }}
+          />
+          <div
+            className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold"
+            onClick={requestOTP}
+          >
+            Send OTP
+          </div>
+        </div>
+        <div className="grid gap-4 h-screen px-[10vw] w-full place-content-center">
+          <div
+            onClick={() => setSelectedItem(0)}
+            className="w-fit mb-12 cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold"
+          >
+            <IconBack />
+          </div>
+          <Text0>Enter OTP sent to +919876543210</Text0>
+          <Text2>
+            We need to validate your phone number by sending a 6 digit OTP
+          </Text2>
+          <TextField className="mt-6" Icon={IconAdd} label="Phone Number" />
+          <div className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold">
+            Continue
+          </div>
+          <div id="recaptcha-container" className="w-full h-48"></div>
+
+          <div className="mt-12">
+            <p>Didn{"'"}t Recieve OTP</p>
+            <p className="pt-4 font-bold text-primary">RESEND</p>
+            <p className="pt-6 pb-16">
+              By pressing continue, you accept our{" "}
+              <a className="font-bold" href="https://pandaal.in/t&c.html">
+                Terms and Conditions
+              </a>
+            </p>
+          </div>
+        </div>
       </Carousel>
     </div>
   );
@@ -106,69 +177,3 @@ const TipGrowing = () => {
     </div>
   );
 };
-
-const PhonePrompt = ({ next, phone, change }) => {
-  const Firebase = useContext(FirebaseIntegration.Context);
-  let verify = new RecaptchaVerifier(
-    
-    "recaptcha-container",
-    {},
-    Firebase.authentication.auth
-  );
-
-  return (
-    <div className="grid gap-4 h-screen px-[10vw] w-full place-content-center">
-      <Text0>Enter your Phone Number</Text0>
-      <Text2>
-        We need to validate your phone number by sending a 6 digit OTP
-      </Text2>
-      <TextField
-        className="mt-6"
-        Icon={IconAdd}
-        label="Phone Number"
-        value={phone}
-        onChange={change}
-      />
-      <div className="recaptcha-container"></div>
-      <div
-        className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold"
-        onClick={() => {
-          Firebase.authentication.signIn(_.toInteger(phone), () => {
-            next();
-          });
-        }}
-      >
-        Send OTP
-      </div>
-    </div>
-  );
-};
-
-const OTPPrompt = ({ back }) => (
-  <div className="grid gap-4 h-screen px-[10vw] w-full place-content-center">
-    <div
-      onClick={back}
-      className="w-fit mb-12 cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold"
-    >
-      <IconBack />
-    </div>
-    <Text0>Enter OTP sent to +919876543210</Text0>
-    <Text2>
-      We need to validate your phone number by sending a 6 digit OTP
-    </Text2>
-    <TextField className="mt-6" Icon={IconAdd} label="Phone Number" />
-    <div className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold">
-      Continue
-    </div>
-    <div className="mt-12">
-      <p>Didn{"'"}t Recieve OTP</p>
-      <p className="pt-4 font-bold text-primary">RESEND</p>
-      <p className="pt-6 pb-16">
-        By pressing continue, you accept our{" "}
-        <a className="font-bold" href="https://pandaal.in/t&c.html">
-          Terms and Conditions
-        </a>
-      </p>
-    </div>
-  </div>
-);

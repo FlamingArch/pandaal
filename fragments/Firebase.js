@@ -89,11 +89,11 @@ const Provider = ({ children }) => {
       value={{
         objects: {
           app: app,
-          auth: auth,
           firestore: firestore,
           config: config,
         },
         authentication: {
+          auth: auth,
           signIn: signIn,
           loading: userLoading,
           error: userError,

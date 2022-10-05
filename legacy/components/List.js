@@ -6,7 +6,7 @@ const View = ({ children, orientation, gap, className }) => {
       className={`${styles.list} ${className} ${
         orientation && orientation == "row" ? styles.row : null
       }`}
-      style={{ gap: gap * 16 }}
+      style={{ gap: gap * 16 || 0 }}
     >
       {children}
     </div>
@@ -34,7 +34,7 @@ const Section = ({
         className={`${styles.sectionContent} ${
           classNames && classNames.sectionContent
         } ${orientation && orientation == "row" ? styles.row : null}`}
-        style={{ gap: gap * 16, padding: padding || "0 1.5rem" }}
+        style={{ gap: gap * 16 || 0, padding: padding || "0 1.5rem" }}
       >
         {children}
       </div>

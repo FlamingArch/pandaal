@@ -10,9 +10,10 @@ import React, { useContext } from "react";
 import FirebaseIntegration from "../fragments/Firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
-export default function PageSignIn() {
+export default function PageSignIn({ setPage }) {
   const [selectedItem, setSelectedItem] = React.useState(0);
   const [phone, setPhone] = React.useState("");
+  const [code, setCode] = React.useState("");
   const Firebase = useContext(FirebaseIntegration.Context);
 
   const generateRecaptchaVerifier = () => {
@@ -41,6 +42,15 @@ export default function PageSignIn() {
     }
   };
 
+  const verifyOTP = () => {
+    window.confirmationResult
+      .confirm(code)
+      .then((result) => {
+        console.log(result);
+        setPage(undefined);
+      })
+      .catch((e) => console.log(`Error Verifying OTP: ${e}`));
+  };
   return (
     <div className="grid w-screen h-screen grid-cols-1 bg-white md:grid-cols-2 dark:bg-black">
       <Carousel
@@ -93,8 +103,17 @@ export default function PageSignIn() {
           <Text2>
             We need to validate your phone number by sending a 6 digit OTP
           </Text2>
-          <TextField className="mt-6" Icon={IconAdd} label="Phone Number" />
-          <div className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold">
+          <TextField
+            className="mt-6"
+            Icon={IconAdd}
+            label="Phone Number"
+            onChange={(e) => setCode(e.target.value)}
+            value={code}
+          />
+          <div
+            onClick={verifyOTP}
+            className="cursor-pointer bg-[#c7dbf5] grid place-content-center p-4 rounded-[1.2rem] text-primary font-bold"
+          >
             Continue
           </div>
           <div id="recaptcha-container" className="w-full h-48"></div>

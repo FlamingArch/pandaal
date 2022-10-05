@@ -22,7 +22,7 @@ const PageHome = ({ actionButton, setPage }) => {
             </Link>
           ) : (
             <div
-              onClick={() => setPage(<SignIn />)}
+              onClick={() => setPage(<SignIn setPage={setPage} />)}
               id="signin"
               className="px-6 py-3 text-center text-white cursor-pointer w-fit rounded-xl bg-primary"
             >

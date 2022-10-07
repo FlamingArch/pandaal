@@ -58,6 +58,16 @@ export default function PageSignIn({ setPage }) {
         autoPlay={true}
         infiniteLoop={true}
         showStatus={false}
+        // BUG: Update Back link in edit profile page.
+        // TODO: Hide Arrow Controls
+        // TODO: Move Indicator Below Subtext and Use colors that are visible
+        // TODO: Change Color of Button to #F3F8FE
+        // TODO: Update Illustrations
+        // ERROR: Error Generating OTP: Error: reCAPTCHA has already been rendered in this element
+        // BUG: Transparent Background on Carousel
+        // BUG: Transparent App bar in Settings Page
+        // MISSING: Icons for Carousel
+
         className="bg-white dark:bg-black hidden-mobile"
       >
         <TipExplore />
@@ -99,14 +109,14 @@ export default function PageSignIn({ setPage }) {
           >
             <IconBack />
           </div>
-          <Text0>Enter OTP sent to +919876543210</Text0>
+          <Text0>Enter OTP sent to {phone}</Text0>
           <Text2>
             We need to validate your phone number by sending a 6 digit OTP
           </Text2>
           <TextField
             className="mt-6"
             Icon={IconAdd}
-            label="Phone Number"
+            label="OTP"
             onChange={(e) => setCode(e.target.value)}
             value={code}
           />

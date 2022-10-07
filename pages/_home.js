@@ -3,9 +3,10 @@ import { IconLocationEdit } from "../legacy/components/Icons";
 import { Page, AppBar } from "../components";
 import { EventCard, List } from "../legacy/components";
 import FirebaseIntegration from "../fragments/Firebase";
-import Link from "next/link";
+
 import SignIn from "./signin";
 import _ from "lodash";
+import Settings from "./settings";
 
 const PageHome = ({ actionButton, setPage }) => {
   const Firebase = useContext(FirebaseIntegration.Context);
@@ -15,11 +16,12 @@ const PageHome = ({ actionButton, setPage }) => {
       appBar={
         <AppBar title="Home">
           {Firebase.authentication.user ? (
-            <Link href="/settings">
-              <div className="grid w-12 h-12 bg-indigo-600 rounded-full cursor-pointer aspect-square place-content-center">
-                H
-              </div>
-            </Link>
+            <div
+              onClick={() => setPage(<Settings setPage={setPage} />)}
+              className="grid w-12 h-12 bg-indigo-600 rounded-full cursor-pointer aspect-square place-content-center"
+            >
+              H
+            </div>
           ) : (
             <div
               onClick={() => setPage(<SignIn setPage={setPage} />)}

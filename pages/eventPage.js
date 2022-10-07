@@ -1,6 +1,8 @@
 import { AppBar, Page } from "../components";
-import { List } from "../legacy/components";
 import { IconBack, IconClock, IconFavorites } from "../legacy/components/Icons";
+
+// TODO: Refactor List.Section to concern-seperated components
+// TODO: Position Sticky for AppBar
 
 export const PageEvent = ({ event, back }) => {
   return (
@@ -51,7 +53,8 @@ export const PageEvent = ({ event, back }) => {
                   </p>
                 </div>
               </div>
-              <div className="p-6 bg-white shadow-md rounded-2xl">
+              {/* TODO: justify-content: space-between; */}
+              <div className="flex justify-between w-full p-6 bg-white shadow-md rounded-2xl">
                 <div className="flex gap-4 ">
                   <div className="flex-col text-pink-500">
                     <div className="text-lg font-bold text-pink-500">
@@ -76,6 +79,8 @@ export const PageEvent = ({ event, back }) => {
                 Event Description
               </h1>
               <p>{event.description}</p>
+
+              {/* TODO: justify-content: space-between; */}
               <div className="p-6 bg-white shadow-md rounded-2xl">
                 <div className="flex gap-4 ">
                   <div className="flex-col ">

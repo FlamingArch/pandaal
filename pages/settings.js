@@ -1,11 +1,11 @@
-import Link from "next/link";
 import { useContext } from "react";
-import { Page, Scaffold } from "../components";
+import { Page } from "../components";
 import FirebaseIntegration from "../fragments/Firebase";
 import { List } from "../legacy/components";
 import { IconAdd, IconBack } from "../legacy/components/Icons";
+import PageEditProfile from "./editprofile";
 
-export default function settings() {
+const Settings = ({ setPage }) => {
   const Firebase = useContext(FirebaseIntegration.Context);
 
   return (
@@ -15,20 +15,26 @@ export default function settings() {
     >
       <Page>
         <div className="flex items-center w-full h-fit">
-          <Link href="/">
-            <div className="ml-6 p-4 aspect-square w-fit rounded-[1rem] fill-primary bg-[#c7dbf5] cursor-pointer">
-              <IconBack />
-            </div>
-          </Link>
+          <div
+            onClick={() => setPage(undefined)}
+            className="ml-6 p-4 aspect-square w-fit rounded-[1rem] fill-primary bg-[#c7dbf5] cursor-pointer"
+          >
+            <IconBack />
+          </div>
+
           <div className="flex flex-col flex-grow gap-2 p-6">
-            <div className="font-bold text-[2rem]">Harsh Chaturvedi</div>
+            <div className="font-bold text-[2rem]">
+              {Firebase.authentication.user.displayName}
+            </div>
             <div>+919876543210</div>
           </div>
-          <Link href="/editprofile">
-            <div className="grid h-full cursor-pointer aspect-square place-content-center">
-              <IconAdd className="fill-primary dark:fill-[#c7dbf5]" />
-            </div>
-          </Link>
+
+          <div
+            onClick={() => setPage(<PageEditProfile setPage={setPage} />)}
+            className="grid h-full cursor-pointer aspect-square place-content-center"
+          >
+            <IconAdd className="fill-primary dark:fill-[#c7dbf5]" />
+          </div>
         </div>
         <div className="flex-grow bg-white dark:bg-black">
           <List.View className="pt-6">
@@ -79,7 +85,10 @@ export default function settings() {
             <div className="grid p-6 place-content-center">
               <div
                 className="px-12 py-6 rounded-[1.5rem] font-bold text-primary cursor-pointer bg-[#c7dbf5]"
-                onClick={() => {}}
+                onClick={() => {
+                  Firebase.authentication.signOut();
+                  setPage(undefined);
+                }}
               >
                 Sign-out
               </div>
@@ -94,4 +103,5 @@ export default function settings() {
       </Page>
     </div>
   );
-}
+};
+export default Settings;

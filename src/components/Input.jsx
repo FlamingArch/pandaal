@@ -8,12 +8,14 @@ const Input = ({
   type,
 }) => {
   const getType = (type) => {
-    return {
-      choiceAnswer: "select",
-      longAnswer: "text",
-      shortAnswer: "text",
-      fileUpload: "file",
-    }[type];
+    return (
+      {
+        choiceAnswer: "select",
+        longAnswer: "text",
+        shortAnswer: "text",
+        fileUpload: "file",
+      }[type] || type
+    );
   };
 
   if (getType(type) == "select") {

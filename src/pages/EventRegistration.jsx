@@ -12,7 +12,8 @@ export default function PageEventRegistration({ setOverlayPage }) {
     <motion.div
       animate={{ opacity: [0, 1] }}
       exit={{ opacity: 0 }}
-      className="flex flex-col p-8 gap-8 h-full"
+      style={{ overscrollBehavior: "contain" }}
+      className="flex flex-col p-8 gap-8 h-screen overflow-scroll"
     >
       <div
         className="rounded-2xl p-4 fill-primary bg-primaryextralight w-fit hover:shadow-2xl hover:shadow-[#505BA570] transition-shadow"

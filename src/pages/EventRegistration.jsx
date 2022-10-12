@@ -7,6 +7,17 @@ import FirebaseIntegration from "../components/Firebase";
 
 export default function PageEventRegistration({ setOverlayPage }) {
   const event = React.useContext(FirebaseIntegration.Context).fetchDocument();
+  const [responses, setResponses] = React.useState([]);
+
+  const appendAnswer = (index, ques, answer) => {
+    const newResponses = responses;
+    if (newResponses[index]) {
+      newResponses[index] = { ...ques, answer: answer };
+    } else {
+      newResponses.splice(index, 0, { ...ques, answer: answer });
+      setResponses(newResponses);
+    }
+  };
 
   return (
     <motion.div
@@ -36,6 +47,7 @@ export default function PageEventRegistration({ setOverlayPage }) {
             type={e.responseType}
             placeholder={"Answer Here"}
             leading={<IconChat className="w-6 h-6 fill-primary" />}
+            onChange={(evnt) => appendAnswer(i, e, evnt.target.value)}
           >
             {e.choices &&
               e.choices.map((e, i) => {
@@ -49,7 +61,7 @@ export default function PageEventRegistration({ setOverlayPage }) {
         </div>
       ))}
 
-      <Button>Register</Button>
+      <Button onClick={() => console.log(responses)}>Register</Button>
     </motion.div>
   );
 }

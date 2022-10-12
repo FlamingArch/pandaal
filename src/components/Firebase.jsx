@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, signOut } from "firebase/auth";
 
 import { useDocumentData } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 import sampleEvent from "../assets/sampleEvent.json";
 
 const Context = React.createContext();
@@ -20,18 +22,33 @@ const Provider = ({ children }) => {
   });
 
   const firestore = getFirestore(app);
-
   const fetchDocument = (id) => {
     return sampleEvent;
+  };
+
+  const auth = getAuth(app);
+  const [user, userLoading, userError] = useAuthState(auth);
+
+  const userExists = (uid) => {
+    return false;
+  };
+
+  const signOutUser = () => {
+    signOut(auth);
   };
 
   return (
     <Context.Provider
       value={{
         fetchDocument: fetchDocument,
+        signOut: signOutUser,
+        userExists: userExists,
         objects: {
           app: app,
           firestore: firestore,
+          auth: auth,
+          user: user,
+          loggingIn: userLoading,
         },
       }}
     >

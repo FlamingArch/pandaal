@@ -23,7 +23,7 @@ export default function PageEventRegistrationInstructions({ setOverlayPage }) {
         <IconBack className="w-6 h-6" />
       </div>
       <p className="text-2xl">How to Register?</p>
-      <p style={{ lineHeight: "1rem" }}>
+      <p style={{ lineHeight: "1rem" }} className="flex-grow">
         {parser.parse(event.howToRegisterHtmlText, "text/html")}
       </p>
       <div

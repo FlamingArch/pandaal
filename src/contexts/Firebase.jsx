@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
 import { collection } from "firebase/firestore";
-import { doc } from "firebase/firestore";
+import { doc, setDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -30,6 +30,55 @@ const Provider = ({ children }) => {
     signOut(auth);
   };
 
+  const toggleLike = (event, user) => {
+    return;
+  };
+
+  const submitRegistration = async (event, eventID, answers) => {
+    console.log(`${eventID} : ${JSON.stringify(event, {}, 2)}`);
+    const document = {
+      answers: answers,
+      bannerURL: event.bannerURL,
+      cashCollected: true,
+      collectCash: "0",
+      endDate: event.endDate,
+      endTime: event.endTime,
+      eventDateType: event.eventDateType,
+      eventID: eventID,
+      eventTitle: event.Title,
+      message: {
+        html: "",
+        text: "",
+        subject: "Registration Confirmed on Pandaal<3",
+      },
+      offlineLocationAddress: event.offlineLocationAddress,
+      onOff: event.onOff,
+      onlinePlatform: event.onlinePlatform,
+      originalPrice: 0, // TODO: Update
+      paymentStatus: "free", // TODO: Update
+      registrationStatus: "registered", // TODO: Update
+      registrationStatusDateTime: serverTimestamp(),
+      startDate: event.startDate,
+      startTime: event.startTime,
+      ticketAuthorised: false,
+      ticketCount: "1",
+      to: auth.currentUser.email,
+      userId: auth.currentUser.uid,
+      userName: auth.currentUser.displayName,
+      userPhone: auth.currentUser.phoneNumber,
+    };
+    const docRef = await addDoc(
+      collection(firestore, "registrations"),
+      document
+    );
+    console.log(`Document Writted with ID: ${docRef.id}`);
+    await setDoc(
+      doc(firestore, "registrations", docRef.id),
+      { registrationId: docRef.id },
+      { merge: true }
+    );
+  };
+
   return (
     <Context.Provider
       value={{
@@ -39,6 +88,8 @@ const Provider = ({ children }) => {
         signingIn: signingIn,
         signInError: signInError,
         signOut: signOutUser,
+        toggleLike: toggleLike,
+        submitRegistration: submitRegistration,
       }}
     >
       {children}

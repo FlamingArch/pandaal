@@ -5,9 +5,9 @@ export default function (questions, response, setResponse) {
   function appendAnswer(index, ques, answer) {
     const newResponses = response;
     if (newResponses[index]) {
-      newResponses[index] = { ...ques, answer: answer };
+      newResponses[index] = { ...ques, ans: answer };
     } else {
-      newResponses.splice(index, 0, { ...ques, answer: answer });
+      newResponses.splice(index, 0, { ...ques, ans: answer });
       setResponse(newResponses);
     }
   }

@@ -5,7 +5,7 @@ import { BackButton } from "../fragments";
 import { PageRegistration, PageSignIn } from ".";
 import Firebase from "../contexts/Firebase";
 
-export default function PageInstructions({ event }) {
+export default function PageInstructions({ eventID, event }) {
   const Navigator = React.useContext(Scaffold.Context);
   const firebase = React.useContext(Firebase.Context);
 
@@ -21,11 +21,13 @@ export default function PageInstructions({ event }) {
         onClick={() =>
           Navigator.push(
             firebase.user ? (
-              <PageRegistration event={event} />
+              <PageRegistration eventID={eventID} event={event} />
             ) : (
               <PageSignIn
                 callback={() =>
-                  Navigator.push(<PageRegistration event={event} />)
+                  Navigator.push(
+                    <PageRegistration eventID={eventID} event={event} />
+                  )
                 }
               />
             )

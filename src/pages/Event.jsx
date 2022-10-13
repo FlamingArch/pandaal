@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Button, Page, Scaffold } from "../components";
 import { PageInstructions } from ".";
-import { useEventDocument } from "../contexts/Firebase";
+import Firebase, { useEventDocument } from "../contexts/Firebase";
 
 import {
   ImageCard,
@@ -22,7 +22,10 @@ const BottomBar = ({ children }) => {
   );
 };
 
-export default function PageEvent({ eventID }) {
+export default function PageEvent({ match }) {
+  const eventID = match;
+  // .params.eventId;
+  const firebase = React.useContext(Firebase.Context);
   const event = useEventDocument(eventID);
   const Navigator = React.useContext(Scaffold.Context);
 
@@ -37,7 +40,27 @@ export default function PageEvent({ eventID }) {
             <EventDetails event={event} />
             <EventTimings event={event} />
             <EventLocation event={event} />
-            <FavoriteCard event={event} />
+            <FavoriteCard
+              likes={event.likeCount}
+              favourite={
+                firebase.user &&
+                event.likedBy.filter((e) => e === firebase.user.uid)
+              }
+              onClick={() => {
+                if (firebase.user) {
+                  firebase.toggleLike(eventID);
+                } else {
+                  Navigator.push(
+                    <PageSignIn
+                      callback={() => {
+                        firebase.toggleLike(eventID);
+                        Navigator.dismiss();
+                      }}
+                    />
+                  );
+                }
+              }}
+            />
             <EventDescription event={event} />
             <EventSocials event={event} />
             <EventTnC event={event} />
@@ -51,7 +74,11 @@ export default function PageEvent({ eventID }) {
           <div className="flex-grow justify-items-stretch place-items-stretch">
             <Button
               type="primary"
-              onClick={() => Navigator.push(<PageInstructions event={event} />)}
+              onClick={() =>
+                Navigator.push(
+                  <PageInstructions eventID={eventID} event={event} />
+                )
+              }
             >
               Registration
             </Button>

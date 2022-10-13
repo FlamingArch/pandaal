@@ -3,8 +3,14 @@ import React from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
-import { collection } from "firebase/firestore";
-import { doc, setDoc, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, increment, arrayUnion } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  addDoc,
+  serverTimestamp,
+  runTransaction,
+} from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -35,7 +41,6 @@ const Provider = ({ children }) => {
   };
 
   const submitRegistration = async (event, eventID, answers) => {
-    console.log(`${eventID} : ${JSON.stringify(event, {}, 2)}`);
     const document = {
       answers: answers,
       bannerURL: event.bannerURL,
@@ -67,16 +72,50 @@ const Provider = ({ children }) => {
       userName: auth.currentUser.displayName,
       userPhone: auth.currentUser.phoneNumber,
     };
-    const docRef = await addDoc(
-      collection(firestore, "registrations"),
-      document
-    );
-    console.log(`Document Writted with ID: ${docRef.id}`);
-    await setDoc(
-      doc(firestore, "registrations", docRef.id),
-      { registrationId: docRef.id },
-      { merge: true }
-    );
+    try {
+      await runTransaction(firestore, async (transaction) => {
+        const docRef = doc(collection(firestore, "registrations"));
+
+        const event = await transaction.get(doc(firestore, "Events", eventID));
+
+        if (event == null) {
+          throw "Event does not exist!";
+        }
+
+        if (event.data().active != true) {
+          throw "Event is not active!";
+        }
+
+        if (!event.data().acceptingRegistrations) {
+          throw "Event is not accepting registrations!";
+        }
+
+        if (
+          event.data().registrationCount >= event.data().availableRegistrations
+        ) {
+          throw "Event is full!";
+        }
+
+        transaction.set(doc(firestore, "registrations", docRef.id), {
+          ...document,
+          registrationID: docRef.id,
+        });
+
+        // const userID = auth.currentUser.uid;
+
+        transaction.update(doc(firestore, "Events", eventID), {
+          registrationCount: increment(1),
+        });
+
+        transaction.update(doc(firestore, "Events", eventID), {
+          registeredUsers: arrayUnion(auth.currentUser.uid),
+        });
+
+        console.log(`Document Writted with ID: ${docRef.id}`);
+      });
+    } catch (e) {
+      console.log(`Error ${e}`);
+    }
   };
 
   return (
@@ -119,3 +158,57 @@ const Firebase = {
 };
 
 export default Firebase;
+
+// if (currentEvent != null) {
+//   if (currentEvent.isActive()) {
+//     if (
+//       currentEvent.getRegistrationCount() <
+//       currentEvent.getAvailableRegistrations()
+//     ) {
+//       if (currentEvent.isAcceptingRegistrations()) {
+//         if (currentEvent.getRegisteredUsers().contains(userId)) {
+//           resultRegistration.postValue("alreadyRegistered");
+//         } else {
+//           //newRegistration
+
+//           transaction.set(registrationReference, registrationMap);
+
+//           transaction.update(
+//             currentEventRef,
+//             "registeredUsers",
+//             FieldValue.arrayUnion(userId)
+//           );
+
+//           transaction.update(
+//             currentUserRef,
+//             "registrations",
+//             userRegistrations
+//           );
+
+//           transaction.update(
+//             currentEventRef,
+//             "registrationCount",
+//             FieldValue.increment(1)
+//           );
+//         }
+//       } else {
+//         throw new FirebaseFirestoreException(
+//           "event not active",
+//           FirebaseFirestoreException.Code.ABORTED
+//         );
+
+//         //resultRegistration.postValue("eventNotActive");
+//       }
+//     } else {
+//       throw new FirebaseFirestoreException(
+//         "TicketsSoldOut",
+//         FirebaseFirestoreException.Code.ABORTED
+//       );
+//     }
+//   } else {
+//     throw new FirebaseFirestoreException(
+//       "not accepting registrations",
+//       FirebaseFirestoreException.Code.ABORTED
+//     );
+//   }
+// }

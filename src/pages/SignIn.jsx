@@ -48,7 +48,7 @@ export default function PageAuth({ callback }) {
   };
 
   const PageSignIn = (
-    <Page.Full>
+    <Page.Full className="p-8">
       <BackButton />
       <div className="flex-grow grid place-items-center">
         <div className="grid gap-4 place-items-center">

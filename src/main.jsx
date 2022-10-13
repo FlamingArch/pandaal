@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import FirebaseIntegration from "./components/Firebase";
-import App from "./fragments/App";
+import App from "./App";
+import Firebase from "./contexts/Firebase";
 import "./styles/index.scss";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <FirebaseIntegration.Provider>
+    <Firebase.Provider>
       <App />
-    </FirebaseIntegration.Provider>
+    </Firebase.Provider>
   </React.StrictMode>
 );

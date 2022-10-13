@@ -1,18 +1,16 @@
 import React from "react";
-import { signInWithPhoneNumber } from "firebase/auth";
 import { motion } from "framer-motion";
+import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import { IconBack, IconPasskey } from "../components/Icons";
 import { Button, Input, Page, Scaffold } from "../components";
-import { PageEventRegistrationInstructions } from ".";
-import FirebaseIntegration from "../components/Firebase";
-import { RecaptchaVerifier } from "firebase/auth";
-import SignUp from "./SignUp";
+import FirebaseIntegration from "../contexts/Firebase";
+
 import { BackButton } from "../fragments";
 
 export default function PageAuth({ callback }) {
-  const Navigator = React.useContext(Scaffold.Environment);
+  const Navigator = React.useContext(Scaffold.Context);
   const Firebase = React.useContext(FirebaseIntegration.Context);
-  const [phone, setPhone] = React.useState("");
+  const [phone, setPhone] = React.useState("9554442069");
   const [otp, setOTP] = React.useState("");
   const [pageIndex, setPageIndex] = React.useState(0);
 
@@ -25,7 +23,7 @@ export default function PageAuth({ callback }) {
           setPageIndex(1);
         },
       },
-      Firebase.objects.auth
+      Firebase.auth
     );
   };
 
@@ -33,7 +31,7 @@ export default function PageAuth({ callback }) {
     generateRecaptchaVerifier();
     console.log("SUP BITCH");
     let appVerifier = window.recaptchaVerifier;
-    signInWithPhoneNumber(Firebase.objects.auth, phone, appVerifier)
+    signInWithPhoneNumber(Firebase.auth, phone, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
       })
@@ -44,11 +42,7 @@ export default function PageAuth({ callback }) {
     window.confirmationResult
       .confirm(code)
       .then((result) => {
-        if (Firebase.userExists()) {
-          callback();
-        } else {
-          Navigator.push(<SignUp />);
-        }
+        callback();
       })
       .catch((e) => console.log(`Error Verifying OTP: ${e}`));
   };

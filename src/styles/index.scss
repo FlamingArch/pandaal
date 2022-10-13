@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-  @apply text-primary font-bold;
+* {
+  --color-primary-100: 243, 248, 254;
+  --color-primary-200: 199, 219, 245;
+  --color-primary-300: 80, 91, 165;
+  --color-primary-400: 63, 72, 130;
+  --color-primary-500: 47, 53, 96;
+  --color-primary-600: 41, 44, 68;
+  --color-secondary-100: 245, 199, 206;
+  --color-secondary-200: 234, 125, 138;
+  --color-secondary-300: 227, 79, 97;
+}
+
+body {
 }

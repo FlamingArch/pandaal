@@ -1,5 +1,5 @@
-export default function intToDay(int) {
-  const days = [
+export default function (n) {
+  return [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -7,6 +7,5 @@ export default function intToDay(int) {
     "Thursday",
     "Friday",
     "Saturday",
-  ];
-  return days[int];
+  ][n];
 }

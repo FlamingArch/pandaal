@@ -1,18 +1,20 @@
 import React from "react";
 import _ from "lodash";
+import Text from "./Text";
+import { parseHTML } from "../helpers";
 
 const LimitedParagraph = ({ children, heading, limit }) => {
   const [descriptionExpanded, setDescriptionExpanded] = React.useState(false);
   return (
     <div>
-      <div className="text-2xl">{heading || "Event Description"}</div>
+      <Text headingLevel={4}>{heading || "Event Description"}</Text>
       <p>
         {descriptionExpanded
-          ? children
-          : _.truncate(children, { length: limit || 300 })}
+          ? parseHTML(children)
+          : parseHTML(_.truncate(children, { length: limit || 300 }))}
       </p>
       <button
-        className="text-primary font-bold uppercase hover:text-primarylight transition-colors"
+        className="text-primary-400 font-bold uppercase hover:text-primary-300 transition-colors"
         onClick={() => setDescriptionExpanded(!descriptionExpanded)}
       >
         Read {descriptionExpanded ? "Less" : "More"}

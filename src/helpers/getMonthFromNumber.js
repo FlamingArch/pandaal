@@ -1,5 +1,5 @@
-export default function intToMonth(int) {
-  const months = [
+export default function getMonthFromNumber(n) {
+  return [
     "January",
     "February",
     "March",
@@ -12,6 +12,5 @@ export default function intToMonth(int) {
     "October",
     "November",
     "December",
-  ];
-  return months[int];
+  ][n];
 }

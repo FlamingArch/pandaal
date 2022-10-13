@@ -33,7 +33,7 @@ export default function PageEvent({ eventID }) {
           <ImageCard src={event.bannerURL} />
         </div>
         <Page.Responsive>
-          <div className="shadow-2xl bg-white flex flex-col gap-4 m-12 p-6 rounded-2xl mb-24">
+          <div className="shadow-2xl bg-white flex flex-col gap-4 m-12 p-6 rounded-2xl mb-36">
             <EventDetails event={event} />
             <EventTimings event={event} />
             <EventLocation event={event} />
@@ -59,7 +59,10 @@ export default function PageEvent({ eventID }) {
         </BottomBar>
 
         <div className="grid place-items-center fixed top-0 left-0 -z-20">
-          <img src={event.bannerURL} className=" scale-150 blur-xl" />
+          <img
+            src={event.bannerURL}
+            className=" scale-150 blur-xl object-cover w-screen h-screen"
+          />
         </div>
       </Page.Full>
     );

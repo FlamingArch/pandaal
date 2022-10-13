@@ -11,7 +11,7 @@ const Full = ({ children, className, appBar }) => {
         className={"w-screen h-screen overflow-scroll " + className}
       >
         {appBar}
-        <div className="flex flex-col gap-4 p-6">{children}</div>
+        <div className="flex flex-col gap-4">{children}</div>
       </motion.div>
     </AnimatePresence>
   );

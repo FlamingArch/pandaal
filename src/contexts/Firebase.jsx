@@ -26,7 +26,7 @@ const Provider = ({ children }) => {
 
   const [user, signingIn, signInError] = useAuthState(auth);
 
-  const signOut = () => {
+  const signOutUser = () => {
     signOut(auth);
   };
 
@@ -38,7 +38,7 @@ const Provider = ({ children }) => {
         user: user,
         signingIn: signingIn,
         signInError: signInError,
-        signOut: signOut,
+        signOut: signOutUser,
       }}
     >
       {children}

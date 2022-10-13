@@ -10,7 +10,10 @@ export default function PageInstructions({ event }) {
   const firebase = React.useContext(Firebase.Context);
 
   return (
-    <Page.Full appBar={<AppBar leading={<BackButton />} />}>
+    <Page.Full
+      appBar={<AppBar leading={<BackButton />} />}
+      className="p-8 gap-6 flex flex-col"
+    >
       <Text headingLevel={3}>How to Register?</Text>
       {parseHTML(event.howToRegisterHtmlText)}
       <Button

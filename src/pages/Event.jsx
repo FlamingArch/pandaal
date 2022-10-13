@@ -29,9 +29,6 @@ export default function PageEvent({ eventID }) {
   if (event) {
     return (
       <Page.Full>
-        <div className="bg-black w-screen h-screen grid place-items-center fixed -z-10">
-          <img src={event.bannerURL} className="scale-125 blur-xl" />
-        </div>
         <div className="w-full place-items-center grid pt-12">
           <ImageCard src={event.bannerURL} />
         </div>
@@ -60,6 +57,10 @@ export default function PageEvent({ eventID }) {
             </Button>
           </div>
         </BottomBar>
+
+        <div className="grid place-items-center fixed top-0 left-0 -z-20">
+          <img src={event.bannerURL} className=" scale-150 blur-xl" />
+        </div>
       </Page.Full>
     );
   }

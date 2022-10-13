@@ -129,7 +129,7 @@ export default function PageAuth({ callback }) {
       animate={{ opacity: [0, 1] }}
       exit={{ opacity: 0 }}
       style={{ overscrollBehavior: "contain" }}
-      className="flex flex-col p-8 gap-8 h-screen overflow-scroll text-center"
+      className="flex flex-col gap-8 h-screen overflow-scroll text-center"
     >
       {pageIndex === 0 ? PageSignIn : PageOTP}
     </motion.div>

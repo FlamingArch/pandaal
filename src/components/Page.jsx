@@ -8,7 +8,7 @@ const Full = ({ children, className, appBar }) => {
         animate={{ opacity: [0, 1] }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className={"w-screen h-screen overflow-scroll bg-white " + className}
+        className={"w-screen h-screen overflow-scroll " + className}
       >
         {appBar}
         <div className="flex flex-col gap-4 p-6">{children}</div>

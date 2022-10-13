@@ -2,7 +2,7 @@ import React from "react";
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { collection } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
@@ -26,6 +26,10 @@ const Provider = ({ children }) => {
 
   const [user, signingIn, signInError] = useAuthState(auth);
 
+  const signOut = () => {
+    signOut(auth);
+  };
+
   return (
     <Context.Provider
       value={{
@@ -34,6 +38,7 @@ const Provider = ({ children }) => {
         user: user,
         signingIn: signingIn,
         signInError: signInError,
+        signOut: signOut,
       }}
     >
       {children}

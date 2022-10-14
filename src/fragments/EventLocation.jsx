@@ -6,12 +6,12 @@ const EventLocation = ({ event }) => {
     <div className="flex flex-row gap-3">
       {event.onOff == 1 ? (
         <>
-          <IconStreaming className="w-6 h-6 fill-primary-400" />
+          <IconStreaming className="w-6 h-6 min-w-[1.5rem] min-h-[1.5rem] fill-primary-400" />
           <p>{event.onlinePlatform}</p>
         </>
       ) : (
         <>
-          <IconLocation className="w-6 h-6 fill-primary-400" />
+          <IconLocation className="w-6 h-6 min-w-[1.5rem] min-h-[1.5rem] fill-primary-400" />
           <p>{event.offlineLocationAddress}</p>
         </>
       )}

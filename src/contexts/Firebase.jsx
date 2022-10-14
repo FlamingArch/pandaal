@@ -104,12 +104,12 @@ const Provider = ({ children }) => {
           startDate: event.data().startDate,
           startTime: event.data().startTime,
           ticketAuthorised: false,
-          ticketCount: "1",
+          ticketCount: 1,
           to: auth.currentUser.email,
           userId: auth.currentUser.uid,
           userName: auth.currentUser.displayName,
           userPhone: auth.currentUser.phoneNumber,
-          registrationID: docRef.id,
+          registrationId: docRef.id,
           message: {
             html: generateTicketHTML(
               event.data(),

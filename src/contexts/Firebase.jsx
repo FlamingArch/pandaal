@@ -97,7 +97,7 @@ const Provider = ({ children }) => {
           offlineLocationAddress: event.data().offlineLocationAddress,
           onOff: event.data().onOff,
           onlinePlatform: event.data().onlinePlatform,
-          originalPrice: 0, // TODO: Update
+          originalPrice: "0", // TODO: Update
           paymentStatus: "free", // TODO: Update
           registrationStatus: "registered", // TODO: Update
           registrationStatusDateTime: serverTimestamp(),

@@ -43,9 +43,6 @@ export default function PageAuth({ callback }) {
     window.confirmationResult
       .confirm(code)
       .then((result) => {
-        // Firebase.userExists()
-        //   ? callback()
-        //   : Navigator.push(<PageSignUp callback={callback} />);
         callback();
       })
       .catch((e) => console.log(`Error Verifying OTP: ${e}`));

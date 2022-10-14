@@ -24,11 +24,15 @@ export default function PageInstructions({ eventID, event }) {
               <PageRegistration eventID={eventID} event={event} />
             ) : (
               <PageSignIn
-                callback={() =>
-                  Navigator.push(
-                    <PageRegistration eventID={eventID} event={event} />
+                callback={() => {
+                  event.registeredUsers.filter(
+                    (e) => e == (firebase.auth.currentUser.uid || "")
                   )
-                }
+                    ? Navigator.dismiss()
+                    : Navigator.push(
+                        <PageRegistration eventID={eventID} event={event} />
+                      );
+                }}
               />
             )
           )

@@ -94,11 +94,21 @@ const Provider = ({ children }) => {
           eventDateType: event.data().eventDateType,
           eventId: eventID,
           eventTitle: event.data().Title,
+          message: {
+            html: generateTicketHTML(
+              event.data(),
+              auth.currentUser.displayName,
+              docRef.id
+            ),
+            text: "",
+            subject: "Registration Confirmed on Pandaal<3",
+          },
           offlineLocationAddress: event.data().offlineLocationAddress,
           onOff: event.data().onOff,
           onlinePlatform: event.data().onlinePlatform,
           originalPrice: "0", // TODO: Update
           paymentStatus: "free", // TODO: Update
+          registrationId: docRef.id,
           registrationStatus: "registered", // TODO: Update
           registrationStatusDateTime: serverTimestamp(),
           startDate: event.data().startDate,
@@ -109,16 +119,6 @@ const Provider = ({ children }) => {
           userId: auth.currentUser.uid,
           userName: auth.currentUser.displayName,
           userPhone: auth.currentUser.phoneNumber,
-          registrationId: docRef.id,
-          message: {
-            html: generateTicketHTML(
-              event.data(),
-              auth.currentUser.displayName,
-              docRef.id
-            ),
-            text: "",
-            subject: "Registration Confirmed on Pandaal<3",
-          },
         };
 
         transaction.set(doc(firestore, "registrations", docRef.id), document);

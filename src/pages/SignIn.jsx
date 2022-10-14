@@ -11,7 +11,7 @@ import PageSignUp from "./signUp";
 export default function PageAuth({ callback }) {
   const Navigator = React.useContext(Scaffold.Context);
   const Firebase = React.useContext(FirebaseIntegration.Context);
-  const [phone, setPhone] = React.useState("9554442069");
+  const [phone, setPhone] = React.useState("");
   const [otp, setOTP] = React.useState("");
   const [pageIndex, setPageIndex] = React.useState(0);
 

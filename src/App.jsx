@@ -5,7 +5,9 @@ import PageEvent from "./pages/Event";
 export default function App() {
   return (
     <Scaffold.View>
-      <PageEvent match="PyuUvuj3qF1RKQxluQIW" />
+      <PageEvent
+        match="PyuUvuj3qF1RKQxluQIW"
+      />
     </Scaffold.View>
   );
 }

@@ -13,6 +13,7 @@ import {
   EventSocials,
   EventTnC,
 } from "../fragments";
+import RegistrationSuccess from "./registrationSuccess";
 
 const BottomBar = ({ children }) => {
   return (
@@ -38,29 +39,8 @@ export default function PageEvent({ match }) {
         <Page.Responsive>
           <div className="shadow-2xl bg-white flex flex-col gap-4 m-12 p-6 rounded-2xl mb-36">
             <EventDetails event={event} />
-            <EventTimings event={event} />
             <EventLocation event={event} />
-            <FavoriteCard
-              likes={event.likeCount}
-              favourite={
-                firebase.user &&
-                event.likedBy.filter((e) => e === firebase.user.uid)
-              }
-              onClick={() => {
-                if (firebase.user) {
-                  firebase.toggleLike(eventID);
-                } else {
-                  Navigator.push(
-                    <PageSignIn
-                      callback={() => {
-                        firebase.toggleLike(eventID);
-                        Navigator.dismiss();
-                      }}
-                    />
-                  );
-                }
-              }}
-            />
+            <EventTimings event={event} />
             <EventDescription event={event} />
             <EventSocials event={event} />
             <EventTnC event={event} />
@@ -74,13 +54,36 @@ export default function PageEvent({ match }) {
           <div className="flex-grow justify-items-stretch place-items-stretch">
             <Button
               type="primary"
-              onClick={() =>
-                Navigator.push(
-                  <PageInstructions eventID={eventID} event={event} />
-                )
-              }
+              onClick={() => {
+                if (firebase.user) {
+                  if (
+                    event.registeredUsers.filter(
+                      (e) => e == firebase.auth.currentUser.uid || ""
+                    )
+                  ) {
+                    console.log("FETCHING TICKET");
+                    firebase.fetchTicket(
+                      eventID,
+                      firebase.auth.currentUser.uid
+                    );
+                    Navigator.push(<RegistrationSuccess />);
+                  } else
+                    Navigator.push(
+                      <PageInstructions eventID={eventID} event={event} />
+                    );
+                } else {
+                  Navigator.push(
+                    <PageInstructions eventID={eventID} event={event} />
+                  );
+                }
+              }}
             >
-              Registration
+              {firebase.user &&
+              event.registeredUsers.filter(
+                (e) => e == (firebase.auth.currentUser.uid || "")
+              )
+                ? "View Ticket"
+                : "Register"}
             </Button>
           </div>
         </BottomBar>

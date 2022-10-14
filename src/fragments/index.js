@@ -1,4 +1,5 @@
 export { default as BackButton } from "./BackButton";
+export { default as CloseButton } from "./CloseButton";
 export { default as EventLocation } from "./EventLocation";
 export { default as EventTnC } from "./EventTnC";
 export { default as EventDescription } from "./EventDescription";

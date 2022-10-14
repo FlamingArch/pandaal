@@ -31,7 +31,7 @@ export default function generateTicketHTML(
               <div class="bold branding" style="font-size: 2.5rem; line-height: 1;">Ticket Confirmation</div>
             </section>
             <section class="background-light p-b">
-              <div class="p-b bold">Hello, ${registrationName}</div>
+              <div class="p-b bold">Hello!</div>
               <div class="p-b">This is a confirmation mail regarding your registration for the event <span class="bold accented">${
                 event.Title
               }</span></div>
@@ -79,3 +79,5 @@ export default function generateTicketHTML(
         </html>`;
   return html;
 }
+
+//TODO: Update to include name after "Hello!"

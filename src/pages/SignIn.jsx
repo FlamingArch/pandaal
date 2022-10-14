@@ -6,6 +6,7 @@ import { Button, Input, Page, Scaffold } from "../components";
 import FirebaseIntegration from "../contexts/Firebase";
 
 import { BackButton } from "../fragments";
+import PageSignUp from "./signUp";
 
 export default function PageAuth({ callback }) {
   const Navigator = React.useContext(Scaffold.Context);
@@ -42,6 +43,9 @@ export default function PageAuth({ callback }) {
     window.confirmationResult
       .confirm(code)
       .then((result) => {
+        // Firebase.userExists()
+        //   ? callback()
+        //   : Navigator.push(<PageSignUp callback={callback} />);
         callback();
       })
       .catch((e) => console.log(`Error Verifying OTP: ${e}`));

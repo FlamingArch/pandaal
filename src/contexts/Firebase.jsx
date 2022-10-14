@@ -84,7 +84,7 @@ const Provider = ({ children }) => {
         }
 
         const document = {
-          Created: serverTimestamp(),
+          created: serverTimestamp(),
           answers: answers,
           bannerURL: event.data().bannerURL,
           cashCollected: true,

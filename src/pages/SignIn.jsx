@@ -74,7 +74,7 @@ export default function PageAuth({ callback }) {
             <Button
               type="secondary"
               onClick={() => {
-                if (phone.length == 10 && _.isInteger(phone)) {
+                if (phone.length == 10) {
                   requestOTP(`+91${phone}`);
                 } else {
                   alert("Invalid Phone Number");
@@ -117,7 +117,7 @@ export default function PageAuth({ callback }) {
             <Button
               type="secondary"
               onClick={() => {
-                if (otp.length == 6 && _.isInteger(otp)) {
+                if (otp.length == 6) {
                   verifyOTP(otp, () => callback());
                 } else {
                   alert("Invalid OTP");

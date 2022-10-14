@@ -47,13 +47,15 @@ const Provider = ({ children }) => {
     const docQuery = query(
       collection(firestore, "registrations"),
       where("eventId", "==", eventID),
-      where("userId", "==", userID)
+      where("userId", "==", userID),
+      where("registrationStatus", "==", "registered")
     );
     const querySnapshot = await getDocs(docQuery);
     querySnapshot.forEach(async (doce) => {
       const vl = await getDoc(doc(firestore, "registrations", doce.id));
       const ticket = vl.data().message.html;
       setTicket(ticket);
+      return;
     });
   };
 
@@ -146,7 +148,7 @@ const Provider = ({ children }) => {
         console.log(`Document Written with ID: ${docRef.id}`);
         return docRef.id;
       });
-      setLastID(id);
+      fetchTicket(eventID, auth.currentUser.uid);
     } catch (e) {
       console.log(`Error ${e}`);
     }

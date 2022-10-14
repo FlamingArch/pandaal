@@ -46,7 +46,6 @@ export default function PageRegistration({ event, eventID }) {
           disabled={disableFormSubmission(response)}
           onClick={() => {
             firebase.submitRegistration(event, eventID, response, name, email);
-            firebase.fetchTicket(eventID, firebase.auth.currentUser.uid);
             Navigator.push(
               <PageRegistrationSuccess eventID={eventID} userID={firebase.auth.currentUser.uid} />
             );

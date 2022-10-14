@@ -92,7 +92,7 @@ const Provider = ({ children }) => {
           endDate: event.data().endDate,
           endTime: event.data().endTime,
           eventDateType: event.data().eventDateType,
-          eventID: eventID,
+          eventId: eventID,
           eventTitle: event.data().Title,
           offlineLocationAddress: event.data().offlineLocationAddress,
           onOff: event.data().onOff,

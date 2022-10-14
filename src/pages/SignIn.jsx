@@ -7,6 +7,7 @@ import FirebaseIntegration from "../contexts/Firebase";
 
 import { BackButton } from "../fragments";
 import PageSignUp from "./signUp";
+import _ from "lodash";
 
 export default function PageAuth({ callback }) {
   const Navigator = React.useContext(Scaffold.Context);
@@ -73,8 +74,10 @@ export default function PageAuth({ callback }) {
             <Button
               type="secondary"
               onClick={() => {
-                if (phone.length == 10) {
+                if (phone.length == 10 && _.isInteger(phone)) {
                   requestOTP(`+91${phone}`);
+                } else {
+                  alert("Invalid Phone Number");
                 }
               }}
             >
@@ -114,7 +117,11 @@ export default function PageAuth({ callback }) {
             <Button
               type="secondary"
               onClick={() => {
-                verifyOTP(otp, () => callback());
+                if (otp.length == 6 && _.isInteger(otp)) {
+                  verifyOTP(otp, () => callback());
+                } else {
+                  alert("Invalid OTP");
+                }
               }}
             >
               Continue

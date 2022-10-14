@@ -45,12 +45,14 @@ export default function generateTicketHTML(
               <div style="padding-left: 12rem"><span class="bold">Booking ID: </span>${registrationId}</div>
             </section>
             <section class="background-light" style="margin-top: 2rem; display: flex">
-              <img style="display: inline-block; width: 13.5rem; height: 18rem" src="${event.bannerURL}"/>
+              <img style="display: inline-block; width: 13.5rem; height: 18rem" src="${
+                event.bannerURL
+              }"/>
               <div style="padding-left: 2rem;">
                 <div class="bold accented p-b font-lg">Event Details</div>
                 <div>Event Name</div><div class="bold accented">${
                   event.Title
-                }</div><div class="accented p-b">by ${event.organiser}</div>
+                }</div><div class="accented p-b">by ${event.organisationName}</div>
                 <div>Start Time</div><div class="bold accented p-b">${
                   event.startDate ? getLongDate(event.startDate) : ""
                 } ${event.startTime ? event.startTime : ""} ${
@@ -58,8 +60,8 @@ export default function generateTicketHTML(
   } ${event.endDate ? getLongDate(event.endDate) : ""}${
     event.endTime ? event.endTime : ""
   }</div>
-                <div>Online Event</div><div class="bold accented p-b">${
-                  event.onlinePlatform
+                <div>Location</div><div class="bold accented p-b">${
+                  event.offlineLocationAddress
                 }</div>
               </div>
             </section>

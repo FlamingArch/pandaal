@@ -46,7 +46,7 @@ const Provider = ({ children }) => {
     console.log(`Fetching ticket for User ${userID} in Event ${eventID}`);
     const docQuery = query(
       collection(firestore, "registrations"),
-      where("eventID", "==", eventID),
+      where("eventId", "==", eventID),
       where("userId", "==", userID)
     );
     const querySnapshot = await getDocs(docQuery);

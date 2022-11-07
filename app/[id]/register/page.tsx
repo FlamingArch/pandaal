@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-export default async function Page({ params }: any) {
+export default function ({ params }: any) {
   return (
     <div>
-      <p>Page {params.id}</p>
-      <Link href={`/${params.id}/instructions`}>
+      Register for Event {params.id}
+      <Link href={`/${params.id}/success`}>
         <button className="rounded bg-blue-500 text-white px-4 py-2 hover:bg-blue-700">
-          How to Register?
+          Complete
         </button>
       </Link>
     </div>

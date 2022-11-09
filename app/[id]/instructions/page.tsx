@@ -34,17 +34,16 @@ export default async function page({ params }: any) {
       <Text headingLevel={2} bold>
         How to Register
       </Text>
-      <Link href={`/${params.id}/register`}>
-        <p>{parseHTML(event?.howToRegisterHtmlText)}</p>
-        <div className="fixed bottom-0 left-0 right-0 p-12 md:w-1/2 lg:w-1/3 mx-auto transition-all">
-          <Link
-            href={`/${params.id}/register`}
-            className="bg-primary-500 hover:bg-primary-600 shadow-primary-300 dark:shadow-primary-700 shadow-xl hover:shadow-2xl hover:shadow-primary-500 transition-all px-8 py-4 grid place-content-center text-white rounded-2xl hover:scale-105"
-          >
-            Register
-          </Link>
-        </div>
-      </Link>
+
+      <div>{parseHTML(event?.howToRegisterHtmlText)}</div>
+      <div className="fixed bottom-0 left-0 right-0 p-12 md:w-1/2 lg:w-1/3 mx-auto transition-all">
+        <Link
+          href={`/${params.id}/register`}
+          className="bg-primary-500 hover:bg-primary-600 shadow-primary-300 dark:shadow-primary-700 shadow-xl hover:shadow-2xl hover:shadow-primary-500 transition-all px-8 py-4 grid place-content-center text-white rounded-2xl hover:scale-105"
+        >
+          Register
+        </Link>
+      </div>
     </div>
   );
 }

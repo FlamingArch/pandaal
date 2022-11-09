@@ -24,12 +24,12 @@ export default async function page({ params }: any) {
   const event = await fetchEvent(params.id);
 
   return (
-    <div className="w-screen min-h-screen p-6 flex gap-4 flex-col">
+    <div className="w-screen min-h-screen p-6 flex gap-4 flex-col dark:bg-black dark:text-white">
       <Link
         href={`/${params.id}`}
-        className="p-4 rounded-2xl bg-primary-50 w-min"
+        className="p-4 rounded-2xl bg-primary-50 w-min dark:bg-primary-800"
       >
-        <IconBack className="w-6 h-6 fill-primary-500" />
+        <IconBack className="w-6 h-6 fill-primary-500 dark:fill-primary-200" />
       </Link>
       <Text headingLevel={2} bold>
         How to Register

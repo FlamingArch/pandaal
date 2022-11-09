@@ -22,12 +22,12 @@ export default function ({ params }: any) {
   }, []);
 
   return (
-    <div className="w-screen min-h-screen p-6 flex flex-col gap-4">
+    <div className="w-screen min-h-screen p-6 flex flex-col gap-4 dark:bg-black dark:text-white">
       <Link
         href={`/${params.id}/instructions`}
-        className="p-4 rounded-2xl bg-primary-50 w-min"
+        className="p-4 rounded-2xl bg-primary-50 w-min dark:bg-primary-800"
       >
-        <IconBack className="w-6 h-6 fill-primary-500" />
+        <IconBack className="w-6 h-6 fill-primary-500 dark:fill-primary-200" />
       </Link>
       <Text headingLevel={2} bold>
         Please Fill This Form

@@ -59,8 +59,9 @@ const Text = ({
       style={{
         fontSize: getTextSize(),
         fontWeight: getFontWeight(),
-        color: accented && "#3F4882",
-        opacity: dimmed && "0.64",
+        // TODO: Add support for accented and dimmed
+        // color: accented && "#3F4882",
+        // opacity: dimmed && "0.64",
       }}
     >
       {children}

@@ -138,17 +138,19 @@ export default async function Page({ params }: { params: { id: string } }) {
           "bg-primary-500 border-primary-400 border-opacity-10 text-white fill-white dark:bg-primary-500 dark:border-primary-400 bg-opacity-90 dark:bg-opacity-90"
         }
       >
-        <div className="flex gap-4 p-6 hover:bg-primary-400 hover:bg-opacity-10 cursor-pointer">
-          <div className="flex flex-col flex-grow">
-            <IconNewEvent className="w-16 h-16 m-1" />
-            <Text headingLevel={6}>List Your Own Event</Text>
-            <p>Contact us to list your own event with pandaal.</p>
+        <Link href={`/new`}>
+          <div className="flex gap-4 p-6 hover:bg-primary-400 hover:bg-opacity-10 cursor-pointer">
+            <div className="flex flex-col flex-grow">
+              <IconNewEvent className="w-16 h-16 m-1" />
+              <Text headingLevel={6}>List Your Own Event</Text>
+              <p>Contact us to list your own event with pandaal.</p>
+            </div>
+            <IconArrowRight className="w-4 h-4  m-1" />
           </div>
-          <IconArrowRight className="w-4 h-4  m-1" />
-        </div>
+        </Link>
       </Card>
 
-      <div className="flex fixed bottom-0 left-0 right-0 backdrop-filter backdrop-saturate-200 shadow-2xl border-[#ccca] border-t-2 backdrop-blur-xl p-6 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 backdrop-brightness-125">
+      <div className="dark:text-white flex fixed bottom-0 left-0 right-0 backdrop-filter backdrop-saturate-200 shadow-2xl border-[#ccca] dark:border-[#222c] border-t-2 backdrop-blur-xl p-6 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 backdrop-brightness-125">
         <div className="flex w-full md:w-2/3 lg:w-1/2 mx-auto">
           <div className="flex-grow flex-col flex">
             <Text headingLevel={5} bold>
@@ -158,7 +160,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
           <Link
             href={`/${params.id}/instructions`}
-            className="bg-primary-500 hover:bg-primary-600 shadow-primary-300 shadow-xl hover:shadow-2xl hover:shadow-primary-500 transition-all px-8 py-3 grid place-content-center text-white rounded-2xl hover:scale-105"
+            className="bg-primary-500 hover:bg-primary-600 shadow-primary-300 dark:shadow-primary-700 shadow-xl hover:shadow-2xl hover:shadow-primary-500 transition-all px-8 py-3 grid place-content-center text-white rounded-2xl hover:scale-105"
           >
             Register
           </Link>
@@ -180,7 +182,7 @@ function Card({
   return (
     <div
       className={
-        "shadow-2xl overflow-hidden border-white dark:border-[#222] border-2 border-opacity-60 bg-white backdrop-filter backdrop-saturate-200 bg-opacity-80 dark:bg-opacity-80 dark:bg-black dark:text-white w-full md:w-2/3 lg:w-1/2 rounded-3xl transition-all flex flex-col gap-2 backdrop-brightness-125 " +
+        "shadow-2xl overflow-hidden border-white dark:border-[#222] border-2 border-opacity-60 bg-white backdrop-filter backdrop-saturate-200 bg-opacity-80 dark:bg-opacity-80 dark:bg-black dark:text-white w-full md:w-2/3 lg:w-1/2 rounded-3xl transition-all flex flex-col gap-2 backdrop-brightness-125 hover:backdrop-brightness-150 " +
         (padding != null ? `p-${padding} ` : `p-6 `) +
         className
       }

@@ -1,14 +1,38 @@
+"use client";
+import { initializeApp } from "firebase/app";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Text } from "../../../components";
+import { IconBack } from "../../../components/icons";
+import constants from "../../../constants";
+import { generateForm } from "../../../helpers";
 
 export default function ({ params }: any) {
+  const [formData, setFormData] = useState([]);
+
+  useEffect(() => {
+    const app = initializeApp(constants.firebaseConfig);
+    const db = getFirestore(app);
+
+    const ref = doc(db, "Events", params.id);
+    getDoc(ref).then((data) => {
+      setFormData(data.data()?.questions);
+    });
+  }, []);
+
   return (
-    <div>
-      Register for Event {params.id}
-      <Link href={`/${params.id}/success`}>
-        <button className="rounded bg-blue-500 text-white px-4 py-2 hover:bg-blue-700">
-          Complete
-        </button>
+    <div className="w-screen min-h-screen p-6 flex flex-col gap-4">
+      <Link
+        href={`/${params.id}/instructions`}
+        className="p-4 rounded-2xl bg-primary-50 w-min"
+      >
+        <IconBack className="w-6 h-6 fill-primary-500" />
       </Link>
+      <Text headingLevel={2} bold>
+        Please Fill This Form
+      </Text>
+      {generateForm(formData)}
     </div>
   );
 }

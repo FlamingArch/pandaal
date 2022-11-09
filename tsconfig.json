@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -28,9 +24,14 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "app/[id]/page.tsx", "contexts/Firebase.jsx", "contexts/Firebase.jsx", "app/[id]/page.tsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "app/[id]/page.jsx",
+    "components/text.tsx",
+    "app/[id]/page.jsx",
+    "contexts/Firebase.jsx",
+    "contexts/Firebase.jsx",
+    "app/[id]/page.jsx",
+    "components/text.tsx"
+  ],
+  "exclude": ["node_modules"]
 }

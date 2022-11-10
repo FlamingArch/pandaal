@@ -1,8 +1,14 @@
 "use client";
 import { initializeApp } from "firebase/app";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+
 import Link from "next/link";
+
+import { useRouter } from "next/navigation";
+
 import { useEffect, useState } from "react";
+
 import { Text } from "../../../components";
 import { IconBack } from "../../../components/icons";
 import constants from "../../../constants";
@@ -12,11 +18,17 @@ export default function ({ params }: any) {
   const [formData, setFormData] = useState([]);
   const [response, setResponse] = useState([]);
   const [enableButton, setEnableButton] = useState(false);
+  const router = useRouter();
+
+  const app = initializeApp(constants.firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  if (!auth.currentUser) {
+    router.push("/signin", {});
+  }
 
   useEffect(() => {
-    const app = initializeApp(constants.firebaseConfig);
-    const db = getFirestore(app);
-
     const ref = doc(db, "Events", params.id);
     getDoc(ref).then((data) => {
       setFormData(data.data()?.questions);

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Input, Text } from "../../components";
 import { IconBack, IconPhone } from "../../components/icons";
 
-export default function (callback: any) {
+export default function ({ callback }: { callback: any }) {
   const [code, setCode] = useState("");
 
   const verifyOTP = (code, callback) => {

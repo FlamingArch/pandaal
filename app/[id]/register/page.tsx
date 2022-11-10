@@ -10,6 +10,8 @@ import { generateForm } from "../../../helpers";
 
 export default function ({ params }: any) {
   const [formData, setFormData] = useState([]);
+  const [response, setResponse] = useState([]);
+  const [enableButton, setEnableButton] = useState(false);
 
   useEffect(() => {
     const app = initializeApp(constants.firebaseConfig);
@@ -32,7 +34,23 @@ export default function ({ params }: any) {
       <Text headingLevel={2} bold>
         Please Fill This Form
       </Text>
-      {generateForm(formData)}
+      {generateForm(formData, response, setResponse, setEnableButton)}
+      <div className="fixed bottom-0 left-0 right-0 p-12 md:w-1/2 lg:w-1/3 mx-auto transition-all">
+        <div
+          onClick={() => {
+            if (response.length === formData.length) console.log(response);
+            else console.log("Fill Form First");
+          }}
+          className={
+            "bg-primary-500 shadow-primary-300 dark:shadow-primary-700 shadow-xl transition-all px-8 py-4 grid place-content-center text-white rounded-2xl " +
+            (enableButton
+              ? "hover:bg-primary-600 hover:shadow-2xl hover:shadow-primary-500 hover:scale-105 "
+              : "opacity-50 cursor-not-allowed")
+          }
+        >
+          Register
+        </div>
+      </div>
     </div>
   );
 }

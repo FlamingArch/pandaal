@@ -1,16 +1,27 @@
 import { Input } from "../components";
 import { IconAnswer } from "../components/icons";
 
-export default function (questions, response, setResponse) {
+export default function (questions, response, setResponse, setEnableButton) {
   function appendAnswer(index, ques, answer) {
     const newResponses = response;
     if (newResponses[index]) {
-      newResponses[index] = { ...ques, ans: answer };
+      if (answer == "") {
+        newResponses.splice(index, 1);
+      } else {
+        newResponses[index] = { ...ques, ans: answer };
+      }
     } else {
       newResponses.splice(index, 0, { ...ques, ans: answer });
       setResponse(newResponses);
     }
+    refreshValidation();
   }
+  const refreshValidation = () => {
+    console.log(`FORM DATA: ${questions.length} RESPONSE: ${response.length}`);
+    if (response.length === questions.length) setEnableButton(true);
+    else setEnableButton(false);
+  };
+
   return questions.map((e, i) => (
     <div key={i} className="grid gap-2">
       <p>{e.ques}</p>

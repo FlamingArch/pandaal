@@ -41,7 +41,7 @@ export default async function page({ params }: any) {
           href={`/${params.id}/register`}
           className="bg-primary-500 hover:bg-primary-600 shadow-primary-300 dark:shadow-primary-700 shadow-xl hover:shadow-2xl hover:shadow-primary-500 transition-all px-8 py-4 grid place-content-center text-white rounded-2xl hover:scale-105"
         >
-          Register
+          Continue
         </Link>
       </div>
     </div>

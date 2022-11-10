@@ -16,6 +16,7 @@ import {
   IconShare,
   IconStreaming,
   IconNewEvent,
+  IconBack,
 } from "../../components/icons";
 import Link from "next/link";
 
@@ -38,6 +39,12 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className="flex items-center flex-col p-8 gap-8 w-screen min-h-screen overflow-scroll pb-32">
+      <Link
+        href={`/`}
+        className="p-4 rounded-2xl bg-primary-50 bg-opacity-80 backdrop-filter backdrop-blur-lg backdrop-brightness-150 backdrop-saturate-200 w-min dark:bg-primary-800 place-self-start"
+      >
+        <IconBack className="w-6 h-6 fill-primary-500 dark:fill-primary-200" />
+      </Link>
       <div className="fixed top-0 left-0 w-screen h-screen overflow-hidden -z-10 bg-white dark:bg-black">
         <Image
           alt=""

@@ -16,6 +16,12 @@
   --color-secondary-300: 227, 79, 97;
 }
 
+*::selection {
+  background-color: rgba(var(--color-primary-500));
+  color: white;
+  box-shadow: 0px 4px 8px gray;
+}
+
 body {
   user-select: none;
   font-family: "Poppins", sans-serif;

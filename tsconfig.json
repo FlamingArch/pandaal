@@ -32,6 +32,6 @@
     "contexts/Firebase.jsx",
     "app/[id]/page.jsx",
     "components/text.tsx"
-  ],
+, "app/[id]/share/page.jsx", "app/[id]/share/page.jsx"  ],
   "exclude": ["node_modules"]
 }

@@ -31,7 +31,7 @@ const Input = ({
       <div className="bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl transition-shadow focus-within:shadow-[#3F4882AA]">
         {leading && <div className="p-4">{leading}</div>}
         <select
-          className="outline-none flex-grow bg-transparent mr-4"
+          className="outline-none flex-grow bg-transparent dark:bg-black dark:text-white mr-4"
           placeholder={placeholder}
           value={value}
           onChange={onChange}

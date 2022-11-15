@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Input, Text } from "../../components";
-import { IconBack, IconPhone } from "../../components/icons";
+import { IconBack, IconPasskey, IconPhone } from "../../components/icons";
 
 export default function ({ callback }: { callback: any }) {
   const [code, setCode] = useState("");
@@ -18,7 +18,7 @@ export default function ({ callback }: { callback: any }) {
   };
 
   return (
-    <div className="w-screen min-h-screen p-6 flex flex-col gap-6">
+    <div className="w-screen min-h-screen p-6 flex flex-col gap-6 dark:bg-black dark:text-white">
       <Link
         href={`/`}
         className="p-4 rounded-2xl bg-primary-50 w-min dark:bg-primary-800"
@@ -31,12 +31,7 @@ export default function ({ callback }: { callback: any }) {
       <div className="max-w-sm mx-auto">
         <Input
           placeholder="Phone"
-          leading={
-            <div className="flex gap-4 mr-[-24px]">
-              <IconPhone className="w-6 h-6 fill-primary-500" />
-              <p className="font-medium text-primary-500">+91</p>
-            </div>
-          }
+          leading={<IconPasskey className="w-6 h-6 fill-primary-500" />}
           type="phone"
           value={code}
           onChange={(e: any) => setCode(e.target.value)}

@@ -30,7 +30,7 @@ export default function ({ setPage }: { setPage: (page: number) => void }) {
   };
 
   return (
-    <div className="w-screen min-h-screen p-6 flex flex-col gap-6">
+    <div className="w-screen min-h-screen p-6 flex flex-col gap-6 dark:bg-black dark:text-white">
       <Link
         href={`/`}
         className="p-4 rounded-2xl bg-primary-50 w-min dark:bg-primary-800"

@@ -26,12 +26,19 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/[id]/page.jsx",
-    "components/text.tsx",
+    "components/text.jsx",
     "app/[id]/page.jsx",
     "contexts/Firebase.jsx",
     "contexts/Firebase.jsx",
     "app/[id]/page.jsx",
-    "components/text.tsx"
-, "app/[id]/share/page.jsx", "app/[id]/share/page.jsx"  ],
+    "components/text.jsx",
+    "app/signin/signIn.jsx",
+    "app/signin/otp.jsx",
+    "app/[id]/share/page.jsx",
+    "ap",
+    "app/signin/signIn.jsx",
+    "p/[id]/share/page.jsx",
+    "app/signin/otp.jsx"
+, "app/signin/page.jsx", "app/signin/page.jsx"  ],
   "exclude": ["node_modules"]
 }

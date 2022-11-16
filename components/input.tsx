@@ -28,10 +28,10 @@ const Input = ({
 
   if (getType(type ?? "") == "select") {
     return (
-      <div className="bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl transition-shadow focus-within:shadow-[#3F4882AA]">
+      <div className="bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all">
         {leading && <div className="p-4">{leading}</div>}
         <select
-          className="outline-none flex-grow bg-transparent dark:bg-black dark:text-white mr-4"
+          className="outline-none flex-grow bg-white dark:bg-black dark:text-white mr-4"
           placeholder={placeholder}
           value={value}
           onChange={onChange}
@@ -47,7 +47,7 @@ const Input = ({
   return (
     <div
       className={
-        "bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl transition-shadow focus-within:shadow-[#3F4882AA] " +
+        "bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all " +
         (getType(type ?? "") == "file" ? "flex place-items-center" : "")
       }
     >

@@ -5,13 +5,14 @@ import Link from "next/link";
 import { Input, Text } from "../../components";
 import { IconBack, IconPasskey, IconPhone } from "../../components/icons";
 
-export default function ({ callback }: { callback: any }) {
+export default function ({ callback }) {
   const [code, setCode] = useState("");
 
   const verifyOTP = (code, callback) => {
     window.confirmationResult
       .confirm(code)
       .then((result) => {
+        if ()
         callback();
       })
       .catch((e) => console.log(`Error Verifying OTP: ${e}`));
@@ -34,7 +35,7 @@ export default function ({ callback }: { callback: any }) {
           leading={<IconPasskey className="w-6 h-6 fill-primary-500" />}
           type="phone"
           value={code}
-          onChange={(e: any) => setCode(e.target.value)}
+          onChange={(e) => setCode(e.target.value)}
         />
       </div>
       <div className="fixed bottom-0 left-0 right-0 p-12 md:w-1/2 lg:w-1/3 mx-auto transition-all">

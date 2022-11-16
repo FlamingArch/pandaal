@@ -12,7 +12,7 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 
-export default function ({ setPage }: { setPage: (page: number) => void }) {
+export default function ({ setPage }) {
   const [phone, setPhone] = useState("");
 
   const handleSubmit = () => {
@@ -51,7 +51,7 @@ export default function ({ setPage }: { setPage: (page: number) => void }) {
           }
           type="phone"
           value={phone}
-          onChange={(e: any) => setPhone(e.target.value)}
+          onChange={(e) => setPhone(e.target.value)}
         />
       </div>
       <div id="rcv"></div>

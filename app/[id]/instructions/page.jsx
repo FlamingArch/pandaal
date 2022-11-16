@@ -6,7 +6,7 @@ import constants from "../../../constants";
 import { parseHTML } from "../../../helpers";
 import { IconBack } from "../../../components/icons";
 
-async function fetchEvent(id: string) {
+async function fetchEvent(id) {
   const app = initializeApp(constants.firebaseConfig);
   const db = getFirestore(app);
 
@@ -20,7 +20,7 @@ async function fetchEvent(id: string) {
   }
 }
 
-export default async function page({ params }: any) {
+export default async function page({ params }) {
   const event = await fetchEvent(params.id);
 
   return (

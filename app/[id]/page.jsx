@@ -20,7 +20,7 @@ import {
 } from "../../components/icons";
 import Link from "next/link";
 
-async function fetchEvent(id: string) {
+async function fetchEvent(id) {
   const app = initializeApp(constants.firebaseConfig);
   const db = getFirestore(app);
 
@@ -34,7 +34,7 @@ async function fetchEvent(id: string) {
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }) {
   const event = await fetchEvent(params.id);
 
   return (
@@ -177,15 +177,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   );
 }
 
-function Card({
-  children,
-  padding,
-  className,
-}: {
-  children: React.ReactNode;
-  padding?: number;
-  className?: string;
-}) {
+function Card({ children, padding, className }) {
   return (
     <div
       className={

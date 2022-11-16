@@ -21,7 +21,7 @@ export default function () {
     const ref = collection(db, "Events");
 
     getDocs(ref).then((querySnapshot) => {
-      const items: any = [];
+      const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
       });
@@ -37,7 +37,7 @@ export default function () {
   const [id, setId] = React.useState("");
   const [idVisible, setIdVisible] = React.useState(false);
 
-  const handleInputField = (e: any) => setId(e.target.value);
+  const handleInputField = (e) => setId(e.target.value);
 
   return (
     <div className="p-6 flex flex-col gap-4 bg-white dark:bg-black text-black dark:text-white w-screen h-screen">
@@ -86,7 +86,7 @@ export default function () {
         Events
       </Text>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-        {items.map((item: any) => (
+        {items.map((item) => (
           <Link
             href={`/${item.id}`}
             key={item.id}

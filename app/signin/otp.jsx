@@ -12,7 +12,6 @@ export default function ({ callback }) {
     window.confirmationResult
       .confirm(code)
       .then((result) => {
-        if ()
         callback();
       })
       .catch((e) => console.log(`Error Verifying OTP: ${e}`));

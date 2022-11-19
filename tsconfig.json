@@ -39,6 +39,6 @@
     "app/signin/signIn.jsx",
     "p/[id]/share/page.jsx",
     "app/signin/otp.jsx"
-, "app/signin/page.jsx", "app/signin/page.jsx", "app/page.jsx", "app/page.jsx", "app/[id]/instructions/page.jsx", "app/[id]/instructions/page.jsx", "app/[id]/register/page.jsx", "app/[id]/register/page.jsx"  ],
+, "app/signin/page.jsx", "app/signin/page.jsx", "components/limitedParagraph.jsx", "app/page.jsx", "app/page.jsx", "app/[id]/instructions/page.jsx", "app/[id]/instructions/page.jsx", "app/[id]/register/page.jsx", "app/[id]/register/page.jsx", "components/limitedParagraph.jsx"  ],
   "exclude": ["node_modules"]
 }

@@ -7,10 +7,6 @@ const LimitedParagraph = ({
   children,
   heading,
   limit,
-}: {
-  children: any;
-  heading?: string;
-  limit?: any;
 }) => {
   const [descriptionExpanded, setDescriptionExpanded] = React.useState(false);
   return (

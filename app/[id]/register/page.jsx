@@ -5,7 +5,10 @@ import {
   getDoc,
   getFirestore,
   serverTimestamp,
-  setDoc,
+  collection,
+  increment,
+  arrayUnion,
+  runTransaction,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import Link from "next/link";
@@ -15,6 +18,7 @@ import { Text } from "../../../components";
 import { IconBack } from "../../../components/icons";
 import constants from "../../../constants";
 import { generateForm, generateTicketHTML } from "../../../helpers";
+import generateRegistrationDocument from "../../../helpers/generateRegistrationDocument";
 
 export default function ({ params }) {
   const [event, setEvent] = useState({});
@@ -33,15 +37,19 @@ export default function ({ params }) {
   }
 
   useEffect(() => {
-    const docRef = doc(db, "users", auth.currentUser.uid);
+    if (auth.currentUser) {
+      const docRef = doc(db, "users", auth.currentUser.uid);
 
-    getDoc(docRef).then((doc) => {
-      if (doc.exists()) {
-        setUserDoc(doc.data());
-      } else {
-        router.push("/signup");
-      }
-    });
+      getDoc(docRef).then((doc) => {
+        if (doc.exists()) {
+          setUserDoc(doc.data());
+        } else {
+          router.push("/signup");
+        }
+      });
+    } else {
+      router.push("/signin");
+    }
   }, []);
 
   useEffect(() => {
@@ -53,46 +61,39 @@ export default function ({ params }) {
 
   useEffect(() => {
     if (event?.questions) {
-      setFormData(generateForm(event.questions));
+      setFormData(event.questions);
     }
   }, [event]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (response.length === formData.length) {
-      console.log(event);
-      const finalResponse = {
-        answers: response,
-        bannerUrl: event.bannerURL,
-        cashCollected: 0,
-        created: serverTimestamp(),
-        endDate: event.endDate,
-        endTime: event.endTime,
-        eventDateType: event.eventDateType,
-        eventId: event.id,
-        eventTitle: event.Title,
-        user: auth.currentUser.uid,
-        message: {
-          html: generateTicketHTML(event, response),
-          subject: "Registration Confirmed on Pandaal ❤️",
-          text: "",
-        },
-        offlineLocationAddress: event.offlineLocationAddress,
-        onOff: event.onOff,
-        onlinePlatform: event.onlinePlatform,
-        paymentStatus: "free",
-        registrationId: undefined, // TODO: Generate Registration ID
-        registrationStatus: "pending",
-        registrationStatusDateTime: undefined, // TODO: Check
-        startDate: event.startDate,
-        startTime: event.startTime,
-        ticketAuthorized: false, // TODO: Check
-        ticketCount: 1, // TODO: Check
-        to: userDoc.email,
-        userId: auth.currentUser.uid,
-        userName: auth.currentUser.displayName,
-        userPhone: auth.currentUser.phoneNumber,
-      };
-      console.log(finalResponse);
+      // console.log(event);
+      // console.log(response);
+      try {
+        await runTransaction(db, async (transaction) => {
+          const docRef = doc(collection(db, "registrations"));
+          const finalResponse = generateRegistrationDocument(
+            response,
+            event,
+            auth,
+            userDoc
+          );
+          console.log(finalResponse);
+          transaction.set(docRef, finalResponse);
+          transaction.set(docRef, { source: "web" }, { merge: true });
+          transaction.update(docRef, {
+            registrationCount: increment(1),
+          });
+          transaction.update(docRef, {
+            registeredUsers: arrayUnion(auth.currentUser.uid),
+          });
+          console.log(`Document Written with ID: ${docRef.id}`);
+          return docRef.id;
+        });
+      } catch (error) {
+        console.log("ERROR : ", error);
+        // console.log("RESPONSE: ", response);
+      }
     } else console.log("Fill Form First");
   };
 

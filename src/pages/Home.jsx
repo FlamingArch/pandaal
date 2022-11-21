@@ -1,26 +1,10 @@
 import React from "react";
-import { IconEdit, IconUser } from "../components/icons";
-import constants from "../constants";
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { useEvents } from "../hooks";
 import { AppBar, EventCard, LoadingList, Scaffold, List } from "../components";
+import { IconEdit, IconUser } from "../components/icons";
 
 export default function PageHome() {
-  const app = initializeApp(constants.firebaseConfig);
-  const firestore = getFirestore(app);
-
-  const [events, setEvents] = React.useState([]);
-
-  React.useEffect(() => {
-    const collectionRef = collection(firestore, "Events");
-    getDocs(collectionRef).then((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setEvents(items);
-    });
-  }, []);
+  const events = useEvents();
 
   let branding = (
     <div className="text-2xl font-bold text-primary-500">pandaal</div>
@@ -46,19 +30,38 @@ export default function PageHome() {
 
   return (
     <Scaffold appBar={<AppBar branding={branding} actions={accountButton} />}>
-      <List.View>
-        <List.Header
-          heading="Popular Events Near Greater Noida"
-          actions={filterButton}
-        />
-        <List.Section heading="Events">
-          {events.length == 0 ? (
-            <LoadingList length={4} />
-          ) : (
-            events.map((e) => <EventCard event={e} />)
-          )}
-        </List.Section>
-      </List.View>
+      <List.Header
+        heading="Popular Events Near Greater Noida"
+        actions={filterButton}
+      />
+      <List.Section heading="Events">
+        {events.length == 0 ? (
+          <LoadingList length={4} />
+        ) : (
+          events.map((e) => <EventCard event={e} />)
+        )}
+      </List.Section>
+      <List.Section heading="Events">
+        {events.length == 0 ? (
+          <LoadingList length={4} />
+        ) : (
+          events.map((e) => <EventCard event={e} />)
+        )}
+      </List.Section>
+      <List.Section heading="Events">
+        {events.length == 0 ? (
+          <LoadingList length={4} />
+        ) : (
+          events.map((e) => <EventCard event={e} />)
+        )}
+      </List.Section>
+      <List.Section heading="Events">
+        {events.length == 0 ? (
+          <LoadingList length={4} />
+        ) : (
+          events.map((e) => <EventCard event={e} />)
+        )}
+      </List.Section>
     </Scaffold>
   );
 }

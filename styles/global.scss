@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  --color-scaffold-background: #ffffff;
+  --color-page-background: #ffffff;
+}
+
+body {
+  background-color: white;
+  color: black;
+}

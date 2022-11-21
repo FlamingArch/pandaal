@@ -42,27 +42,6 @@ export default function PageHome() {
             events.map((e) => <EventCard event={e} />)
           )}
         </List.Section>
-        <List.Section heading="Events">
-          {events.length == 0 ? (
-            <LoadingList length={4} />
-          ) : (
-            events.map((e) => <EventCard event={e} />)
-          )}
-        </List.Section>
-        <List.Section heading="Events">
-          {events.length == 0 ? (
-            <LoadingList length={4} />
-          ) : (
-            events.map((e) => <EventCard event={e} />)
-          )}
-        </List.Section>
-        <List.Section heading="Events">
-          {events.length == 0 ? (
-            <LoadingList length={4} />
-          ) : (
-            events.map((e) => <EventCard event={e} />)
-          )}
-        </List.Section>
       </List.View>
     </Scaffold>
   );

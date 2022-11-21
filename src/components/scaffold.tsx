@@ -8,7 +8,7 @@ export default function ViewScaffold({
   appBar?: React.ReactNode;
 }) {
   return (
-    <div className="w-screen h-screen grid overflow-hidden">
+    <div className="w-screen h-screen flex-col flex overflow-hidden">
       {appBar && appBar}
       {children}
     </div>

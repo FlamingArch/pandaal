@@ -14,7 +14,7 @@ function Section({
       <p className="px-8 uppercase font-bold">{heading}</p>
       <div
         className={
-          "animate-pulse flex overflow-scroll gap-10 p-8 " +
+          "flex overflow-scroll gap-10 p-8 " +
           (orientation == "column" ? "flex-col" : "")
         }
       >

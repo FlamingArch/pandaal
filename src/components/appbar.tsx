@@ -5,7 +5,7 @@ export default function ViewAppBar({
   branding,
   actions,
 }: {
-  branding?: string;
+  branding?: string | React.ReactNode;
   actions?: React.ReactNode | [React.ReactNode];
 }) {
   return (

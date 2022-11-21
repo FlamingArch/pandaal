@@ -5,9 +5,9 @@ function Section({
   children,
   heading,
 }: {
-  orientation: "column" | "row";
-  children: React.ReactNode;
-  heading: React.ReactNode;
+  orientation?: "column" | "row";
+  children?: React.ReactNode;
+  heading?: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col">
@@ -25,7 +25,11 @@ function Section({
 }
 
 function View({ children }: { children: React.ReactNode }) {
-  return <div className="w-screen flex flex-col max-h-screen overflow-scroll">{children}</div>;
+  return (
+    <div className="w-screen flex flex-col overflow-scroll">
+      {children}
+    </div>
+  );
 }
 
 function Header({

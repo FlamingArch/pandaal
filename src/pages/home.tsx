@@ -30,38 +30,40 @@ export default function PageHome() {
 
   return (
     <Scaffold appBar={<AppBar branding={branding} actions={accountButton} />}>
-      <List.Header
-        heading="Popular Events Near Greater Noida"
-        actions={filterButton}
-      />
-      <List.Section heading="Events">
-        {events.length == 0 ? (
-          <LoadingList length={4} />
-        ) : (
-          events.map((e) => <EventCard event={e} />)
-        )}
-      </List.Section>
-      <List.Section heading="Events">
-        {events.length == 0 ? (
-          <LoadingList length={4} />
-        ) : (
-          events.map((e) => <EventCard event={e} />)
-        )}
-      </List.Section>
-      <List.Section heading="Events">
-        {events.length == 0 ? (
-          <LoadingList length={4} />
-        ) : (
-          events.map((e) => <EventCard event={e} />)
-        )}
-      </List.Section>
-      <List.Section heading="Events">
-        {events.length == 0 ? (
-          <LoadingList length={4} />
-        ) : (
-          events.map((e) => <EventCard event={e} />)
-        )}
-      </List.Section>
+      <List.View>
+        <List.Header
+          heading="Popular Events Near Greater Noida"
+          actions={filterButton}
+        />
+        <List.Section heading="Events">
+          {events.length == 0 ? (
+            <LoadingList length={4} />
+          ) : (
+            events.map((e) => <EventCard event={e} />)
+          )}
+        </List.Section>
+        <List.Section heading="Events">
+          {events.length == 0 ? (
+            <LoadingList length={4} />
+          ) : (
+            events.map((e) => <EventCard event={e} />)
+          )}
+        </List.Section>
+        <List.Section heading="Events">
+          {events.length == 0 ? (
+            <LoadingList length={4} />
+          ) : (
+            events.map((e) => <EventCard event={e} />)
+          )}
+        </List.Section>
+        <List.Section heading="Events">
+          {events.length == 0 ? (
+            <LoadingList length={4} />
+          ) : (
+            events.map((e) => <EventCard event={e} />)
+          )}
+        </List.Section>
+      </List.View>
     </Scaffold>
   );
 }

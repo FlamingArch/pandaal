@@ -3,6 +3,7 @@ import { useEvents } from "../hooks";
 import { AppBar, LoadingList, Scaffold, List } from "../components";
 import { EventCard } from "../fragments";
 import { IconEdit, IconUser } from "../components/icons";
+import { Outlet } from "react-router-dom";
 
 export default function PageHome() {
   const events = useEvents();
@@ -44,6 +45,7 @@ export default function PageHome() {
           )}
         </List.Section>
       </List.View>
+      <Outlet />
     </Scaffold>
   );
 }

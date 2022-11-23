@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ViewEventCard({ event }: { event: any }) {
   return (
-    // <Link to={`/${event.id}`}>
-    <Link to={`/event`}>
+    <Link to={`/${event.id}`}>
       <div
         key={event.id}
         className="flex flex-col flex-shrink-0 w-[210px] transition-all hover:bg-primary-50 hover:scale-110 hover:rounded-3xl cursor-pointer hover:p-2"

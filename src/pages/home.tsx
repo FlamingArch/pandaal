@@ -1,6 +1,7 @@
 import React from "react";
 import { useEvents } from "../hooks";
-import { AppBar, EventCard, LoadingList, Scaffold, List } from "../components";
+import { AppBar, LoadingList, Scaffold, List } from "../components";
+import { EventCard } from "../fragments";
 import { IconEdit, IconUser } from "../components/icons";
 
 export default function PageHome() {

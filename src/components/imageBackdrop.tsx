@@ -15,7 +15,7 @@ export default function ImageBackdrop({
       className={
         "fixed top-0 left-0 w-screen h-screen object-cover object-center -z-10" +
         (blur ? "filter blur-3xl scale-125 " : "") +
-        (dim ? "brightness-50 " : "")
+        (dim ? "dark:brightness-50 brightness-150 " : "")
       }
     ></img>
   );

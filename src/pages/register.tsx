@@ -20,7 +20,7 @@ export default function PageRegister() {
         type: "spring",
         duration: 0.3,
       }}
-      className="fixed top-0 left-0 w-screen h-screen bg-white z-50 p-8 gap-8 flex flex-col"
+      className="fixed top-0 left-0 w-screen h-screen bg-white dark:bg-black z-50 p-8 gap-8 flex flex-col"
     >
       <BackButton />
 

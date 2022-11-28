@@ -89,7 +89,7 @@ export default function PageEvent() {
                 onChange={() => setLiked(!liked)}
               />
 
-              <div className="rounded-3xl cursor-pointer bg-white bg-opacity-80 backdrop-filter backdrop-saturate-200 backdrop-brightness-110 items-center dark:bg-black dark:bg-opacity-80 p-6 flex justify-between gap-4">
+              <div className="rounded-3xl cursor-pointer bg-white items-center dark:bg-black p-6 flex shadow-lg justify-between gap-4">
                 <LimitedParagraph heading="Event Description" limit={100}>
                   {event?.description}
                 </LimitedParagraph>

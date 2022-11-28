@@ -12,7 +12,7 @@ const favouriteTile = ({ count, value, onChange }) => {
 
   return (
     <div
-      className="rounded-3xl cursor-pointer bg-white bg-opacity-80 backdrop-filter backdrop-saturate-200 backdrop-brightness-110 items-center dark:bg-black dark:bg-opacity-80 p-6 flex justify-between gap-4"
+      className="rounded-3xl cursor-pointer bg-white items-center dark:bg-black shadow-lg p-6 flex justify-between gap-4"
       onClick={onChange}
     >
       <div className="flex flex-col">

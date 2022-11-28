@@ -21,12 +21,10 @@ export default function ViewEventCard({
   const navigate = useNavigate();
 
   const hoverStyles = hover
-    ? "hover:bg-primary-50 hover:scale-110 hover:rounded-3xl cursor-pointer hover:p-2"
+    ? "hover:bg-primary-50 dark:hover:bg-primary-900 hover:scale-110 hover:rounded-3xl cursor-pointer hover:p-2"
     : "";
   const widthStyles = width ? `w-${width}` : "w-[210px]";
   const defaultStyles = `flex flex-col flex-shrink-0 transition-all`;
-
-  console.log(`Setting WidthStyle: ${widthStyles}`);
 
   return (
     <div

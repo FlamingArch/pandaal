@@ -43,6 +43,7 @@ export default function PageHome() {
             ))
           )}
         </List.Section>
+        <div className="h-56"></div>
       </List.View>
       <Outlet />
     </Scaffold>

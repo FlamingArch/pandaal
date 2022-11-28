@@ -25,7 +25,7 @@ export default function ViewPage({
     ? "backdrop-filter backdrop-blur-3xl bg-opacity-80 dark:bg-opacity-80 backdrop-brightness-200 dark:bg-brightness-50 backdrop-saturate-200"
     : "";
   const defaultStyles =
-    "bg-white dark:bg-black text-black dark:text-white flex flex-col flex-grow w-full h-full transition-all";
+    "bg-white dark:bg-black text-black dark:text-white flex flex-col flex-grow w-full min-h-fit transition-all";
 
   return (
     <div

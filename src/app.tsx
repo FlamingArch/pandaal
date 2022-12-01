@@ -1,7 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import RequireSignIn from "./components/requireSignIn";
 import { FirebaseProvider } from "./contexts/firebase";
-import { PageHome, PageEvent, PageRegister, PageInstructions } from "./pages";
+import {
+  PageHome,
+  PageEvent,
+  PageRegister,
+  PageInstructions,
+  PageSignIn,
+} from "./pages";
 
 export default function App() {
   return (
@@ -10,10 +17,18 @@ export default function App() {
         <Route path="/" element={<PageHome />}>
           <Route path=":eventId" element={<PageEvent />}>
             <Route path="instructions" element={<PageInstructions />} />
-            <Route path="register" element={<PageRegister />} />
+            <Route
+              path="register"
+              element={
+                <RequireSignIn>
+                  <PageRegister />
+                </RequireSignIn>
+              }
+            />
             <Route path="*" element={<PageEvent />} />
           </Route>
         </Route>
+        <Route path="signin" element={<PageSignIn />} />
         <Route path="*" element={<PageHome />} />
       </Routes>
     </FirebaseProvider>

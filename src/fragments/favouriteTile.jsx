@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { IconFavourite, IconFavouriteFill } from "../components/icons";
 
-const favouriteTile = ({ count, value, onChange }) => {
+const FavouriteTile = ({ count, value, onChange }) => {
   let likedButtonStyles = value
     ? "bg-pink-500 dark:bg-pink-500 shadow-pink-300 p-6 m-0 dark:shadow-pink-700 shadow-xl rounded-3xl"
     : "m-2 p-4 rounded-[3rem]";
@@ -37,4 +37,4 @@ const favouriteTile = ({ count, value, onChange }) => {
   );
 };
 
-export default favouriteTile;
+export default FavouriteTile;

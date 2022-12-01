@@ -10,6 +10,7 @@
     "deploy": "vite build && firebase deploy"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.191",
     "autoprefixer": "^10.4.13",
     "firebase": "^9.14.0",
     "framer-motion": "^7.6.9",

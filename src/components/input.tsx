@@ -8,6 +8,7 @@ const Input = ({
   leading,
   trailing,
   type,
+  className,
 }: {
   children?: React.ReactNode;
   value: any;
@@ -16,6 +17,7 @@ const Input = ({
   leading?: any;
   trailing?: any;
   type?: string;
+  className?: string;
 }) => {
   const getType = (type: string) => {
     return (
@@ -30,8 +32,10 @@ const Input = ({
 
   if (getType(type ?? "") == "select") {
     return (
-      <div className="bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all">
-        {leading && <div className="p-4">{leading}</div>}
+      <div
+        className={`bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all ${className}`}
+      >
+        {leading && <div className="p-4 pr-0">{leading}</div>}
         <select
           className="outline-none flex-grow bg-white dark:bg-black dark:text-white mr-4"
           placeholder={placeholder}
@@ -49,13 +53,13 @@ const Input = ({
   return (
     <div
       className={
-        "bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all " +
+        `bg-white dark:bg-black overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all ${className} ` +
         (getType(type ?? "") == "file" ? "flex place-items-center" : "")
       }
     >
-      {leading && <div className="p-4">{leading}</div>}
+      {leading && <div className="p-4 pr-0">{leading}</div>}
       <input
-        className="outline-none flex-grow dark:bg-black dark:text-white p-4"
+        className="outline-none flex-grow dark:bg-black dark:text-white p-4 w-full"
         placeholder={placeholder}
         value={value}
         onChange={onChange}

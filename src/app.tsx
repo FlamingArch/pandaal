@@ -29,6 +29,14 @@ export default function App() {
           </Route>
         </Route>
         <Route path="signin" element={<PageSignIn />} />
+        <Route
+          path="account"
+          element={
+            <RequireSignIn>
+              <PageSignIn />
+            </RequireSignIn>
+          }
+        />
         <Route path="*" element={<PageHome />} />
       </Routes>
     </FirebaseProvider>

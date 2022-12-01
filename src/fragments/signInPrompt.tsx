@@ -33,12 +33,14 @@ export default function SignInPrompt({ setPhoneNumber, onSubmit }) {
           value={countryCode}
           onChange={(e) => setCountryCode(e.target.value)}
           className="min-w-[4rem] w-min"
+          placeholder="Country Code"
         />
         <Input
           leading={
             <IconPhone className="w-6 h-6 fill-primary-500 dark:fill-primary-400" />
           }
           value={phone}
+          placeholder="Phone Number"
           onChange={(e) => setPhone(e.target.value)}
         />
       </div>

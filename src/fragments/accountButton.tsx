@@ -11,7 +11,7 @@ function AccountButton() {
 
   return (
     <div
-      className="flex items-center justify-center gap-2 hover:bg-primary-50 dark:hover:bg-primary-900 cursor-pointer rounded-xl"
+      className="flex items-center justify-center hover:bg-primary-50 dark:hover:bg-primary-900 cursor-pointer rounded-xl"
       onMouseEnter={() => setExpand(true)}
       onMouseLeave={() => setExpand(false)}
       onClick={() => navigate("/account")}
@@ -26,11 +26,11 @@ function AccountButton() {
       </div>
       <div
         className={
-          "px-2 transition-all duration-300 " +
+          "transition-all duration-300 " +
           (expand ? "w-32 " : "w-0 opacity-0 ")
         }
       >
-        <div className="min-w-[8rem] font-medium">
+        <div className="min-w-[8rem] px-4 font-medium">
           {user?.displayName ?? "Sign In"}
         </div>
       </div>

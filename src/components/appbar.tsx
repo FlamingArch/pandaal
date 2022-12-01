@@ -25,7 +25,7 @@ export default function ViewAppBar({
       backdropStyles = "";
   }
   const defaultStyles =
-    "p-8 grid grid-cols-2 gap-4 sticky top-0 z-10 items-center ";
+    "p-6 grid grid-cols-2 gap-4 sticky top-0 z-10 items-center ";
 
   return (
     <div className={`${defaultStyles} ${backdropStyles}`}>

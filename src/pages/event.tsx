@@ -37,10 +37,12 @@ export default function PageEvent() {
         <Scaffold appBar={<AppBar leading={<BackButton />} />}>
           <ImageBackdrop src={event?.bannerURL} dim blur />
           <div className="fixed bottom-0 z-50 left-0 right-0 w-full transition-all shadow-3xl bg-white dark:bg-black dark:text-white dark:bg-opacity-80 bg-opacity-80 backdrop-filter backdrop-brightness-200 dark:bg-brightness-50 backdrop-saturate-200 backdrop-blur-3xl ">
-            <div className="flex-grow flex justify-between items-center mx-auto md:w-2/3 p-8 xl:w-1/2">
+            <div className="flex-grow flex justify-between items-center mx-auto md:w-2/3 px-8 p-4 xl:w-1/2">
               <div className="flex flex-col">
                 <div className="uppercase font-bold">Price</div>
-                <div className="text-xl text-primary-500">Price</div>
+                <div className="text-xl text-primary-500">
+                  {event?.price == 0 ? "Free" : event?.price}
+                </div>
               </div>
               <Link
                 to={"instructions"}
@@ -55,7 +57,7 @@ export default function PageEvent() {
             style={{ scrollBehavior: "smooth" }}
           >
             <EventCard event={event} className=" place-self-center" />
-            <Page padding={12} gap={8} rounded shadow responsive material>
+            <Page padding={6} gap={8} rounded shadow responsive material>
               <div className="flex flex-col gap-2">
                 <p
                   className="flex-col uppercase font-light opacity-80"
@@ -89,11 +91,11 @@ export default function PageEvent() {
                 onChange={() => setLiked(!liked)}
               />
 
-              <div className="rounded-3xl cursor-pointer bg-white items-center dark:bg-black p-6 flex shadow-lg justify-between gap-4">
-                <LimitedParagraph heading="Event Description" limit={100}>
-                  {event?.description}
-                </LimitedParagraph>
-              </div>
+              {/* <div className="rounded-3xl cursor-pointer bg-white items-center dark:bg-black p-6 flex shadow-lg justify-between gap-4"> */}
+              <LimitedParagraph heading="Event Description" limit={100}>
+                {event?.description}
+              </LimitedParagraph>
+              {/* </div> */}
             </Page>
           </div>
         </Scaffold>

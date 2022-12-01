@@ -16,7 +16,10 @@ const FavouriteTile = ({ count, value, onChange }) => {
       onClick={onChange}
     >
       <div className="flex flex-col">
-        <motion.div onUpdate={{ opacity: [1, 0, 1] }} className="text-xl">
+        <motion.div
+          onUpdate={{ opacity: [1, 0, 1] }}
+          className={"text-xl " + (value ? "text-pink-500" : "")}
+        >
           {value ? "Added to Favourites" : "Interested in this event?"}
         </motion.div>
         {!value && (

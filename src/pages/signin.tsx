@@ -19,7 +19,7 @@ export default function PageSignIn() {
   return (
     <Page padding={8} gap={8}>
       <div className="flex justify-between items-center">
-        <BackButton customPath="/"/>
+        <BackButton/>
         <p className="text-3xl font-bold text-center text-primary-500">
           pandaal
         </p>

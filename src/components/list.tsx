@@ -11,10 +11,10 @@ function Section({
 }) {
   return (
     <div className="flex flex-col">
-      <p className="px-8 uppercase font-bold">{heading}</p>
+      <p className="px-6 pt-6 uppercase font-bold">{heading}</p>
       <div
         className={
-          "flex overflow-scroll gap-10 p-8 " +
+          "flex overflow-scroll gap-6 p-6" +
           (orientation == "column" ? "flex-col" : "")
         }
       >
@@ -26,7 +26,7 @@ function Section({
 
 function View({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-screen flex flex-col overflow-scroll">
+    <div className="w-screen flex flex-col overflow-scroll pb-20">
       {children}
     </div>
   );
@@ -40,7 +40,7 @@ function Header({
   heading: React.ReactNode;
 }) {
   return (
-    <div className="flex justify-between items-center gap-4 p-8">
+    <div className="flex justify-between items-center gap-4 px-6">
       <p className="text-3xl ">{heading}</p>
       {actions}
     </div>

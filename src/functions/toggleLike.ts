@@ -8,11 +8,14 @@ import {
 import { useContext } from "react";
 import { FirebaseContext } from "../contexts/firebase";
 
-export default async function toggleFavourite(id: string, userId: string) {
+export default async function toggleFavourite(
+  firestore: any,
+  id: string,
+  userId: string
+) {
   if (!userId) {
     return { count: null, error: `Error Toggling Like: Not Signed In` };
   }
-  const { firestore } = useContext<any>(FirebaseContext);
   const ref = doc(firestore, "Events", id);
   try {
     await runTransaction(firestore, async (transaction) => {

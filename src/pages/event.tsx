@@ -33,10 +33,11 @@ export default function PageEvent() {
     return <Navigate to="/" />;
   }
 
-  const { auth } = React.useContext<any>(FirebaseContext);
+  const { auth, firestore } = React.useContext<any>(FirebaseContext);
 
   const handleToggleLike = async () => {
     const response = await toggleLike(
+      firestore,
       eventId ?? "null",
       auth?.currentUser?.uid
     );

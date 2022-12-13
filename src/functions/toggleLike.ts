@@ -5,8 +5,6 @@ import {
   runTransaction,
   arrayRemove,
 } from "firebase/firestore";
-import { useContext } from "react";
-import { FirebaseContext } from "../contexts/firebase";
 
 export default async function toggleFavourite(
   firestore: any,
@@ -34,6 +32,7 @@ export default async function toggleFavourite(
           likedBy: arrayUnion(userId),
         });
       }
+      return { count: data.likeCount, error: null };
     });
   } catch (e) {
     return { count: null, error: `Error Toggling Like: ${e}` };

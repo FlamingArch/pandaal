@@ -1,5 +1,11 @@
 import React from "react";
-import { Navigate, useParams, Link, Outlet } from "react-router-dom";
+import {
+  Navigate,
+  useParams,
+  Link,
+  Outlet,
+  useNavigate,
+} from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Scaffold,
@@ -8,21 +14,23 @@ import {
   AppBar,
   LimitedParagraph,
   BottomBar,
-} from "../components";
+  Button,
+} from "../../components";
 import {
   BackButton,
   EventCard,
   EventInfo,
   EventOrganisationDetails,
   FavouriteTile,
-} from "../fragments";
-import { useEvent } from "../hooks";
-import { isLiked, toggleLike } from "../functions";
-import { FirebaseContext } from "../contexts/firebase";
+} from "../../fragments";
+import { useEvent } from "../../hooks";
+import { isLiked, toggleLike } from "../../functions";
+import { FirebaseContext } from "../../contexts/firebase";
 
 export default function PageEvent() {
   const { eventId } = useParams();
   const event = useEvent(eventId ?? "null");
+  const navigate = useNavigate();
   window.document.title = `${event?.Title} - Pandaal`;
   const [likeCount, setLikeCount] = React.useState(-1);
   React.useEffect(() => setLikeCount(event?.likeCount ?? -1), [event]);
@@ -56,12 +64,9 @@ export default function PageEvent() {
           {event?.price == 0 ? "Free" : event?.price}
         </div>
       </div>
-      <Link
-        to={"instructions"}
-        className="px-8 py-3 bg-primary-500 text-white rounded-2xl shadow-xl transition-all shadow-primary-300 dark:shadow-primary-700 hover:shadow-primary-500 hover:shadow-2xl hover:scale-105 hover:bg-primary-600"
-      >
+      <Button type="emphasis" onClick={() => navigate("instructions")}>
         Register
-      </Link>
+      </Button>
     </BottomBar>
   );
 

@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link, Outlet, useParams } from "react-router-dom";
 
-import { useEvent } from "../hooks";
-import { parseHTML } from "../helpers";
-import { BackButton } from "../fragments";
+import { useEvent } from "../../hooks";
+import { parseHTML } from "../../helpers";
+import { BackButton } from "../../fragments";
 
 export default function PageRegister() {
   const { eventId } = useParams();

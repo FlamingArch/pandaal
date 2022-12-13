@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Page } from "../components";
-import { BackButton, SignInPrompt, SignInVerifyCode } from "../fragments";
+import { Page } from "../../components";
+import { BackButton, SignInPrompt, SignInVerifyCode } from "../../fragments";
 import _ from "lodash";
 
 export default function PageSignIn() {

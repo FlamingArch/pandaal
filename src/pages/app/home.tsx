@@ -1,8 +1,8 @@
 import React from "react";
-import { useEvents } from "../hooks";
-import { AppBar, LoadingList, Scaffold, List } from "../components";
-import { AccountButton, EventCard } from "../fragments";
-import { IconEdit, IconUser } from "../components/icons";
+import { useEvents } from "../../hooks";
+import { AppBar, LoadingList, Scaffold, List, Button } from "../../components";
+import { AccountButton, EventCard } from "../../fragments";
+import { IconEdit, IconFeedback } from "../../components/icons";
 import { Outlet } from "react-router-dom";
 
 export default function PageHome() {
@@ -10,13 +10,6 @@ export default function PageHome() {
 
   let branding = (
     <div className="text-2xl font-bold text-primary-500">pandaal</div>
-  );
-
-  let filterButton = (
-    <div className="cursor-pointer transition p-3 w-fit flex gap-3 rounded-xl bg-primary-50 hover:bg-primary-100 fill-black dark:fill-white dark:text-white dark:bg-primary-800 hover:fill-primary-500 hover:text-primary-500">
-      <IconEdit className="w-6 h-6" />
-      Filter
-    </div>
   );
 
   return (
@@ -32,7 +25,14 @@ export default function PageHome() {
       <List.View>
         <List.Header
           heading="Popular Events Near Greater Noida"
-          actions={filterButton}
+          actions={
+            <Button
+              onClick={() => {}}
+              leading={<IconFeedback className="w-6 h-6" />}
+            >
+              Filter
+            </Button>
+          }
         />
         <List.Section heading="Events">
           {events.length == 0 ? (

@@ -26,7 +26,7 @@ function Section({
 
 function View({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-screen flex flex-col overflow-scroll pb-20">
+    <div className="w-full flex flex-col overflow-scroll pb-20">
       {children}
     </div>
   );

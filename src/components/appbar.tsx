@@ -14,7 +14,7 @@ export default function ViewAppBar({
   switch (backdrop) {
     case "material":
       backdropStyles =
-        "bg-white dark:bg-black bg-opacity-80 backdrop-blur-3xl backdrop-saturate-150";
+        "bg-white dark:bg-black bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200";
       break;
     case "shadow":
       // TODO: Implement Shadow

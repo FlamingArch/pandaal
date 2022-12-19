@@ -78,9 +78,10 @@ export default function PageEvent() {
         transition={{ type: "spring", duration: 0.3, staggerChildren: 0.3 }}
         className="fixed w-screen h-screen top-0 left-0 z-10 shadow-2xl overflow-scroll bg-black flex flex-col"
       >
-        <Scaffold appBar={<AppBar leading={<BackButton />} />}>
-          <ImageBackdrop src={event?.bannerURL} dim blur />
-          {bottomBar}
+        <Scaffold
+          appBar={<AppBar leading={<BackButton />} />}
+          backdrop={<ImageBackdrop src={event?.bannerURL} dim blur />}
+        >
           <div
             className="z-20 flex flex-col gap-8 h-fit pb-56 overflow-y-auto"
             style={{ scrollBehavior: "smooth" }}

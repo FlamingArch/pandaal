@@ -2,10 +2,12 @@ import React from "react";
 
 export default function ViewAppBar({
   leading,
+  title,
   actions,
   backdrop,
 }: {
-  leading?: string | React.ReactNode;
+  leading?: React.ReactNode;
+  title?: string | React.ReactNode;
   backdrop?: "material" | "shadow" | "solid" | "transparent";
   actions?: React.ReactNode | [React.ReactNode];
 }) {
@@ -28,7 +30,10 @@ export default function ViewAppBar({
 
   return (
     <div className={`${defaultStyles} ${backdropStyles}`}>
-      <div className="leading">{leading}</div>
+      <div className="leading text-xl font-medium flex items-center gap-4">
+        {leading}
+        {title}
+      </div>
       <div className="flex justify-end gap-4">{actions}</div>
     </div>
   );

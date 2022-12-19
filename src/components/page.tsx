@@ -5,12 +5,13 @@ export default function ViewPage({
   responsive,
   rounded,
   shadow,
-  material,
+  backdrop,
   padding,
   gap,
+  className,
 }: {
   children: React.ReactNode;
-  material?: boolean;
+  backdrop?: "solid" | "transparent" | "material";
   responsive?: boolean;
   rounded?: boolean;
   shadow?: boolean;
@@ -21,17 +22,20 @@ export default function ViewPage({
   const responsiveStyles = responsive ? "mx-auto md:w-2/3 =xl:w-1/2" : "";
   const roundedStyles = rounded ? "rounded-3xl" : "";
   const shadowStyles = shadow ? "shadow-2xl" : "";
-  const materialStyles = material
-    ? "backdrop-filter backdrop-blur-3xl bg-opacity-80 dark:bg-opacity-80 backdrop-brightness-200 dark:bg-brightness-50 backdrop-saturate-200"
-    : "";
+  const backdropStyles =
+    backdrop == "material"
+      ? "bg-white dark:bg-black backdrop-filter backdrop-blur-3xl bg-opacity-80 dark:bg-opacity-80 backdrop-brightness-200 dark:bg-brightness-50 backdrop-saturate-200"
+      : backdrop == "solid"
+      ? "bg-white dark:bg-black"
+      : "";
   const defaultStyles =
-    "bg-white dark:bg-black text-black dark:text-white flex flex-col flex-grow w-full min-h-fit transition-all";
+    "text-black dark:text-white flex flex-col flex-grow w-full min-h-fit transition-all";
 
   return (
     <div
-      className={`${defaultStyles} ${responsiveStyles} ${materialStyles} ${shadowStyles} ${roundedStyles} ${
+      className={`${defaultStyles} ${responsiveStyles} ${backdropStyles} ${shadowStyles} ${roundedStyles} ${
         padding ? `p-${padding}` : ""
-      } ${gap ? `gap-${gap}` : ""}`}
+      } ${gap ? `gap-${gap}` : ""} ${className}`}
     >
       {children}
     </div>

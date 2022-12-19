@@ -14,6 +14,7 @@ export default function PageHome() {
 
   return (
     <Scaffold
+      scroll="y"
       appBar={
         <AppBar
           backdrop="material"

@@ -11,6 +11,7 @@ import {
   PageSignIn,
   PageAccount,
   PageTest,
+  PageRegistrationConfirmation,
 } from "./pages";
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
             />
             <Route path="*" element={<PageEvent />} />
           </Route>
+          <Route path=":eventId" element={<PageRegistrationConfirmation />} />
         </Route>
         <Route path="signin" element={<PageSignIn />} />
         <Route

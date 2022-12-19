@@ -1,5 +1,4 @@
 import React from "react";
-import { IconUser } from "./icons";
 
 export default function ViewAppBar({
   leading,
@@ -14,7 +13,7 @@ export default function ViewAppBar({
   switch (backdrop) {
     case "material":
       backdropStyles =
-        "bg-white dark:bg-black bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200";
+        "bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60 backdrop-blur-3xl backdrop-saturate-200 dark:backdrop-blur-2xl dark:backdrop-saturate-200";
       break;
     case "shadow":
       // TODO: Implement Shadow

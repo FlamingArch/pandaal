@@ -10,39 +10,39 @@ import {
   PageInstructions,
   PageSignIn,
   PageAccount,
+  PageTest,
 } from "./pages";
 
 export default function App() {
   return (
     <FirebaseProvider>
-      <AnimatePresence>
-        <Routes>
-          <Route path="/" element={<PageHome />}>
-            <Route path=":eventId" element={<PageEvent />}>
-              <Route path="instructions" element={<PageInstructions />} />
-              <Route
-                path="register"
-                element={
-                  <RequireSignIn>
-                    <PageRegister />
-                  </RequireSignIn>
-                }
-              />
-              <Route path="*" element={<PageEvent />} />
-            </Route>
+      <Routes>
+        <Route path="/" element={<PageHome />}>
+          <Route path=":eventId" element={<PageEvent />}>
+            <Route path="instructions" element={<PageInstructions />} />
+            <Route
+              path="register"
+              element={
+                <RequireSignIn>
+                  <PageRegister />
+                </RequireSignIn>
+              }
+            />
+            <Route path="*" element={<PageEvent />} />
           </Route>
-          <Route path="signin" element={<PageSignIn />} />
-          <Route
-            path="account"
-            element={
-              <RequireSignIn>
-                <PageAccount />
-              </RequireSignIn>
-            }
-          />
-          <Route path="*" element={<PageHome />} />
-        </Routes>
-      </AnimatePresence>
+        </Route>
+        <Route path="signin" element={<PageSignIn />} />
+        <Route
+          path="account"
+          element={
+            <RequireSignIn>
+              <PageAccount />
+            </RequireSignIn>
+          }
+        />
+        <Route path="test" element={<PageTest />} />
+        <Route path="*" element={<PageHome />} />
+      </Routes>
     </FirebaseProvider>
   );
 }

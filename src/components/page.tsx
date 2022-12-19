@@ -18,7 +18,7 @@ export default function ViewPage({
   gap?: number;
   className?: string;
 }) {
-  const responsiveStyles = responsive ? "mx-auto md:w-2/3 p-6 xl:w-1/2" : "";
+  const responsiveStyles = responsive ? "mx-auto md:w-2/3 =xl:w-1/2" : "";
   const roundedStyles = rounded ? "rounded-3xl" : "";
   const shadowStyles = shadow ? "shadow-2xl" : "";
   const materialStyles = material

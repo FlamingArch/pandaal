@@ -23,7 +23,7 @@ export default function Button({
         return "text-primary-500 hover:text-primary-600 fill-primary-500 hover:fill-primary-600";
       default:
       case "secondary":
-        return "bg-primary-50 text-black hover:text-primary-500 hover:fill-primary-500 hover:bg-primary-100";
+        return "bg-primary-50 dark:bg-primary-800 dark:text-white dark:fill-white text-black hover:text-primary-500 hover:fill-primary-500 hover:bg-primary-100";
     }
   };
 

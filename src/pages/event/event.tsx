@@ -82,11 +82,11 @@ export default function PageEvent() {
           <ImageBackdrop src={event?.bannerURL} dim blur />
           {bottomBar}
           <div
-            className="z-20 p-8 flex flex-col gap-8 h-fit pb-56 overflow-y-auto"
+            className="z-20 flex flex-col gap-8 h-fit pb-56 overflow-y-auto"
             style={{ scrollBehavior: "smooth" }}
           >
             <EventCard event={event} className=" place-self-center" />
-            <Page padding={6} gap={8} rounded shadow responsive material>
+            <Page padding={8} gap={6} rounded shadow responsive>
               <EventInfo event={event} />
               <EventOrganisationDetails event={event} />
               <FavouriteTile

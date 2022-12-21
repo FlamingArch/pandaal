@@ -1,4 +1,7 @@
+import _ from "lodash";
 import React from "react";
+import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Scaffold({
   appBar,
@@ -33,6 +36,13 @@ export default function Scaffold({
   };
   className?: string;
 }) {
+  const location = useLocation();
+  const path = location.pathname.split("/").filter((e) => !_.isEmpty(e)) ?? [];
+  const oldPath =
+    location.state?.path.split("/").filter((e) => !_.isEmpty(e)) ?? [];
+
+  console.log(path, "\n", oldPath);
+
   return (
     <div
       className={`bg-white dark:bg-black min-w-screen min-h-screen flex flex-col ${
@@ -44,7 +54,9 @@ export default function Scaffold({
       >
         {backdrop}
       </div>
-      <div className={`w-screen z-20 sticky top-0 ${styles?.appBar}`}>{appBar}</div>
+      <div className={`w-screen z-20 sticky top-0 ${styles?.appBar}`}>
+        {appBar}
+      </div>
       <div className={`w-full z-10 ${styles?.leading}`}>{leading}</div>
       <div className={`w-full z-10 flex flex-grow`}>
         <div className={`flex flex-col ${styles?.sideBar}`}>{sideBar}</div>
@@ -55,11 +67,23 @@ export default function Scaffold({
         {bottomBar}
       </div>
       {overlay && (
-        <div
+        <motion.div
+          initial={
+            path.length == oldPath.length
+              ? { translateX: window.innerWidth }
+              : { translateY: window.innerHeight }
+          }
+          animate={{ translateX: 0, translateY: 0 }}
+          exit={
+            path.length == oldPath.length
+              ? { translateX: window.innerWidth }
+              : { translateY: window.innerHeight }
+          }
+          transition={{ damping: 100 }}
           className={`w-screen h-screen overflow-scroll z-30 absolute top-0 left-0 right-0 grid place-content-center ${styles?.overlay}`}
         >
           {overlay}
-        </div>
+        </motion.div>
       )}
     </div>
   );

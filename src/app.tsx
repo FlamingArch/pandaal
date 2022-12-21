@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { RequireSignIn } from "./components";
 import { FirebaseProvider } from "./contexts/firebase";
 import {
@@ -16,37 +16,41 @@ import {
 } from "./pages";
 
 export default function App() {
+  const location = useLocation();
+
   return (
     <FirebaseProvider>
-      <Routes>
-        <Route path="/" element={<PageHome />}>
-          <Route path=":eventId" element={<PageEvent />}>
-            <Route path="instructions" element={<PageInstructions />} />
-            <Route
-              path="register"
-              element={
-                <RequireSignIn>
-                  <PageRegister />
-                </RequireSignIn>
-              }
-            />
-            <Route path="*" element={<PageEvent />} />
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageHome />}>
+            <Route path=":eventId" element={<PageEvent />}>
+              <Route path="instructions" element={<PageInstructions />} />
+              <Route
+                path="register"
+                element={
+                  <RequireSignIn>
+                    <PageRegister />
+                  </RequireSignIn>
+                }
+              />
+              <Route path="*" element={<PageEvent />} />
+            </Route>
+            <Route path=":eventId" element={<PageRegistrationConfirmation />} />
           </Route>
-          <Route path=":eventId" element={<PageRegistrationConfirmation />} />
-        </Route>
-        <Route path="signin" element={<PageSignIn />} />
-        <Route
-          path="account"
-          element={
-            <RequireSignIn>
-              <PageAccount />
-            </RequireSignIn>
-          }
-        />
-        <Route path="/test/payments" element={<PageTestPayments />} />
-        <Route path="/test/components" element={<PageTestComponents />} />
-        <Route path="*" element={<PageHome />} />
-      </Routes>
+          <Route path="signin" element={<PageSignIn />} />
+          <Route
+            path="account"
+            element={
+              <RequireSignIn>
+                <PageAccount />
+              </RequireSignIn>
+            }
+          />
+          <Route path="/test/payments" element={<PageTestPayments />} />
+          <Route path="/test/components" element={<PageTestComponents />} />
+          <Route path="*" element={<PageHome />} />
+        </Routes>
+      </AnimatePresence>
     </FirebaseProvider>
   );
 }

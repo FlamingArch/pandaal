@@ -3,13 +3,11 @@ import { motion } from "framer-motion";
 import { Input } from "../components";
 import { IconPhone } from "../components/icons";
 import { FirebaseContext } from "../contexts/firebase";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { sendSignInCode } from "../functions";
 
 export default function SignInPrompt({ setPhoneNumber, onSubmit }) {
   const [phone, setPhone] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+91");
-  const { auth } = React.useContext(FirebaseContext);
+  const { auth, signInSendCode } = React.useContext(FirebaseContext);
 
   React.useEffect(() => {
     setPhoneNumber(`${countryCode}${phone}`);
@@ -51,7 +49,14 @@ export default function SignInPrompt({ setPhoneNumber, onSubmit }) {
       <div id="rcv" />
 
       <button
-        onClick={() => sendSignInCode(auth, phone, countryCode, onSubmit)}
+        onClick={() =>
+          signInSendCode(
+            auth,
+            "rcv",
+            `${countryCode}${phone}`,
+            onSubmit
+          )
+        }
         className={
           "px-16 py-3 mt-20 w-fit mx-auto bg-primary-500 text-white rounded-2xl transition-all " +
           (onSubmit !== null

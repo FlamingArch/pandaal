@@ -1,6 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Link, Outlet, useOutlet, useParams } from "react-router-dom";
+import { Link, useOutlet, useParams } from "react-router-dom";
 import { BackButton } from "../../fragments";
 import { generateForm } from "../../helpers";
 import { useEvent } from "../../hooks";

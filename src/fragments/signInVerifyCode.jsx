@@ -1,8 +1,9 @@
 import React from "react";
 import { Input } from "../components";
-import { verifySignInCode } from "../functions";
+import { FirebaseContext } from "../contexts/firebase";
 
 export default function signInVerifyCode({ phoneNumber, completion }) {
+  const { signInVerifyCode } = React.useContext(FirebaseContext);
   const [code, setCode] = React.useState("");
 
   return (
@@ -19,7 +20,7 @@ export default function signInVerifyCode({ phoneNumber, completion }) {
         onChange={(e) => setCode(e.target.value)}
       />
       <button
-        onClick={() => verifySignInCode(code, completion)}
+        onClick={() => signInVerifyCode(code, completion)}
         className={
           "px-16 py-3 mt-20 w-fit mx-auto bg-primary-500 text-white rounded-2xl transition-all " +
           (code.length === 6

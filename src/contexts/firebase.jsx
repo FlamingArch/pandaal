@@ -1,6 +1,6 @@
 import React from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut as so } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getFunctions, httpsCallable } from "firebase/functions";
@@ -16,6 +16,31 @@ export const FirebaseProvider = ({ children }) => {
   const functions = getFunctions(app, "asia-south1");
 
   const [user, loggingIn, loginError] = useAuthState(auth);
+
+  const signInVerifyCode = (code, completion, error) =>
+    window.confirmationResult.confirm(code).then(completion).catch(error);
+
+  const signInSendCode = (
+    auth,
+    recaptachVerifierId,
+    phone,
+    completion,
+    error
+  ) => {
+    const verifier = new RecaptchaVerifier(
+      recaptachVerifierId,
+      { size: "invisible" },
+      auth
+    );
+    signInWithPhoneNumber(auth, phone, verifier)
+      .then((confirmation) => {
+        window.confirmationResult = confirmation;
+        completion(confirmation);
+      })
+      .catch(error);
+  };
+
+  const signOut = () => so(auth);
 
   const fetchOrderId = httpsCallable(functions, "fetchOrderId");
   const paymentSuccess = httpsCallable(functions, "paymentSuccess");
@@ -34,6 +59,9 @@ export const FirebaseProvider = ({ children }) => {
         fetchOrderId,
         paymentSuccess,
         paymentFailure,
+        signInSendCode,
+        signInVerifyCode,
+        signOut,
       }}
     >
       {children}

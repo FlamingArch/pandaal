@@ -21,7 +21,6 @@ export default function PageTest() {
 
   return (
     <Scaffold
-      scroll="both"
       appBar={
         <AppBar
           backdrop="material"
@@ -33,7 +32,7 @@ export default function PageTest() {
       backdrop={
         <img
           src={"https://source.unsplash.com/random"}
-          className="w-screen h-screen filter blur-3xl scale-125"
+          className="filter blur-3xl scale-125"
         />
       }
     >

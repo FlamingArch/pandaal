@@ -5,11 +5,13 @@ export default function ViewAppBar({
   title,
   actions,
   backdrop,
+  className,
 }: {
   leading?: React.ReactNode;
   title?: string | React.ReactNode;
   backdrop?: "material" | "shadow" | "solid" | "transparent";
   actions?: React.ReactNode | [React.ReactNode];
+  className?: string;
 }) {
   let backdropStyles;
   switch (backdrop) {
@@ -29,7 +31,7 @@ export default function ViewAppBar({
     "p-6 grid grid-cols-2 gap-4 sticky top-0 z-10 items-center ";
 
   return (
-    <div className={`${defaultStyles} ${backdropStyles}`}>
+    <div className={`${defaultStyles} ${backdropStyles} ${className}`}>
       <div className="leading text-xl font-medium flex items-center gap-4">
         {leading}
         {title}

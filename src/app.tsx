@@ -10,8 +10,9 @@ import {
   PageInstructions,
   PageSignIn,
   PageAccount,
-  PageTest,
   PageRegistrationConfirmation,
+  PageTestPayments,
+  PageTestComponents,
 } from "./pages";
 
 export default function App() {
@@ -42,7 +43,8 @@ export default function App() {
             </RequireSignIn>
           }
         />
-        <Route path="test" element={<PageTest />} />
+        <Route path="/test/payments" element={<PageTestPayments />} />
+        <Route path="/test/components" element={<PageTestComponents />} />
         <Route path="*" element={<PageHome />} />
       </Routes>
     </FirebaseProvider>

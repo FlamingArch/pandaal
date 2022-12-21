@@ -25,7 +25,7 @@ export default function PageHome() {
     >
       <List.View>
         <List.Header
-          heading="Popular Events Near Greater Noida"
+          heading="Popular Events Near You"
           actions={
             <Button
               onClick={() => {}}

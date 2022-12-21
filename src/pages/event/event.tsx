@@ -5,6 +5,7 @@ import {
   Link,
   Outlet,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -43,6 +44,9 @@ export default function PageEvent() {
 
   const { auth, firestore } = React.useContext<any>(FirebaseContext);
 
+  const location = useLocation();
+  const zindex = location.pathname.split("/").length * 10;
+
   const handleToggleLike = async () => {
     const response = await toggleLike(
       firestore,
@@ -72,37 +76,30 @@ export default function PageEvent() {
 
   return (
     <AnimatePresence>
-      <motion.div
-        animate={{ x: [window.innerWidth, 0] }}
-        exit={{ x: [0, window.innerWidth] }}
-        transition={{ type: "spring", duration: 0.3, staggerChildren: 0.3 }}
-        className="fixed w-screen h-screen top-0 left-0 z-10 shadow-2xl overflow-scroll bg-black flex flex-col"
+      <Scaffold
+        appBar={<AppBar leading={<BackButton />} />}
+        backdrop={<ImageBackdrop src={event?.bannerURL} dim blur />}
+        isOverlay
+        zIndex={1000}
+        leading={
+          <EventCard event={event} className="mx-auto m-8 place-self-center" />
+        }
+        bottomBar={bottomBar}
       >
-        <Scaffold
-          appBar={<AppBar leading={<BackButton />} />}
-          backdrop={<ImageBackdrop src={event?.bannerURL} dim blur />}
-        >
-          <div
-            className="z-20 flex flex-col gap-8 h-fit pb-56 overflow-y-auto"
-            style={{ scrollBehavior: "smooth" }}
-          >
-            <EventCard event={event} className=" place-self-center" />
-            <Page padding={8} gap={6} rounded shadow responsive>
-              <EventInfo event={event} />
-              <EventOrganisationDetails event={event} />
-              <FavouriteTile
-                value={isLiked(event ?? {}, auth?.currentUser?.uid)}
-                count={likeCount}
-                onChange={handleToggleLike}
-              />
-              <LimitedParagraph heading="Event Description" limit={100}>
-                {event?.description}
-              </LimitedParagraph>
-            </Page>
-          </div>
-        </Scaffold>
-        <Outlet />
-      </motion.div>
+        <Page padding={8} gap={6} backdrop="material" rounded shadow responsive>
+          <EventInfo event={event} />
+          <EventOrganisationDetails event={event} />
+          <FavouriteTile
+            value={isLiked(event ?? {}, auth?.currentUser?.uid)}
+            count={likeCount}
+            onChange={handleToggleLike}
+          />
+          <LimitedParagraph heading="Event Description" limit={100}>
+            {event?.description}
+          </LimitedParagraph>
+        </Page>
+      </Scaffold>
+      <Outlet />
     </AnimatePresence>
   );
 }

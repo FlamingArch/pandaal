@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 
 export default function Scaffold({
   appBar,
@@ -7,89 +6,59 @@ export default function Scaffold({
   bottomBar,
   leading,
   trailing,
+  overlay,
   backdrop,
   children,
   styles,
   className,
-  isOverlay,
-  scroll,
 }: {
   appBar?: React.ReactNode;
   sideBar?: React.ReactNode;
   bottomBar?: React.ReactNode;
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
+  overlay?: React.ReactNode;
   backdrop?: React.ReactNode;
-  children?: React.ReactNode;
-  className?: string;
-  isOverlay?: boolean;
-  scroll?: "none" | "x" | "y" | "both";
+  children: React.ReactNode;
   styles?: {
+    scaffold?: string;
     appBar?: string;
     sideBar?: string;
     bottomBar?: string;
     leading?: string;
     trailing?: string;
+    overlay?: string;
     backdrop?: string;
     children?: string;
   };
+  className?: string;
 }) {
-  if (bottomBar && sideBar) {
-    console.warn(
-      `Warning: Both bottomBar and sideBar are present. Sidebar will overlap bottomBar on screen sizes < sm (666px).\n\nThis is a known issue, and will be fixed in a later version.`
-    );
-  }
-
-  const location = useLocation();
-  const zindex = location.pathname.split("/").length * 10;
-
-  let scrollStyles;
-  switch (scroll) {
-    default:
-    case "none":
-      scrollStyles = "overflow-hidden";
-      break;
-    case "x":
-      scrollStyles = "overflow-hidden overflow-x-scroll";
-      break;
-    case "y":
-      scrollStyles = "overflow-hidden overflow-y-scroll";
-      break;
-    case "both":
-      scrollStyles = "overflow-scroll";
-      break;
-  }
-
-  const isOverlayStyles = isOverlay ? "fixed inset-0" : "";
-
   return (
     <div
-      className={`relative bg-white z-[${zindex}] dark:bg-black w-screen h-screen flex flex-col max-w-[100vw] max-h-[100vh] ${scrollStyles} ${isOverlayStyles} ${className}`}
-      style={{
-        gridTemplateColumns: "",
-      }}
+      className={`min-w-screen min-h-screen flex flex-col ${styles?.scaffold} ${className}`}
     >
-      <div className={`${styles?.backdrop} fixed z-0`}>{backdrop}</div>
-      <div className={`${styles?.appBar} sticky top-0 z-20`}>{appBar}</div>
-      <div className={`${styles?.leading} z-10`}>{leading}</div>
-      <div className="flex flex-grow">
-        <div className={`${styles?.sideBar} hidden md:flex flex-col z-10`}>
-          {sideBar}
-        </div>
-        <div
-          className={`flex-grow ${styles?.children} max-w-full max-h-full overflow-scroll z-10`}
-        >
-          {children}
-        </div>
+      <div
+        className={`fixed top-0 -z-10 left-0 w-screen h-screen overflow-hidden ${styles?.backdrop}`}
+      >
+        {backdrop}
       </div>
-      <div className={`${styles?.trailing}`}>{trailing}</div>
-      <div className={`${styles?.bottomBar} sticky bottom-0 left-0 right-0`}>
+      <div className={`w-screen sticky top-0 ${styles?.appBar}`}>
+        {appBar}
+      </div>
+      <div className={`w-full ${styles?.leading}`}>{leading}</div>
+      <div className={`w-full flex flex-grow`}>
+        <div className={`flex flex-col ${styles?.sideBar}`}>{sideBar}</div>
+        {children}
+      </div>
+      <div className={`w-full ${styles?.trailing}`}>{trailing}</div>
+      <div className={`w-full sticky bottom-0 ${styles?.bottomBar}`}>
         {bottomBar}
       </div>
+
       <div
-        className={`${styles?.sideBar} sticky bottom-0 left-0 right-0 z-10 md:hidden`}
+        className={`w-screen min-h-screen absolute top-0 left-0 right-0 grid place-content-center ${styles?.overlay}`}
       >
-        {sideBar}
+        {overlay}
       </div>
     </div>
   );

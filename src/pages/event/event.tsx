@@ -6,6 +6,7 @@ import {
   Outlet,
   useNavigate,
   useLocation,
+  useOutlet,
 } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -35,6 +36,7 @@ export default function PageEvent() {
   window.document.title = `${event?.Title} - Pandaal`;
   const [likeCount, setLikeCount] = React.useState(-1);
   React.useEffect(() => setLikeCount(event?.likeCount ?? -1), [event]);
+  const outlet = useOutlet();
 
   if (event === false) {
     console.error("Event not found");
@@ -79,14 +81,21 @@ export default function PageEvent() {
       <Scaffold
         appBar={<AppBar leading={<BackButton />} />}
         backdrop={<ImageBackdrop src={event?.bannerURL} dim blur />}
-        isOverlay
-        zIndex={1000}
+        overlay={outlet}
         leading={
           <EventCard event={event} className="mx-auto m-8 place-self-center" />
         }
         bottomBar={bottomBar}
       >
-        <Page padding={8} gap={6} backdrop="material" rounded shadow responsive>
+        <Page
+          padding={8}
+          gap={6}
+          backdrop="material"
+          rounded
+          shadow
+          responsive
+          className="pb-48"
+        >
           <EventInfo event={event} />
           <EventOrganisationDetails event={event} />
           <FavouriteTile
@@ -99,7 +108,6 @@ export default function PageEvent() {
           </LimitedParagraph>
         </Page>
       </Scaffold>
-      <Outlet />
     </AnimatePresence>
   );
 }

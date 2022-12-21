@@ -35,31 +35,32 @@ export default function Scaffold({
 }) {
   return (
     <div
-      className={`min-w-screen min-h-screen flex flex-col ${styles?.scaffold} ${className}`}
+      className={`bg-white dark:bg-black min-w-screen min-h-screen flex flex-col ${
+        overlay && "overflow-hidden h-screen"
+      } ${styles?.scaffold} ${className}`}
     >
       <div
-        className={`fixed top-0 -z-10 left-0 w-screen h-screen overflow-hidden ${styles?.backdrop}`}
+        className={`fixed top-0 left-0 w-screen h-screen overflow-hidden ${styles?.backdrop}`}
       >
         {backdrop}
       </div>
-      <div className={`w-screen sticky top-0 ${styles?.appBar}`}>
-        {appBar}
-      </div>
-      <div className={`w-full ${styles?.leading}`}>{leading}</div>
-      <div className={`w-full flex flex-grow`}>
+      <div className={`w-screen z-20 sticky top-0 ${styles?.appBar}`}>{appBar}</div>
+      <div className={`w-full z-10 ${styles?.leading}`}>{leading}</div>
+      <div className={`w-full z-10 flex flex-grow`}>
         <div className={`flex flex-col ${styles?.sideBar}`}>{sideBar}</div>
         {children}
       </div>
-      <div className={`w-full ${styles?.trailing}`}>{trailing}</div>
-      <div className={`w-full sticky bottom-0 ${styles?.bottomBar}`}>
+      <div className={`w-full z-10 ${styles?.trailing}`}>{trailing}</div>
+      <div className={`w-full z-20 sticky bottom-0 ${styles?.bottomBar}`}>
         {bottomBar}
       </div>
-
-      <div
-        className={`w-screen min-h-screen absolute top-0 left-0 right-0 grid place-content-center ${styles?.overlay}`}
-      >
-        {overlay}
-      </div>
+      {overlay && (
+        <div
+          className={`w-screen h-screen overflow-scroll z-30 absolute top-0 left-0 right-0 grid place-content-center ${styles?.overlay}`}
+        >
+          {overlay}
+        </div>
+      )}
     </div>
   );
 }

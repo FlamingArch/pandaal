@@ -3,10 +3,11 @@ import { useEvents, useEventsCategorised } from "../../hooks";
 import { AppBar, LoadingList, Scaffold, List, Button } from "../../components";
 import { AccountButton, EventCard } from "../../fragments";
 import { IconEdit, IconFeedback } from "../../components/icons";
-import { Outlet } from "react-router-dom";
+import { Outlet, useOutlet } from "react-router-dom";
 
 export default function PageHome() {
   const events = useEventsCategorised();
+  const outlet = useOutlet();
 
   let branding = (
     <div className="text-2xl font-bold text-primary-500">pandaal</div>
@@ -14,14 +15,15 @@ export default function PageHome() {
 
   return (
     <Scaffold
-      scroll="y"
       appBar={
         <AppBar
           backdrop="material"
           leading={branding}
           actions={<AccountButton />}
+          className="max-w-[100vw] overflow-hidden"
         />
       }
+      overlay={outlet}
     >
       <List.View>
         <List.Header
@@ -50,7 +52,6 @@ export default function PageHome() {
         ))}
         <div className="h-56"></div>
       </List.View>
-      <Outlet />
     </Scaffold>
   );
 }

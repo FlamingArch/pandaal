@@ -1,10 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Input } from "../components";
+import { Button, Input, Page, Text } from "../components";
 import { IconPhone } from "../components/icons";
 import { FirebaseContext } from "../contexts/firebase";
 
-export default function SignInPrompt({ setPhoneNumber, onSubmit }) {
+export default function SignInPrompt({
+  setPhoneNumber,
+  onSubmit,
+  disableSubmission,
+}) {
   const [phone, setPhone] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+91");
   const { auth, signInSendCode } = React.useContext(FirebaseContext);
@@ -17,55 +21,44 @@ export default function SignInPrompt({ setPhoneNumber, onSubmit }) {
     if (!(countryCode[0] == "+")) {
       setCountryCode("+" + countryCode);
     }
+    if (countryCode.length > 4) {
+      setCountryCode(countryCode.substring(0, 4));
+    }
   }, [countryCode]);
 
   return (
-    <motion.div
-      animate={{ opacity: [0, 1], scale: [1.2, 1] }}
-      exit={{ opacity: [1, 0], scale: [1, 0.9] }}
-      className="grid place-content-center h-[70vh] gap-8"
-    >
-      <p className="text-3xl font-bold text-center">Sign In</p>
-      <div className="w-2/3 text-center mx-auto">
-        Enter your Phone Number. A code will be sent to verify the number.
-      </div>
-
-      <div className="flex gap-4 mx-auto">
+    <Page padding={8} className="justify-center items-center" gap={4}>
+      <Text headingLevel={3} bold>
+        Sign In
+      </Text>
+      <Text dimmed>Enter your phone number to continue</Text>
+      <div className="flex gap-4 w-96">
         <Input
+          type="number"
+          className="w-32"
           value={countryCode}
           onChange={(e) => setCountryCode(e.target.value)}
-          className="min-w-[4rem] w-min"
-          placeholder="Country Code"
+          placeholder="Code"
         />
         <Input
-          leading={
-            <IconPhone className="w-6 h-6 fill-primary-500 dark:fill-primary-400" />
-          }
+          type="number"
+          className="flex-grow"
           value={phone}
-          placeholder="Phone Number"
           onChange={(e) => setPhone(e.target.value)}
+          placeholder="Phone Number"
         />
       </div>
-      <div id="rcv" />
-
-      <button
+      <div id="rcv"></div>
+      <Button
         onClick={() =>
-          signInSendCode(
-            auth,
-            "rcv",
-            `${countryCode}${phone}`,
-            onSubmit
-          )
+          signInSendCode(auth, "rcv", `${countryCode}${phone}`, onSubmit)
         }
-        className={
-          "px-16 py-3 mt-20 w-fit mx-auto bg-primary-500 text-white rounded-2xl transition-all " +
-          (onSubmit !== null
-            ? "shadow-xl shadow-primary-300 dark:shadow-primary-700 hover:shadow-primary-500 hover:shadow-2xl hover:scale-105 hover:bg-primary-600"
-            : "opacity-50 cursor-not-allowed")
-        }
+        type="emphasis"
+        disabled={disableSubmission}
+        className="w-96"
       >
         Send Code
-      </button>
-    </motion.div>
+      </Button>
+    </Page>
   );
 }

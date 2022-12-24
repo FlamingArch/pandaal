@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Page } from "../../components";
+import { AppBar, Branding, Page, Scaffold } from "../../components";
 import { BackButton, SignInPrompt, SignInVerifyCode } from "../../fragments";
 import _ from "lodash";
 
@@ -13,19 +13,12 @@ export default function PageSignIn() {
   const redirectPath = location.state?.path ?? "/";
 
   const validatePhone = () => {
-    if (phoneNumber.length == 13) return true;
+    if (phoneNumber.length == 13 || phoneNumber.length == 14) return true;
     return false;
   };
 
   return (
-    <Page padding={8} gap={8}>
-      <div className="flex justify-between items-center">
-        <BackButton />
-        <p className="text-3xl font-bold text-center text-primary-500">
-          pandaal
-        </p>
-        <div className="w-12 h-12"></div>
-      </div>
+    <Scaffold appBar={<AppBar leading={<BackButton />} title={<Branding />} />}>
       {codeSent ? (
         <SignInVerifyCode
           phoneNumber={phoneNumber}
@@ -37,8 +30,9 @@ export default function PageSignIn() {
         <SignInPrompt
           setPhoneNumber={setPhoneNumber}
           onSubmit={validatePhone() ? () => setCodeSent(true) : null}
+          disableSubmission={!validatePhone()}
         />
       )}
-    </Page>
+    </Scaffold>
   );
 }

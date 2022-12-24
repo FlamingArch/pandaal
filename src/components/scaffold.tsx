@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React from "react";
-import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function Scaffold({
@@ -36,13 +35,6 @@ export default function Scaffold({
   };
   className?: string;
 }) {
-  const location = useLocation();
-  const path = location.pathname.split("/").filter((e) => !_.isEmpty(e)) ?? [];
-  const oldPath =
-    location.state?.path.split("/").filter((e) => !_.isEmpty(e)) ?? [];
-
-  console.log(path, "\n", oldPath);
-
   return (
     <div
       className={`bg-white dark:bg-black min-w-screen min-h-screen flex flex-col ${

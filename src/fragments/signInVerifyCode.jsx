@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Input, Page, Text } from "../components";
+import { IconPasskey } from "../components/icons";
 import { FirebaseContext } from "../contexts/firebase";
 
 export default function signInVerifyCode({ phoneNumber, completion }) {
@@ -19,6 +20,7 @@ export default function signInVerifyCode({ phoneNumber, completion }) {
         type="number"
         value={code}
         onChange={(e) => setCode(e.target.value)}
+        leading={<IconPasskey className="w-6 h-6 fill-primary-500" />}
         placeholder="Code"
         className="w-96"
       />

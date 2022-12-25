@@ -15,6 +15,10 @@ function AccountButton() {
       onMouseEnter={() => setExpand(true)}
       onMouseLeave={() => setExpand(false)}
       onClick={() => navigate("/account")}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        navigate("/signout");
+      }}
     >
       <div className="relative cursor-pointer overflow-hidden transition rounded-xl bg-primary-500 hover:bg-primary-700 fill-white">
         <img
@@ -26,8 +30,7 @@ function AccountButton() {
       </div>
       <div
         className={
-          "transition-all duration-300 " +
-          (expand ? "w-32 " : "w-0 opacity-0 ")
+          "transition-all duration-300 " + (expand ? "w-32 " : "w-0 opacity-0 ")
         }
       >
         <div className="min-w-[8rem] px-4 font-medium">

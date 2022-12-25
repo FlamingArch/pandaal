@@ -9,8 +9,6 @@ export default function PageSignIn() {
   const [codeSent, setCodeSent] = React.useState(false);
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const redirectPath = location.state?.path ?? "/";
 
   const validatePhone = () => {
     if (phoneNumber.length == 13 || phoneNumber.length == 14) return true;
@@ -23,7 +21,7 @@ export default function PageSignIn() {
         <SignInVerifyCode
           phoneNumber={phoneNumber}
           completion={() => {
-            navigate(redirectPath);
+            navigate("/signup");
           }}
         />
       ) : (

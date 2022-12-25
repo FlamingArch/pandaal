@@ -1,11 +1,17 @@
 import React from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut as so } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  signOut as so,
+} from "firebase/auth";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getFunctions, httpsCallable } from "firebase/functions";
 
 import constants from "../constants";
+import _ from "lodash";
 
 export const FirebaseContext = React.createContext(null);
 
@@ -42,6 +48,13 @@ export const FirebaseProvider = ({ children }) => {
 
   const signOut = () => so(auth);
 
+  const fetchDoc = async (path) => {
+    console.log(`Fetching Document: ${path}`);
+    const docRef = doc(firestore, path);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  };
+
   const fetchOrderId = httpsCallable(functions, "fetchOrderId");
   const paymentSuccess = httpsCallable(functions, "paymentSuccess");
   const paymentFailure = httpsCallable(functions, "paymentFailure");
@@ -56,6 +69,7 @@ export const FirebaseProvider = ({ children }) => {
         user,
         loggingIn,
         loginError,
+        fetchDoc,
         fetchOrderId,
         paymentSuccess,
         paymentFailure,

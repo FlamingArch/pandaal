@@ -58,6 +58,7 @@ export const FirebaseProvider = ({ children }) => {
   const fetchOrderId = httpsCallable(functions, "fetchOrderId");
   const paymentSuccess = httpsCallable(functions, "paymentSuccess");
   const paymentFailure = httpsCallable(functions, "paymentFailure");
+  const registerUser = httpsCallable(functions, "registerUser");
 
   return (
     <FirebaseContext.Provider
@@ -73,6 +74,7 @@ export const FirebaseProvider = ({ children }) => {
         fetchOrderId,
         paymentSuccess,
         paymentFailure,
+        registerUser,
         signInSendCode,
         signInVerifyCode,
         signOut,

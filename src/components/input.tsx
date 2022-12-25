@@ -11,7 +11,7 @@ const Input = ({
   className,
 }: {
   children?: React.ReactNode;
-  value: any;
+  value?: any;
   onChange: any;
   placeholder?: string;
   leading?: any;

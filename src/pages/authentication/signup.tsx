@@ -13,6 +13,7 @@ import {
 import { IconMail, IconUser } from "../../components/icons";
 import { FirebaseContext } from "../../contexts/firebase";
 import { userDocExists } from "../../functions";
+import { range } from "../../helpers";
 import { useCollegeDetails, useCourses, useBranches } from "../../hooks";
 
 export default function PageSignUp() {
@@ -55,12 +56,6 @@ export default function PageSignUp() {
     setDoc(docRef, response, { merge: true }).then(() => {
       navigate(redirectPath);
     });
-  };
-
-  const range = (start: number, end: number) => {
-    return Array(end - start + 1)
-      .fill(0)
-      .map((_, idx) => start + idx);
   };
 
   return loading ? (

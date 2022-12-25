@@ -12,3 +12,4 @@ export { default as ProtectedRoute } from "./protectedRoute";
 export { default as RequireSignIn } from "./requireSignIn";
 export { default as Scaffold } from "./scaffold";
 export { default as Text } from "./text";
+export { default as AttendeeInput } from "./attendeeInput";

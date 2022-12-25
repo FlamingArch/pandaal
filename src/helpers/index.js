@@ -9,3 +9,4 @@ export { default as getMonthFromNumber } from "./getMonthFromNumber";
 export { default as disableFormSubmission } from "./disableFormSubmission";
 export { default as generateTicketHTML } from "./generateTicketHTML";
 export { default as getFullDateRange } from "./getFullDateRange";
+export { default as range } from "./range";

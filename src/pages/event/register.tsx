@@ -3,12 +3,21 @@ import { useOutlet, useParams } from "react-router-dom";
 import { BackButton } from "../../fragments";
 import { generateForm } from "../../helpers";
 import { useEvent } from "../../hooks";
-import { AppBar, Button, Scaffold } from "../../components";
+import {
+  AppBar,
+  AttendeeInput,
+  Button,
+  Input,
+  Page,
+  Scaffold,
+  Text,
+} from "../../components";
 import { initiateRegisteration } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
+import _, { range } from "lodash";
 
 export default function PageRegister() {
-  const { firestore, registerUser, user } =
+  const { firestore, functions, registerUser, user } =
     React.useContext<any>(FirebaseContext);
 
   const { eventId } = useParams();
@@ -18,10 +27,15 @@ export default function PageRegister() {
   const [response, setResponse] = React.useState([]);
   const [enableButton, setEnableButton] = React.useState(false);
 
+  const [noAttendees, setNoAttendees] = React.useState(1);
+  const [attendees, setAttendees] = React.useState<any>([]);
+
   return (
-    <Scaffold appBar={<AppBar leading={<BackButton />} />} overlay={outlet}>
-      <div className="w-full md:w-1/2 xl:w-1/3 mx-auto gap-8 flex flex-col p-8">
-        <div className="flex-grow-0 md:flex-grow transition-all" />
+    <Scaffold
+      appBar={<AppBar backdrop="material" leading={<BackButton />} />}
+      overlay={outlet}
+    >
+      <Page backdrop="solid" padding={6} gap={4}>
         <div className="text-3xl font-bold">Fill Out This Form</div>
         {event?.questions &&
           generateForm(
@@ -30,6 +44,54 @@ export default function PageRegister() {
             setResponse,
             setEnableButton
           )}
+        {event?.price != 0 && (
+          <div className="flex items-center justify-between gap-4 rounded-2xl p-4 bg-primary-50 dark:bg-primary-900">
+            <div className="flex flex-col">
+              <Text headingLevel={5}>Attendees</Text>
+              <Text bold accented>
+                Max: {_.min([5, event?.availableRegistrations])}
+              </Text>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button
+                disabled={noAttendees == 1}
+                className="p-2"
+                type="primary"
+                onClick={() => {
+                  if (noAttendees !== 1) setNoAttendees((oldVal) => oldVal - 1);
+                }}
+              >
+                -
+              </Button>
+              <Text headingLevel={4}>{noAttendees}</Text>
+              <Button
+                disabled={
+                  noAttendees >= _.min([5, event?.availableRegistrations])
+                }
+                className="p-2"
+                type="primary"
+                onClick={() => {
+                  if (noAttendees < _.min([5, event?.availableRegistrations])) {
+                    setNoAttendees((oldVal) => oldVal + 1);
+                  }
+                }}
+              >
+                +
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {event?.price != 0 &&
+          range(noAttendees).map((i) => (
+            <AttendeeInput
+              onChange={(value) => {
+                attendees[i] = value;
+                setAttendees((oldVal) => attendees);
+              }}
+            />
+          ))}
+
         <div className="flex-grow md:flex-grow-0 transition-all" />
         {enableButton && (
           <Button
@@ -38,20 +100,22 @@ export default function PageRegister() {
             onClick={() =>
               initiateRegisteration(
                 firestore,
+                functions,
                 registerUser,
                 eventId,
                 user.uid,
                 response,
-                1,
-                [user.displayName, 22]
+                noAttendees,
+                attendees,
+                user,
+                () => console.log("REGISTRATION SUCCES")
               )
             }
           >
             Register
           </Button>
         )}
-        <div className="flex-grow-0 md:flex-grow transition-all" />
-      </div>
+      </Page>
     </Scaffold>
   );
 }

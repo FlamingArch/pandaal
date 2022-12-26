@@ -12,7 +12,7 @@ import {
   PageSignOut,
   PageSignUp,
   PageAccount,
-  PageRegistrationConfirmation,
+  PageConfirmation,
   PageTestPayments,
   PageTestComponents,
 } from "./pages";
@@ -28,7 +28,7 @@ export default function App() {
             <Route path=":eventId" element={<PageEvent />}>
               <Route path="instructions" element={<PageInstructions />} />
               <Route
-              path="register"
+                path="register"
                 element={
                   <RequireSignIn>
                     <PageRegister />
@@ -37,7 +37,10 @@ export default function App() {
               />
               <Route path="*" element={<PageEvent />} />
             </Route>
-            <Route path=":eventId" element={<PageRegistrationConfirmation />} />
+            <Route
+              path=":eventId/confirmation"
+              element={<PageConfirmation />}
+            />
           </Route>
           <Route path="signin" element={<PageSignIn />} />
           <Route path="signout" element={<PageSignOut />} />

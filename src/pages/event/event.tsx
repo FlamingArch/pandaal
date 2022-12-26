@@ -88,13 +88,12 @@ export default function PageEvent() {
         bottomBar={bottomBar}
       >
         <Page
-          padding={8}
           gap={6}
           backdrop="material"
           rounded
           shadow
           responsive
-          className="pb-48"
+          className="pb-48 p-8"
         >
           <EventInfo event={event} />
           <EventOrganisationDetails event={event} />

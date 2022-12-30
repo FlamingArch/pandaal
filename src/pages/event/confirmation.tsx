@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { AppBar, Page, Scaffold } from "../../components";
 import {
   IconDone,
@@ -10,10 +10,23 @@ import {
 } from "../../components/icons";
 import { BackButton } from "../../fragments";
 import { useEvent } from "../../hooks";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { doc } from "firebase/firestore";
+import { FirebaseContext } from "../../contexts/firebase";
 
 export default function PageConfirmation() {
   const { eventId } = useParams();
   const event = useEvent(eventId ?? "null");
+
+  const navigate = useNavigate();
+  const regId = useLocation().state?.regId;
+  if (!regId) {
+    navigate(`\${eventId}`);
+  }
+  console.log(regId);
+
+  const { firestore } = React.useContext<any>(FirebaseContext);
+  useDocumentData(doc(firestore, "registrations", regId));
 
   return (
     <Scaffold appBar={<AppBar backdrop="material" leading={<BackButton />} />}>

@@ -89,7 +89,7 @@ export default function PageEvent() {
       >
         <Page
           gap={6}
-          backdrop="material"
+          backdrop="solid"
           rounded
           shadow
           responsive

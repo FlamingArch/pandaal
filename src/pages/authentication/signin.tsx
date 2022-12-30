@@ -16,7 +16,11 @@ export default function PageSignIn() {
   };
 
   return (
-    <Scaffold appBar={<AppBar leading={<BackButton />} title={<Branding />} />}>
+    <Scaffold
+      appBar={
+        <AppBar leading={<BackButton customPath="/" />} title={<Branding />} />
+      }
+    >
       {codeSent ? (
         <SignInVerifyCode
           phoneNumber={phoneNumber}

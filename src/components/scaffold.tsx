@@ -60,9 +60,9 @@ export default function Scaffold({
       </div>
       {overlay && (
         <motion.div
-          initial={{ translateX: window.innerWidth }}
-          animate={{ translateX: 0 }}
-          exit={{ translateX: window.innerWidth }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ damping: 100 }}
           className={`w-screen h-screen overflow-scroll z-30 absolute top-0 left-0 right-0 grid place-content-center ${styles?.overlay}`}
         >

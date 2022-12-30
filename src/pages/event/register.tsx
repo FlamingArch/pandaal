@@ -1,5 +1,5 @@
 import React from "react";
-import { useOutlet, useParams } from "react-router-dom";
+import { useNavigate, useOutlet, useParams } from "react-router-dom";
 import { BackButton } from "../../fragments";
 import { generateForm } from "../../helpers";
 import { useEvent } from "../../hooks";
@@ -21,6 +21,7 @@ export default function PageRegister() {
     React.useContext<any>(FirebaseContext);
 
   const { eventId } = useParams();
+  const navigate = useNavigate();
   const event = useEvent(eventId ?? "");
   const outlet = useOutlet();
 
@@ -108,7 +109,7 @@ export default function PageRegister() {
                 noAttendees,
                 attendees,
                 user,
-                () => console.log("REGISTRATION SUCCES")
+                (response) => console.log(`/${eventId}/confirmation`, response)
               )
             }
           >

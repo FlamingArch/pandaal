@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { AppBar, Page, Scaffold } from "../../components";
 import {
+  IconCanceled,
   IconDone,
   IconEdit,
   IconPreloader,
@@ -9,24 +10,41 @@ import {
   IconTicketFill,
 } from "../../components/icons";
 import { BackButton } from "../../fragments";
-import { useEvent } from "../../hooks";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { doc } from "firebase/firestore";
+import { collection, doc } from "firebase/firestore";
 import { FirebaseContext } from "../../contexts/firebase";
+import { getMonthFromNumber } from "../../helpers";
+import _ from "lodash";
 
 export default function PageConfirmation() {
-  const { eventId } = useParams();
-  const event = useEvent(eventId ?? "null");
-
-  const navigate = useNavigate();
-  const regId = useLocation().state?.regId;
-  if (!regId) {
-    navigate(`\${eventId}`);
-  }
-  console.log(regId);
-
+  const [registrationState, setRegistrationState] =
+    React.useState("successful");
+  const [date, setDate] = React.useState<Date>(new Date());
   const { firestore } = React.useContext<any>(FirebaseContext);
-  useDocumentData(doc(firestore, "registrations", regId));
+  const { eventId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  if (!location.state) {
+    navigate(`\\${eventId}`);
+  }
+
+  if (!location.state?.registrationId) {
+    navigate(`\\${eventId}`);
+  }
+
+  const registrationId = location.state?.registrationId;
+  const [snapshot, loading, error] = useDocumentData(
+    doc(collection(firestore, "registrations"), registrationId ?? "")
+  );
+
+  React.useEffect(() => console.log("error"), [error]);
+
+  React.useEffect(() => {
+    console.log(snapshot?.registrationStatus);
+    setRegistrationState(snapshot?.registrationStatus);
+    setDate(new Date(snapshot?.paymentAuthorizedAt * 1000 ?? 1));
+  }, [snapshot]);
 
   return (
     <Scaffold appBar={<AppBar backdrop="material" leading={<BackButton />} />}>
@@ -36,30 +54,74 @@ export default function PageConfirmation() {
         </p>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:p-12 max-w-5xl lg:mx-auto">
           <div className="flex flex-col gap-4">
-            <div className="flex rounded-full bg-green-500 bg-opacity-10 p-1 fill-green-500 text-green-500 font-medium">
+            <div
+              className={
+                "flex rounded-full bg-opacity-10 p-1 font-medium " +
+                (registrationState == "failed"
+                  ? "bg-red-500 fill-red-500 text-red-500"
+                  : registrationState == "successful"
+                  ? "bg-green-500 fill-green-500 text-green-500"
+                  : "bg-yellow-500 fill-yellow-500 text-yellow-500")
+              }
+            >
               <div className="rounded-full aspect-square h-full w-fit bg-white grid place-content-center">
-                <IconDone className="w-6 h-6" />
+                {registrationState == "failed" ? (
+                  <IconCanceled className="w-6 h-6 fill-red-500" />
+                ) : registrationState == "successful" ? (
+                  <IconDone className="w-6 h-6 fill-green-500" />
+                ) : (
+                  <IconPreloader className="w-6 h-6 stroke-yellow-500" />
+                )}
               </div>
-              <div className="p-4 flex-grow">Payment Completed</div>
+              <div className="p-4 flex-grow">
+                {registrationState == "failed"
+                  ? "Payment Failed"
+                  : registrationState == "successful"
+                  ? "Payment Successful"
+                  : "Processing Payment"}
+              </div>
             </div>
-            <div className="flex rounded-full bg-yellow-500 bg-opacity-10 p-1 fill-yellow-500 text-yellow-500 font-medium">
+            <div
+              className={
+                "flex rounded-full bg-opacity-10 p-1 font-medium " +
+                (registrationState == "failed"
+                  ? "bg-red-500 fill-red-500 text-red-500 "
+                  : registrationState == "successful"
+                  ? "bg-green-500 fill-green-500 text-green-500 "
+                  : "bg-yellow-500 fill-yellow-500 text-yellow-500 ")
+              }
+            >
               <div className="rounded-full aspect-square h-full w-fit bg-white grid place-content-center">
-                <IconPreloader className="w-6 h-6 stroke-yellow-500" />
+                {registrationState == "failed" ? (
+                  <IconCanceled className="w-6 h-6 fill-red-500" />
+                ) : registrationState == "successful" ? (
+                  <IconDone className="w-6 h-6 fill-green-500" />
+                ) : (
+                  <IconPreloader className="w-6 h-6 stroke-yellow-500" />
+                )}
               </div>
-              <div className="p-4 flex-grow">Processing Registration</div>
+              <div className="p-4 flex-grow">
+                {registrationState == "failed"
+                  ? "Registration Failed"
+                  : registrationState == "successful"
+                  ? "Registration Complete"
+                  : "Registering"}
+              </div>
             </div>
           </div>
 
           <div className="flex flex-col gap-4">
             <div className="font-semibold">Event Details</div>
             <div className="rounded-xl overflow-clip shadow-lg flex max-w-96 bg-white h-40">
-              <img src={event?.bannerURL} className="aspect-[9/12]" />
+              <img src={snapshot?.bannerURL} className="aspect-[9/12]" />
               <div className="flex flex-col p-4">
                 <div className="text-primary-500 font-medium">
                   Registering for
                 </div>
-                <div className="text-xl font-medium">{event?.Title}</div>
-                <div className="">{event?.organisationName}</div>
+                <div className="text-xl font-medium">
+                  {snapshot?.eventTitle}
+                </div>
+                <div className="">{snapshot?.organisationName}</div>
               </div>
             </div>
 
@@ -69,19 +131,27 @@ export default function PageConfirmation() {
               <div className="flex flex-col flex-grow items-stretch">
                 <div className="flex justify-between">
                   <div className="font-medium">Recieved</div>
-                  <div className="text-[#828386] font-normal">Rs. 100.00</div>
+                  <div className="text-[#828386] font-normal">{`${date.getHours()}:${date.getMinutes()}, ${date.getDate()} ${getMonthFromNumber(
+                    date.getMonth()
+                  ).slice(0, 3)} ${date.getFullYear()}`}</div>
                 </div>
                 <div className="flex justify-between">
                   <div className="font-medium">Payment Status</div>
-                  <div className="text-[#828386] font-normal">Rs. 100.00</div>
+                  <div className="text-[#828386] font-normal">
+                    {_.startCase(snapshot?.registrationStatus)}
+                  </div>
                 </div>
                 <div className="flex justify-between">
                   <div className="font-medium">Amount</div>
-                  <div className="text-[#828386] font-normal">Rs. 100.00</div>
+                  <div className="text-[#828386] font-normal">
+                    ₹ {snapshot?.payingAmount / 100}
+                  </div>
                 </div>
                 <div className="flex justify-between">
                   <div className="font-medium">Payment ID</div>
-                  <div className="text-[#828386] font-normal">Rs. 100.00</div>
+                  <div className="text-[#828386] font-normal">
+                    {snapshot?.paymentId}
+                  </div>
                 </div>
                 <div className="text-[#828386] font-normal">
                   This amount is non- refundable. Please contact the event

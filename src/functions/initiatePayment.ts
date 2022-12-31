@@ -37,7 +37,7 @@ export default async function intiatePayment(
         signature: response.razorpay_signature,
         registrationId: data.registrationId,
       });
-      completion(response);
+      completion({ registrationId: data.registrationId });
     },
     prefill: {
       name: userDoc.name,
@@ -87,7 +87,7 @@ export default async function intiatePayment(
   var instance = new Razorpay(options);
   instance.on("payment.failed", (response) => {
     paymentFailure({
-      userId: userDoc.uid,
+      userId: data.uid,
       registrationId: data.registrationId,
       eventId: data.eventId,
       ticketCount: data.ticketCount,
@@ -95,7 +95,7 @@ export default async function intiatePayment(
       errorDescription: response.error.description,
       errorResponse: response.error.reason,
     });
-    completion(response);
+    completion({ registrationId: data.registrationId, error: response.error });
   });
 
   instance.open();

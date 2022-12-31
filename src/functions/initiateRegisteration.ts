@@ -1,7 +1,15 @@
 import { collection, doc, getDoc } from "@firebase/firestore";
-import React from "react";
 import { initiatePayment } from ".";
-import { FirebaseContext } from "../contexts/firebase";
+
+export enum RegistrationResponses {
+  ERROR_NOT_EXISTS = "Document Does Not Exists",
+  ERROR_INACTIVE = "Event not active",
+  ERROR_REGISTRATION_OFF = "Not accepting registrations",
+  ERROR_SOLDOUT = "Tickets Sold Out",
+  ERROR_ALREDY_REGISTERED = "User Already Registered",
+  REGISTRATION_SUCCESS = "user Registered",
+  REGISTRATION_PAYMENT_INITIATED = "Payment Initiated",
+}
 
 export default async function initiateRegisteration(
   firestore,
@@ -59,14 +67,4 @@ export default async function initiateRegisteration(
     console.error("ERROR: Error fetching userDoc");
   }
   return null;
-}
-
-export enum RegistrationResponses {
-  ERROR_NOT_EXISTS = "Document Does Not Exists",
-  ERROR_INACTIVE = "Event not active",
-  ERROR_REGISTRATION_OFF = "Not accepting registrations",
-  ERROR_SOLDOUT = "Tickets Sold Out",
-  ERROR_ALREDY_REGISTERED = "User Already Registered",
-  REGISTRATION_SUCCESS = "user Registered",
-  REGISTRATION_PAYMENT_INITIATED = "Payment Initiated",
 }

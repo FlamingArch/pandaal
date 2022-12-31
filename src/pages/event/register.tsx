@@ -109,7 +109,8 @@ export default function PageRegister() {
                 noAttendees,
                 attendees,
                 user,
-                (response) => console.log(`/${eventId}/confirmation`, response)
+                (response) =>
+                  navigate(`/${eventId}/confirmation`, { state: response })
               )
             }
           >

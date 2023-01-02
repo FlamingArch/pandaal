@@ -19,9 +19,9 @@ import _ from "lodash";
 export default function PageConfirmation() {
   const [registrationState, setRegistrationState] =
     React.useState("successful");
+  const { eventId } = useParams();
   const [date, setDate] = React.useState<Date>(new Date());
   const { firestore } = React.useContext<any>(FirebaseContext);
-  const { eventId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const registrationId = location.state?.registrationId;
@@ -47,7 +47,7 @@ export default function PageConfirmation() {
   if (location.state?.error) {
     return (
       <Scaffold
-        appBar={<AppBar backdrop="material" leading={<BackButton />} />}
+        appBar={<AppBar backdrop="material" leading={<BackButton customPath={`/${eventId}`}/>} />}
       >
         <Page padding={6} gap={8} backdrop="solid">
           <p className="text-4xl font-semibold w-full max-w-5xl lg:mx-auto">

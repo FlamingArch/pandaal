@@ -142,6 +142,9 @@ export default function PageRegister() {
                 noAttendees,
                 attendees,
                 user,
+                () => {
+                  setLoading(false);
+                },
                 (response) => {
                   navigate(`/${eventId}/confirmation`, { state: response });
                   setLoading(false);

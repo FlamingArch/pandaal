@@ -21,6 +21,7 @@ export default async function initiateRegisteration(
   ticketCount,
   audeinceData,
   user,
+  onDismiss,
   completion
 ) {
   const userDocRef = doc(firestore, "users", userId);
@@ -58,6 +59,7 @@ export default async function initiateRegisteration(
           registrationId: ref.id,
           ticketCount: ticketCount,
         },
+        onDismiss,
         (response) => completion(response)
       );
     } else {

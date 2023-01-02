@@ -12,6 +12,7 @@ export default async function intiatePayment(
     registrationId: string;
     ticketCount: number;
   },
+  onDismiss,
   completion: (response: any) => void
 ) {
   const fetchOrderId = httpsCallable(functionsInstance, "fetchOrderId");
@@ -80,6 +81,7 @@ export default async function intiatePayment(
           errorDescription: "The user canceled the payment.",
           errorResponse: `{"error":{"code":"BAD_REQUEST_ERROR","description":"Payment processing cancelled by user","source":"customer","step":"payment_authentication","reason":"payment_cancelled","metadata":{}}}`,
         });
+        onDismiss();
       },
     },
   };

@@ -2,16 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IconUser } from "../components/icons";
 import { FirebaseContext } from "../contexts/firebase";
+import { useUserDoc } from "../hooks";
+import profileFemale from "../assets/profile-female.svg";
+import profileMale from "../assets/profile-male.svg";
 
 function AccountButton() {
   const { user } = React.useContext<any>(FirebaseContext);
   const [expand, setExpand] = React.useState(false);
-
   const navigate = useNavigate();
 
   return (
     <div
-      className="flex items-center justify-center hover:bg-primary-50 dark:hover:bg-primary-900 cursor-pointer rounded-xl"
+      className="flex items-center justify-center hover:bg-primary-50 dark:hover:bg-primary-900 cursor-pointer rounded-xl hover:fill-white fill-none"
       onMouseEnter={() => setExpand(true)}
       onMouseLeave={() => setExpand(false)}
       onClick={() => navigate("/account")}
@@ -20,9 +22,9 @@ function AccountButton() {
         navigate("/signout");
       }}
     >
-      <div className="relative cursor-pointer overflow-hidden transition rounded-xl bg-primary-500 hover:bg-primary-700 fill-white">
+      <div className="relative cursor-pointer overflow-hidden transition rounded-xl bg-primary-500 hover:bg-primary-700">
         <img
-          src={user?.photoURL}
+          src={profileMale}
           alt=""
           className="w-12 scale-[1.1] h-12 aspect-square object-cover object-center hover:filter hover:brightness-75 transition-all border-none outline-none"
         />

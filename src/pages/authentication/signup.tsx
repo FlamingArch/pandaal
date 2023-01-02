@@ -10,7 +10,7 @@ import {
   Scaffold,
   Text,
 } from "../../components";
-import { IconMail, IconUser } from "../../components/icons";
+import { IconMail, IconPreloader, IconUser } from "../../components/icons";
 import { FirebaseContext } from "../../contexts/firebase";
 import { userDocExists } from "../../functions";
 import { range } from "../../helpers";
@@ -60,9 +60,9 @@ export default function PageSignUp() {
 
   return loading ? (
     <Scaffold>
-      <Text headingLevel={1} bold>
-        "Loading..."
-      </Text>
+      <div className="w-screen h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center">
+        <IconPreloader className="w-8 h-8 stroke-gray-500" />
+      </div>
     </Scaffold>
   ) : (
     <Scaffold appBar={<AppBar title={<Branding />} backdrop="material" />}>

@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Input, Page, Text } from "../components";
-import { IconPasskey } from "../components/icons";
+import { IconPasskey, IconPreloader } from "../components/icons";
 import { FirebaseContext } from "../contexts/firebase";
 
 export default function signInVerifyCode({ phoneNumber, completion }) {
   const { signInVerifyCode } = React.useContext(FirebaseContext);
   const [code, setCode] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <Page padding={8} className="justify-center items-center" gap={4}>
@@ -25,12 +26,21 @@ export default function signInVerifyCode({ phoneNumber, completion }) {
         className="w-96"
       />
       <Button
-        onClick={() => signInVerifyCode(code, completion)}
+        onClick={() => {
+          setLoading(true);
+          signInVerifyCode(code, completion);
+        }}
         type="emphasis"
         disabled={code.length !== 6}
         className="w-96"
       >
-        Verify Code
+        {loading ? (
+          <p className="flex gap-2">
+            <IconPreloader className="w-6 h-6 stroke-white" /> Verifying
+          </p>
+        ) : (
+          "Verify Code"
+        )}
       </Button>
     </Page>
     // <div className="grid place-content-center h-[70vh] gap-8">

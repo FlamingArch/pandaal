@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button, Input, Page, Text } from "../components";
-import { IconPhone } from "../components/icons";
+import { IconPhone, IconPreloader } from "../components/icons";
 import { FirebaseContext } from "../contexts/firebase";
 
 export default function SignInPrompt({
@@ -12,6 +12,7 @@ export default function SignInPrompt({
   const [phone, setPhone] = React.useState("");
   const [countryCode, setCountryCode] = React.useState("+91");
   const { auth, signInSendCode } = React.useContext(FirebaseContext);
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     setPhoneNumber(`${countryCode}${phone}`);
@@ -33,31 +34,48 @@ export default function SignInPrompt({
       </Text>
       <Text dimmed>Enter your phone number to continue</Text>
       <div className="flex gap-4 w-96">
-        <Input
+        {/* <Input
           type="number"
           className="w-32"
           value={countryCode}
           onChange={(e) => setCountryCode(e.target.value)}
           placeholder="Code"
-        />
+        /> */}
         <Input
           type="number"
           className="flex-grow"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          leading={
+            <div className="flex">
+              <IconPhone className="w-6 h-6 fill-primary-500" />
+              <p className="text-primary-500 font-semibold">+91</p>
+            </div>
+          }
+          onChange={(e) => {
+            if (!loading) {
+              setPhone(e.target.value);
+            }
+          }}
           placeholder="Phone Number"
         />
       </div>
       <div id="rcv"></div>
       <Button
-        onClick={() =>
-          signInSendCode(auth, "rcv", `${countryCode}${phone}`, onSubmit)
-        }
+        onClick={() => {
+          if (!loading) {
+            setLoading(true);
+            signInSendCode(auth, "rcv", `${countryCode}${phone}`, onSubmit);
+          }
+        }}
         type="emphasis"
         disabled={disableSubmission}
         className="w-96"
       >
-        Send Code
+        {loading ? (
+          <IconPreloader className="w-6 h-6 stroke-white" />
+        ) : (
+          "Send Code"
+        )}
       </Button>
     </Page>
   );

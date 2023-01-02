@@ -7,7 +7,6 @@ import {
   AppBar,
   AttendeeInput,
   Button,
-  Input,
   Page,
   Scaffold,
   Text,
@@ -15,6 +14,7 @@ import {
 import { initiateRegisteration } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
 import _, { range } from "lodash";
+import { IconPreloader } from "../../components/icons";
 
 export default function PageRegister() {
   const { firestore, functions, registerUser, user } =
@@ -25,11 +25,43 @@ export default function PageRegister() {
   const event = useEvent(eventId ?? "");
   const outlet = useOutlet();
 
+  const [loading, setLoading] = React.useState(false);
+
   const [response, setResponse] = React.useState([]);
   const [enableButton, setEnableButton] = React.useState(false);
 
   const [noAttendees, setNoAttendees] = React.useState(1);
   const [attendees, setAttendees] = React.useState<any>([]);
+
+  if (!event) {
+    return (
+      <Scaffold>
+        <div className="w-screen h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center">
+          <IconPreloader className="w-8 h-8 stroke-gray-500" />
+        </div>
+      </Scaffold>
+    );
+  }
+
+  if (loading) {
+    return (
+      <Scaffold>
+        <Page
+          padding={8}
+          gap={6}
+          className="place-content-center place-items-center text-center"
+        >
+          <IconPreloader className="w-16 h-16 stroke-primary-500" />
+          <Text headingLevel={2} bold>
+            Processing{event?.price === "0" ? "" : ` Payment`}...
+          </Text>
+          <Text headingLevel={6} accented>
+            Do not press the back button or refresh the page.
+          </Text>
+        </Page>
+      </Scaffold>
+    );
+  }
 
   return (
     <Scaffold
@@ -98,7 +130,8 @@ export default function PageRegister() {
           <Button
             type="emphasis"
             className="w-48 mx-auto"
-            onClick={() =>
+            onClick={() => {
+              setLoading(true);
               initiateRegisteration(
                 firestore,
                 functions,
@@ -109,12 +142,14 @@ export default function PageRegister() {
                 noAttendees,
                 attendees,
                 user,
-                (response) =>
-                  navigate(`/${eventId}/confirmation`, { state: response })
-              )
-            }
+                (response) => {
+                  navigate(`/${eventId}/confirmation`, { state: response });
+                  setLoading(false);
+                }
+              );
+            }}
           >
-            Register
+            Register {event?.price === "0" ? "" : `(₹ ${event?.price})`}
           </Button>
         )}
       </Page>

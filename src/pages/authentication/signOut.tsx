@@ -4,14 +4,7 @@ import { FirebaseContext } from "../../contexts/firebase";
 
 export default function signOut() {
   const { user, signOut } = React.useContext<any>(FirebaseContext);
-
   const navigate = useNavigate();
-
-  if (user) {
-    signOut();
-  } else {
-    navigate("/signin");
-  }
-
-  return <Navigate to="/signin" />;
+  user ? signOut() : navigate("/");
+  return <Navigate to="/" />;
 }

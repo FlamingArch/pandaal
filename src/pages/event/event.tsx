@@ -28,14 +28,13 @@ import {
 import { useEvent } from "../../hooks";
 import { isLiked, toggleLike } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
+import { IconPreloader } from "../../components/icons";
 
 export default function PageEvent() {
   const { eventId } = useParams();
   const event = useEvent(eventId ?? "null");
   const navigate = useNavigate();
   window.document.title = `${event?.Title} - Pandaal`;
-  const [likeCount, setLikeCount] = React.useState(-1);
-  React.useEffect(() => setLikeCount(event?.likeCount ?? -1), [event]);
   const outlet = useOutlet();
 
   if (event === false) {
@@ -55,11 +54,6 @@ export default function PageEvent() {
       eventId ?? "null",
       auth?.currentUser?.uid
     );
-    if (response?.error) {
-      console.error(response.error);
-    } else {
-      setLikeCount(response?.count! ?? -1);
-    }
   };
 
   const bottomBar = (
@@ -83,27 +77,33 @@ export default function PageEvent() {
         backdrop={<ImageBackdrop src={event?.bannerURL} dim blur />}
         overlay={outlet}
         leading={
-          <EventCard event={event} className="mx-auto m-8 place-self-center" />
+          event && (
+            <EventCard
+              event={event}
+              className="mx-auto m-8 place-self-center"
+            />
+          )
         }
-        bottomBar={bottomBar}
+        bottomBar={event && bottomBar}
       >
-        <Page
-          gap={6}
-          backdrop="solid"
-          rounded
-          className="pb-48 p-8"
-        >
-          <EventInfo event={event} />
-          <EventOrganisationDetails event={event} />
-          <FavouriteTile
-            value={isLiked(event ?? {}, auth?.currentUser?.uid)}
-            count={likeCount}
-            onChange={handleToggleLike}
-          />
-          <LimitedParagraph heading="Event Description" limit={100}>
-            {event?.description}
-          </LimitedParagraph>
-        </Page>
+        {event ? (
+          <Page gap={6} backdrop="solid" rounded className="pb-48 p-8">
+            <EventInfo event={event} />
+            <EventOrganisationDetails event={event} />
+            <FavouriteTile
+              value={isLiked(event ?? {}, auth?.currentUser?.uid)}
+              count={event?.likeCount ?? 0}
+              onChange={handleToggleLike}
+            />
+            <LimitedParagraph heading="Event Description" limit={100}>
+              {event?.description}
+            </LimitedParagraph>
+          </Page>
+        ) : (
+          <div className="w-screen h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center">
+            <IconPreloader className="w-8 h-8 stroke-gray-500" />
+          </div>
+        )}
       </Scaffold>
     </AnimatePresence>
   );

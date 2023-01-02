@@ -61,7 +61,7 @@ export default async function initiateRegisteration(
         (response) => completion(response)
       );
     } else {
-      console.log(response);
+      completion({ registrationId: ref.id, error: { errorDescription: result } });
     }
   } catch {
     console.error("ERROR: Error fetching userDoc");

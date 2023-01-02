@@ -44,7 +44,7 @@ export default function EventCard({
           <p className="text-xl font-medium">{event?.Title}</p>
           <p className="">{event?.organisationName}</p>
           <p className="font-bold text-primary-500">
-            {event?.price === "0" ? "Free" : event?.price}
+            {event?.price === "0" ? "Free" : `₹ ${event?.price}`}
           </p>
         </div>
       )}

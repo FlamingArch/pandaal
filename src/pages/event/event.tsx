@@ -67,7 +67,7 @@ export default function PageEvent() {
       <div className="flex flex-col">
         <div className="uppercase font-bold">Price</div>
         <div className="text-xl text-primary-500">
-          {event?.price == 0 ? "Free" : event?.price}
+          {event?.price == 0 ? "Free" : `₹ ${event?.price}`}
         </div>
       </div>
       <Button type="emphasis" onClick={() => navigate("instructions")}>
@@ -91,8 +91,6 @@ export default function PageEvent() {
           gap={6}
           backdrop="solid"
           rounded
-          shadow
-          responsive
           className="pb-48 p-8"
         >
           <EventInfo event={event} />

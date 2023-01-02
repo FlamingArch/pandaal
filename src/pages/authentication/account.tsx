@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Input, Page, Scaffold, Text } from "../../components";
+import { AppBar, Button, Input, Page, Scaffold, Text } from "../../components";
 import {
   IconEdit,
   IconFeedback,
@@ -61,10 +61,9 @@ export default function PageAccount() {
             value={phone}
             onChange={(e) => {}}
           />
-          <div className="rounded-xl p-4 bg-primary-50 grid place-content-center cursor-pointer hover:fill-primary-500 hover:text-primary-500 grid-flow-col gap-2">
-            <IconFeedback className="w-6 h-6" />
+          <Button className="flex-grow w-full ml-auto" type="primary">
             Save Changes
-          </div>
+          </Button>
         </div>
       </Page>
     </Scaffold>

@@ -26,17 +26,7 @@ export default function PageHome() {
       overlay={outlet}
     >
       <List.View>
-        <List.Header
-          heading="Popular Events Near You"
-          actions={
-            <Button
-              onClick={() => {}}
-              leading={<IconFeedback className="w-6 h-6" />}
-            >
-              Filter
-            </Button>
-          }
-        />
+        <List.Header heading="Popular Events Near You" />
         {Object.keys(events).map((category, index) => (
           <List.Section heading={category} key={index}>
             {events[category].map((event, index) => (

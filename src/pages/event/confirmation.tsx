@@ -24,6 +24,17 @@ export default function PageConfirmation() {
   const { eventId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const registrationId = location.state?.registrationId;
+  console.log(registrationId);
+  const [snapshot, loading, error] = useDocumentData(
+    doc(collection(firestore, "registrations"), registrationId!)
+  );
+  React.useEffect(() => console.log("error"), [error]);
+  React.useEffect(() => {
+    console.log(snapshot?.registrationStatus);
+    setRegistrationState(snapshot?.registrationStatus);
+    setDate(new Date(snapshot?.paymentAuthorizedAt * 1000 ?? 1));
+  }, [snapshot]);
 
   if (!location.state) {
     navigate(`\\${eventId}`);
@@ -33,18 +44,43 @@ export default function PageConfirmation() {
     navigate(`\\${eventId}`);
   }
 
-  const registrationId = location.state?.registrationId;
-  const [snapshot, loading, error] = useDocumentData(
-    doc(collection(firestore, "registrations"), registrationId ?? "")
-  );
-
-  React.useEffect(() => console.log("error"), [error]);
-
-  React.useEffect(() => {
-    console.log(snapshot?.registrationStatus);
-    setRegistrationState(snapshot?.registrationStatus);
-    setDate(new Date(snapshot?.paymentAuthorizedAt * 1000 ?? 1));
-  }, [snapshot]);
+  if (location.state?.error) {
+    return (
+      <Scaffold
+        appBar={<AppBar backdrop="material" leading={<BackButton />} />}
+      >
+        <Page padding={6} gap={8} backdrop="solid">
+          <p className="text-4xl font-semibold w-full max-w-5xl lg:mx-auto">
+            Error While Registering
+          </p>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:p-12 max-w-5xl lg:mx-auto">
+            <div className="flex flex-col gap-4">
+              <div className="flex rounded-full bg-opacity-10 p-1 font-medium bg-red-500 fill-red-500 text-red-500">
+                <div className="rounded-full aspect-square h-full w-fit bg-white grid place-content-center">
+                  <IconCanceled className="w-6 h-6 fill-red-500" />
+                </div>
+                <div className="p-4 flex-grow">Registration Failed</div>
+              </div>
+              <p className="font-medium">
+                Your Registration could not be processed at this time.
+              </p>
+              <p className="">
+                Reason:{" "}
+                <span className="text-red-500">
+                  {location.state?.error?.errorDescription}
+                </span>
+                <br />
+                Registration ID:{" "}
+                <span className="text-red-500">
+                  {location.state?.registrationId}
+                </span>
+              </p>
+            </div>
+          </div>
+        </Page>
+      </Scaffold>
+    );
+  }
 
   return (
     <Scaffold appBar={<AppBar backdrop="material" leading={<BackButton />} />}>

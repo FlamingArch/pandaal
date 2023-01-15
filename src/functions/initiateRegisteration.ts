@@ -39,7 +39,6 @@ export default async function initiateRegisteration(
       ticketCount: ticketCount,
       audienceData: audeinceData,
     };
-    console.log(registerUser);
     const response = await registerUser(object);
     const result = JSON.parse(response.data) as RegistrationResponses;
     if (result == RegistrationResponses.REGISTRATION_SUCCESS) {

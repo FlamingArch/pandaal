@@ -7,7 +7,6 @@ export default function useBranches(course: string) {
 
   React.useEffect(() => {
     fetchDoc("appData/collegeDetails").then((e: any) => {
-      console.log("FETCHED BRANCHES: ", e[course]?.branch);
       setBranches(e[course]?.branch ?? []);
     });
   }, []);

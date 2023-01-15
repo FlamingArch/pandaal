@@ -15,10 +15,6 @@ export default function PageTest() {
     setScrolled(window.pageYOffset);
   };
 
-  React.useEffect(() => {
-    console.log(scrolled);
-  }, [scrolled]);
-
   return (
     <Scaffold
       appBar={

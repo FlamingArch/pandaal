@@ -41,7 +41,6 @@ export default function PageSignUp() {
 
   React.useEffect(() => {
     userDocExists(firestore, user.uid).then((e) => {
-      console.log(`USERDOC EXISTS: ${e}`);
       if (e) {
         navigate("/");
       } else {

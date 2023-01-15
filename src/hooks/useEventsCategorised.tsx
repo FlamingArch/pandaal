@@ -34,9 +34,5 @@ export default function useEvents() {
     });
   }, []);
 
-  React.useEffect(() => {
-    console.log(events);
-  }, [events]);
-
   return events;
 }

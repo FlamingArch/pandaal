@@ -25,13 +25,10 @@ export default function PageConfirmation() {
   const location = useLocation();
   const navigate = useNavigate();
   const registrationId = location.state?.registrationId;
-  console.log(registrationId);
   const [snapshot, loading, error] = useDocumentData(
     doc(collection(firestore, "registrations"), registrationId!)
   );
-  React.useEffect(() => console.log("error"), [error]);
   React.useEffect(() => {
-    console.log(snapshot?.registrationStatus);
     setRegistrationState(snapshot?.registrationStatus);
     setDate(new Date(snapshot?.paymentAuthorizedAt * 1000 ?? 1));
   }, [snapshot]);

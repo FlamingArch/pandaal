@@ -3,10 +3,6 @@ import { IconAnswer } from "../components/icons";
 
 export default function (questions, response, setResponse, setEnableButton) {
   function appendAnswer(index, ques, answer) {
-    // console.log(`Questions: ${JSON.stringify(questions, {}, 2)}`);
-    // console.log(
-    //   `Index: ${index}\nQues: ${JSON.stringify(ques)}\nAns: ${answer}`
-    // );
     const newResponses = response;
     if (newResponses[index]) {
       if (answer == "") {
@@ -21,7 +17,6 @@ export default function (questions, response, setResponse, setEnableButton) {
     refreshValidation();
   }
   const refreshValidation = () => {
-    // console.log(`FORM DATA: ${questions.length} RESPONSE: ${response.length}`);
     if (response.length === questions.length) setEnableButton(true);
     else setEnableButton(false);
   };

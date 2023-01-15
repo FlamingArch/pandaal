@@ -49,7 +49,6 @@ export const FirebaseProvider = ({ children }) => {
   const signOut = () => so(auth);
 
   const fetchDoc = async (path) => {
-    console.log(`Fetching Document: ${path}`);
     const docRef = doc(firestore, path);
     const docSnap = await getDoc(docRef);
     return docSnap.data();

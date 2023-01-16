@@ -36,7 +36,7 @@ export default function PageRegister() {
   if (!event) {
     return (
       <Scaffold>
-        <div className="w-screen h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center">
+        <div className="w-screen h-screen bg-gray-50 flex flex-col items-center justify-center">
           <IconPreloader className="w-8 h-8 stroke-gray-500" />
         </div>
       </Scaffold>
@@ -78,7 +78,7 @@ export default function PageRegister() {
             setEnableButton
           )}
         {event?.price != 0 && (
-          <div className="flex items-center justify-between gap-4 rounded-2xl p-4 bg-primary-50 dark:bg-primary-900">
+          <div className="flex items-center justify-between gap-4 rounded-2xl p-4 bg-primary-50">
             <div className="flex flex-col">
               <Text headingLevel={5}>Attendees</Text>
               <Text bold accented>

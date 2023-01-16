@@ -22,7 +22,7 @@ export default function PageTest() {
           backdrop="material"
           leading={<BackButton customPath="/" />}
           title="Test Page"
-          className="backdrop-brightness-100 dark:backdrop-brightness-100 bg-opacity-0 dark:bg-opacity-0 backdrop-saturate-100 dark:backdrop-saturate-100"
+          className="backdrop-brightness-100 bg-opacity-0 backdrop-saturate-100"
         />
       }
       backdrop={

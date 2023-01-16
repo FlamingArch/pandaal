@@ -14,11 +14,6 @@ body {
   background-color: white;
   color: black;
   user-select: none;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: black;
-    color: white;
-  }
 }
 
 /* Chrome, Safari, Edge, Opera */

@@ -24,12 +24,12 @@ export default function ViewPage({
   const shadowStyles = shadow ? "shadow-2xl" : "";
   const backdropStyles =
     backdrop == "material"
-      ? "bg-white dark:bg-black backdrop-filter backdrop-blur-3xl bg-opacity-80 dark:bg-opacity-80 backdrop-brightness-200 dark:bg-brightness-50 backdrop-saturate-200"
+      ? "bg-white backdrop-filter backdrop-blur-3xl bg-opacity-80 backdrop-brightness-200 backdrop-saturate-200"
       : backdrop == "solid"
-      ? "bg-white dark:bg-black"
+      ? "bg-white"
       : "";
   const defaultStyles =
-    "text-black dark:text-white flex flex-col flex-grow w-full min-h-fit transition-all";
+    "text-black flex flex-col flex-grow w-full min-h-fit transition-all";
 
   return (
     <div

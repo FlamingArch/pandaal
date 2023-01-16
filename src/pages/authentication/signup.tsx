@@ -59,7 +59,7 @@ export default function PageSignUp() {
 
   return loading ? (
     <Scaffold>
-      <div className="w-screen h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center">
+      <div className="w-screen h-screen bg-gray-50 flex flex-col items-center justify-center">
         <IconPreloader className="w-8 h-8 stroke-gray-500" />
       </div>
     </Scaffold>

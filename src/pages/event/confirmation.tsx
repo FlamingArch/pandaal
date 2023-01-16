@@ -160,7 +160,7 @@ export default function PageConfirmation() {
 
             <div className="font-semibold">Payment Details</div>
             <div className="flex pl-4 gap-4">
-              <div className="h-full w-1 bg-black dark:bg-white bg-opacity-10" />
+              <div className="h-full w-1 bg-black bg-opacity-10" />
               <div className="flex flex-col flex-grow items-stretch">
                 <div className="flex justify-between">
                   <div className="font-medium">Recieved</div>

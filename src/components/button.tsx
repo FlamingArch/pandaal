@@ -27,14 +27,14 @@ export default function Button({
   const getStyles = () => {
     switch (type) {
       case "emphasis":
-        return "hover:scale-105 bg-primary-500 shadow-xl dark:shadow-xl shadow-primary-300 dark:shadow-primary-700 hover:shadow-primary-500 hover:shadow-2xl text-white fill-white hover:text-primary-50 hover:fill-primary-50 hover:bg-primary-600";
+        return "hover:scale-105 bg-primary-500 shadow-xl shadow-primary-300 hover:shadow-primary-500 hover:shadow-2xl text-white fill-white hover:text-primary-50 hover:fill-primary-50 hover:bg-primary-600";
       case "primary":
         return "bg-primary-500 text-white fill-white hover:text-primary-50 hover:fill-primary-50 hover:bg-primary-600";
       case "link":
         return "text-primary-500 hover:text-primary-600 fill-primary-500 hover:fill-primary-600";
       default:
       case "secondary":
-        return "bg-primary-50 dark:bg-primary-800 dark:text-white dark:fill-white text-black hover:text-primary-500 hover:fill-primary-500 hover:bg-primary-100 dark:hover:bg-primary-700 dark:bg-opacity-70 dark:hover:bg-opacity-70 dark:hover:text-primary-100";
+        return "bg-primary-50 text-black hover:text-primary-500 hover:fill-primary-500 hover:bg-primary-100";
     }
   };
   const getHoverStyles = () => {
@@ -47,7 +47,7 @@ export default function Button({
         return "hover:text-primary-600 hover:fill-primary-600";
       default:
       case "secondary":
-        return "hover:text-primary-500 hover:fill-primary-500 hover:bg-primary-100 dark:hover:bg-primary-700 dark:hover:bg-opacity-70 dark:hover:text-primary-100";
+        return "hover:text-primary-500 hover:fill-primary-500 hover:bg-primary-100";
     }
   };
   const baseStyles =

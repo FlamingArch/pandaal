@@ -13,7 +13,7 @@ function AccountButton() {
 
   return (
     <div
-      className="flex items-center justify-center hover:bg-primary-50 dark:hover:bg-primary-900 cursor-pointer rounded-xl hover:fill-white fill-none"
+      className="flex items-center justify-center hover:bg-primary-50 cursor-pointer rounded-xl hover:fill-white fill-none"
       onMouseEnter={() => setExpand(true)}
       onMouseLeave={() => setExpand(false)}
       onClick={() => navigate("/account")}

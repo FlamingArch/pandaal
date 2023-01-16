@@ -17,18 +17,18 @@ export default function ViewAppBar({
   switch (backdrop) {
     case "material":
       backdropStyles =
-        "bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60 backdrop-blur-3xl backdrop-saturate-200 dark:backdrop-blur-2xl dark:backdrop-saturate-200";
+        "bg-white bg-opacity-60 backdrop-blur-3xl backdrop-saturate-200";
       break;
     case "shadow":
       // TODO: Implement Shadow
       break;
     case "solid":
-      backdropStyles = "bg-white dark:bg-black";
+      backdropStyles = "bg-white";
     default:
       backdropStyles = "";
   }
   const defaultStyles =
-    "p-6 grid grid-cols-2 gap-4 sticky top-0 z-10 items-center ";
+    "p-6 grid grid-cols-2 gap-4 sticky top-0 z-10 items-center";
 
   return (
     <div className={`${defaultStyles} ${backdropStyles} ${className}`}>

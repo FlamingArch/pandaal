@@ -37,7 +37,7 @@ export default function Scaffold({
 }) {
   return (
     <div
-      className={`bg-white dark:bg-black min-w-screen min-h-screen flex flex-col ${
+      className={`bg-white min-w-screen min-h-screen flex flex-col ${
         overlay && "overflow-hidden h-screen"
       } ${styles?.scaffold} ${className}`}
     >

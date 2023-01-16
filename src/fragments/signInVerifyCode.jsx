@@ -58,7 +58,7 @@ export default function signInVerifyCode({ phoneNumber, completion }) {
     //     className={
     //       "px-16 py-3 mt-20 w-fit mx-auto bg-primary-500 text-white rounded-2xl transition-all " +
     //       (code.length === 6
-    //         ? "shadow-xl shadow-primary-300 dark:shadow-primary-700 hover:shadow-primary-500 hover:shadow-2xl hover:scale-105 hover:bg-primary-600"
+    //         ? "shadow-xl shadow-primary-300 hover:shadow-primary-500 hover:shadow-2xl hover:scale-105 hover:bg-primary-600"
     //         : "opacity-50 cursor-not-allowed")
     //     }
     //   >

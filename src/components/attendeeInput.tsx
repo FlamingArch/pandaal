@@ -10,7 +10,7 @@ export default function ViewAttendeeInput({ onChange }) {
   }, [value]);
 
   return (
-    <div className="bg-primary-50 dark:bg-primary-900 rounded-2xl flex-col p-4 gap-3 flex">
+    <div className="bg-primary-50 rounded-2xl flex-col p-4 gap-3 flex">
       <Text accented>Attendee 1 </Text>
       <div className="flex gap-4">
         <Input

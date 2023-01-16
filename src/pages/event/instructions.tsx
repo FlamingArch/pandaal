@@ -29,7 +29,7 @@ export default function PageRegister() {
         <div className="flex-grow md:flex-grow-0 transition-all" />
         <Link
           to={`/${eventId}/register`}
-          className="grid place-content-center px-8 py-3 bg-primary-500 text-white rounded-2xl shadow-xl transition-all shadow-primary-300 dark:shadow-primary-700 hover:shadow-primary-500 hover:shadow-2xl hover:scale-105 hover:bg-primary-600"
+          className="grid place-content-center px-8 py-3 bg-primary-500 text-white rounded-2xl shadow-xl transition-all shadow-primary-300 hover:shadow-primary-500 hover:shadow-2xl hover:scale-105 hover:bg-primary-600"
         >
           Register
         </Link>

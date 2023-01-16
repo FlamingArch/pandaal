@@ -21,7 +21,7 @@ export default function EventCard({
   const navigate = useNavigate();
 
   const hoverStyles = hover
-    ? "hover:bg-primary-50 dark:hover:bg-primary-900 hover:scale-110 hover:rounded-3xl cursor-pointer hover:p-2"
+    ? "hover:bg-primary-50 hover:scale-110 hover:rounded-3xl cursor-pointer hover:p-2"
     : "";
   const widthStyles = width ? `w-${width}` : "w-[175px]";
   const defaultStyles = `flex flex-col flex-shrink-0 transition-all`;

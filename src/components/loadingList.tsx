@@ -10,7 +10,7 @@ export default function loadingList({ length }: { length: number }) {
       {items.map((_, i) => (
         <div
           key={i}
-          className="w-[175px] aspect-[9/12] bg-gray-300 dark:bg-gray-900 flex-shrink-0 rounded-3xl animate-pulse"
+          className="w-[175px] aspect-[9/12] bg-gray-300 flex-shrink-0 rounded-3xl animate-pulse"
         />
       ))}
     </>

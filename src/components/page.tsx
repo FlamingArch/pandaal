@@ -1,41 +1,76 @@
 import React from "react";
 
-export default function ViewPage({
+export default function Page({
   children,
-  responsive,
-  rounded,
-  shadow,
   backdrop,
+  cornerRadius,
   padding,
+  margin,
+  // responseFactor,
+  responsive,
   gap,
-  className,
 }: {
-  children: React.ReactNode;
-  backdrop?: "solid" | "transparent" | "material";
-  responsive?: boolean;
-  rounded?: boolean;
-  shadow?: boolean;
-  padding?: number;
+  children?: React.ReactNode;
+  backdrop?: "clear" | "solid" | "material";
+  cornerRadius?:
+    | number
+    | {
+        topLeft?: number;
+        topRight?: number;
+        bottomLeft?: number;
+        bottomRight?: number;
+      };
+  padding?:
+    | number
+    | { top?: number; right?: number; bottom?: number; left?: number };
+  margin?:
+    | number
+    | { top?: number; right?: number; bottom?: number; left?: number };
   gap?: number;
-  className?: string;
+  // responseFactor?: number;
+  responsive: bool;
 }) {
-  const responsiveStyles = responsive ? "mx-auto md:w-2/3 =xl:w-1/2" : "";
-  const roundedStyles = rounded ? "rounded-3xl" : "";
-  const shadowStyles = shadow ? "shadow-2xl" : "";
-  const backdropStyles =
-    backdrop == "material"
-      ? "bg-white backdrop-filter backdrop-blur-3xl bg-opacity-80 backdrop-brightness-200 backdrop-saturate-200"
-      : backdrop == "solid"
-      ? "bg-white"
-      : "";
-  const defaultStyles =
-    "text-black flex flex-col flex-grow w-full min-h-fit transition-all";
+  function getBackdropStyles(Backdrop) {
+    switch (Backdrop) {
+      case "clear":
+        return "bg-transparent";
+      case "solid":
+        return "bg-white";
+      case "material":
+        return "bg-white bg-opacity-60 backdrop-blur-3xl backdrop-saturate-200";
+      default:
+        return "bg-transparent";
+    }
+  }
 
   return (
     <div
-      className={`${defaultStyles} ${responsiveStyles} ${backdropStyles} ${shadowStyles} ${roundedStyles} ${
-        padding ? `p-${padding}` : ""
-      } ${gap ? `gap-${gap}` : ""} ${className}`}
+      style={{
+        borderRadius:
+          typeof cornerRadius == "number"
+            ? `${cornerRadius / 4}rem`
+            : `${(cornerRadius?.topLeft ?? 0) / 4}rem ${
+                (cornerRadius?.topRight ?? 0) / 4
+              }rem ${(cornerRadius?.bottomLeft ?? 0) / 4}rem ${
+                (cornerRadius?.bottomRight ?? 0) / 4
+              }rem`,
+        padding:
+          typeof padding == "number"
+            ? `${padding / 4}rem`
+            : `${(padding?.top ?? 0) / 4}rem ${(padding?.right ?? 0) / 4}rem ${
+                (padding?.bottom ?? 0) / 4
+              }rem ${(padding?.left ?? 0) / 4}rem`,
+        margin:
+          typeof margin == "number"
+            ? `${margin / 4}rem`
+            : `${(margin?.top ?? 0) / 4}rem ${(margin?.right ?? 0) / 4}rem ${
+                (margin?.bottom ?? 0) / 4
+              }rem ${(margin?.left ?? 0) / 4}rem`,
+        gap: `${gap / 4}rem`,
+      }}
+      className={`flex flex-col mx-auto h-full transition-all ${getBackdropStyles(
+        backdrop
+      )} w-full md:w-3/4 lg:w-2/3 xl:w-1/2 2xl:w-1/3`}
     >
       {children}
     </div>

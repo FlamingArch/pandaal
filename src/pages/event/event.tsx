@@ -2,11 +2,10 @@ import React from "react";
 import {
   Navigate,
   useParams,
-  Link,
-  Outlet,
   useNavigate,
   useLocation,
   useOutlet,
+  Link,
 } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -28,7 +27,7 @@ import {
 import { useEvent } from "../../hooks";
 import { isLiked, toggleLike } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
-import { IconPreloader } from "../../components/icons";
+import { IconNewEvent, IconPreloader, IconShare } from "../../components/icons";
 
 export default function PageEvent() {
   const { eventId } = useParams();
@@ -59,9 +58,9 @@ export default function PageEvent() {
   const bottomBar = (
     <BottomBar>
       <div className="flex flex-col">
-        <div className="uppercase font-bold">Price</div>
-        <div className="text-xl text-primary-500">
-          {event?.price == 0 ? "Free" : `₹ ${event?.price}`}
+        <div className="text-primary-500">Total Price</div>
+        <div className="text-xl">
+          {event?.price == 0 ? "Free" : `₹ ${event?.price}/person`}
         </div>
       </div>
       <Button type="emphasis" onClick={() => navigate("instructions")}>
@@ -73,21 +72,28 @@ export default function PageEvent() {
   return (
     <AnimatePresence>
       <Scaffold
-        appBar={<AppBar leading={<BackButton customPath="/"/>} />}
+        appBar={<AppBar leading={<BackButton customPath="/" />} />}
         backdrop={<ImageBackdrop src={event?.bannerURL} dim blur />}
         overlay={outlet}
         leading={
           event && (
             <EventCard
               event={event}
-              className="mx-auto m-8 place-self-center"
+              className="mx-auto m-12 place-self-center"
             />
           )
         }
         bottomBar={event && bottomBar}
       >
         {event ? (
-          <Page gap={6} backdrop="solid" rounded className="pb-48 p-8">
+          <Page
+            backdrop="solid"
+            cornerRadius={6}
+            padding={{ top: 6, left: 6, bottom: 28, right: 6 }}
+            margin={{ top: 12, left: 6, bottom: 6, right: 6 }}
+            gap={12}
+            responseFactor={0.4}
+          >
             <EventInfo event={event} />
             <EventOrganisationDetails event={event} />
             <FavouriteTile
@@ -95,9 +101,34 @@ export default function PageEvent() {
               count={event?.likeCount ?? 0}
               onChange={handleToggleLike}
             />
-            <LimitedParagraph heading="Event Description" limit={100}>
+            <LimitedParagraph heading="Event Description" limit={300}>
               {event?.description}
             </LimitedParagraph>
+            <Link
+              to={`/${eventId}/share`}
+              className="flex rounded-3xl shadow-md p-6 gap-6"
+            >
+              <div className="flex flex-col">
+                <p className="text-lg font-semibold">Share this Event</p>
+                <p className="">
+                  Why have all the fun alone, invite your friends too.
+                </p>
+              </div>
+              <div className="grid h-full place-content-center">
+                <IconShare className="w-8 h-8 stroke-gray-500" />
+              </div>
+            </Link>
+            <LimitedParagraph heading="Terms & Conditions" limit={300}>
+              {event?.termsAndConditions}
+            </LimitedParagraph>
+            <Link
+              to={`/new`}
+              className="rounded-3xl shadow-md p-6 gap-2 grid place-content-center text-center"
+            >
+              <IconNewEvent className="w-8 h-8 stroke-gray-500 place-self-center" />
+              <p className="text-lg font-semibold">List Your own Event</p>
+              <p className="">Contact us to list your own event with Pandaal</p>
+            </Link>
           </Page>
         ) : (
           <div className="w-screen h-screen bg-gray-50 flex flex-col items-center justify-center">

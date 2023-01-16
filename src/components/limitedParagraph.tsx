@@ -16,17 +16,20 @@ const LimitedParagraph = ({
   return (
     <div>
       {heading && <Text headingLevel={5}>{heading}</Text>}
+      <div className="h-4"></div>
       <p>
         {descriptionExpanded
           ? parseHTML(children)
           : parseHTML(_.truncate(children, { length: limit ?? 300 }))}
       </p>
-      <button
-        className="text-primary-400 font-medium uppercase hover:text-primary-300 transition-colors"
-        onClick={() => setDescriptionExpanded(!descriptionExpanded)}
-      >
-        Read {descriptionExpanded ? "Less" : "More"}
-      </button>
+      {parseHTML(children).length >= limit && (
+        <button
+          className="text-primary-400 font-medium uppercase hover:text-primary-300 transition-colors"
+          onClick={() => setDescriptionExpanded(!descriptionExpanded)}
+        >
+          Read {descriptionExpanded ? "Less" : "More"}
+        </button>
+      )}
     </div>
   );
 };

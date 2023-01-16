@@ -50,7 +50,7 @@ export default function Scaffold({
         {appBar}
       </div>
       <div className={`w-full z-10 ${styles?.leading}`}>{leading}</div>
-      <div className={`w-full z-10 flex flex-grow`}>
+      <div className={`w-full z-10 flex flex-grow justify-center`}>
         <div className={`flex flex-col ${styles?.sideBar}`}>{sideBar}</div>
         {children}
       </div>

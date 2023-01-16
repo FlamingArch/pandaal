@@ -27,7 +27,7 @@ export default function Button({
   const getStyles = () => {
     switch (type) {
       case "emphasis":
-        return "hover:scale-105 bg-primary-500 shadow-xl shadow-primary-300 hover:shadow-primary-500 hover:shadow-2xl text-white fill-white hover:text-primary-50 hover:fill-primary-50 hover:bg-primary-600";
+        return "hover:scale-105 bg-primary-500 text-white fill-white hover:text-primary-50 hover:fill-primary-50 hover:bg-primary-600"; // shadow-xl shadow-primary-300 hover:shadow-primary-500 hover:shadow-2xl
       case "primary":
         return "bg-primary-500 text-white fill-white hover:text-primary-50 hover:fill-primary-50 hover:bg-primary-600";
       case "link":

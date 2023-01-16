@@ -12,9 +12,10 @@ import { BackButton } from "../../fragments";
 import { useUserDoc } from "../../hooks";
 import profileFemale from "../../assets/profile-female.svg";
 import profileMale from "../../assets/profile-male.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function PageAccount() {
-  const { user } = React.useContext<any>(FirebaseContext);
+  const { user, signOut } = React.useContext<any>(FirebaseContext);
   const userDoc = useUserDoc(user.uid);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -26,7 +27,14 @@ export default function PageAccount() {
     setPhone(user.phoneNumber);
   }, [user]);
 
+  const navigate = useNavigate();
+
   const handleSubmit = () => {};
+
+  const handleSignOut = () => {
+    signOut();
+    navigate("/");
+  };
 
   return (
     <Scaffold appBar={<AppBar leading={<BackButton />} />}>
@@ -38,9 +46,9 @@ export default function PageAccount() {
         <div className="relative self-center rounded-full overflow-clip aspect-square w-36 h-36 bg-primary-500">
           <img
             src={
-              userDoc?.imgBmp ?? userDoc?.gender == "female"
-                ? profileFemale
-                : profileMale
+              userDoc?.imgBmp ?? userDoc?.gender == "male"
+                ? profileMale
+                : profileFemale
             }
             className="hover:brightness-50 transition-all"
           />
@@ -49,26 +57,33 @@ export default function PageAccount() {
           </div>
         </div>
 
-        <div className="flex flex-col w-full max-w-lg gap-6 mx-auto">
-          <Input
-            placeholder="Name"
-            leading={<IconUser className="w-6 h-6 fill-primary-500" />}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Input
-            placeholder="Email"
-            leading={<IconMail className="w-6 h-6 fill-primary-500" />}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            placeholder="Email"
-            className="opacity-50"
-            leading={<IconPhone className="w-6 h-6 fill-primary-500" />}
-            value={phone}
-            onChange={(e) => {}}
-          />
+        <Input
+          placeholder="Name"
+          leading={<IconUser className="w-6 h-6 fill-primary-500" />}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          placeholder="Email"
+          leading={<IconMail className="w-6 h-6 fill-primary-500" />}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          placeholder="Email"
+          className="opacity-50"
+          leading={<IconPhone className="w-6 h-6 fill-primary-500" />}
+          value={phone}
+          onChange={(e) => {}}
+        />
+        <div className="flex gap-4">
+          <Button
+            className="flex-grow w-full ml-auto"
+            type="secondary"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </Button>
           <Button className="flex-grow w-full ml-auto" type="primary">
             Save Changes
           </Button>

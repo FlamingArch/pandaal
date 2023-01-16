@@ -28,7 +28,7 @@ export default function Page({
     | { top?: number; right?: number; bottom?: number; left?: number };
   gap?: number;
   // responseFactor?: number;
-  responsive: bool;
+  responsive?: boolean;
 }) {
   function getBackdropStyles(Backdrop) {
     switch (Backdrop) {

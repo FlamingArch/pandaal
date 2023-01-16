@@ -23,47 +23,26 @@ export default function signInVerifyCode({ phoneNumber, completion }) {
         onChange={(e) => setCode(e.target.value)}
         leading={<IconPasskey className="w-6 h-6 fill-primary-500" />}
         placeholder="Code"
-        className="w-96"
       />
-      <Button
-        onClick={() => {
-          setLoading(true);
-          signInVerifyCode(code, completion);
-        }}
-        type="emphasis"
-        disabled={code.length !== 6}
-        className="w-96"
-      >
-        {loading ? (
-          <p className="flex gap-2">
-            <IconPreloader className="w-6 h-6 stroke-white" /> Verifying
-          </p>
-        ) : (
-          "Verify Code"
-        )}
-      </Button>
+      <div className="flex">
+        <Button
+          onClick={() => {
+            setLoading(true);
+            signInVerifyCode(code, completion);
+          }}
+          type="emphasis"
+          disabled={code.length !== 6}
+          className="flex-grow"
+        >
+          {loading ? (
+            <p className="flex gap-2">
+              <IconPreloader className="w-6 h-6 stroke-white" /> Verifying
+            </p>
+          ) : (
+            "Verify Code"
+          )}
+        </Button>
+      </div>
     </Page>
-    // <div className="grid place-content-center h-[70vh] gap-8">
-    //   <p className="text-3xl font-bold text-center">Enter Code</p>
-    //   <div className="w-2/3 text-center mx-auto">
-
-    //   </div>
-    //   <Input
-    //     type="number"
-    //     placeholder="Code"
-    //     value={code}
-    //     onChange={(e) => setCode(e.target.value)}
-    //   />
-    //   <button
-    //     className={
-    //       "px-16 py-3 mt-20 w-fit mx-auto bg-primary-500 text-white rounded-2xl transition-all " +
-    //       (code.length === 6
-    //         ? "shadow-xl shadow-primary-300 hover:shadow-primary-500 hover:shadow-2xl hover:scale-105 hover:bg-primary-600"
-    //         : "opacity-50 cursor-not-allowed")
-    //     }
-    //   >
-    //     Verify Code
-    //   </button>
-    // </div>
   );
 }

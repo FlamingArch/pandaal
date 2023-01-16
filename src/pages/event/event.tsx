@@ -89,10 +89,10 @@ export default function PageEvent() {
           <Page
             backdrop="solid"
             cornerRadius={6}
-            padding={{ top: 6, left: 6, bottom: 28, right: 6 }}
-            margin={{ top: 12, left: 6, bottom: 6, right: 6 }}
+            padding={6}
+            margin={{ top: 12, left: 6, bottom: 28, right: 6 }}
             gap={12}
-            responseFactor={0.4}
+            responsive
           >
             <EventInfo event={event} />
             <EventOrganisationDetails event={event} />

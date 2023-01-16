@@ -21,7 +21,6 @@ export default async function intiatePayment(
 
   const orderDetails = await fetchOrderId(data);
   const order = JSON.parse(orderDetails.data as any);
-  console.debug(orderDetails);
 
   var options = {
     key: "rzp_live_SLrlOO8OxclkKl",

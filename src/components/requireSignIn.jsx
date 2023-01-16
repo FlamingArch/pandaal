@@ -6,9 +6,6 @@ import { IconPreloader } from "./icons";
 export default function RequireSignIn({ children }) {
   const { user, loggingIn } = useContext(FirebaseContext);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  console.log(loggingIn);
 
   if (loggingIn) {
     return (

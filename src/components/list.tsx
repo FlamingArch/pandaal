@@ -11,7 +11,7 @@ function Section({
 }) {
   return (
     <div className="flex flex-col">
-      <p className="px-6 pt-6 uppercase font-bold">{heading}</p>
+      <p className="px-6 pt-6 text-lg">{heading}</p>
       <div
         className={
           "flex overflow-scroll gap-6 p-6" +

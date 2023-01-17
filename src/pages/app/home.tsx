@@ -2,7 +2,7 @@ import React from "react";
 import { useEvents, useEventsCategorised } from "../../hooks";
 import { AppBar, LoadingList, Scaffold, List, Button } from "../../components";
 import { AccountButton, EventCard } from "../../fragments";
-import { IconEdit, IconFeedback } from "../../components/icons";
+import { IconLocationEdit } from "../../components/icons";
 import { Outlet, useOutlet } from "react-router-dom";
 
 export default function PageHome() {
@@ -30,11 +30,11 @@ export default function PageHome() {
     >
       <List.View>
         <p className="p-6 pb-2">Hey, Harsh</p>
-        <p className="text-xl font-bold p-6 pt-0">
+        <p className="text-2xl font-bold p-6 pt-0">
           Showing all the getaway spots near
         </p>
-        <p className="text-xl font-bold p-6 m-2 text-secondary-500 pt-0">
-          Greater Noida
+        <p className="flex text-2xl font-bold p-4 m-6 rounded-2xl transition-colors hover:bg-secondary-50 text-secondary-500 fill-secondary-500 mt-0">
+          Greater Noida <IconLocationEdit className="w-8 h-8" />
         </p>
         {Object.keys(events).map((category, index) => (
           <List.Section heading={category} key={index}>
@@ -49,7 +49,6 @@ export default function PageHome() {
             ))}
           </List.Section>
         ))}
-        <div className="h-56"></div>
       </List.View>
     </Scaffold>
   );

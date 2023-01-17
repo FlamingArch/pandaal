@@ -72,7 +72,7 @@ export default function PageEvent() {
   return (
     <AnimatePresence>
       <Scaffold
-        appBar={<AppBar leading={<BackButton customPath="/" />} />}
+        appBar={<AppBar backdrop="gradientBlack" background="clear" padding={6} responsive leading={<BackButton customPath="/" />} />}
         backdrop={<ImageBackdrop src={event?.bannerURL} dim blur />}
         overlay={outlet}
         leading={

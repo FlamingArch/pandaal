@@ -70,7 +70,7 @@ export default function Page({
       }}
       className={`flex flex-col mx-auto h-full transition-all ${getBackdropStyles(
         backdrop
-      )} w-full md:w-3/4 lg:w-2/3 xl:w-1/2 2xl:w-1/3`}
+      )} w-full md:w-3/4 lg:w-2/3`}
     >
       {children}
     </div>

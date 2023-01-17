@@ -9,7 +9,7 @@ export default function PageHome() {
   const events = useEventsCategorised();
   const outlet = useOutlet();
 
-  window.document.title = "Pandaal: An Event Ecosystem"
+  window.document.title = "Pandaal: An Event Ecosystem";
 
   let branding = (
     <div className="text-2xl font-bold text-primary-500">pandaal</div>
@@ -19,7 +19,8 @@ export default function PageHome() {
     <Scaffold
       appBar={
         <AppBar
-          backdrop="material"
+          background="material"
+          padding={6}
           leading={branding}
           actions={<AccountButton />}
           className="max-w-[100vw] overflow-hidden"
@@ -28,7 +29,13 @@ export default function PageHome() {
       overlay={outlet}
     >
       <List.View>
-        <List.Header heading="Popular Events Near You" />
+        <p className="p-6 pb-2">Hey, Harsh</p>
+        <p className="text-xl font-bold p-6 pt-0">
+          Showing all the getaway spots near
+        </p>
+        <p className="text-xl font-bold p-6 m-2 text-secondary-500 pt-0">
+          Greater Noida
+        </p>
         {Object.keys(events).map((category, index) => (
           <List.Section heading={category} key={index}>
             {events[category].map((event, index) => (

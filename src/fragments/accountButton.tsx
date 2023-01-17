@@ -13,7 +13,7 @@ function AccountButton() {
 
   return (
     <div
-      className="flex items-center justify-center hover:bg-primary-50 cursor-pointer rounded-xl hover:fill-white fill-none"
+      className="flex items-center justify-center hover:bg-primary-50 cursor-pointer rounded-full hover:fill-white fill-none "
       onMouseEnter={() => setExpand(true)}
       onMouseLeave={() => setExpand(false)}
       onClick={() => navigate("/account")}
@@ -22,11 +22,19 @@ function AccountButton() {
         navigate("/signout");
       }}
     >
-      <div className="relative cursor-pointer overflow-hidden transition rounded-xl bg-primary-500 hover:bg-primary-700">
+      <div
+        className={
+          "relative cursor-pointer overflow-hidden transition bg-primary-500 hover:bg-primary-700 " +
+          (expand ? "rounded-full" : "rounded-full")
+        }
+      >
         <img
           src={profileMale}
           alt=""
-          className="w-12 scale-[1.1] h-12 aspect-square object-cover object-center hover:filter hover:brightness-75 transition-all border-none outline-none"
+          className={
+            "w-12 scale-[1.1] h-12 aspect-square object-cover object-center hover:filter transition-all border-none outline-none " +
+            (expand ? "brightness-50" : "")
+          }
         />
         <IconUser className="w-6 h-6 m-3 absolute top-0 left-0 right-0 bottom-0" />
       </div>

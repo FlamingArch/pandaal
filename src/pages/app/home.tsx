@@ -9,6 +9,8 @@ export default function PageHome() {
   const events = useEventsCategorised();
   const outlet = useOutlet();
 
+  window.document.title = "Pandaal: An Event Ecosystem"
+
   let branding = (
     <div className="text-2xl font-bold text-primary-500">pandaal</div>
   );

@@ -4,6 +4,7 @@ import { AppBar, Button, Input, Page, Scaffold, Text } from "../components";
 import { IconBack, IconPasskey, IconPreloader } from "../components/icons";
 import { FirebaseContext } from "../contexts/firebase";
 import illustration from "../assets/signin.svg";
+import _ from "lodash";
 
 export default function signInVerifyCode({
   phoneNumber,
@@ -13,6 +14,15 @@ export default function signInVerifyCode({
   const { signInVerifyCode } = React.useContext(FirebaseContext);
   const [code, setCode] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    if (error) {
+      document.getElementById("rcv").innerHTML = "";
+      window.confirmationResult = undefined;
+      setLoading(false);
+    }
+  }, [error]);
 
   return (
     <Scaffold
@@ -38,7 +48,7 @@ export default function signInVerifyCode({
           leading={
             <Button
               type="primary"
-              onClick={() => navigate("/")}
+              onClick={() => setCodeSent(false)}
               leading={<IconBack className="w-6 h-6" />}
             />
           }
@@ -59,7 +69,13 @@ export default function signInVerifyCode({
         <Input
           type="number"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          className={error ? "border-red-500 shadow-red-500 shadow-2xl" : ""}
+          onChange={(e) => {
+            if (error) {
+              setError(null);
+            }
+            setCode(e.target.value);
+          }}
           leading={
             <div className="flex">
               <IconPasskey className="w-6 h-6 fill-primary-500 ml-4" />
@@ -67,12 +83,19 @@ export default function signInVerifyCode({
           }
           placeholder="Code"
         />
+        {error && (
+          <p className="mt-4 text-center text-red-500">{`${_.startCase(
+            error?.code.split("/")[1]
+          )}!`}</p>
+        )}
         <div className="flex-grow" />
         <div className="flex">
           <Button
             onClick={() => {
               setLoading(true);
-              signInVerifyCode(code, completion);
+              signInVerifyCode(code, completion, (error) => {
+                setError(error);
+              });
             }}
             type="emphasis"
             disabled={code.length !== 6}

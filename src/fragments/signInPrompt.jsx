@@ -7,6 +7,7 @@ import BackButton from "./backButton";
 import { Branding } from ".";
 import { useLocation, useNavigate } from "react-router-dom";
 import illustration from "../assets/signin.svg";
+import _ from "lodash";
 
 export default function SignInPrompt({
   setPhoneNumber,
@@ -17,6 +18,7 @@ export default function SignInPrompt({
   const [countryCode, setCountryCode] = React.useState("+91");
   const { auth, signInSendCode } = React.useContext(FirebaseContext);
   const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
 
   const navigate = useNavigate();
 
@@ -32,6 +34,14 @@ export default function SignInPrompt({
       setCountryCode(countryCode.substring(0, 4));
     }
   }, [countryCode]);
+
+  React.useEffect(() => {
+    if (error) {
+      setLoading(false);
+    } else if (!error?.code) {
+      setTimeout(() => navigate("/signin"), 3000);
+    }
+  }, [error]);
 
   return (
     <Scaffold
@@ -84,6 +94,7 @@ export default function SignInPrompt({
         <Input
           type="number"
           value={phone}
+          className={error ? "border-red-500 shadow-red-500 shadow-2xl" : ""}
           leading={
             <div className="flex">
               <IconPhone className="w-6 h-6 fill-primary-500 ml-4" />
@@ -92,11 +103,19 @@ export default function SignInPrompt({
           }
           onChange={(e) => {
             if (!loading) {
+              if (error) {
+                setError(null);
+              }
               setPhone(e.target.value);
             }
           }}
           placeholder="Phone Number"
         />
+        {error && (
+          <p className="mt-4 text-center text-red-500">{`${_.startCase(
+            error?.code?.split("/")[1] ?? "Internal error, try refreshing page"
+          )}!`}</p>
+        )}
 
         <div id="rcv"></div>
         <div className="flex-grow" />
@@ -105,7 +124,15 @@ export default function SignInPrompt({
             onClick={() => {
               if (!loading) {
                 setLoading(true);
-                signInSendCode(auth, "rcv", `${countryCode}${phone}`, onSubmit);
+                signInSendCode(
+                  auth,
+                  "rcv",
+                  `${countryCode}${phone}`,
+                  onSubmit,
+                  (error) => {
+                    setError(error);
+                  }
+                );
               }
             }}
             className="flex-grow"

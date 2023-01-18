@@ -43,7 +43,12 @@ export const FirebaseProvider = ({ children }) => {
         window.confirmationResult = confirmation;
         completion(confirmation);
       })
-      .catch(error);
+      .catch((e) => {
+        verifier.clear();
+        document.getElementById("rcv").innerHTML = "";
+
+        error(e);
+      });
   };
 
   const signOut = () => so(auth);

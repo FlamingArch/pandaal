@@ -15,7 +15,7 @@ function Section({
       <div
         className={
           "flex overflow-scroll gap-6 p-6" +
-          (orientation == "column" ? "flex-col" : "")
+          (orientation == "column" ? "flex-col overflow-y-auto" : "overflow-y-hidden")
         }
       >
         {children}

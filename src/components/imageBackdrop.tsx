@@ -10,13 +10,15 @@ export default function ImageBackdrop({
   dim?: boolean;
 }) {
   return (
-    <img
-      src={src}
-      className={
-        "fixed top-0 left-0 w-screen h-screen object-cover object-center -z-10" +
-        (blur ? "filter blur-lg scale-125 " : "") +
-        (dim ? "brightness-75 " : "")
-      }
-    ></img>
+    <div className="w-screen h-screen overflow-hidden">
+      <img
+        src={src}
+        className={
+          "fixed top-0 left-0 w-screen h-screen object-cover object-center -z-10" +
+          (blur ? "filter blur-lg scale-125 " : "") +
+          (dim ? "brightness-75 " : "")
+        }
+      ></img>
+    </div>
   );
 }

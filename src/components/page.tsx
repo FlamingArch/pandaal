@@ -6,9 +6,9 @@ export default function Page({
   cornerRadius,
   padding,
   margin,
-  // responseFactor,
   responsive,
   gap,
+  className,
 }: {
   children?: React.ReactNode;
   backdrop?: "clear" | "solid" | "material";
@@ -27,8 +27,8 @@ export default function Page({
     | number
     | { top?: number; right?: number; bottom?: number; left?: number };
   gap?: number;
-  // responseFactor?: number;
   responsive?: boolean;
+  className?: String;
 }) {
   function getBackdropStyles(Backdrop) {
     switch (Backdrop) {
@@ -43,6 +43,8 @@ export default function Page({
     }
   }
 
+  const responsiveStyles = responsive ? " md:w-2/3 lg:w-1/2 mx-auto" : "";
+
   return (
     <div
       style={{
@@ -56,21 +58,21 @@ export default function Page({
               }rem`,
         padding:
           typeof padding == "number"
-            ? `${padding / 4}rem`
-            : `${(padding?.top ?? 0) / 4}rem ${(padding?.right ?? 0) / 4}rem ${
-                (padding?.bottom ?? 0) / 4
-              }rem ${(padding?.left ?? 0) / 4}rem`,
+            ? `${(padding ?? 6) / 4}rem`
+            : `${(padding?.top ?? 6) / 4}rem ${(padding?.right ?? 6) / 4}rem ${
+                (padding?.bottom ?? 6) / 4
+              }rem ${(padding?.left ?? 6) / 4}rem`,
         margin:
           typeof margin == "number"
             ? `${margin / 4}rem`
             : `${(margin?.top ?? 0) / 4}rem ${(margin?.right ?? 0) / 4}rem ${
                 (margin?.bottom ?? 0) / 4
               }rem ${(margin?.left ?? 0) / 4}rem`,
-        gap: `${gap / 4}rem`,
+        gap: `${(gap ?? 0) / 4}rem`,
       }}
-      className={`flex flex-col mx-auto h-full transition-all ${getBackdropStyles(
+      className={`flex flex-col mx-auto h-full flex-grow transition-all ${getBackdropStyles(
         backdrop
-      )} w-full md:w-3/4 lg:w-2/3`}
+      )} w-full ${responsiveStyles} ${className}`}
     >
       {children}
     </div>

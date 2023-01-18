@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AppBar, Branding, Page, Scaffold } from "../../components";
-import { BackButton, SignInPrompt, SignInVerifyCode } from "../../fragments";
+import { AppBar, Page, Scaffold } from "../../components";
+import {
+  BackButton,
+  SignInPrompt,
+  SignInVerifyCode,
+  Branding,
+} from "../../fragments";
 import _ from "lodash";
 
 export default function PageSignIn() {
@@ -15,26 +20,19 @@ export default function PageSignIn() {
     return false;
   };
 
-  return (
-    <Scaffold
-      appBar={
-        <AppBar leading={<BackButton customPath="/" />} title={<Branding />} />
-      }
-    >
-      {codeSent ? (
-        <SignInVerifyCode
-          phoneNumber={phoneNumber}
-          completion={() => {
-            navigate("/signup");
-          }}
-        />
-      ) : (
-        <SignInPrompt
-          setPhoneNumber={setPhoneNumber}
-          onSubmit={validatePhone() ? () => setCodeSent(true) : null}
-          disableSubmission={!validatePhone()}
-        />
-      )}
-    </Scaffold>
+  return codeSent ? (
+    <SignInVerifyCode
+      phoneNumber={phoneNumber}
+      setCodeSent={setCodeSent}
+      completion={() => {
+        navigate("/signup");
+      }}
+    />
+  ) : (
+    <SignInPrompt
+      setPhoneNumber={setPhoneNumber}
+      onSubmit={validatePhone() ? () => setCodeSent(true) : null}
+      disableSubmission={!validatePhone()}
+    />
   );
 }

@@ -32,40 +32,31 @@ const Input = ({
 
   if (getType(type ?? "") == "select") {
     return (
-      <div
-        className={`bg-white overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all ${className}`}
-      >
-        {leading && <div className="p-4 pr-0">{leading}</div>}
+      <div className={"flex items-center border-2 rounded-2xl border-primary-500 shadow-[#0000] hover:shadow-2xl focus-within:shadow-xl hover:shadow-gray-400 focus-within:hover:shadow-primary-500 focus-within:shadow-primary-200 focus-within:hover:shadow-2xl transition-shadow " + className}>
+        {leading}
         <select
-          className="outline-none flex-grow bg-white mr-4"
-          placeholder={placeholder}
           value={value}
           onChange={onChange}
+          placeholder={placeholder}
+          className="outline-none p-3 bg-transparent"
         >
-          <option value="">Select</option>
           {children}
         </select>
-        {trailing && <div className="p-4">{trailing}</div>}
+        {trailing}
       </div>
     );
   }
 
   return (
-    <div
-      className={
-        `bg-white overflow-hidden border-2 rounded-2xl focus-within:hover:shadow-[#3F4882AA] hover:shadow-2xl border-primary-400 flex gap-2 focus-within:shadow-2xl focus-within:shadow-[#3F4882AA] transition-all ${className} ` +
-        (getType(type ?? "") == "file" ? "flex place-items-center" : "")
-      }
-    >
-      {leading && <div className="p-4 pr-0">{leading}</div>}
+    <div className={"flex items-center border-2 rounded-2xl border-primary-500 shadow-[#0000] hover:shadow-2xl focus-within:shadow-xl hover:shadow-gray-400 focus-within:hover:shadow-primary-500 focus-within:shadow-primary-200 focus-within:hover:shadow-2xl transition-shadow " + className}>
+      {leading}
       <input
-        className="outline-none flex-grow p-4 w-full"
-        placeholder={placeholder}
         value={value}
         onChange={onChange}
-        type={getType(type ?? "text") || "text"}
+        placeholder={placeholder}
+        className="outline-none p-3 bg-transparent"
       />
-      {trailing && <div className="p-4">{trailing}</div>}
+      {trailing}
     </div>
   );
 };

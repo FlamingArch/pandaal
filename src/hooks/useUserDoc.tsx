@@ -6,6 +6,10 @@ import constants from "../constants";
 export default function useuserDoc(id: string) {
   const [userDoc, setUserDoc] = React.useState<any>();
 
+  if (!id) {
+    return {};
+  }
+
   const app = initializeApp(constants.firebaseConfig);
   const firestore = getFirestore(app);
 

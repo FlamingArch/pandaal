@@ -79,7 +79,7 @@ export default function AppBar({
     }
   };
 
-  const responsiveStyles = responsive ? " md:w-3/4 lg:w-2/3 mx-auto" : "";
+  const responsiveStyles = responsive ? " md:w-2/3 lg:w-1/2 mx-auto" : "";
 
   return (
     <div
@@ -99,45 +99,42 @@ export default function AppBar({
                 }rem`,
           padding:
             typeof padding == "number"
-              ? `${padding / 4}rem`
-              : `${(padding?.top ?? 0) / 4}rem ${
-                  (padding?.right ?? 0) / 4
-                }rem ${(padding?.bottom ?? 0) / 4}rem ${
-                  (padding?.left ?? 0) / 4
+              ? `${(padding ?? 6) / 4}rem`
+              : `${(padding?.top ?? 6) / 4}rem ${
+                  (padding?.right ?? 6) / 4
+                }rem ${(padding?.bottom ?? 6) / 4}rem ${
+                  (padding?.left ?? 6) / 4
                 }rem`,
           margin:
             typeof margin == "number"
-              ? `${margin / 4}rem`
+              ? `${(margin ?? 0) / 4}rem`
               : `${(margin?.top ?? 0) / 4}rem ${(margin?.right ?? 0) / 4}rem ${
                   (margin?.bottom ?? 0) / 4
                 }rem ${(margin?.left ?? 0) / 4}rem`,
-          gap: `${gap ?? 0 / 4}rem`,
+          gap: `${(gap ?? 0) / 4}rem`,
         }}
         className={`flex flex-col flex-grow ${getBackdropStyles(background)} `}
       >
         <div
-          className={"flex gap-2 overflow-hidden w-full " + responsiveStyles}
+          style={{ gap: `${(gap ?? 0) / 4}rem` }}
+          className={"flex w-full " + responsiveStyles}
         >
-          <div className="flex items-center flex-grow">
+          <div
+            style={{
+              gap: `${(gap ?? 0) / 4}rem`,
+            }}
+            className="flex items-center"
+          >
             {leading}
             {title}
           </div>
-          <div className="flex items-center flex-[2] justify-center">
+          <div className="flex items-center flex-grow justify-center">
             {center}
           </div>
-          <div className="flex items-center flex-grow justify-end">
-            {actions}
-          </div>
+          <div className="flex items-center justify-end">{actions}</div>
         </div>
         {children}
       </div>
     </div>
   );
 }
-
-// leading,
-// title,
-// actions,
-// backdrop,
-// responsive,
-// className,

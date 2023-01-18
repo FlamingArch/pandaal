@@ -1,20 +1,13 @@
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  Branding,
-  Button,
-  Input,
-  Page,
-  Scaffold,
-  Text,
-} from "../../components";
+import { AppBar, Button, Input, Page, Scaffold, Text } from "../../components";
 import { IconMail, IconPreloader, IconUser } from "../../components/icons";
 import { FirebaseContext } from "../../contexts/firebase";
+import { Branding } from "../../fragments";
 import { userDocExists } from "../../functions";
 import { range } from "../../helpers";
-import { useCollegeDetails, useCourses, useBranches } from "../../hooks";
+import { useCollegeDetails, useCourses } from "../../hooks";
 
 export default function PageSignUp() {
   const { user, firestore } = React.useContext<any>(FirebaseContext);

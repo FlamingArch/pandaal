@@ -6,3 +6,5 @@ export { default as FavouriteTile } from "../fragments/favouriteTile";
 export { default as AccountButton } from "../fragments/accountButton";
 export { default as SignInPrompt } from "./signInPrompt";
 export { default as SignInVerifyCode } from "./signInVerifyCode";
+export { default as AttendeeInput } from "./attendeeInput";
+export { default as Branding } from "./branding";

@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "./input";
-import Text from "./text";
+import Input from "../components/input";
+import Text from "../components/text";
 
 export default function ViewAttendeeInput({ onChange }) {
   const [value, setValue] = React.useState(",");

@@ -1,6 +1,18 @@
 import React from "react";
 
-const Text = ({ children, bold, headingLevel, accented, dimmed }) => {
+const Text = ({
+  children,
+  bold,
+  headingLevel,
+  accented,
+  dimmed,
+}: {
+  children?: React.ReactNode;
+  bold?: boolean;
+  headingLevel?: number;
+  accented?: boolean;
+  dimmed?: boolean;
+}) => {
   function getTextSize() {
     switch (headingLevel) {
       case 1:
@@ -47,8 +59,8 @@ const Text = ({ children, bold, headingLevel, accented, dimmed }) => {
       style={{
         fontSize: getTextSize(),
         fontWeight: getFontWeight(),
-        color: accented && "#3F4882",
-        opacity: dimmed && "0.64",
+        color: accented ? "#3F4882" : "",
+        opacity: dimmed ? "0.64" : "",
       }}
     >
       {children}

@@ -60,8 +60,6 @@ export default function App() {
               </RequireSignIn>
             }
           />
-          <Route path="/test/payments" element={<PageTestPayments />} />
-          <Route path="/test/components" element={<PageTestComponents />} />
           <Route path="*" element={<PageHome />} />
         </Routes>
       </AnimatePresence>

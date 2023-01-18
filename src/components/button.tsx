@@ -51,7 +51,7 @@ export default function Button({
     }
   };
   const baseStyles =
-    "flex justify-center items-center gap-3 p-4 w-fit rounded-xl transition-all cursor-pointer ";
+    "flex justify-center items-center p-4 w-fit rounded-xl transition-all cursor-pointer ";
   const disabledStyles = disabled
     ? " opacity-50 cursor-not-allowed shadow-none "
     : "";

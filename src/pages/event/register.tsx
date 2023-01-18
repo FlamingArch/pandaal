@@ -1,16 +1,9 @@
 import React from "react";
 import { useNavigate, useOutlet, useParams } from "react-router-dom";
-import { BackButton } from "../../fragments";
+import { BackButton, AttendeeInput } from "../../fragments";
 import { generateForm } from "../../helpers";
 import { useEvent } from "../../hooks";
-import {
-  AppBar,
-  AttendeeInput,
-  Button,
-  Page,
-  Scaffold,
-  Text,
-} from "../../components";
+import { AppBar, Button, Page, Scaffold, Text } from "../../components";
 import { initiateRegisteration } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
 import _, { range } from "lodash";
@@ -65,10 +58,10 @@ export default function PageRegister() {
 
   return (
     <Scaffold
-      appBar={<AppBar backdrop="material" leading={<BackButton />} />}
+      appBar={<AppBar backdrop="material" responsive leading={<BackButton />} />}
       overlay={outlet}
     >
-      <Page backdrop="solid" padding={6} gap={4}>
+      <Page backdrop="solid" padding={6} gap={4} responsive>
         <div className="text-3xl font-bold">Fill Out This Form</div>
         {event?.questions &&
           generateForm(
@@ -88,7 +81,7 @@ export default function PageRegister() {
             <div className="flex items-center gap-4">
               <Button
                 disabled={noAttendees == 1}
-                className="p-2"
+                className="aspect-square"
                 type="primary"
                 onClick={() => {
                   if (noAttendees !== 1) setNoAttendees((oldVal) => oldVal - 1);
@@ -101,7 +94,7 @@ export default function PageRegister() {
                 disabled={
                   noAttendees >= _.min([5, event?.availableRegistrations])
                 }
-                className="p-2"
+                className="aspect-square"
                 type="primary"
                 onClick={() => {
                   if (noAttendees < _.min([5, event?.availableRegistrations])) {

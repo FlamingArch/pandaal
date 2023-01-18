@@ -27,7 +27,7 @@ export default function (questions, response, setResponse, setEnableButton) {
       <Input
         type={e.responseType}
         placeholder={"Answer Here"}
-        leading={<IconAnswer className="w-6 h-6 fill-primary-500" />}
+        leading={<IconAnswer className="w-6 h-6 fill-primary-500 ml-4" />}
         onChange={(eventParams) => appendAnswer(i, e, eventParams.target.value)}
       >
         {e.choices &&

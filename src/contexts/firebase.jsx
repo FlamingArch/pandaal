@@ -45,7 +45,7 @@ export const FirebaseProvider = ({ children }) => {
       })
       .catch((e) => {
         verifier.clear();
-        document.getElementById("rcv").innerHTML = "";
+        document.getElementById("rcv")?.innerHTML = "";
 
         error(e);
       });

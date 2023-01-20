@@ -18,7 +18,7 @@ export default function signInVerifyCode({
 
   React.useEffect(() => {
     if (error) {
-      document.getElementById("rcv").innerHTML = "";
+      document.getElementById("rcv")?.innerHTML = "";
       window.confirmationResult = undefined;
       setLoading(false);
     }

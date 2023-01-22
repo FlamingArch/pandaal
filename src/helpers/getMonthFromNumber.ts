@@ -1,4 +1,4 @@
-export default function getMonthFromNumber(n) {
+export default function getMonthFromNumber(n: number) {
   return [
     "January",
     "February",

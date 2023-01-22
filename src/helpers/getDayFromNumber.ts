@@ -1,4 +1,4 @@
-export default function (n) {
+export default function (n: number) {
   return [
     "Sunday",
     "Monday",

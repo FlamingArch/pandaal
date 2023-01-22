@@ -13,8 +13,6 @@ import {
   PageSignUp,
   PageAccount,
   PageConfirmation,
-  PageTestPayments,
-  PageTestComponents,
 } from "./pages";
 
 export default function App() {
@@ -24,24 +22,28 @@ export default function App() {
     <FirebaseProvider>
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageHome />}>
-            <Route path=":eventId" element={<PageEvent />}>
-              <Route path="instructions" element={<PageInstructions />} />
-              <Route
-                path="register"
-                element={
-                  <RequireSignIn>
-                    <PageRegister />
-                  </RequireSignIn>
-                }
-              />
-              <Route path="*" element={<PageEvent />} />
-            </Route>
-            <Route
-              path=":eventId/confirmation"
-              element={<PageConfirmation />}
-            />
+          <Route path="/" element={<PageHome />} />
+          <Route path=":eventId" element={<PageEvent />}>
+            <Route path="*" element={<PageEvent />} />
           </Route>
+          <Route
+            path=":eventId/ticket"
+            element={
+              <RequireSignIn>
+                <PageInstructions />
+              </RequireSignIn>
+            }
+          />
+          <Route path=":eventId/instructions" element={<PageInstructions />} />
+          <Route
+            path=":eventId/register"
+            element={
+              <RequireSignIn>
+                <PageRegister />
+              </RequireSignIn>
+            }
+          />
+          <Route path=":eventId/confirmation" element={<PageConfirmation />} />
           <Route path="signin" element={<PageSignIn />} />
           <Route path="signout" element={<PageSignOut />} />
           <Route

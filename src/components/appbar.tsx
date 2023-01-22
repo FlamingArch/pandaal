@@ -85,7 +85,7 @@ export default function AppBar({
     <div
       className={`flex-grow transition-all ${getBackdropStyles(
         backdrop ?? "clear"
-      )} ${className}`}
+      )}`}
     >
       <div
         style={{
@@ -113,7 +113,9 @@ export default function AppBar({
                 }rem ${(margin?.left ?? 0) / 4}rem`,
           gap: `${(gap ?? 0) / 4}rem`,
         }}
-        className={`flex flex-col flex-grow ${getBackdropStyles(background)} `}
+        className={`flex flex-col flex-grow ${getBackdropStyles(
+          background
+        )} ${className}`}
       >
         <div
           style={{ gap: `${(gap ?? 0) / 4}rem` }}

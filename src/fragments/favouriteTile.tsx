@@ -12,16 +12,16 @@ const FavouriteTile = ({ count, value, onChange }) => {
     setIsFavourite(value);
   }, [count, value]);
 
-  let likedButtonStyles = isFavourite ? "fill-white p-6 m-0" : "m-2 p-4";
+  let likedButtonStyles = isFavourite ? "fill-white p-2 m-0" : "m-1 p-1";
   let baseButtonStyles = "transition-all duration-500";
   let likedContainerStyles = isFavourite
     ? "bg-secondary-500 fill-white text-white"
     : "bg-white fill-secondary-500 text-secondary-500";
   let baseContainerStyles =
-    "rounded-3xl cursor-pointer items-center shadow p-6 flex justify-between gap-4 transition-all duration-500";
+    "rounded-3xl cursor-pointer items-center shadow-md shadow-[#AAAA] p-6 flex justify-between gap-4 transition-all duration-500";
   let iconStyles = isFavourite
-    ? "w-6 h-6 fill-white"
-    : "w-6 h-6 fill-secondary-500";
+    ? "w-8 h-8 fill-secondary-50"
+    : "w-8 h-8 fill-secondary-500";
 
   return (
     <div
@@ -33,9 +33,9 @@ const FavouriteTile = ({ count, value, onChange }) => {
       }}
     >
       <div className="flex flex-col">
-        <motion.div onUpdate={{ opacity: [1, 0, 1] }} className="text-xl ">
+        <div className="text-lg font-bold">
           {isFavourite ? "Added to Favourites" : "Interested in this event?"}
-        </motion.div>
+        </div>
         {!isFavourite && (
           <div className="opacity-80">Add to Favourites and Get Updates</div>
         )}
@@ -48,7 +48,7 @@ const FavouriteTile = ({ count, value, onChange }) => {
             <IconFavourite className={iconStyles} />
           )}
         </div>
-        <div className="text-xl">{likeCount}</div>
+        <div className="text-md">{likeCount}</div>
       </div>
     </div>
   );

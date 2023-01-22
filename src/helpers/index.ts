@@ -3,3 +3,4 @@ export { default as getLongDate } from "./getLongDate";
 export { default as parseHTML } from "./parseHTML";
 export { default as getMonthFromNumber } from "./getMonthFromNumber";
 export { default as getFullDateRange } from "./getFullDateRange";
+export { default as groupData } from "./groupData";

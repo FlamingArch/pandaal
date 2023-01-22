@@ -7,15 +7,11 @@ const LimitedParagraph = ({
   children,
   heading,
   limit = 100,
-}: {
-  children: React.ReactNode;
-  heading: string | React.ReactNode;
-  limit: number;
 }) => {
   const [descriptionExpanded, setDescriptionExpanded] = React.useState(false);
   return (
     <div>
-      {heading && <Text headingLevel={5}>{heading}</Text>}
+      {heading && <Text headingLevel={4}>{heading}</Text>}
       <div className="h-4"></div>
       <p>
         {descriptionExpanded

@@ -32,13 +32,13 @@ const Input = ({
 
   if (getType(type ?? "") == "select") {
     return (
-      <div className={"flex items-center border-2 rounded-2xl border-primary-500 shadow-[#0000] hover:shadow-2xl focus-within:shadow-xl hover:shadow-gray-400 focus-within:hover:shadow-primary-500 focus-within:shadow-primary-200 focus-within:hover:shadow-2xl transition-shadow " + className}>
+      <div className={"flex items-center bg-white border-2 rounded-2xl border-primary-500 shadow-[#0000] hover:shadow-2xl focus-within:shadow-xl hover:shadow-gray-400 focus-within:hover:shadow-primary-500 focus-within:shadow-primary-200 focus-within:hover:shadow-2xl transition-shadow " + className}>
         {leading}
         <select
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="outline-none p-3 bg-transparent"
+          className="outline-none p-3 bg-transparent flex-grow w-full"
         >
           {children}
         </select>
@@ -48,13 +48,13 @@ const Input = ({
   }
 
   return (
-    <div className={"flex items-center border-2 rounded-2xl border-primary-500 shadow-[#0000] hover:shadow-2xl focus-within:shadow-xl hover:shadow-gray-400 focus-within:hover:shadow-primary-500 focus-within:shadow-primary-200 focus-within:hover:shadow-2xl transition-shadow " + className}>
+    <div className={"flex items-center bg-white border-2 rounded-2xl border-primary-500 shadow-[#0000] hover:shadow-2xl focus-within:shadow-xl hover:shadow-gray-400 focus-within:hover:shadow-primary-500 focus-within:shadow-primary-200 focus-within:hover:shadow-2xl transition-shadow " + className}>
       {leading}
       <input
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="outline-none p-3 bg-transparent"
+        className="outline-none p-3 bg-transparent flex-grow w-full"
       />
       {trailing}
     </div>

@@ -1,215 +1,104 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { AppBar, Page, Scaffold } from "../../components";
+import { Link, useParams } from "react-router-dom";
+import { AppBar, Page, Scaffold, Text } from "../../components";
 import {
-  IconCanceled,
-  IconDone,
-  IconEdit,
-  IconPreloader,
-  IconSupport,
-  IconTicketFill,
+  IconEventConfirmation,
+  IconLocation,
+  IconStreaming,
 } from "../../components/icons";
-import { BackButton } from "../../fragments";
-import { useDocumentData } from "react-firebase-hooks/firestore";
-import { collection, doc } from "firebase/firestore";
-import { FirebaseContext } from "../../contexts/firebase";
-import { getMonthFromNumber } from "../../helpers";
-import _ from "lodash";
-
+import { BackButton, EventOrganisationDetails } from "../../fragments";
+import { useEvent } from "../../hooks";
 export default function PageConfirmation() {
-  const [registrationState, setRegistrationState] =
-    React.useState("successful");
-  const { eventId } = useParams();
-  const [date, setDate] = React.useState<Date>(new Date());
-  const { firestore } = React.useContext<any>(FirebaseContext);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const registrationId = location.state?.registrationId;
-  const [snapshot, loading, error] = useDocumentData(
-    doc(collection(firestore, "registrations"), registrationId!)
-  );
-  React.useEffect(() => {
-    setRegistrationState(snapshot?.registrationStatus);
-    setDate(new Date(snapshot?.paymentAuthorizedAt * 1000 ?? 1));
-  }, [snapshot]);
-
-  if (!location.state) {
-    navigate(`\\${eventId}`);
-  }
-
-  if (!location.state?.registrationId) {
-    navigate(`\\${eventId}`);
-  }
-
-  if (location.state?.error) {
-    return (
-      <Scaffold
-        appBar={<AppBar backdrop="material" leading={<BackButton customPath={`/${eventId}`}/>} />}
-      >
-        <Page padding={6} gap={8} backdrop="solid">
-          <p className="text-4xl font-semibold w-full max-w-5xl lg:mx-auto">
-            Error While Registering
-          </p>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:p-12 max-w-5xl lg:mx-auto">
-            <div className="flex flex-col gap-4">
-              <div className="flex rounded-full bg-opacity-10 p-1 font-medium bg-red-500 fill-red-500 text-red-500">
-                <div className="rounded-full aspect-square h-full w-fit bg-white grid place-content-center">
-                  <IconCanceled className="w-6 h-6 fill-red-500" />
-                </div>
-                <div className="p-4 flex-grow">Registration Failed</div>
-              </div>
-              <p className="font-medium">
-                Your Registration could not be processed at this time.
-              </p>
-              <p className="">
-                Reason:{" "}
-                <span className="text-red-500">
-                  {location.state?.error?.errorDescription}
-                </span>
-                <br />
-                Registration ID:{" "}
-                <span className="text-red-500">
-                  {location.state?.registrationId}
-                </span>
-              </p>
-            </div>
-          </div>
-        </Page>
-      </Scaffold>
-    );
-  }
-
+  const eventId = useParams().eventId;
+  const [event] = useEvent(eventId);
   return (
-    <Scaffold appBar={<AppBar backdrop="material" leading={<BackButton />} />}>
-      <Page padding={6} gap={4} backdrop="solid">
-        <p className="text-4xl font-semibold w-full max-w-5xl lg:mx-auto">
-          Registration Confirmation
-        </p>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:p-12 max-w-5xl lg:mx-auto">
-          <div className="flex flex-col gap-4">
-            <div
-              className={
-                "flex rounded-full bg-opacity-10 p-1 font-medium " +
-                (registrationState == "failed"
-                  ? "bg-red-500 fill-red-500 text-red-500"
-                  : registrationState == "successful"
-                  ? "bg-green-500 fill-green-500 text-green-500"
-                  : "bg-yellow-500 fill-yellow-500 text-yellow-500")
-              }
-            >
-              <div className="rounded-full aspect-square h-full w-fit bg-white grid place-content-center">
-                {registrationState == "failed" ? (
-                  <IconCanceled className="w-6 h-6 fill-red-500" />
-                ) : registrationState == "successful" ? (
-                  <IconDone className="w-6 h-6 fill-green-500" />
-                ) : (
-                  <IconPreloader className="w-6 h-6 stroke-yellow-500" />
-                )}
-              </div>
-              <div className="p-4 flex-grow">
-                {registrationState == "failed"
-                  ? "Payment Failed"
-                  : registrationState == "successful"
-                  ? "Payment Successful"
-                  : "Processing Payment"}
-              </div>
-            </div>
-            <div
-              className={
-                "flex rounded-full bg-opacity-10 p-1 font-medium " +
-                (registrationState == "failed"
-                  ? "bg-red-500 fill-red-500 text-red-500 "
-                  : registrationState == "successful"
-                  ? "bg-green-500 fill-green-500 text-green-500 "
-                  : "bg-yellow-500 fill-yellow-500 text-yellow-500 ")
-              }
-            >
-              <div className="rounded-full aspect-square h-full w-fit bg-white grid place-content-center">
-                {registrationState == "failed" ? (
-                  <IconCanceled className="w-6 h-6 fill-red-500" />
-                ) : registrationState == "successful" ? (
-                  <IconDone className="w-6 h-6 fill-green-500" />
-                ) : (
-                  <IconPreloader className="w-6 h-6 stroke-yellow-500" />
-                )}
-              </div>
-              <div className="p-4 flex-grow">
-                {registrationState == "failed"
-                  ? "Registration Failed"
-                  : registrationState == "successful"
-                  ? "Registration Complete"
-                  : "Registering"}
-              </div>
+    <Scaffold
+      appBar={
+        <AppBar
+          responsive
+          background="material"
+          leading={<BackButton customPath={`/${eventId}`} />}
+        />
+      }
+    >
+      <Page gap={6} responsive>
+        <Text headingLevel={2} bold>
+          Order Confirmation
+        </Text>
+
+        <div className="flex flex-col">
+          <div className="flex items-center rounded-3xl shadow-md p-6 gap-6 bg-white">
+            <IconEventConfirmation className="w-8 h-8 fill-green-600" />
+            <div className="flex flex-col">
+              <Text headingLevel={4} bold>
+                Payment Successful
+              </Text>
+              at Mon, 23 Jan 2023 03:57 pm
             </div>
           </div>
-
-          <div className="flex flex-col gap-4">
-            <div className="font-semibold">Event Details</div>
-            <div className="rounded-xl overflow-clip shadow-lg flex max-w-96 bg-white h-40">
-              <img src={snapshot?.bannerURL} className="aspect-[9/12]" />
-              <div className="flex flex-col p-4">
-                <div className="text-primary-500 font-medium">
+          <div className="w-1 h-6 bg-green-600 self-center"></div>
+          <div className="flex items-center rounded-3xl shadow-md p-6 gap-6 bg-white">
+            <IconEventConfirmation className="w-8 h-8 fill-green-600" />
+            <div className="flex flex-col">
+              <Text headingLevel={4} bold>
+                Payment Successful
+              </Text>
+              at Mon, 23 Jan 2023 03:57 pm
+            </div>
+          </div>
+          <div className="w-1 h-6 bg-green-600 self-center"></div>
+          <div className="flex flex-col items-stretch overflow-hidden rounded-3xl shadow-md bg-primary-50">
+            <button className="p-4 uppercase font-bold text-primary-500">
+              View Ticket
+            </button>
+            <div className="flex items-center rounded-3xl shadow-md p-6 gap-6 bg-white">
+              <IconEventConfirmation className="w-8 h-8 fill-green-600" />
+              <div className="flex flex-col">
+                <Text bold accented headingLevel={6}>
                   Registering for
-                </div>
-                <div className="text-xl font-medium">
-                  {snapshot?.eventTitle}
-                </div>
-                <div className="">{snapshot?.organisationName}</div>
-              </div>
-            </div>
-
-            <div className="font-semibold">Payment Details</div>
-            <div className="flex pl-4 gap-4">
-              <div className="h-full w-1 bg-black bg-opacity-10" />
-              <div className="flex flex-col flex-grow items-stretch">
-                <div className="flex justify-between">
-                  <div className="font-medium">Recieved</div>
-                  <div className="text-[#828386] font-normal">{`${date.getHours()}:${date.getMinutes()}, ${date.getDate()} ${getMonthFromNumber(
-                    date.getMonth()
-                  ).slice(0, 3)} ${date.getFullYear()}`}</div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="font-medium">Payment Status</div>
-                  <div className="text-[#828386] font-normal">
-                    {_.startCase(snapshot?.registrationStatus)}
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="font-medium">Amount</div>
-                  <div className="text-[#828386] font-normal">
-                    ₹ {snapshot?.payingAmount / 100}
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="font-medium">Payment ID</div>
-                  <div className="text-[#828386] font-normal">
-                    {snapshot?.paymentId}
-                  </div>
-                </div>
-                <div className="text-[#828386] font-normal">
-                  This amount is non- refundable. Please contact the event
-                  organiser for any queries
+                </Text>
+                <Text headingLevel={6}>{event?.title}</Text>
+                <div className="flex gap-1">
+                  {event?.onOff == 1 ? (
+                    <IconStreaming className="w-6 h-6 fill-primary-500" />
+                  ) : (
+                    <IconLocation className="w-6 h-6 fill-primary-500" />
+                  )}
+                  <p className="opacity-80">
+                    {event?.onOff == 1
+                      ? event?.onlinePlatform
+                      : event?.offlineLocationAddress}
+                  </p>
                 </div>
               </div>
-            </div>
-
-            <div className="font-semibold">Facing Issues?</div>
-            <div className="hover:bg-primary-100 hover:fill-primary-700 cursor-pointer transition-all flex w-auto rounded-full bg-primary-50 p-1 fill-primary-500 text-primary-500 font-medium">
-              <div className="p-4 flex-grow">Raise a Support Ticket</div>
-              <div className="rounded-full aspect-square h-full p-4 bg-white grid place-content-center">
-                <IconSupport className="w-6 h-6" />
-              </div>
-            </div>
-          </div>
-
-          <div className="h-48"></div>
-          <div className="fixed lg:w-1/3 lg:mx-auto bottom-0 left-0 shadow-primary-100 right-0 hover:bg-primary-700 hover:fill-primary-700 cursor-pointer transition-all flex w-auto rounded-full bg-primary-500 p-1 fill-primary-500 text-white font-medium m-6 shadow-lg">
-            <div className="p-4 flex-grow">View Ticket</div>
-            <div className="rounded-full aspect-square h-full p-4 bg-white grid place-content-center">
-              <IconTicketFill className="w-6 h-6 grid place-content-center" />
             </div>
           </div>
         </div>
+
+        <div className="flex flex-col rounded-3xl shadow-md p-6 gap-4 bg-white">
+          <Text headingLevel={4} bold>
+            Payment Successful
+          </Text>
+          <div
+            style={{ gridTemplateColumns: "auto 1fr" }}
+            className="w-full text-left grid grid-cols-2"
+          >
+            <p className="min-w-fit mr-4">Payment Status:</p>
+            <p>Paid</p>
+            <p className="min-w-fit mr-4">Amount:</p>
+            <p className="text-lg font-bold text-green-700">₹ 3.05</p>
+            <p className="min-w-fit mr-4">Payment ID:</p>
+            <p>knXNcnl32221sakj</p>
+          </div>
+          <p className="opacity-50 text-sm font-bold">
+            This amount is non refundable. Please contact the event organiser
+            for any queries.
+          </p>
+        </div>
+        <p className="text-sm">
+          If you're facing any issues, please raise a ticket by clicking{" "}
+          <a href="https://pandaal.in/support">here</a>.
+        </p>
       </Page>
     </Scaffold>
   );

@@ -10,7 +10,7 @@ import { IconPreloader } from "../../components/icons";
 
 export default function PageRegister() {
   const { eventId } = useParams();
-  const event = useEvent(eventId ?? "");
+  const [event] = useEvent(eventId ?? "");
   const navigate = useNavigate();
   const outlet = useOutlet();
 

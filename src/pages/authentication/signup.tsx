@@ -1,4 +1,5 @@
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import _ from "lodash";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppBar, Button, Input, Page, Scaffold, Text } from "../../components";
@@ -6,7 +7,6 @@ import { IconMail, IconPreloader, IconUser } from "../../components/icons";
 import { FirebaseContext } from "../../contexts/firebase";
 import { Branding } from "../../fragments";
 import { userDocExists } from "../../functions";
-import { range } from "../../helpers";
 import { useCollegeDetails, useCourses } from "../../hooks";
 
 export default function PageSignUp() {
@@ -42,8 +42,7 @@ export default function PageSignUp() {
     });
   }, []);
 
-  const handleSubmit = (e: any) => {
-    e?.preventDefault();
+  const handleSubmit = () => {
     const docRef = doc(firestore, "users", user.uid);
     setDoc(docRef, response, { merge: true }).then(() => {
       navigate(redirectPath);
@@ -186,7 +185,7 @@ export default function PageSignUp() {
                   placeholder="College Name"
                   className="p-4"
                 >
-                  {range(1, courses[response.course]?.years ?? []).map(
+                  {_.range(1, courses[response.course]?.years ?? []).map(
                     (year: any) => (
                       <option value={year} key={year}>
                         {year}

@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate, useOutlet, useParams } from "react-router-dom";
+
 import { BackButton, AttendeeInput } from "../../fragments";
-import { generateForm } from "../../helpers";
+import { generateForm, initiateRegisteration } from "../../functions";
 import { useEvent } from "../../hooks";
 import { AppBar, Button, Page, Scaffold, Text } from "../../components";
-import { initiateRegisteration } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
 import _, { range } from "lodash";
 import { IconPreloader } from "../../components/icons";
@@ -15,7 +15,7 @@ export default function PageRegister() {
 
   const { eventId } = useParams();
   const navigate = useNavigate();
-  const event = useEvent(eventId ?? "");
+  const [event] = useEvent(eventId ?? "");
   const outlet = useOutlet();
 
   const [loading, setLoading] = React.useState(false);
@@ -58,8 +58,50 @@ export default function PageRegister() {
 
   return (
     <Scaffold
-      appBar={<AppBar backdrop="material" responsive leading={<BackButton />} />}
+      appBar={
+        <AppBar backdrop="material" responsive leading={<BackButton />} />
+      }
       overlay={outlet}
+      bottomBar={
+        enableButton && (
+          <AppBar
+            responsive
+            background="material"
+            center={
+              <Button
+                type="emphasis"
+                className="flex-grow"
+                onClick={() => {
+                  setLoading(true);
+                  initiateRegisteration(
+                    firestore,
+                    functions,
+                    registerUser,
+                    eventId,
+                    user.uid,
+                    response,
+                    noAttendees,
+                    attendees,
+                    user,
+                    () => {
+                      setLoading(false);
+                    },
+                    (response) => {
+                      navigate(`/${eventId}/confirmation`, { state: response });
+                      setLoading(false);
+                    }
+                  );
+                }}
+              >
+                Register{" "}
+                {event?.price === "0"
+                  ? ""
+                  : `(₹ ${event?.price * noAttendees})`}
+              </Button>
+            }
+          />
+        )
+      }
     >
       <Page backdrop="solid" padding={6} gap={4} responsive>
         <div className="text-3xl font-bold">Fill Out This Form</div>
@@ -111,6 +153,7 @@ export default function PageRegister() {
         {event?.price != 0 &&
           range(noAttendees).map((i) => (
             <AttendeeInput
+              key={i}
               onChange={(value) => {
                 attendees[i] = value;
                 setAttendees((oldVal) => attendees);
@@ -119,35 +162,6 @@ export default function PageRegister() {
           ))}
 
         <div className="flex-grow md:flex-grow-0 transition-all" />
-        {enableButton && (
-          <Button
-            type="emphasis"
-            className="w-48 mx-auto"
-            onClick={() => {
-              setLoading(true);
-              initiateRegisteration(
-                firestore,
-                functions,
-                registerUser,
-                eventId,
-                user.uid,
-                response,
-                noAttendees,
-                attendees,
-                user,
-                () => {
-                  setLoading(false);
-                },
-                (response) => {
-                  navigate(`/${eventId}/confirmation`, { state: response });
-                  setLoading(false);
-                }
-              );
-            }}
-          >
-            Register {event?.price === "0" ? "" : `(₹ ${event?.price})`}
-          </Button>
-        )}
       </Page>
     </Scaffold>
   );

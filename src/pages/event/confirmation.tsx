@@ -1,16 +1,30 @@
+import _ from "lodash";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
 import { AppBar, Page, Scaffold, Text } from "../../components";
 import {
   IconEventConfirmation,
   IconLocation,
   IconStreaming,
 } from "../../components/icons";
-import { BackButton, EventOrganisationDetails } from "../../fragments";
-import { useEvent } from "../../hooks";
+import { BackButton } from "../../fragments";
+import { useRegistration } from "../../hooks";
 export default function PageConfirmation() {
-  const eventId = useParams().eventId;
-  const [event] = useEvent(eventId);
+  const { eventId } = useParams();
+  const location = useLocation();
+
+  if (!location || !location.state) {
+    return <Navigate to={`/${eventId}`} />;
+  }
+
+  const [registrationStatus, setRegistrationStatus] = React.useState("pending");
+  const [reg, regLoading, regError] = useRegistration(
+    location?.state?.registrationId ?? ""
+  );
+  React.useEffect(() => {
+    setRegistrationStatus(reg?.registrationStatus ?? "pending");
+  }, [reg]);
+
   return (
     <Scaffold
       appBar={
@@ -28,46 +42,88 @@ export default function PageConfirmation() {
 
         <div className="flex flex-col">
           <div className="flex items-center rounded-3xl shadow-md p-6 gap-6 bg-white">
-            <IconEventConfirmation className="w-8 h-8 fill-green-600" />
+            <IconEventConfirmation
+              className={`w-8 h-8 ${
+                registrationStatus == "successful"
+                  ? "fill-green-600"
+                  : registrationStatus == "failed"
+                  ? "fill-red-600"
+                  : "fill-yellow-600"
+              }`}
+            />
             <div className="flex flex-col">
               <Text headingLevel={4} bold>
-                Payment Successful
+                Payment {_.startCase(registrationStatus)}
               </Text>
               at Mon, 23 Jan 2023 03:57 pm
             </div>
           </div>
-          <div className="w-1 h-6 bg-green-600 self-center"></div>
+          <div
+            className={`w-1 h-6 ${
+              registrationStatus == "successful"
+                ? "bg-green-600"
+                : registrationStatus == "failed"
+                ? "bg-red-600"
+                : "bg-yellow-600"
+            } self-center`}
+          ></div>
           <div className="flex items-center rounded-3xl shadow-md p-6 gap-6 bg-white">
-            <IconEventConfirmation className="w-8 h-8 fill-green-600" />
+            <IconEventConfirmation
+              className={`w-8 h-8 ${
+                registrationStatus == "successful"
+                  ? "fill-green-600"
+                  : registrationStatus == "failed"
+                  ? "fill-red-600"
+                  : "fill-yellow-600"
+              }`}
+            />
             <div className="flex flex-col">
               <Text headingLevel={4} bold>
-                Payment Successful
+                Registration Status
               </Text>
-              at Mon, 23 Jan 2023 03:57 pm
+              <p
+                className={`${
+                  registrationStatus == "successful"
+                    ? "text-green-600"
+                    : registrationStatus == "failed"
+                    ? "text-red-600"
+                    : "text-yellow-600"
+                }`}
+              >
+                {_.startCase(registrationStatus)}
+              </p>
             </div>
           </div>
-          <div className="w-1 h-6 bg-green-600 self-center"></div>
+          <div
+            className={`w-1 h-6 ${
+              registrationStatus == "successful"
+                ? "bg-green-600"
+                : registrationStatus == "failed"
+                ? "bg-red-600"
+                : "bg-yellow-600"
+            } self-center`}
+          ></div>
           <div className="flex flex-col items-stretch overflow-hidden rounded-3xl shadow-md bg-primary-50">
             <button className="p-4 uppercase font-bold text-primary-500">
               View Ticket
             </button>
             <div className="flex items-center rounded-3xl shadow-md p-6 gap-6 bg-white">
-              <IconEventConfirmation className="w-8 h-8 fill-green-600" />
+              <img className="w-20 rounded-xl shadow-lg" src={reg?.bannerURL} />
               <div className="flex flex-col">
                 <Text bold accented headingLevel={6}>
                   Registering for
                 </Text>
-                <Text headingLevel={6}>{event?.title}</Text>
-                <div className="flex gap-1">
-                  {event?.onOff == 1 ? (
+                <Text headingLevel={6}>{reg?.eventTitle}</Text>
+                <div className="flex gap-1 pt-2">
+                  {reg?.onOff == 1 ? (
                     <IconStreaming className="w-6 h-6 fill-primary-500" />
                   ) : (
                     <IconLocation className="w-6 h-6 fill-primary-500" />
                   )}
                   <p className="opacity-80">
-                    {event?.onOff == 1
-                      ? event?.onlinePlatform
-                      : event?.offlineLocationAddress}
+                    {reg?.onOff == 1
+                      ? reg?.onlinePlatform
+                      : reg?.offlineLocationAddress}
                   </p>
                 </div>
               </div>

@@ -59,20 +59,20 @@ export default function PageAccount() {
 
         <Input
           placeholder="Name"
-          leading={<IconUser className="w-6 h-6 fill-primary-500" />}
+          leading={<IconUser className="w-6 h-6 fill-primary-500 ml-4" />}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <Input
           placeholder="Email"
-          leading={<IconMail className="w-6 h-6 fill-primary-500" />}
+          leading={<IconMail className="w-6 h-6 fill-primary-500 ml-4" />}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           placeholder="Email"
           className="opacity-50"
-          leading={<IconPhone className="w-6 h-6 fill-primary-500" />}
+          leading={<IconPhone className="w-6 h-6 fill-primary-500 ml-4" />}
           value={phone}
           onChange={(e) => {}}
         />

@@ -4,3 +4,4 @@ export { default as useEvents } from "./useEvents";
 export { default as useCollegeDetails } from "./useCollegeDetails";
 export { default as useBranches } from "./useBranches";
 export { default as useCourses } from "./useCourses";
+export { default as useRegistration } from "./useRegistration";

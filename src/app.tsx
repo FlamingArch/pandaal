@@ -43,7 +43,14 @@ export default function App() {
               </RequireSignIn>
             }
           />
-          <Route path=":eventId/confirmation" element={<PageConfirmation />} />
+          <Route
+            path=":eventId/confirmation"
+            element={
+              <RequireSignIn>
+                <PageConfirmation />
+              </RequireSignIn>
+            }
+          />
           <Route path="signin" element={<PageSignIn />} />
           <Route path="signout" element={<PageSignOut />} />
           <Route

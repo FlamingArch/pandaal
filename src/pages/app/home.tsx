@@ -9,8 +9,6 @@ import { groupData } from "../../helpers";
 
 export default function PageHome() {
   const { user } = React.useContext<any>(FirebaseContext);
-  const userDoc = useUserDoc(user?.id);
-
   const [events, loading, error] = useEvents();
   const [groupedEvents, setGroupedEvents] = React.useState({});
 

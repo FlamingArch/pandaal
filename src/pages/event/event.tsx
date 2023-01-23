@@ -15,19 +15,35 @@ import {
   EventOrganisationDetails,
   FavouriteTile,
 } from "../../fragments";
-import { useEvent } from "../../hooks";
-import { isLiked, toggleLike } from "../../functions";
+import { useEvent, useUserDoc } from "../../hooks";
+import { getRegistrationId, isLiked, toggleLike } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
 import { IconNewEvent, IconPreloader, IconShare } from "../../components/icons";
 
 export default function PageEvent() {
   const { eventId } = useParams();
   const { user, firestore, auth } = React.useContext<any>(FirebaseContext);
+  const [userDoc, userDocLoading, userDocError] = useUserDoc(user?.uid);
   const [event, eventLoading, eventError] = useEvent(eventId ?? "null");
   const navigate = useNavigate();
   window.document.title = `${event?.Title} - Pandaal`;
 
-  // if (eventError) return <Navigate to="/" />;
+  const [registered, setRegistered] = React.useState(false);
+
+  React.useEffect(() => {
+    if (user && eventId) {
+      console.log("Here Motherfucker");
+      setRegistered(!!getRegistrationId(userDoc, eventId));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (userDoc) {
+      setRegistered(!!getRegistrationId(userDoc, eventId!));
+    }
+  }, [userDoc]);
+
+  if (eventError) return <Navigate to="/" />;
 
   const bottomBar = (
     <AppBar
@@ -43,8 +59,11 @@ export default function PageEvent() {
         </div>
       }
       actions={
-        <Button type="emphasis" onClick={() => navigate("instructions")}>
-          Register
+        <Button
+          type="emphasis"
+          onClick={() => navigate(registered ? "ticket" : "instructions")}
+        >
+          {registered ? "View Ticket" : "Register"}
         </Button>
       }
     />

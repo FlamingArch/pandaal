@@ -14,6 +14,7 @@ import {
   PageAccount,
   PageConfirmation,
 } from "./pages";
+import PageTicket from "./pages/event/ticket";
 
 export default function App() {
   const location = useLocation();
@@ -30,7 +31,7 @@ export default function App() {
             path=":eventId/ticket"
             element={
               <RequireSignIn>
-                <PageInstructions />
+                <PageTicket />
               </RequireSignIn>
             }
           />

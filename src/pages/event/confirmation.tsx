@@ -21,6 +21,7 @@ export default function PageConfirmation() {
   const [reg, regLoading, regError] = useRegistration(
     location?.state?.registrationId ?? ""
   );
+  
   React.useEffect(() => {
     setRegistrationStatus(reg?.registrationStatus ?? "pending");
   }, [reg]);

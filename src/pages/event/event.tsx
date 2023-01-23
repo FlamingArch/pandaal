@@ -32,7 +32,6 @@ export default function PageEvent() {
 
   React.useEffect(() => {
     if (user && eventId) {
-      console.log("Here Motherfucker");
       setRegistered(!!getRegistrationId(userDoc, eventId));
     }
   }, []);

@@ -39,7 +39,7 @@ export default function PageTicket() {
         if (doc.exists()) {
           setRegistration(doc.data());
         } else {
-          console.log("No such document!");
+          navigate(`/${eventId}`);
         }
       });
     }

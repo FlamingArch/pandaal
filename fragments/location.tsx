@@ -10,7 +10,7 @@ export default function location() {
 
   return (
     <div className="flex flex-col p-6 pt-0">
-      <p>Hey, Harsh</p>
+      <p>Hey, Wanderer</p>
       <p className="text-xl font-bold">Showing all the getaway spots near me</p>
       <Link
         href={"/location"}

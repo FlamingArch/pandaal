@@ -8,7 +8,7 @@ export default function CityOption({ cityName }: { cityName: string }) {
   const router = useRouter();
 
   return (
-    <option
+    <div
       className={
         "p-3 rounded-xl hover:bg-primary-100 cursor-pointer hover:text-primary-500 transition-all "
       }
@@ -18,6 +18,6 @@ export default function CityOption({ cityName }: { cityName: string }) {
       }}
     >
       {cityName}
-    </option>
+    </div>
   );
 }

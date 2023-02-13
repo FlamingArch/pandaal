@@ -386,3 +386,45 @@ export function IconEventConfirmation({ className }: { className: string }) {
     </svg>
   );
 }
+
+export function IconNotificationsFill({ className }: { className: string }) {
+  return (
+    <svg
+      className={`${className}`}
+      xmlns="http://www.w3.org/2000/svg"
+      height="48"
+      width="48"
+      viewBox="0 0 48 48"
+    >
+      <path d="M8 38v-3h4.2V19.7q0-4.2 2.475-7.475Q17.15 8.95 21.2 8.1V6.65q0-1.15.825-1.9T24 4q1.15 0 1.975.75.825.75.825 1.9V8.1q4.05.85 6.55 4.125t2.5 7.475V35H40v3Zm16 6q-1.6 0-2.8-1.175Q20 41.65 20 40h8q0 1.65-1.175 2.825Q25.65 44 24 44Z" />
+    </svg>
+  );
+}
+
+export function IconHomeFill({ className }: { className: string }) {
+  return (
+    <svg
+      className={`${className}`}
+      xmlns="http://www.w3.org/2000/svg"
+      height="48"
+      width="48"
+      viewBox="0 0 48 48"
+    >
+      <path d="M11 42q-1.25 0-2.125-.875T8 39V19.5q0-.7.325-1.35.325-.65.875-1.05l13-9.75q.4-.3.85-.45.45-.15.95-.15.5 0 .95.15.45.15.85.45l13 9.75q.55.4.875 1.05.325.65.325 1.35V39q0 1.25-.875 2.125T37 42h-9V28h-8v14Z"/>
+    </svg>
+  );
+}
+
+export function IconHome({ className }: { className: string }) {
+  return (
+    <svg
+      className={`${className}`}
+      xmlns="http://www.w3.org/2000/svg"
+      height="48"
+      width="48"
+      viewBox="0 0 48 48"
+    >
+      <path d="M11 39h7.5V26.5h11V39H37V19.5L24 9.75 11 19.5Zm0 3q-1.25 0-2.125-.875T8 39V19.5q0-.7.325-1.35.325-.65.875-1.05l13-9.75q.4-.3.85-.45.45-.15.95-.15.5 0 .95.15.45.15.85.45l13 9.75q.55.4.875 1.05.325.65.325 1.35V39q0 1.25-.875 2.125T37 42H26.5V29.5h-5V42Zm13-17.65Z"/>
+    </svg>
+  );
+}

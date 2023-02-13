@@ -9,7 +9,7 @@ export default function location() {
   const currentCity = useAppStore((state) => state.currentCity);
 
   return (
-    <div className="flex flex-col p-6 pt-0">
+    <div className="flex flex-col pt-0 p-6">
       <p>Hey, Wanderer</p>
       <p className="text-xl font-bold">Showing all the getaway spots near me</p>
       <Link

@@ -10,7 +10,7 @@ export default function LocationLayout({
     <div>
       <header className="flex flex-col gap-4 sticky top-0 p-4 backdrop-blur-xl backdrop-filter backdrop-saturate-200 bg-white">
         <Link
-          href={"/"}
+          href={"/home"}
           replace
           className="rounded-xl bg-primary-50 hover:bg-primary-100 cursor-pointer transition-colors p-3 fill-primary-500 w-fit"
         >

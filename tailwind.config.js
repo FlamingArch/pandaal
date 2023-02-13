@@ -11,6 +11,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        "auto-1fr": "auto 1fr",
+        fluid: "repeat(auto-fit, minmax(15rem, 1fr))",
+      },
       colors: {
         primary: {
           50: "#F4F8FD",

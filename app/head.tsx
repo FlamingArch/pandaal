@@ -6,5 +6,5 @@ export default function Head() {
       <meta name="description" content="An Event Ecosystem" />
       <link rel="icon" href="/favicon.ico" />
     </>
-  )
+  );
 }

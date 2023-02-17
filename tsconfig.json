@@ -24,6 +24,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "helpers/groupData.js", "helpers/groupData.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "helpers/groupData.ts", "helpers/groupData.ts"],
   "exclude": ["node_modules"]
 }

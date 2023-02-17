@@ -63,3 +63,7 @@
     }
   }
 }
+
+.links a {
+  @apply text-primary-500 font-bold hover:underline hover:text-primary-600;
+}

@@ -1,6 +1,6 @@
-export default function groupData(events, key) {
-  let grouped = {};
-  events.forEach((item) => {
+export default function groupData(events: any, key: any) {
+  let grouped: any = {};
+  events.forEach((item: any) => {
     if (grouped[item[key]]) {
       grouped[item[key]] = [...grouped[item[key]], item];
     } else {

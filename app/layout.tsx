@@ -3,7 +3,7 @@ import "./globals.scss";
 import { Poppins } from "@next/font/google";
 import Link from "next/link";
 
-const font = Poppins({ weight: ["400", "700"], subsets: ["latin"] });
+const font = Poppins({ weight: ["300", "400", "700"], subsets: ["latin"] });
 
 export default function RootLayout({
   children,

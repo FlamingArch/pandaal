@@ -1,7 +1,7 @@
-import { IconUser } from "@/components/icons";
 import { Poppins } from "@next/font/google";
 import Navigation from "./nav";
 import Link from "next/link";
+import UserBadge from "./userBadge";
 
 const font = Poppins({ weight: ["400", "700"], subsets: ["latin"] });
 
@@ -19,13 +19,7 @@ export default function RootLayout({
         >
           pandaal
         </Link>
-        <Link
-          href="/signin"
-          className="bg-primary-500 fill-white text-white p-3 rounded-xl flex gap-2 hover:bg-primary-600 transition-colors"
-        >
-          <IconUser className="w-6 h-6" />
-          <p>Sign In</p>
-        </Link>
+        <UserBadge />
       </header>
       <div className="flex">
         <Navigation />

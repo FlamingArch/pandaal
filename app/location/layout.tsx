@@ -8,7 +8,7 @@ export default function LocationLayout({
 }) {
   return (
     <div>
-      <header className="flex flex-col gap-4 sticky top-0 p-4 backdrop-blur-xl backdrop-filter backdrop-saturate-200 bg-white">
+      <header className="flex flex-col gap-4 sticky top-0 p-4 backdrop-blur-xl backdrop-filter backdrop-saturate-200 bg-white bg-opacity-60 z-10">
         <Link
           href={"/home"}
           replace

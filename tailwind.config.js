@@ -14,6 +14,12 @@ module.exports = {
       gridTemplateColumns: {
         "auto-1fr": "auto 1fr",
         fluid: "repeat(auto-fit, minmax(15rem, 1fr))",
+        "1fr-2fr": "1fr 2fr",
+      },
+      gridTemplateRows: {
+        "auto-1fr": "auto 1fr",
+        fluid: "repeat(auto-fit, minmax(15rem, 1fr))",
+        "1fr-2fr": "1fr 2fr",
       },
       colors: {
         primary: {

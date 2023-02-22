@@ -20,10 +20,11 @@ export default function PageSignUp() {
     course: "",
     interest: [],
     branch: "",
-    year: null,
+    year: undefined,
     uid: user.uid,
     phoneNumber: user.phoneNumber,
     created: serverTimestamp(),
+    registrations: [],
   });
   const [loading, setLoading] = React.useState(true);
   const collegeDetails = useCollegeDetails();
@@ -69,8 +70,8 @@ export default function PageSignUp() {
           value={response.gender}
           onChange={(e) => setResponse({ ...response, gender: e.target.value })}
           type="select"
-          className="p-4"
         >
+          <option value="">Select</option>
           <option value="male">Mr.</option>
           <option value="female">Ms./Mrs.</option>
           <option value="other">Other</option>
@@ -79,7 +80,7 @@ export default function PageSignUp() {
         <Input
           value={response.name}
           onChange={(e) => setResponse({ ...response, name: e.target.value })}
-          leading={<IconUser className="w-6 h-6 fill-primary-500" />}
+          leading={<IconUser className="w-6 h-6 fill-primary-500 ml-4" />}
           placeholder="Name"
           className="mt-4"
         />
@@ -88,7 +89,7 @@ export default function PageSignUp() {
           value={response.email}
           type="email"
           onChange={(e) => setResponse({ ...response, email: e.target.value })}
-          leading={<IconMail className="w-6 h-6 fill-primary-500" />}
+          leading={<IconMail className="w-6 h-6 fill-primary-500 ml-4" />}
           placeholder="Email"
         />
 
@@ -101,10 +102,10 @@ export default function PageSignUp() {
           onChange={(e) =>
             setResponse({ ...response, occupation: e.target.value })
           }
-          className="p-4"
           placeholder="Occupation"
           type="select"
         >
+          <option value="">Select</option>
           <option value="Student">Student</option>
           <option value="Teacher">Teacher/Professor</option>
           <option value="Working">Working Professional</option>
@@ -125,8 +126,8 @@ export default function PageSignUp() {
               }
               type="select"
               placeholder="College Name"
-              className="p-4"
             >
+              <option value="">Select</option>
               {collegeDetails.map(
                 (college: any) =>
                   college.isactive && <option>{college.name}</option>
@@ -141,8 +142,8 @@ export default function PageSignUp() {
               }
               type="select"
               placeholder="College Name"
-              className="p-4"
             >
+              <option value="">Select</option>
               {Object.keys(courses).map((college: any) => (
                 <option key={college} value={college}>
                   {college}
@@ -160,8 +161,8 @@ export default function PageSignUp() {
                   }
                   type="select"
                   placeholder="Branch"
-                  className="p-4"
                 >
+                  <option value="">Select</option>
                   {(courses[response.course] ?? []).branch.map(
                     (branch: any) => (
                       <option value={branch} key={branch}>
@@ -182,10 +183,10 @@ export default function PageSignUp() {
                     setResponse({ ...response, year: e.target.value })
                   }
                   type="select"
-                  placeholder="College Name"
-                  className="p-4"
+                  placeholder="Year"
                 >
-                  {_.range(1, courses[response.course]?.years ?? []).map(
+                  <option value="">Select</option>
+                  {_.range(1, courses[response.course]?.years + 1 ?? []).map(
                     (year: any) => (
                       <option value={year} key={year}>
                         {year}

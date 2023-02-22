@@ -6,5 +6,5 @@ import constants from "../constants";
 export default function useEvent(id) {
   if (!id) return [undefined, true, null];
   const firestore = getFirestore(initializeApp(constants.firebaseConfig));
-  return useDocumentData(doc(collection(firestore, "Events"), id));
+  return useDocumentData(doc(collection(firestore, "Events"), id)) as any;
 }

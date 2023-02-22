@@ -15,15 +15,18 @@ import {
   EventOrganisationDetails,
   FavouriteTile,
 } from "../../fragments";
-import { useEvent, useUserDoc } from "../../hooks";
+import { useEvent } from "../../hooks";
 import { getRegistrationId, isLiked, toggleLike } from "../../functions";
 import { FirebaseContext } from "../../contexts/firebase";
 import { IconNewEvent, IconPreloader, IconShare } from "../../components/icons";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function PageEvent() {
   const { eventId } = useParams();
   const { user, firestore, auth } = React.useContext<any>(FirebaseContext);
-  const [userDoc, userDocLoading, userDocError] = useUserDoc(user?.uid);
+
+  const [userDoc, setUserDoc] = React.useState<any>(null);
+
   const [event, eventLoading, eventError] = useEvent(eventId ?? "null");
   const navigate = useNavigate();
   window.document.title = `${event?.Title} - Pandaal`;
@@ -31,10 +34,24 @@ export default function PageEvent() {
   const [registered, setRegistered] = React.useState(false);
 
   React.useEffect(() => {
-    if (user && eventId) {
-      setRegistered(!!getRegistrationId(userDoc, eventId));
+    if (user) {
+      const ref = doc(firestore, "users", user.uid);
+      getDoc(ref)
+        .then((doc) => {
+          if (doc.exists()) setUserDoc(doc.data());
+          else navigate("/signup");
+        })
+        .catch((e) => {
+          setUserDoc({ name: user.displayName });
+        });
     }
-  }, []);
+  }, [user]);
+
+  // React.useEffect(() => {
+  //   if (user && eventId) {
+  //     setRegistered(!!getRegistrationId(userDoc, eventId));
+  //   }
+  // }, []);
 
   React.useEffect(() => {
     if (userDoc) {

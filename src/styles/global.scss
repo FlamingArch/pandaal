@@ -24,12 +24,16 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
 // Added for Links in Instructions in Instructions Page
 p a {
   font-weight: 600;
-  color: #3F4882
+  color: #3f4882;
+}
+
+.select-hide-arrow::-ms-expand {
+  display: none;
 }

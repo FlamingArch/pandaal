@@ -12,9 +12,9 @@ export default function PageSignInLayout({
         <Image fill className="p-12 w-full h-full" src={illustration} alt="" />
       </div>
       <div className="flex flex-col p-6 md:p-16 lg:p-24 xl:p-32 items-stretch min-h-[400px] flex-grow w-full mx-auto">
-        <p className="text-xl font-bold text-primary-500 z-10">pandaal</p>
-        <div className="flex-grow"></div>
+        <p className="text-xl font-bold text-primary-500 z-10 pb-12">pandaal</p>
         {children}
+        <div className="flex-grow"></div>
         <div className="flex-grow"></div>
         <p className="text-center opacity-60">
           By Continuing, you agree our{" "}

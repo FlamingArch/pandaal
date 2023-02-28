@@ -20,7 +20,7 @@ export default function Page({ params }: { params: { eventId: string } }) {
   const router = useRouter();
   const [ticketCount, setTicketCount] = React.useState(0);
 
-  if (loading && !event)
+  if (loading || !event)
     return (
       <main className="flex gap-4 w-full h-[50vh] items-center justify-center">
         <IconPreloader className="w-6 h-6 stroke-black" /> <p>Loading</p>
@@ -34,20 +34,20 @@ export default function Page({ params }: { params: { eventId: string } }) {
       </main>
     );
 
-  if (!user) router.push("/login");
+  if (!user) router.push("/signin");
 
   return (
     <main className="flex flex-col gap-4">
       {event?.questions && (
         <>
-          <div className="flex-grow text-xl">Ticket Count</div>
+          <div className="flex-grow text-xl">Questions</div>
           {JSON.stringify(event?.questions)}
         </>
       )}
       <div className="flex-grow text-xl">Ticket Count</div>
       <div className="gap-4 flex items-center">
         <div className="flex-grow">Ticket Count</div>
-        <Counter onChange={(val) => console.log(val)} from={1} to={5} />
+        <Counter onChange={setTicketCount} from={1} to={5} />
       </div>
     </main>
   );

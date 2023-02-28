@@ -10,13 +10,12 @@ export default async function page({
   const event = await fetchEvent(params.eventId);
   return (
     <>
-      <p className="text-3xl font-bold">Instructions</p>
-      <div className="h-full flex-grow links text-sm">
+      <div className="flex-grow links text-sm">
         {Parser().parse(event?.howToRegisterHtmlText)}
       </div>
       <Link
         href={`${params.eventId}/register`}
-        className="rounded-2xl grid place-content-center pt-auto bg-primary-500 hover:bg-primary-600 p-3 cursor-pointer text-white hover:text-white"
+        className="rounded-2xl bottom-0 left-0 right-0 m-6 fixed  grid place-content-center pt-auto bg-primary-500 hover:bg-primary-600 p-3 cursor-pointer text-white hover:text-white"
       >
         Register
       </Link>

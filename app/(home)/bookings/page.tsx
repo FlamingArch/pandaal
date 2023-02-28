@@ -1,7 +1,13 @@
+import _ from "lodash";
+
 export default function BookingsPage() {
   return (
-    <div>
-      <h1 className="text-3xl px-6 font-bold">Bookings</h1>
+    <div className="bg-white">
+      {_.range(0, 100).map((i) => (
+        <div className="grid place-content-center p-4" key={i}>
+          Booking {i}
+        </div>
+      ))}
     </div>
   );
 }

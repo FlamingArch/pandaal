@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <div className={font.className}>
-      <header className="flex items-center justify-between p-6 backdrop-blur-xl backdrop-saturate-200 bg-white bg-opacity-60 sticky top-0">
+      <header className="flex items-center justify-between p-6 backdrop-blur-xl backdrop-saturate-200 bg-white bg-opacity-60 sticky top-0 z-10">
         <Link
           href="/"
           className="text-primary-500 hover:text-primary-700 font-bold text-xl cursor-pointer transition-colors"

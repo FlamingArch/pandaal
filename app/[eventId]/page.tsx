@@ -7,7 +7,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { fetchEvent } from "@/functions";
-import { Parser } from "html-to-react";
+import { parseHTML as parse } from "@/functions";
 
 export default async function EventPage({
   params,
@@ -85,13 +85,13 @@ export default async function EventPage({
 
           <div className="text-lg pt-6 pb-3">Event Description</div>
           {event?.description.length > 300 ? (
-            <p>{Parser().parse(event?.description ?? "")}</p>
+            <p>{parse(event?.description ?? "")}</p>
           ) : (
-            <p>{Parser().parse(event?.description ?? "")}</p>
+            <p>{parse(event?.description ?? "")}</p>
           )}
 
           <div className="text-lg pt-6 pb-3">Terms & Conditions</div>
-          <p>{Parser().parse(event?.termsAndConditions ?? "")}</p>
+          <p>{parse(event?.termsAndConditions ?? "")}</p>
         </div>
       </div>
     </div>

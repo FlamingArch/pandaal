@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { fetchEvent } from "functions";
-import { Parser } from "html-to-react";
+import { parseHTML as parse } from "functions";
 
 export default async function page({
   params,
@@ -11,7 +11,7 @@ export default async function page({
   return (
     <>
       <div className="flex-grow links text-sm">
-        {Parser().parse(event?.howToRegisterHtmlText)}
+        {parse(event?.howToRegisterHtmlText)}
       </div>
       <Link
         href={`${params.eventId}/register`}

@@ -34,6 +34,7 @@ export default function SegmentedControl(props: SegmentedControlProps) {
           value={value}
           selected={value === props.selected}
           onClick={props.onChange}
+          key={value}
         />
       ))}
     </div>

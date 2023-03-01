@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { doc, getFirestore } from "firebase/firestore";
-import { Counter } from "@/components";
+import { Counter, Form } from "@/components";
 
 export default function Page({ params }: { params: { eventId: string } }) {
   const app = initializeApp(constants.firebaseConfig);
@@ -19,6 +19,8 @@ export default function Page({ params }: { params: { eventId: string } }) {
   const [event] = useDocumentData(doc(firestore, "Events", params.eventId));
   const router = useRouter();
   const [ticketCount, setTicketCount] = React.useState(0);
+  const [response, setResponse] = React.useState([]);
+  const [validation, setValidation] = React.useState(false);
 
   if (loading || !event)
     return (
@@ -41,7 +43,12 @@ export default function Page({ params }: { params: { eventId: string } }) {
       {event?.questions && (
         <>
           <div className="flex-grow text-xl">Questions</div>
-          {JSON.stringify(event?.questions)}
+          <Form
+            response={response}
+            setResponse={setResponse}
+            setValidation={setValidation}
+            questions={event?.questions}
+          />
         </>
       )}
       <div className="flex-grow text-xl">Ticket Count</div>
@@ -49,6 +56,13 @@ export default function Page({ params }: { params: { eventId: string } }) {
         <div className="flex-grow">Ticket Count</div>
         <Counter onChange={setTicketCount} from={1} to={5} />
       </div>
+      <button
+        className="bg-primary-500 rounded-xl p-3 w-full text-white hover:bg-primary-600 transition-all disabled:opacity-50 disabled:hover:bg-primary-500 disabled:cursor-not-allowed"
+        disabled={!validation}
+        onClick={() => console.log(response)}
+      >
+        Register
+      </button>
     </main>
   );
 }

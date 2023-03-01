@@ -1,6 +1,6 @@
 type InputProps = {
   children?: React.ReactNode;
-  value: React.InputHTMLAttributes<HTMLInputElement>["value"];
+  value?: React.InputHTMLAttributes<HTMLInputElement>["value"];
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   leading?: React.ReactNode;
@@ -29,7 +29,7 @@ export default function Input(props: InputProps) {
   return (
     <div
       className="flex items-center rounded-xl overflow-hidden border-2
-     border-gray-400 hover:shadow-xl focus-within:shadow-primary-300 focus-within:hover:shadow-primary-300 focus-within:border-primary-500 focus-within:hover:border-primary-500 transition-all"
+     border-gray-400 hover:shadow-xl focus-within:shadow-primary-300 focus-within:hover:shadow-primary-300 focus-within:border-primary-500 focus-within:shadow-xl focus-within:hover:border-primary-500 transition-all"
     >
       {props.leading}
       {getType(props.type ?? "text") == "select" ? (

@@ -4,13 +4,7 @@ import React from "react";
 import { SegmentedControl } from "@/components";
 import { useRouter, usePathname } from "next/navigation";
 
-type BookingNavigationTabsProps = {
-  children?: React.ReactNode;
-};
-
-export default function bookingNavigationTabs(
-  props: BookingNavigationTabsProps
-) {
+export default function bookingNavigationTabs() {
   const path = usePathname();
   const pathArr = path?.split("/");
   const [selected, setSelected] = React.useState(

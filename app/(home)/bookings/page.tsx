@@ -3,6 +3,7 @@
 import { IconPreloader } from "@/components/icons";
 import constants from "@/constants";
 import { fetchRegistrations } from "@/functions";
+import { getLongDate } from "@/helpers";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { DocumentData, getFirestore } from "firebase/firestore";
@@ -58,6 +59,8 @@ export default function BookingsPage() {
       />
       <div className="p-4">
         <p className="text-xl">{e.eventTitle}</p>
+        <p>{getLongDate(e.startDate)}</p>
+        <p className="text-primary-500">{e.ticketCount} Tickets</p>
       </div>
     </div>
   ));

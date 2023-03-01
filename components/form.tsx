@@ -34,10 +34,6 @@ export default function Form({
 
   // const refreshValidation = () => {
   React.useEffect(() => {
-    console.debug(`${response.length} \n ${questions.length}`);
-    console.debug(
-      `${JSON.stringify(response, {}, 2)} / ${JSON.stringify(questions, {}, 2)}`
-    );
     if (validationStale) {
       if (response.length === questions.length) setValidation(true);
       else setValidation(false);

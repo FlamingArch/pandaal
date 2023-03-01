@@ -14,7 +14,9 @@ export default function PageLayoutBookings(props: PageLayoutBookingsProps) {
         </HideOnScroll>
         <BookingNavigationTabs />
       </header>
-      <div className="p-3 flex flex-col">{props.children}</div>
+      <div className="p-3 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        {props.children}
+      </div>
     </>
   );
 }

@@ -27,10 +27,12 @@ export default function bookingNavigationTabs(
   }, [selected]);
 
   return (
-    <SegmentedControl
-      values={["Upcoming", "Older"]}
-      selected={selected}
-      onChange={(val) => setSelected(val)}
-    />
+    <div className="md:mx-auto">
+      <SegmentedControl
+        values={["Upcoming", "Older"]}
+        selected={selected}
+        onChange={(val) => setSelected(val)}
+      />
+    </div>
   );
 }

@@ -2,12 +2,8 @@ import React, { useEffect, useReducer } from "react";
 
 type CounterState = { count: number };
 
-type CounterAction = UpdateAction | ResetAction;
-
-type ResetAction = { type: "reset" };
-
 type UpdateAction = {
-  type: "increment" | "decrement" | "reset";
+  type: "increment" | "decrement";
   payload: number;
 };
 
@@ -17,14 +13,12 @@ type CounterProps = {
   onChange: (value: number) => void;
 };
 
-function reducer(state: CounterState, action: CounterAction) {
+function reducer(state: CounterState, action: UpdateAction) {
   switch (action.type) {
     case "increment":
       return { count: state.count + action.payload };
     case "decrement":
       return { count: state.count - action.payload };
-    case "reset":
-      return initState;
     default:
       return state;
   }
@@ -34,7 +28,8 @@ const buttonClasses =
   "rounded-xl bg-primary-50 hover:bg-primary-100 p-3 cursor-pointer text-primary-500 transition-colors backdrop-saturate-200 fill-primary-500 bg-opacity-80 backdrop-blur-2xl aspect-square grid place-content-center disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary-50";
 
 export default function Counter(props: CounterProps) {
-  const initState = { count: props.from };
+  const initCount = props.from ?? 0;
+  const initState = { count: initCount };
 
   const [state, dispatch] = useReducer(reducer, initState);
 

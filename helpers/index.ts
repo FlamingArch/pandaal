@@ -4,3 +4,7 @@ export { default as getDayFromNumber } from "./getDayFromNumber";
 export { default as getFullDateRange } from "./getFullDateRange";
 export { default as getLongDate } from "./getLongDate";
 export { default as getMonthFromNumber } from "./getMonthFromNumber";
+export { default as fetchEvent } from "./fetchEvent";
+export { default as fetchEvents } from "./fetchEvents";
+export { default as fetchRegistrations } from "./fetchRegistrations";
+export { default as parseHTML } from "./parseHTML";

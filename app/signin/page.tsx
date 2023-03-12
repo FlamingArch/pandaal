@@ -13,7 +13,7 @@ import _ from "lodash";
 import { useRouter } from "next/navigation";
 
 export default function page() {
-  const [phoneNumber, setPhoneNumber] = React.useState("8953642875");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
   const [code, setCode] = React.useState("");
   const [phoneValidated, setPhoneValidated] = React.useState(true);
   const [response, setResponse] = React.useState<any>(null);

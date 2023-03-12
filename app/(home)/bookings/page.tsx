@@ -2,7 +2,7 @@
 
 import { IconPreloader } from "@/components/icons";
 import constants from "@/constants";
-import { fetchRegistrations } from "@/functions";
+import { fetchRegistrations } from "@/helpers";
 import { getLongDate } from "@/helpers";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";

@@ -6,8 +6,8 @@ import {
 } from "@/components/icons";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchEvent } from "@/functions";
-import { parseHTML as parse } from "@/functions";
+import { fetchEvent } from "@/helpers";
+import { parseHTML as parse } from "@/helpers";
 
 export default async function EventPage({
   params,

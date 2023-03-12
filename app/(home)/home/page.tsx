@@ -1,5 +1,5 @@
 import EventsView from "./eventsView";
-import { fetchEvents } from "@/functions";
+import { fetchEvents } from "@/helpers";
 import { where } from "firebase/firestore";
 
 const today = new Date().toISOString().slice(0, 10).replace(/-/g, ""); // Today date in YYYYMMDD string

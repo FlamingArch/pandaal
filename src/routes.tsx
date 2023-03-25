@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import CityPage from "./app/city/page";
-import { Input } from "./components";
-import { getCityStorage, setCityStorage } from "./functions";
+import PageCity from "./app/city";
+import PageHome from "./app/home";
 
 export default function AppRoutes() {
   return <></>;

@@ -1,5 +1,6 @@
 export { default as getCityStorage } from "./getCityStorage";
 export { default as setCityStorage } from "./setCityStorage";
+export { default as fetchEvent } from "./fetchEvent";
 export { default as groupData } from "./groupData";
 // export { default as userDocExists } from "./userDocExists";
 // export { default as signinGoogle } from "./signinGoogle";

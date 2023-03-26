@@ -18,7 +18,10 @@ type PageProps = {
 
 export default function Page(props: PageProps) {
   return (
-    <div className="flex flex-col w-screen min-h-screen">
+    <div className={"flex flex-col w-screen min-h-screen " + props.className}>
+      <div className="-z-10 fixed w-screen h-screen grid place-content-center">
+        {props.backdrop}
+      </div>
       {props.appBar}
       {props.leading}
       <div className="flex flex-grow">

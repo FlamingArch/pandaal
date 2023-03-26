@@ -1,6 +1,5 @@
-import PageCity from "./app/city";
-import PageHome from "./app/home";
+import PageEvent from "./app/event";
 
 export default function AppRoutes() {
-  return <></>;
+  return <PageEvent />;
 }

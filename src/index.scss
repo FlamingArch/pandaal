@@ -6,6 +6,41 @@
 
 * {
   font-family: "Poppins", sans-serif;
-  @apply text-sm;
+  @apply text-base md:text-sm;
   user-select: none;
+}
+
+.dim-behind {
+  box-shadow: 0 0 0 100vmax rgba($color: #000000, $alpha: 0.6);
+}
+
+.responsive {
+  @apply w-auto md:w-2/3 lg:w-1/2 md:mx-auto;
+}
+
+.card {
+  @apply rounded-3xl shadow-2xl bg-primary-50;
+}
+
+.card-focused {
+  @apply bg-white;
+}
+
+.smooth {
+  transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slide-in {
+  animation: slide forwards 350ms;
+
+  @keyframes slide {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }

@@ -1,6 +1,4 @@
-import PageEvent from "./app/event";
-import { Scaffold, Text } from "./components";
-import { useAppStore } from "./hooks/useAppStore";
+import PageSignIn from "./app/signIn";
 
 export default function AppRoutes() {
   return <></>;

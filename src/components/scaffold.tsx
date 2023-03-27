@@ -1,4 +1,4 @@
-type PageProps = {
+type ScaffoldProps = {
   children: React.ReactNode;
   appBar?: React.ReactNode;
   bottomAppBar?: React.ReactNode;
@@ -16,7 +16,7 @@ type PageProps = {
   className?: string;
 };
 
-export default function Page(props: PageProps) {
+export default function Scaffold(props: ScaffoldProps) {
   return (
     <div className={"flex flex-col w-screen min-h-screen " + props.className}>
       <div className="-z-10 fixed w-screen h-screen grid place-content-center">
@@ -24,10 +24,10 @@ export default function Page(props: PageProps) {
       </div>
       {props.appBar}
       {props.leading}
-      <div className="flex flex-grow">
+      <div className="flex flex-grow items-stretch">
         {props.sidebar}
         <div
-          className="flex flex-col flex-grow"
+          className="flex flex-col flex-grow overflow-hidden"
           style={{
             padding:
               typeof props.padding == "number"

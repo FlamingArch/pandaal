@@ -22,7 +22,7 @@ export default function AppBar({
   center?: React.ReactNode | React.ReactNode;
   children?: React.ReactNode;
   responsive?: boolean;
-  sticky?: boolean;
+  sticky?: boolean | "bottom";
   backdrop?:
     | "clear"
     | "gradient"
@@ -86,7 +86,11 @@ export default function AppBar({
   return (
     <div
       className={`transition-all ${getBackdropStyles(backdrop ?? "clear")} ${
-        sticky ? "sticky top-0" : ""
+        sticky === true
+          ? "sticky top-0"
+          : sticky === "bottom"
+          ? "sticky bottom-0"
+          : ""
       }`}
     >
       <div

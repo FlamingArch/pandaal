@@ -1,5 +1,5 @@
 import { where } from "firebase/firestore";
-import { Page } from "../components";
+import { Scaffold } from "../components";
 import EventCard from "../components/eventCard";
 import Text from "../components/text";
 import { groupData } from "../functions";
@@ -38,7 +38,7 @@ export default function PageHome() {
   const groupedEvents = groupData(events, "Category");
 
   return (
-    <Page padding={0}>
+    <Scaffold padding={0}>
       {Object.keys(groupedEvents).map((category) => {
         return (
           <div className="flex gap-4 flex-col">
@@ -49,6 +49,6 @@ export default function PageHome() {
           </div>
         );
       })}
-    </Page>
+    </Scaffold>
   );
 }

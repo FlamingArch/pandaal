@@ -1,4 +1,4 @@
-import { AppBar, Input, Page } from "../components";
+import { AppBar, Input, Scaffold } from "../components";
 
 import { useAppStore } from "../hooks/useAppStore";
 
@@ -11,7 +11,7 @@ export default function PageCity() {
   }));
 
   return (
-    <Page gap={4}>
+    <Scaffold gap={4}>
       <p className="text-2xl font-bold">Change your Location City</p>
       <p className="text-lg">We are only available in a few cities</p>
       <Input
@@ -23,6 +23,6 @@ export default function PageCity() {
         <option value="Greater Noida">Greater Noida</option>
         <option value="Lucknow">Lucknow</option>
       </Input>
-    </Page>
+    </Scaffold>
   );
 }

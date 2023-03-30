@@ -1,6 +1,8 @@
-import React from "react";
+type IconProps = {
+  className: string;
+};
 
-export function IconFeedback({ className }: { className: string }) {
+export function IconFeedback({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -14,7 +16,7 @@ export function IconFeedback({ className }: { className: string }) {
   );
 }
 
-export function IconOrganisation({ className }: { className: string }) {
+export function IconOrganisation({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -28,7 +30,7 @@ export function IconOrganisation({ className }: { className: string }) {
   );
 }
 
-export function IconBack({ className }: { className: string }) {
+export function IconBack({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -42,7 +44,7 @@ export function IconBack({ className }: { className: string }) {
   );
 }
 
-export function IconPasskey({ className }: { className: string }) {
+export function IconPasskey({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -56,7 +58,7 @@ export function IconPasskey({ className }: { className: string }) {
   );
 }
 
-export function IconAnswer({ className }: { className: string }) {
+export function IconAnswer({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -70,7 +72,7 @@ export function IconAnswer({ className }: { className: string }) {
   );
 }
 
-export function IconClock({ className }: { className: string }) {
+export function IconClock({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -84,7 +86,7 @@ export function IconClock({ className }: { className: string }) {
   );
 }
 
-export function IconStreaming({ className }: { className: string }) {
+export function IconStreaming({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -98,7 +100,7 @@ export function IconStreaming({ className }: { className: string }) {
   );
 }
 
-export function IconLocation({ className }: { className: string }) {
+export function IconLocation({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -112,7 +114,7 @@ export function IconLocation({ className }: { className: string }) {
   );
 }
 
-export function IconEdit({ className }: { className: string }) {
+export function IconEdit({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -126,7 +128,7 @@ export function IconEdit({ className }: { className: string }) {
   );
 }
 
-export function IconGlobe({ className }: { className: string }) {
+export function IconGlobe({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -140,7 +142,7 @@ export function IconGlobe({ className }: { className: string }) {
   );
 }
 
-export function IconMail({ className }: { className: string }) {
+export function IconMail({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -154,7 +156,7 @@ export function IconMail({ className }: { className: string }) {
   );
 }
 
-export function IconInstagram({ className }: { className: string }) {
+export function IconInstagram({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -172,7 +174,7 @@ export function IconInstagram({ className }: { className: string }) {
   );
 }
 
-export function IconShare({ className }: { className: string }) {
+export function IconShare({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -186,7 +188,7 @@ export function IconShare({ className }: { className: string }) {
   );
 }
 
-export function IconArrowRight({ className }: { className: string }) {
+export function IconArrowRight({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -200,7 +202,7 @@ export function IconArrowRight({ className }: { className: string }) {
   );
 }
 
-export function IconNewEvent({ className }: { className: string }) {
+export function IconNewEvent({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -214,7 +216,7 @@ export function IconNewEvent({ className }: { className: string }) {
   );
 }
 
-export function IconPhone({ className }: { className: string }) {
+export function IconPhone({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -228,7 +230,7 @@ export function IconPhone({ className }: { className: string }) {
   );
 }
 
-export function IconUser({ className }: { className: string }) {
+export function IconUser({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -242,7 +244,7 @@ export function IconUser({ className }: { className: string }) {
   );
 }
 
-export function IconDiversity({ className }: { className: string }) {
+export function IconDiversity({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -256,7 +258,7 @@ export function IconDiversity({ className }: { className: string }) {
   );
 }
 
-export function IconFavourite({ className }: { className: string }) {
+export function IconFavourite({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -270,7 +272,7 @@ export function IconFavourite({ className }: { className: string }) {
   );
 }
 
-export function IconFavouriteFill({ className }: { className: string }) {
+export function IconFavouriteFill({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -284,7 +286,7 @@ export function IconFavouriteFill({ className }: { className: string }) {
   );
 }
 
-export function IconTicketFill({ className }: { className: string }) {
+export function IconTicketFill({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -297,7 +299,7 @@ export function IconTicketFill({ className }: { className: string }) {
     </svg>
   );
 }
-export function IconSupport({ className }: { className: string }) {
+export function IconSupport({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -311,7 +313,7 @@ export function IconSupport({ className }: { className: string }) {
   );
 }
 
-export function IconDone({ className }: { className: string }) {
+export function IconDone({ className }: IconProps) {
   return (
     <svg
       className={className}
@@ -325,7 +327,7 @@ export function IconDone({ className }: { className: string }) {
   );
 }
 
-export function IconPreloader({ className }: { className: string }) {
+export function IconPreloader({ className }: IconProps) {
   return (
     <svg
       className={`${className} animate-spin`}
@@ -345,7 +347,7 @@ export function IconPreloader({ className }: { className: string }) {
   );
 }
 
-export function IconCanceled({ className }: { className: string }) {
+export function IconCanceled({ className }: IconProps) {
   return (
     <svg
       className={`${className}`}
@@ -359,7 +361,7 @@ export function IconCanceled({ className }: { className: string }) {
     </svg>
   );
 }
-export function IconLocationEdit({ className }: { className: string }) {
+export function IconLocationEdit({ className }: IconProps) {
   return (
     <svg
       className={`${className}`}
@@ -373,7 +375,7 @@ export function IconLocationEdit({ className }: { className: string }) {
   );
 }
 
-export function IconEventConfirmation({ className }: { className: string }) {
+export function IconEventConfirmation({ className }: IconProps) {
   return (
     <svg
       className={`${className}`}
@@ -387,7 +389,7 @@ export function IconEventConfirmation({ className }: { className: string }) {
   );
 }
 
-export function IconNotificationsFill({ className }: { className: string }) {
+export function IconNotificationsFill({ className }: IconProps) {
   return (
     <svg
       className={`${className}`}
@@ -401,7 +403,7 @@ export function IconNotificationsFill({ className }: { className: string }) {
   );
 }
 
-export function IconHomeFill({ className }: { className: string }) {
+export function IconHomeFill({ className }: IconProps) {
   return (
     <svg
       className={`${className}`}
@@ -415,7 +417,7 @@ export function IconHomeFill({ className }: { className: string }) {
   );
 }
 
-export function IconHome({ className }: { className: string }) {
+export function IconHome({ className }: IconProps) {
   return (
     <svg
       className={`${className}`}
@@ -429,7 +431,7 @@ export function IconHome({ className }: { className: string }) {
   );
 }
 
-export function IconShareAlt({ className }: { className: string }) {
+export function IconShareAlt({ className }: IconProps) {
   return (
     <svg
       className={`${className}`}
@@ -439,6 +441,20 @@ export function IconShareAlt({ className }: { className: string }) {
       width="48"
     >
       <path d="M220 1016q-24 0-42-18t-18-42V447q0-24 18-42t42-18h169v60H220v509h520V447H569v-60h171q24 0 42 18t18 42v509q0 24-18 42t-42 18H220Zm229-307V252l-88 88-43-43 161-161 161 161-43 43-88-88v457h-60Z" />
+    </svg>
+  );
+}
+
+export function IconClose({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      height="48"
+      viewBox="0 96 960 960"
+      width="48"
+    >
+      <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
     </svg>
   );
 }

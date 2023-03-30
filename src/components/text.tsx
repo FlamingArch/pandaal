@@ -5,6 +5,7 @@ type TextProps = {
   accented?: boolean | string;
   dimmed?: boolean | number;
   className?: string;
+  style?: React.HTMLAttributes<HTMLDivElement>["style"];
 };
 
 function getTextSize(headingLevel: number | undefined) {
@@ -51,6 +52,7 @@ export default function Text(props: TextProps) {
       style={{
         color: getAccentColor(props.accented),
         opacity: getDimmedValue(props.dimmed),
+        ...props.style,
       }}
       className={`${props.bold ? "font-bold" : null} ${getTextSize(
         props.headingLevel

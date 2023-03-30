@@ -19,11 +19,7 @@
 }
 
 .card {
-  @apply rounded-3xl shadow-2xl bg-primary-50;
-}
-
-.card-focused {
-  @apply bg-white;
+  @apply rounded-3xl shadow-2xl  bg-white;
 }
 
 .smooth {
@@ -31,7 +27,7 @@
 }
 
 .slide-in {
-  animation: slide forwards 350ms;
+  animation: slide 350ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
 
   @keyframes slide {
     0% {
@@ -43,4 +39,20 @@
       opacity: 1;
     }
   }
+}
+
+.hidden-desktop {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.hidden-mobile {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.link a {
+  @apply text-primary-500 font-semibold hover:underline;
 }

@@ -1,3 +1,5 @@
+import StyleObject from "../styleObject";
+
 type InputProps = {
   children?: React.ReactNode;
   value?: React.InputHTMLAttributes<HTMLInputElement>["value"];
@@ -30,13 +32,21 @@ const getType = (type: string) =>
     fileUpload: "file",
   }[type] || type);
 
+const styles = new StyleObject({
+  base: "flex items-center rounded-xl overflow-hidden transition ",
+  normal: "border-2 border-gray-700 fill-gray-700 text-gray-700",
+  hover: "hover:shadow-xl",
+  focus:
+    "focus-within:shadow-primary-300  focus-within:border-primary-500 focus-within:shadow-xl focus-within:fill-primary-500 focus-within:text-primary-500",
+  focusHover:
+    "focus-within:hover:shadow-primary-300 focus-within:hover:border-primary-500 focus-within:hover:fill-primary-500 focus-within:hover:text-primary-500",
+  others: "",
+});
+
 export default function Input(props: InputProps) {
   return (
-    <div
-      className="flex items-center rounded-xl overflow-hidden border-2
-     border-gray-700 hover:shadow-xl focus-within:shadow-primary-300 focus-within:hover:shadow-primary-300 focus-within:border-primary-500 focus-within:shadow-xl focus-within:hover:border-primary-500 transition-all fill-gray-700 focus-within:fill-primary-500 focus-within:hover:fill-primary-500 focus-within:text-primary-500 focus-within:hover:text-primary-500 text-gray-700"
-    >
-      {props.leading}
+    <div className={styles.getAllStyles()}>
+      <div className="flex items-center">{props.leading}</div>
       {getType(props.type ?? "text") == "select" ? (
         <select
           className="flex-grow outline-none bg-transparent p-3 mr-3 text-black"

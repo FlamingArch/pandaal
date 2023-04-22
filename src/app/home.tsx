@@ -1,11 +1,16 @@
 import { where } from "firebase/firestore";
-import { Scaffold } from "../components";
+import { AppBar, Button, Scaffold } from "../components";
 import EventCard from "../components/eventCard";
 import Text from "../components/text";
 import { groupData } from "../functions";
 import { useAppStore } from "../hooks/useAppStore";
 import useEvents from "../hooks/useEvents";
 import CityPage from "./city";
+import {
+  IconAnswer,
+  IconNotificationsFill,
+  IconUser,
+} from "../components/icons";
 
 const today = new Date().toISOString().slice(0, 10).replace(/-/g, ""); // Today date in YYYYMMDD string
 
@@ -38,7 +43,29 @@ export default function PageHome() {
   const groupedEvents = groupData(events, "Category");
 
   return (
-    <Scaffold padding={0}>
+    <Scaffold
+      padding={6}
+      appBar={
+        <AppBar
+          sticky
+          background="material"
+          leading={
+            <p className="font-bold text-xl text-primary-500">pandaal</p>
+          }
+          actions={
+            <>
+              <Button buttonStyle="action" Icon={IconNotificationsFill} />
+              <Button buttonStyle="badge">
+                <img
+                  src="https://unsplash.com/photos/mEZ3PoFGs_k/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8OXx8aGVhZHNob3R8ZW58MHx8fHwxNjgyMTQ1OTM2&force=true&w=640"
+                  className="w-14 h-14 object-cover"
+                />
+              </Button>
+            </>
+          }
+        />
+      }
+    >
       {Object.keys(groupedEvents).map((category) => {
         return (
           <div className="flex gap-4 flex-col">

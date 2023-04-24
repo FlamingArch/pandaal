@@ -15,11 +15,13 @@ export default function VerifySignInCode(props: VerifySignInCodeProps) {
   const [code, setCode] = useState("");
 
   return props.codeSent ? (
-    <div className="dim-behind z-30">
-      <div className="p-12 fixed bottom-0 card card-primary md:top-0 md:my-[20vh] left-0 right-0 responsive gap-8 flex flex-col md:max-w-[450px] md:max-h-[600px] slide-in">
-        <Button onClick={props.onClose} style="action">
-          <IconClose className="w-6 h-6" />
-        </Button>
+    <div className="dim-behind z-30 fixed">
+      <div className="p-12 fixed bottom-0 card card-primary md:top-0 md:my-[20vh] left-0 right-0 responsive gap-8 flex flex-col md:max-w-[450px] md:max-h-[600px] slide-in overflow-scroll">
+        <div className="flex">
+          <Button onClick={props.onClose} buttonStyle="action">
+            <IconClose className="w-6 h-6" />
+          </Button>
+        </div>
         <Text className="font-medium text-3xl">Verify Code</Text>
         <div className="flex flex-col gap-2">
           <Text headingLevel={0.5} className="font-medium">
@@ -56,7 +58,7 @@ export default function VerifySignInCode(props: VerifySignInCodeProps) {
         <Button
           onClick={props.onVerifyCode}
           disabled={code.length !== 10 && constants.regexOnlyDigits.test(code)}
-          style="emphasis"
+          buttonStyle="emphasis"
         >
           <Text headingLevel={0.25}>Verify Code</Text>
         </Button>

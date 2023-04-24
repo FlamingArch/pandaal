@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/router";
 import _ from "lodash";
 
 function convertToTextDate(date: string) {
@@ -21,11 +22,19 @@ function convertToTextDate(date: string) {
 }
 
 export default function EventCard({ event }: { event: any }) {
-  console.log(event.id ?? "None");
+  const navigate = useNavigate({ from: "/" });
 
   return (
     <div
       key={event.id}
+      onClick={() =>
+        navigate({
+          to: `$eventId`,
+          params: {
+            eventId: event.id,
+          },
+        })
+      }
       className="flex flex-col hover:bg-primary-50 rounded-3xl cursor-pointer w-40 hover:scale-105 transition"
     >
       <img

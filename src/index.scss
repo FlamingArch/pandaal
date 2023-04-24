@@ -56,3 +56,7 @@
 .link a {
   @apply text-primary-500 font-semibold hover:underline;
 }
+
+.hide-last:last-child {
+  display: hidden;
+}

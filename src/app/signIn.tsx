@@ -14,7 +14,7 @@ import {
   VerifySignInCode,
   SignInPromptText,
 } from "../fragments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import illustration from "../assets/signin.svg";
 import constants from "../constants";
 import Stack from "../components/Stack";
@@ -25,15 +25,17 @@ export default function PageSignIn() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [codeSent, setCodeSent] = useState<boolean | null>(null);
 
+  useEffect(() => console.log(phoneNumber), [phoneNumber]);
+
   const sendCodeHandler = () => setCodeSent(true);
 
   const sendCodeButton = (
     <Button
       onClick={sendCodeHandler}
       disabled={
-        phoneNumber.length !== 10 && constants.regexOnlyDigits.test(phoneNumber)
+        phoneNumber.length != 10 || !constants.regexOnlyDigits.test(phoneNumber)
       }
-      style="emphasis"
+      buttonStyle="emphasis"
     >
       Send Code
     </Button>

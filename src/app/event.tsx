@@ -12,6 +12,7 @@ import { useAppStore } from "../hooks/useAppStore";
 import { parseHTML } from "../functions";
 
 import useEvent from "../hooks/useEvent";
+import { useNavigate } from "@tanstack/router";
 
 export default function PageEvent() {
   const eventId = "ED61YENHLt4mLSf2SGCl";
@@ -25,6 +26,8 @@ export default function PageEvent() {
     isError,
     error,
   } = useEvent(firestore, eventId);
+
+  const navigate = useNavigate({ from: "$eventId" });
 
   if (isLoading) {
     return (
@@ -69,12 +72,15 @@ export default function PageEvent() {
       background="gradientBlack"
       padding={{ bottom: 10 }}
       leading={
-        <Button onClick={() => console.log("TODO: Go back to previous page")}>
+        <Button buttonStyle="action" onClick={() => navigate({ to: "/" })}>
           <IconBack className="w-6 h-6" />
         </Button>
       }
       actions={
-        <Button onClick={() => console.log("TODO: Go back to share page")}>
+        <Button
+          buttonStyle="action"
+          onClick={() => console.log("TODO: Go back to share page")}
+        >
           <IconShareAlt className="w-6 h-6" />
         </Button>
       }
@@ -91,7 +97,7 @@ export default function PageEvent() {
   const backdrop = (
     <img
       src={eventData.bannerURL}
-      className=" blur-2xl fixed -z-10 object-fill w-screen h-screen scale-125 brightness-50 saturate-150"
+      className=" blur-xl fixed -z-10 object-fill w-screen h-screen scale-125 brightness-50 saturate-150"
     />
   );
 

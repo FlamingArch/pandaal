@@ -33,7 +33,7 @@ const getType = (type: string) =>
   }[type] || type);
 
 const styles = new StyleObject({
-  base: "flex items-center rounded-xl overflow-hidden transition ",
+  base: "flex items-center rounded-xl overflow-hidden transition min-h-[48px] ",
   normal: "border-2 border-gray-700 fill-gray-700 text-gray-700",
   hover: "hover:shadow-xl",
   focus:

@@ -8,6 +8,7 @@ import {
   IconPreloader,
 } from "../components/icons";
 import { UserBadge, EventCard } from "../fragments";
+import { useNavigate } from "@tanstack/router";
 
 const today = new Date().toISOString().slice(0, 10).replace(/-/g, ""); // Today date in YYYYMMDD string
 
@@ -28,6 +29,8 @@ export default function PageHome() {
     isError,
     error,
   } = useEvents(firestore, queries, city);
+
+  const navigate = useNavigate({ from: "/" });
 
   if (isLoading) {
     return (
@@ -50,6 +53,7 @@ export default function PageHome() {
       Icon={IconLocationEdit}
       buttonStyle="cardSecondary"
       className="mt-4 md:mt-0 md:w-[50vw] lg:w-[30vw]"
+      onClick={() => navigate({ to: "city" })}
     />
   );
 

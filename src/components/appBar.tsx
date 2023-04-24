@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function AppBar({
   leading,
   title,
@@ -69,9 +67,9 @@ export default function AppBar({
       case "gradientBlack":
         return "bg-gradient-to-b from-[#000000AA] to-transparent";
       case "material":
-        return "bg-white bg-opacity-60 backdrop-filter backdrop-saturate-200 backdrop-blur-lg";
+        return "bg-white bg-opacity-60 backdrop-filter backdrop-saturate-150 backdrop-blur-lg";
       case "materialShadow":
-        return "bg-white bg-opacity-60 backdrop-filter backdrop-saturate-200 backdrop-blur-lg shadow-lg";
+        return "bg-white bg-opacity-60 backdrop-filter backdrop-saturate-150 backdrop-blur-lg shadow-lg";
       case "solid":
         return "bg-white";
       case "shadow":

@@ -1,16 +1,13 @@
 import { where } from "firebase/firestore";
 import { AppBar, Button, Scaffold } from "../components";
-import EventCard from "../components/eventCard";
-import Text from "../components/text";
 import { groupData } from "../functions";
-import { useAppStore } from "../hooks/useAppStore";
-import useEvents from "../hooks/useEvents";
-import CityPage from "./city";
+import { useAppStore, useEvents } from "../hooks";
 import {
-  IconAnswer,
+  IconLocationEdit,
   IconNotificationsFill,
-  IconUser,
+  IconPreloader,
 } from "../components/icons";
+import { UserBadge, EventCard } from "../fragments";
 
 const today = new Date().toISOString().slice(0, 10).replace(/-/g, ""); // Today date in YYYYMMDD string
 
@@ -33,7 +30,12 @@ export default function PageHome() {
   } = useEvents(firestore, queries, city);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-screen h-screen place-content-center grid grid-flow-col gap-3">
+        <IconPreloader className="w-6 h-6 stroke-primary-500" />{" "}
+        <p className="font-medium">Loading</p>
+      </div>
+    );
   }
 
   if (isError) {
@@ -42,34 +44,38 @@ export default function PageHome() {
 
   const groupedEvents = groupData(events, "Category");
 
-  return (
-    <Scaffold
-      padding={6}
-      appBar={
-        <AppBar
-          sticky
-          background="material"
-          leading={
-            <p className="font-bold text-xl text-primary-500">pandaal</p>
-          }
-          actions={
-            <>
-              <Button buttonStyle="action" Icon={IconNotificationsFill} />
-              <Button buttonStyle="badge">
-                <img
-                  src="https://unsplash.com/photos/mEZ3PoFGs_k/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8OXx8aGVhZHNob3R8ZW58MHx8fHwxNjgyMTQ1OTM2&force=true&w=640"
-                  className="w-14 h-14 object-cover"
-                />
-              </Button>
-            </>
-          }
-        />
+  const locationBar = (
+    <Button
+      label={city}
+      Icon={IconLocationEdit}
+      buttonStyle="cardSecondary"
+      className="mt-4 md:mt-0 md:w-[50vw] lg:w-[30vw]"
+    />
+  );
+
+  const topBar = (
+    <AppBar
+      sticky
+      background="material"
+      leading={<p className="font-bold text-xl text-primary-500">pandaal</p>}
+      center={<div className="hidden-mobile flex flex-col">{locationBar}</div>}
+      actions={
+        <>
+          <Button buttonStyle="action" Icon={IconNotificationsFill} />
+          <UserBadge />
+        </>
       }
     >
-      {Object.keys(groupedEvents).map((category) => {
+      <div className="hidden-desktop flex flex-col">{locationBar}</div>
+    </AppBar>
+  );
+
+  return (
+    <Scaffold padding={6} appBar={topBar}>
+      {Object.keys(groupedEvents).map((category, index) => {
         return (
-          <div className="flex gap-4 flex-col">
-            <Text headingLevel={6}>{category}</Text>
+          <div className="flex gap-4 flex-col pb-6" key={index}>
+            <p className="font-semibold uppercase">{category}</p>
             {groupedEvents[category].map((event: any) => (
               <EventCard event={event} />
             ))}

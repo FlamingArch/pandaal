@@ -36,3 +36,5 @@ export const useAppStore = create<AppStoreData>((set) => ({
   auth: getAuth(app),
   functions: getFunctions(app),
 }));
+
+export default useAppStore;

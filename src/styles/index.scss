@@ -10,6 +10,10 @@
   user-select: none;
 }
 
+.root {
+  overflow: hidden;
+}
+
 .dim-behind {
   box-shadow: 0 0 0 100vmax rgba($color: #000000, $alpha: 0.6);
 }
@@ -19,7 +23,11 @@
 }
 
 .card {
-  @apply rounded-3xl shadow-2xl  bg-white;
+  @apply rounded-3xl shadow-2xl bg-white;
+}
+
+.col {
+  @apply flex flex-col p-6;
 }
 
 .smooth {

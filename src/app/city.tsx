@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/router";
-import { AppBar, Button, Input, Scaffold } from "../components";
+import { AppBar, Button, Scaffold } from "../components";
 import { IconBack } from "../components/icons";
 
 import { useAppStore } from "../hooks/useAppStore";

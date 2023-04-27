@@ -52,7 +52,7 @@ export default function PageHome() {
       label={city}
       Icon={IconLocationEdit}
       buttonStyle="cardSecondary"
-      className="mt-4 md:mt-0 md:w-[50vw] lg:w-[30vw]"
+      className="mt-4 md:mt-0 md:w-[50vw] lg:w-[30vw] font-medium"
       onClick={() => navigate({ to: "city" })}
     />
   );

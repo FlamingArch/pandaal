@@ -6,7 +6,7 @@ import {
   Input,
   Page,
 } from "../components";
-import { IconPhone } from "../components/icons";
+import { IconPhone, IconPreloader } from "../components/icons";
 import {
   Branding,
   Legal,
@@ -38,10 +38,12 @@ export default function PageSignIn() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [codeSent, setCodeSent] = useState<boolean | null>(null);
   const [response, setResponse] = useState<ConfirmationResult | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => console.log(phoneNumber), [phoneNumber]);
 
   const sendCodeHandler = () => {
+    setLoading(true);
     const recaptchaVerifier = new RecaptchaVerifier(
       "rcv",
       {
@@ -55,6 +57,7 @@ export default function PageSignIn() {
       (result) => {
         setResponse(result);
         setCodeSent(true);
+        setLoading(false);
       }
     );
   };
@@ -69,10 +72,13 @@ export default function PageSignIn() {
     <Button
       onClick={sendCodeHandler}
       disabled={
-        phoneNumber.length != 10 || !constants.regexOnlyDigits.test(phoneNumber)
+        loading ||
+        phoneNumber.length != 10 ||
+        !constants.regexOnlyDigits.test(phoneNumber)
       }
       buttonStyle="emphasis"
     >
+      {loading && <IconPreloader className="w-6 h-6 stroke-white" />}
       Send Code
     </Button>
   );
@@ -109,7 +115,7 @@ export default function PageSignIn() {
       <VerifySignInCode
         codeSent={!!codeSent}
         phoneNumber={"+91 " + phoneNumber}
-        onClose={() => setCodeSent(false)}
+        onClose={() => navigate({ to: "/signin", replace: true })}
         onVerifyCode={verifyCode}
         onError={(e) => console.log(e)}
       />

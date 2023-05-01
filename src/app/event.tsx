@@ -12,7 +12,6 @@ import { parseHTML } from "../functions";
 
 import useEvent from "../hooks/useEvent";
 import { useNavigate, useParams } from "@tanstack/router";
-import { useEffect } from "react";
 
 export default function PageEvent() {
   const { eventId } = useParams();
@@ -26,7 +25,7 @@ export default function PageEvent() {
     isLoading,
     isError,
     error,
-  } = useEvent(firestore, eventId);
+  } = useEvent(firestore, eventId!);
 
   if (isLoading) {
     return (

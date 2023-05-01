@@ -12,6 +12,7 @@ import { parseHTML } from "../functions";
 
 import useEvent from "../hooks/useEvent";
 import { useNavigate, useParams } from "@tanstack/router";
+import { useEffect } from "react";
 
 export default function PageEvent() {
   const { eventId } = useParams();
@@ -116,7 +117,7 @@ export default function PageEvent() {
       bottomAppBar={bottomAppBar}
     >
       <div
-        className="card col responsive gap-2 fadeInBottom opacity-0"
+        className="card col responsive gap-2 fadeInBottom"
         // style={{ animationDelay: "0ms", animationDuration: "500ms" }}
       >
         <Text headingLevel={5}>{eventData.title}</Text>

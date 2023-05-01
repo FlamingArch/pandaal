@@ -5,7 +5,7 @@ import { User } from "firebase/auth";
 import { IconUser } from "../components/icons";
 import { useNavigate } from "@tanstack/router";
 
-export default function userBadge({ user }: { user?: User }) {
+export default function userBadge({ user }: { user?: User | null }) {
   const navigate = useNavigate({ from: "/" });
   const [userExpanded, setUserExpanded] = useState(false);
 
@@ -39,7 +39,7 @@ export default function userBadge({ user }: { user?: User }) {
             exit={{ width: 0, opacity: 0 }}
           >
             <span className="px-4 font-medium">
-              {user ? user.displayName : "Sign In"}
+              {user ? user.displayName?.split(" ")[0] : "Sign In"}
             </span>
           </motion.p>
         )}

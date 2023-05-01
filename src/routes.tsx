@@ -9,6 +9,7 @@ import PageHome from "./app/home";
 import PageCity from "./app/city";
 import PageSignIn from "./app/signIn";
 import PageEvent from "./app/event";
+import PageInstructions from "./app/instructions";
 
 function Root() {
   return <Outlet />;
@@ -42,14 +43,26 @@ const eventRoute = new Route({
   component: PageEvent,
 });
 
+const instructionsRoute = new Route({
+  getParentRoute: () => eventRoute,
+  path: "instructions",
+  component: PageInstructions,
+});
+
 const routeTree = rootRoute.addChildren([
   homeRoute,
   cityRoute,
   signInRoute,
-  eventRoute,
+  eventRoute.addChildren([instructionsRoute]),
 ]);
 
 const router = new Router({ routeTree });
+
+declare module "@tanstack/router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 export default function AppRoutes() {
   return <RouterProvider router={router} />;

@@ -19,10 +19,12 @@ const queries: any = [
 ];
 
 export default function PageHome() {
-  const { firestore, city } = useAppStore((state) => ({
+  const { firestore, auth, city } = useAppStore((state) => ({
     firestore: state.firestore,
     city: state.city,
+    auth: state.auth,
   }));
+
   const {
     data: events,
     isLoading,
@@ -66,7 +68,7 @@ export default function PageHome() {
       actions={
         <>
           <Button buttonStyle="action" Icon={IconNotificationsFill} />
-          <UserBadge />
+          <UserBadge user={auth.currentUser} />
         </>
       }
     >

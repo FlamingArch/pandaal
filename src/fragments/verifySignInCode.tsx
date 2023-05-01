@@ -7,7 +7,7 @@ type VerifySignInCodeProps = {
   codeSent: boolean;
   phoneNumber: string;
   onClose: () => void;
-  onVerifyCode: () => void;
+  onVerifyCode: (code: string) => void;
   onError: (error: string) => void;
 };
 
@@ -56,8 +56,8 @@ export default function VerifySignInCode(props: VerifySignInCodeProps) {
         <div className="hidden md:flex flex-grow"></div>
 
         <Button
-          onClick={props.onVerifyCode}
-          disabled={code.length !== 10 && constants.regexOnlyDigits.test(code)}
+          onClick={() => props.onVerifyCode(code)}
+          disabled={code.length !== 6 && constants.regexOnlyDigits.test(code)}
           buttonStyle="emphasis"
         >
           <Text headingLevel={0.25}>Verify Code</Text>

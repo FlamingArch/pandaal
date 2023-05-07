@@ -44,8 +44,8 @@ const eventRoute = new Route({
 });
 
 const instructionsRoute = new Route({
-  getParentRoute: () => eventRoute,
-  path: "instructions",
+  getParentRoute: () => rootRoute,
+  path: "instructions/$eventId",
   component: PageInstructions,
 });
 
@@ -53,7 +53,8 @@ const routeTree = rootRoute.addChildren([
   homeRoute,
   cityRoute,
   signInRoute,
-  eventRoute.addChildren([instructionsRoute]),
+  eventRoute,
+  instructionsRoute,
 ]);
 
 const router = new Router({ routeTree });

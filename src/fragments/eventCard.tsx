@@ -1,25 +1,6 @@
 import { useNavigate } from "@tanstack/router";
 import _ from "lodash";
-
-function convertToTextDate(date: string) {
-  const year = date.slice(0, 4);
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ][Number.parseInt(date.slice(4, 6)) - 1].slice(0, 3);
-  const day = date.slice(6, 8);
-  return `${month} ${day}, ${year}`;
-}
+import { convertToTextDate } from "../functions";
 
 export default function EventCard({ event }: { event: any }) {
   const navigate = useNavigate({ from: "/" });

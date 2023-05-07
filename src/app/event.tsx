@@ -61,9 +61,12 @@ export default function PageEvent() {
         </div>
       }
       actions={
-        <button className="rounded-xl bg-primary-500 hover:bg-primary-600 shadow-lg shadow-primary-400 hover:shadow-xl transition p-3 px-16 text-white">
-          <Text headingLevel={0.25}>Register</Text>
-        </button>
+        <Button
+          buttonStyle="emphasis"
+          label="Register"
+          className="w-64"
+          onClick={() => navigate({ to: `/instructions/${eventId}` })}
+        ></Button>
       }
     />
   );

@@ -61,12 +61,22 @@ export default function AppBar({
       case "clear":
         return "bg-transparent";
       case "gradient":
-        return "bg-gradient-to-b from-[#FFFFFFAA] to-transparent";
+        return (
+          "from-[#FFFFFFCC] to-transparent " +
+          (sticky === "bottom" ? "bg-gradient-to-t" : "bg-gradient-to-b")
+        );
       case "gradientReverse":
-        return "bg-gradient-to-b from-[#000000AA] to-transparent";
+        return (
+          "from-[#000000CC] to-transparent " +
+          (sticky === "bottom" ? "bg-gradient-to-t" : "bg-gradient-to-b")
+        );
       case "gradientBlack":
-        return "bg-gradient-to-b from-[#000000AA] to-transparent";
+        return (
+          "from-[#000000CC] to-transparent " +
+          (sticky === "bottom" ? "bg-gradient-to-t" : "bg-gradient-to-b")
+        );
       case "material":
+      default:
         return "bg-white bg-opacity-80 backdrop-filter backdrop-saturate-150 backdrop-blur-lg";
       case "materialShadow":
         return "bg-white bg-opacity-80 backdrop-filter backdrop-saturate-150 backdrop-blur-lg shadow-lg";
@@ -74,7 +84,6 @@ export default function AppBar({
         return "bg-white";
       case "shadow":
         return "bg-white shadow-lg";
-      default:
         return "bg-white";
     }
   };

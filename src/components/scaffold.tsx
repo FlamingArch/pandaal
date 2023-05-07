@@ -6,6 +6,8 @@ type ScaffoldProps = {
   trailing?: React.ReactNode;
   sidebar?: React.ReactNode;
   backdrop?: React.ReactNode;
+  scrollRef?: React.LegacyRef<HTMLDivElement> | undefined;
+  responsive?: boolean;
   padding?:
     | number
     | { top?: number; bottom?: number; left?: number; right?: number };
@@ -18,13 +20,21 @@ type ScaffoldProps = {
 
 export default function Scaffold(props: ScaffoldProps) {
   return (
-    <div className={"flex flex-col w-screen min-h-screen " + props.className}>
+    <div
+      className={"flex flex-col w-screen min-h-screen " + props.className}
+      ref={props.scrollRef}
+    >
       <div className="-z-10 fixed w-screen h-screen grid place-content-center">
         {props.backdrop}
       </div>
       {props.appBar}
       {props.leading}
-      <div className="flex flex-grow items-stretch">
+      <div
+        className={
+          "flex flex-grow items-stretch " +
+          (props.responsive ? "responsive" : "")
+        }
+      >
         {props.sidebar}
         <div
           className="flex flex-col flex-grow overflow-hidden"

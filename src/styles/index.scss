@@ -6,7 +6,6 @@
 
 * {
   font-family: "Poppins", sans-serif;
-
   user-select: none;
 }
 
@@ -67,4 +66,16 @@
 
 .hide-last:last-child {
   display: hidden;
+}
+
+.steps {
+  @apply flex justify-between text-gray-400 cursor-default;
+
+  .active {
+    @apply text-primary-500 font-medium;
+  }
+}
+
+.highlight-anchor a {
+  @apply font-semibold text-primary-500;
 }

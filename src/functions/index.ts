@@ -5,6 +5,7 @@ export { default as groupData } from "./groupData";
 export { default as signInGoogle } from "./signInGoogle";
 export { default as signOut } from "./signOut";
 export { default as parseHTML } from "./parseHTML";
+export { default as convertToTextDate } from "./convertToTextDate";
 // export { default as userDocExists } from "./userDocExists";
 // export { default as signinPhoneSendCode } from "./signinPhoneSendCode";
 // export { default as signinPhoneVerifyCode } from "./signinPhoneVerifyCode";

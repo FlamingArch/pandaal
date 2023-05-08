@@ -21,20 +21,6 @@ export default function PageInstructions() {
     error,
   } = useEvent(firestore, eventId!);
 
-  if (!event?.exists) {
-    navigate({ to: "/" });
-  }
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  const onScroll = (e: Event) => {
-    console.log(ref.current);
-  };
-
-  useEffect(() => {
-    ref.current?.addEventListener("scroll", onScroll);
-  }, []);
-
   const appBar = (
     <div className="z-50 top-0 sticky">
       <AppBar
@@ -52,9 +38,9 @@ export default function PageInstructions() {
       >
         <ul className="steps responsive stick top-0">
           <li className="active">Instructions</li>
-          <li>Sign In</li>
-          <li>Details</li>
+          <li>Register</li>
           <li>Payment</li>
+          <li>Confirmation</li>
         </ul>
         <Text className="responsive" headingLevel={4} bold>
           How to Register?
@@ -65,30 +51,41 @@ export default function PageInstructions() {
 
   const bottomAppBar = (
     <AppBar sticky="bottom" background="gradient">
-      <Button buttonStyle="emphasis" label="Register" className="responsive" />
+      <Button
+        buttonStyle="emphasis"
+        label="Continue"
+        className="responsive"
+        onClick={() => navigate({ to: "/register/$eventId" })}
+      />
     </AppBar>
   );
 
-  const eventCard = <EventBanner event={event?.data} />;
+  if (isLoading) {
+    return (
+      <Scaffold appBar={appBar} className="fadeInRight animate-spin">
+        <div className="flex h-full items-center gap-2 mx-auto pt-12 ">
+          <IconPreloader className="w-6 h-6 stroke-primary-500" /> Loading
+        </div>
+      </Scaffold>
+    );
+  }
+
+  if (!event?.exists) {
+    navigate({ to: "/" });
+  }
 
   return (
     <Scaffold
       responsive
       appBar={appBar}
       bottomAppBar={bottomAppBar}
-      leading={eventCard}
+      leading={<EventBanner className="fadeIn" event={event?.data} />}
+      className="fadeInRight animate-spin"
       gap={6}
-      scrollRef={ref}
     >
-      {isLoading ? (
-        <div className="flex gap-2 mx-auto pt-12 ">
-          <IconPreloader className="w-6 h-6 stroke-primary-500" /> Loading
-        </div>
-      ) : (
-        <p className="highlight-anchor">
-          {parseHTML(event?.data?.howToRegisterHtmlText)}
-        </p>
-      )}
+      <p className="highlight-anchor fadeIn">
+        {parseHTML(event?.data?.howToRegisterHtmlText)}
+      </p>
     </Scaffold>
   );
 }

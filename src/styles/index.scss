@@ -74,8 +74,11 @@
   .active {
     @apply text-primary-500 font-medium;
   }
+  .complete {
+    @apply text-black;
+  }
 }
 
 .highlight-anchor a {
-  @apply font-semibold text-primary-500;
+  @apply font-semibold text-primary-500 hover:underline;
 }

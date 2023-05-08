@@ -10,6 +10,7 @@ import PageCity from "./app/city";
 import PageSignIn from "./app/signIn";
 import PageEvent from "./app/event";
 import PageInstructions from "./app/instructions";
+import PageRegister from "./app/register";
 
 function Root() {
   return <Outlet />;
@@ -49,12 +50,19 @@ const instructionsRoute = new Route({
   component: PageInstructions,
 });
 
+const registerRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "register/$eventId",
+  component: PageRegister,
+});
+
 const routeTree = rootRoute.addChildren([
   homeRoute,
   cityRoute,
   signInRoute,
   eventRoute,
   instructionsRoute,
+  registerRoute,
 ]);
 
 const router = new Router({ routeTree });

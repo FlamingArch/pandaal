@@ -1,8 +1,14 @@
 import { convertToTextDate } from "../functions";
 
-export default function EventBanner({ event }: { event?: any }) {
+export default function EventBanner({
+  event,
+  className,
+}: {
+  event?: any;
+  className?: string;
+}) {
   return (
-    <div className="relative overflow-hidden">
+    <div className={"relative overflow-hidden " + className}>
       <div className="absolute bg-black -z-10 w-full">
         <img
           src={event?.bannerURL}

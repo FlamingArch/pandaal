@@ -1,14 +1,16 @@
-import { AppBar, Button, Scaffold, Text } from "../components";
-import { useAppStore, useEvent } from "../hooks";
+import { useMemo } from "react";
+import { AppBar, Button, Scaffold, StepsList, Text } from "../components";
 import { IconBack, IconPreloader } from "../components/icons";
 import { useNavigate, useParams } from "@tanstack/router";
+import { useAppStore, useEvent } from "../hooks";
+import { ErrorCard, EventBanner } from "../fragments";
 import { parseHTML } from "../functions";
-import { useEffect, useRef } from "react";
-import { EventBanner } from "../fragments";
 
 export default function PageInstructions() {
-  const { eventId } = useParams();
   const navigate = useNavigate();
+  const { eventId } = useParams();
+
+  if (!eventId) navigate({ to: "/" });
 
   const { firestore } = useAppStore((state) => ({
     firestore: state.firestore,
@@ -21,70 +23,85 @@ export default function PageInstructions() {
     error,
   } = useEvent(firestore, eventId!);
 
-  const appBar = (
-    <div className="z-50 top-0 sticky">
-      <AppBar
-        responsive
-        gap={6}
-        background="materialShadow"
-        leading={
-          <Button
-            buttonStyle="action"
-            Icon={IconBack}
-            label="Event"
-            onClick={() => navigate({ to: `/${eventId}` })}
+  const appBar = useMemo(
+    () => (
+      <div className="z-40 sticky top-0">
+        <AppBar
+          gap={4}
+          responsive
+          background="materialShadow"
+          leading={
+            <Button
+              label="Event"
+              Icon={IconBack}
+              buttonStyle="action"
+              onClick={() => navigate({ to: `/${eventId}` })}
+            />
+          }
+        >
+          <StepsList
+            elements={["Instructions", "Register", "Payment", "Confirmation"]}
+            activeIndex={0}
           />
-        }
-      >
-        <ul className="steps responsive stick top-0">
-          <li className="active">Instructions</li>
-          <li>Register</li>
-          <li>Payment</li>
-          <li>Confirmation</li>
-        </ul>
-        <Text className="responsive" headingLevel={4} bold>
-          How to Register?
-        </Text>
-      </AppBar>
-    </div>
-  );
-
-  const bottomAppBar = (
-    <AppBar sticky="bottom" background="gradient">
-      <Button
-        buttonStyle="emphasis"
-        label="Continue"
-        className="responsive"
-        onClick={() => navigate({ to: "/register/$eventId" })}
-      />
-    </AppBar>
+        </AppBar>
+      </div>
+    ),
+    []
   );
 
   if (isLoading) {
     return (
-      <Scaffold appBar={appBar} className="fadeInRight animate-spin">
-        <div className="flex h-full items-center gap-2 mx-auto pt-12 ">
+      <Scaffold appBar={appBar}>
+        <div className="flex mx-auto h-full items-center gap-4">
           <IconPreloader className="w-6 h-6 stroke-primary-500" /> Loading
         </div>
       </Scaffold>
     );
   }
 
-  if (!event?.exists) {
+  if (isError) {
+    return (
+      <Scaffold appBar={appBar} responsive>
+        <ErrorCard error={error} />
+      </Scaffold>
+    );
+  }
+
+  if (!event.exists) {
     navigate({ to: "/" });
   }
+
+  const bottomAppBar = (
+    <AppBar sticky="bottom" background="gradient">
+      <Button
+        className="responsive"
+        buttonStyle="emphasis"
+        onClick={() => navigate({ to: "/register/$eventId" })}
+      >
+        Continue
+      </Button>
+    </AppBar>
+  );
 
   return (
     <Scaffold
       responsive
       appBar={appBar}
       bottomAppBar={bottomAppBar}
-      leading={<EventBanner className="fadeIn" event={event?.data} />}
-      className="fadeInRight animate-spin"
-      gap={6}
+      leading={<EventBanner className="fadeIn" event={event.data} />}
+      gap={4}
     >
+      <Text headingLevel={5} className="fadeIn" bold>
+        How to Register?
+      </Text>
       <p className="highlight-anchor fadeIn">
-        {parseHTML(event?.data?.howToRegisterHtmlText)}
+        {parseHTML(event.data?.howToRegisterHtmlText)}
+      </p>
+      <Text className="pt-6 fadeIn uppercase font-semibold">
+        Terms and Conditions
+      </Text>
+      <p className="highlight-anchor fadeIn">
+        {parseHTML(event.data?.termsAndConditions)}
       </p>
     </Scaffold>
   );

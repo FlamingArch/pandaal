@@ -6,3 +6,5 @@ export { default as SignInPromptText } from "./signInPromptText";
 export { default as UserBadge } from "./userBadge";
 export { default as EventCard } from "./eventCard";
 export { default as EventBanner } from "./eventBanner";
+export { default as ErrorCard } from "./errorCard";
+export { default as UserCard } from "./userCard";

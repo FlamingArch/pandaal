@@ -141,7 +141,7 @@ export default function AppBar({
             className="flex items-center"
           >
             {leading}
-            {title}
+            <div className="font-semibold">{title}</div>
           </div>
           <div className="flex items-center flex-grow justify-center">
             {center}

@@ -6,3 +6,4 @@ export { default as Button } from "./button";
 export { default as Text } from "./text";
 export { default as ColorBackdrop } from "./colorBackdrop";
 export { default as Page } from "./page";
+export { default as StepsList } from "./stepsList";

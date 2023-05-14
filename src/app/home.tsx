@@ -1,4 +1,4 @@
-import { where } from "firebase/firestore";
+import { or, where } from "firebase/firestore";
 import { AppBar, Button, Scaffold } from "../components";
 import { groupData } from "../functions";
 import { useAppStore, useEvents } from "../hooks";

@@ -28,6 +28,7 @@ export default function PageInstructions() {
       <div className="z-40 sticky top-0">
         <AppBar
           gap={4}
+          padding={{ right: 0 }}
           responsive
           background="materialShadow"
           leading={
@@ -40,6 +41,7 @@ export default function PageInstructions() {
           }
         >
           <StepsList
+            className="pr-6"
             elements={["Instructions", "Register", "Payment", "Confirmation"]}
             activeIndex={0}
           />

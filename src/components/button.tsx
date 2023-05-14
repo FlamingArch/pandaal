@@ -16,7 +16,8 @@ type ButtonStyles =
   | "emphasisAction"
   | "badge"
   | "card"
-  | "cardSecondary";
+  | "cardSecondary"
+  | "cardSecondaryReverse";
 
 // TODO: Add disabled button styles
 const buttonStyles = {
@@ -65,6 +66,11 @@ const buttonStyles = {
       "transition disabled:opacity-50 disabled:cursor-not-allowed rounded-full bg-primary-50 bg-opacity-80 backdrop-blur backdrop-saturate-200 hover:bg-primary-100 text-black p-1 fill-primary-500 hover:fill-primary-700 flex flex-row-reverse justify-between items-center pl-4",
     icon: "bg-white rounded-full p-3",
   },
+  cardSecondaryReverse: {
+    button:
+      "transition disabled:opacity-50 disabled:cursor-not-allowed rounded-full bg-primary-50 bg-opacity-80 backdrop-blur backdrop-saturate-200 hover:bg-primary-100 text-black p-1 fill-primary-500 hover:fill-primary-700 flex flex-row gap-4 items-center pr-4",
+    icon: "bg-white rounded-full p-3",
+  },
 };
 
 function getButtonStyles(style: ButtonStyles) {
@@ -88,6 +94,8 @@ function getButtonStyles(style: ButtonStyles) {
       return buttonStyles.card;
     case "cardSecondary":
       return buttonStyles.cardSecondary;
+    case "cardSecondaryReverse":
+      return buttonStyles.cardSecondaryReverse;
   }
 }
 

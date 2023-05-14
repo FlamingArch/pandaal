@@ -18,7 +18,7 @@ export default function EventBanner({
       <div className="responsive p-6 z-10 flex text-white">
         <img
           src={event?.bannerURL}
-          className="rounded-xl w-[120px] aspect-[9/12]"
+          className="rounded-xl w-[120px] aspect-[9/12] h-fit"
         ></img>
         <div className="flex flex-col p-6 gap-4">
           <p className="text-xl font-semibold">{event?.title}</p>

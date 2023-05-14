@@ -2,7 +2,9 @@ import { AppBar, Button, Scaffold, Text } from "../components";
 import {
   IconBack,
   IconClock,
-  IconLocation,
+  IconFavouriteFill,
+  IconLocationArrow,
+  IconPlus,
   IconPreloader,
   IconShareAlt,
   IconStreaming,
@@ -48,10 +50,9 @@ export default function PageEvent() {
 
   const bottomAppBar = (
     <AppBar
-      sticky="bottom"
       responsive
       background="materialShadow"
-      className="slideInBottom"
+      className="slideInBottom fixed z-10 bottom-0 left-0 right-0"
       leading={
         <div className="flex flex-col">
           <Text accented>Price</Text>
@@ -117,15 +118,17 @@ export default function PageEvent() {
       appBar={appBar}
       leading={card}
       bottomAppBar={bottomAppBar}
+      padding={0}
     >
       <div
-        className="card col responsive gap-2 fadeInBottom"
+        className="card col responsive gap-4 fadeInBottom flex-grow"
         // style={{ animationDelay: "0ms", animationDuration: "500ms" }}
       >
-        <Text headingLevel={5}>{eventData.title}</Text>
-        <Text accented className="font-medium">
-          {eventData.organisationName}
-        </Text>
+        <div className="border w-8 border-black mx-auto"></div>
+
+        <Text headingLevel={6}>{eventData.title}</Text>
+
+        <p className="font-medium">{eventData.Category}</p>
 
         <div className="flex gap-2 items-center pb-2">
           <IconClock className="w-6 h-6 fill-primary-500" />
@@ -136,22 +139,73 @@ export default function PageEvent() {
             {eventData.endTime && " " + eventData.endTime}
           </Text>
         </div>
-        <div className="flex gap-2 items-center pb-2">
-          {eventData.onOff == 1 ? (
-            <>
-              <IconStreaming className="w-6 h-6 fill-primary-500" />
-              <Text>{eventData.onlinePlatform}</Text>
-            </>
-          ) : (
-            <>
-              <IconLocation className="w-6 h-6 fill-primary-500" />
-              <Text>{eventData.offlineLocationAddress}</Text>
-            </>
-          )}
+
+        <p className="font-medium">Location</p>
+        <Button
+          buttonStyle="cardSecondary"
+          className="p-6 rounded-[16px] text-primary-500 font-medium"
+          label={
+            eventData.onOff == 1
+              ? eventData.onlinePlatform
+              : eventData.offlineLocationAddress
+          }
+          Icon={eventData.onOff == 1 ? IconStreaming : IconLocationArrow}
+        />
+
+        <p className="font-medium">Options</p>
+
+        <div className="flex gap-4">
+          <Button
+            className="p-6 max-w-[167px] rounded-[16px] flex-col text-[#823F73] bg-[#FDF4FD] hover:bg-[#EFDDEF] fill-[#823F73] hover:fill-[#612354] font-medium aspect-square"
+            buttonStyle="cardSecondary"
+            label="Add to Favourites"
+            Icon={IconFavouriteFill}
+          />
+          <Button
+            className="p-6 max-w-[167px] rounded-[16px] flex-col text-primary-500 font-medium aspect-square"
+            buttonStyle="cardSecondary"
+            label="Add to Favourites"
+            Icon={IconFavouriteFill}
+          />
         </div>
 
-        <Text headingLevel={6}>Event Description</Text>
+        <p className="font-medium">Event Description</p>
         <Text>{parseHTML(eventData.description)}</Text>
+
+        <p className="font-medium">Connect With Us On</p>
+        <Button
+          className="bg-pink-50 hover:bg-pink-100 fill-pink-500 hover:fill-pink-700 font-medium text-pink-500"
+          buttonStyle="cardSecondaryReverse"
+          label="Instagram"
+          Icon={eventData.onOff == 1 ? IconStreaming : IconLocationArrow}
+        />
+        <Button
+          className="bg-blue-50 hover:bg-blue-100 fill-blue-500 hover:fill-blue-700 font-medium text-blue-500"
+          buttonStyle="cardSecondaryReverse"
+          label="Mail"
+          Icon={eventData.onOff == 1 ? IconStreaming : IconLocationArrow}
+        />
+        <Button
+          className="bg-green-50 hover:bg-green-100 fill-green-500 hover:fill-green-700 font-medium text-green-500"
+          buttonStyle="cardSecondaryReverse"
+          label="Website"
+          Icon={eventData.onOff == 1 ? IconStreaming : IconLocationArrow}
+        />
+
+        <p className="font-medium">Organise With Us</p>
+        <Button
+          buttonStyle="card"
+          className="p-6 rounded-[16px] text-primary-500"
+          // label="pandaal"
+          Icon={IconPlus}
+        >
+          <div className="flex flex-col items-start">
+            <p className="font-bold">pandaal</p>
+            <p className="text-lg">List your own event</p>
+          </div>
+        </Button>
+
+        <div className="h-16" />
       </div>
       <div className="flex-grow" />
     </Scaffold>

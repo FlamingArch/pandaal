@@ -60,7 +60,7 @@ export default function VerifySignInCode(props: VerifySignInCodeProps) {
           disabled={code.length !== 6 && constants.regexOnlyDigits.test(code)}
           buttonStyle="emphasis"
         >
-          <Text headingLevel={0.25}>Verify Code</Text>
+          <p className="text-white font-medium">Verify Code</p>
         </Button>
       </div>
     </div>

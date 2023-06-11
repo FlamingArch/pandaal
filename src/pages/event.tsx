@@ -1,19 +1,22 @@
-import { AppBar, Button, Scaffold, Text } from "../components";
+import { AppBar, Button, Page, Text } from "../components";
 import {
   IconBack,
   IconClock,
   IconFavouriteFill,
+  IconInstagram,
   IconLocationArrow,
+  IconMail,
   IconPlus,
   IconPreloader,
   IconShareAlt,
   IconStreaming,
+  IconWeb,
 } from "../components/icons";
 import { useAppStore } from "../hooks/useAppStore";
 import { parseHTML } from "../functions";
 
 import useEvent from "../hooks/useEvent";
-import { useNavigate, useParams } from "@tanstack/router";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function PageEvent() {
   const { eventId } = useParams();
@@ -29,17 +32,21 @@ export default function PageEvent() {
     error,
   } = useEvent(firestore, eventId!);
 
+  if (event?.exists) document.title = event.data!.title;
+
   if (isLoading) {
     return (
-      <div className="w-screen h-screen place-content-center grid grid-flow-col gap-3">
-        <IconPreloader className="w-6 h-6 stroke-primary-500" />{" "}
-        <p className="font-medium">Loading</p>
-      </div>
+      <Page contentClassName="justify-center items-center">
+        <div className="flex gap-2">
+          <IconPreloader className="w-6 h-6 stroke-primary-500 nodark:stroke-white" />
+          <p className="font-medium">Loading</p>
+        </div>
+      </Page>
     );
   }
 
   if (isError) {
-    return <Scaffold>{`Error fetching event: ${error}`}</Scaffold>;
+    return <Page>{`Error fetching event: ${error}`}</Page>;
   }
 
   if (!event.exists) {
@@ -51,7 +58,6 @@ export default function PageEvent() {
   const bottomAppBar = (
     <AppBar
       responsive
-      background="materialShadow"
       className="slideInBottom fixed z-10 bottom-0 left-0 right-0"
       leading={
         <div className="flex flex-col">
@@ -66,8 +72,8 @@ export default function PageEvent() {
           buttonStyle="emphasis"
           label="Register"
           className="w-64"
-          onClick={() => navigate({ to: `/instructions/${eventId}` })}
-        ></Button>
+          onClick={() => navigate(`/${eventId}/instructions`)}
+        />
       }
     />
   );
@@ -76,24 +82,22 @@ export default function PageEvent() {
     <AppBar
       sticky
       responsive
-      background="gradientBlack"
-      className="slideInTop"
+      backdrop="gradientBlack"
+      className="slideInTop z-10"
       padding={{ bottom: 10 }}
       leading={
         <Button
-          onClick={() => navigate({ to: "/" })}
-          className="bg-opacity-0 fill-white hover:fill-white rounded-xl hover:bg-opacity-10"
-        >
-          <IconBack className="w-6 h-6" />
-        </Button>
+          buttonStyle="actionSecondaryTransparentWhite"
+          onClick={() => navigate(-1)}
+          Icon={IconBack}
+        />
       }
       actions={
         <Button
-          className="bg-opacity-0 fill-white hover:fill-white rounded-xl hover:bg-opacity-10"
+          buttonStyle="actionSecondaryTransparentWhite"
           onClick={() => console.log("TODO: Go back to share page")}
-        >
-          <IconShareAlt className="w-6 h-6" />
-        </Button>
+          Icon={IconShareAlt}
+        />
       }
     ></AppBar>
   );
@@ -113,7 +117,7 @@ export default function PageEvent() {
   );
 
   return (
-    <Scaffold
+    <Page
       backdrop={backdrop}
       appBar={appBar}
       leading={card}
@@ -140,10 +144,11 @@ export default function PageEvent() {
           </Text>
         </div>
 
-        <p className="font-medium">Location</p>
+        <p className="font-medium">
+          {eventData.onOff == 1 ? "Platform" : "Location"}
+        </p>
         <Button
-          buttonStyle="cardSecondary"
-          className="p-6 rounded-[16px] text-primary-500 font-medium"
+          buttonStyle="cardBigSecondaryReverse"
           label={
             eventData.onOff == 1
               ? eventData.onlinePlatform
@@ -156,16 +161,14 @@ export default function PageEvent() {
 
         <div className="flex gap-4">
           <Button
-            className="p-6 max-w-[167px] rounded-[16px] flex-col text-[#823F73] bg-[#FDF4FD] hover:bg-[#EFDDEF] fill-[#823F73] hover:fill-[#612354] font-medium aspect-square"
-            buttonStyle="cardSecondary"
+            buttonStyle="cardSquareSecondary"
             label="Add to Favourites"
             Icon={IconFavouriteFill}
           />
           <Button
-            className="p-6 max-w-[167px] rounded-[16px] flex-col text-primary-500 font-medium aspect-square"
-            buttonStyle="cardSecondary"
-            label="Add to Favourites"
-            Icon={IconFavouriteFill}
+            buttonStyle="cardSquareSecondary"
+            label="Share"
+            Icon={IconShareAlt}
           />
         </div>
 
@@ -174,40 +177,29 @@ export default function PageEvent() {
 
         <p className="font-medium">Connect With Us On</p>
         <Button
-          className="bg-pink-50 hover:bg-pink-100 fill-pink-500 hover:fill-pink-700 font-medium text-pink-500"
-          buttonStyle="cardSecondaryReverse"
+          buttonStyle="cardSecondary"
           label="Instagram"
-          Icon={eventData.onOff == 1 ? IconStreaming : IconLocationArrow}
+          Icon={IconInstagram}
         />
-        <Button
-          className="bg-blue-50 hover:bg-blue-100 fill-blue-500 hover:fill-blue-700 font-medium text-blue-500"
-          buttonStyle="cardSecondaryReverse"
-          label="Mail"
-          Icon={eventData.onOff == 1 ? IconStreaming : IconLocationArrow}
-        />
-        <Button
-          className="bg-green-50 hover:bg-green-100 fill-green-500 hover:fill-green-700 font-medium text-green-500"
-          buttonStyle="cardSecondaryReverse"
-          label="Website"
-          Icon={eventData.onOff == 1 ? IconStreaming : IconLocationArrow}
-        />
+        <Button buttonStyle="cardSecondary" label="Mail" Icon={IconMail} />
+        <Button buttonStyle="cardSecondary" label="Website" Icon={IconWeb} />
 
         <p className="font-medium">Organise With Us</p>
         <Button
-          buttonStyle="card"
-          className="p-6 rounded-[16px] text-primary-500"
-          // label="pandaal"
+          buttonStyle="cardBigReverse"
           Icon={IconPlus}
-        >
-          <div className="flex flex-col items-start">
-            <p className="font-bold">pandaal</p>
-            <p className="text-lg">List your own event</p>
-          </div>
-        </Button>
+          className=""
+          label={
+            <div className="flex flex-col items-start text-white">
+              <span className="font-bold">pandaal</span>
+              <span className="text-lg">List your own event</span>
+            </div>
+          }
+        ></Button>
 
-        <div className="h-16" />
+        <div className="h-20" />
       </div>
       <div className="flex-grow" />
-    </Scaffold>
+    </Page>
   );
 }

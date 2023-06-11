@@ -3,22 +3,22 @@ import { Button } from "../components";
 import { AnimatePresence, motion } from "framer-motion";
 import { User } from "firebase/auth";
 import { IconUser } from "../components/icons";
-import { useNavigate } from "@tanstack/router";
+import { useNavigate } from "react-router-dom";
 
 export default function userBadge({ user }: { user?: User | null }) {
-  const navigate = useNavigate({ from: "/" });
+  const navigate = useNavigate();
   const [userExpanded, setUserExpanded] = useState(false);
 
   return (
     <div
-      className="flex items-center hover:bg-primary-50 rounded-xl cursor-pointer"
+      className="flex items-center hover:bg-primary-50 nodark:hover:bg-primary-800 nodark:hover:bg-opacity-70 rounded-xl cursor-pointer"
       onClick={() => {
-        if (!user) navigate({ to: "signin" });
+        if (!user) navigate("signin");
       }}
       onMouseLeave={() => setUserExpanded(false)}
     >
       <Button
-        buttonStyle={user ? "badge" : "emphasisAction"}
+        buttonStyle={user ? "badge" : "actionEmphasis"}
         onMouseEnter={() => setUserExpanded(true)}
         Icon={!user ? IconUser : undefined}
       >

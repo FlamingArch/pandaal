@@ -9,6 +9,10 @@
   user-select: none;
 }
 
+body {
+  @apply bg-white;
+}
+
 .root {
   overflow: hidden;
 }

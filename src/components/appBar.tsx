@@ -10,18 +10,20 @@ const appBarStylesClasses = {
   center: "flex-grow flex items-center justify-center",
   actions: "flex",
   primaryBar: "flex items-center",
-  heading: "flex text-xl flex-grow font-medium",
+  heading: "flex text-2xl font-bold flex-grow",
   primary: "p-3",
   backdrop: {
     clear: "",
-    gradient: "bg-gradient-to-b from-page dark:from-page-dark to-transparent",
+    gradient: "bg-gradient-to-b from-white nodark:from-black to-transparent",
     gradientReverse:
-      "bg-gradient-to-b from-page-dark dark:from-page to-transparent",
-    gradientBlack: "bg-gradient-to-b from-page-dark to-transparent",
-    material: "backdrop-blur-xl backdrop-saturate-150",
-    materialShadow: "backdrop-blur-xl backdrop-saturate-150 shadow-xl",
-    solid: "bg-page dark:bg-page-dark",
-    shadow: "bg-page dark:bg-page-dark shadow-xl",
+      "bg-gradient-to-b from-black nodark:from-white to-transparent",
+    gradientBlack: "bg-gradient-to-b from-dark to-transparent",
+    material:
+      "backdrop-blur-xl bg-white bg-opacity-50 nodark:bg-black nodark:bg-opacity-50 backdrop-saturate-150",
+    materialShadow:
+      "backdrop-blur-xl bg-white bg-opacity-50 nodark:bg-black nodark:bg-opacity-50 backdrop-saturate-150 shadow-xl",
+    solid: "bg-white nodark:bg-black",
+    shadow: "bg-white nodark:bg-black shadow-xl",
   },
 };
 
@@ -57,10 +59,10 @@ export default function AppBar({
           }rem`,
     padding:
       typeof padding == "number"
-        ? `${(padding ?? 4) / 4}rem`
-        : `${(padding?.top ?? 4) / 4}rem ${(padding?.right ?? 4) / 4}rem ${
-            (padding?.bottom ?? 4) / 4
-          }rem ${(padding?.left ?? 4) / 4}rem`,
+        ? `${(padding ?? 6) / 4}rem`
+        : `${(padding?.top ?? 6) / 4}rem ${(padding?.right ?? 6) / 4}rem ${
+            (padding?.bottom ?? 6) / 4
+          }rem ${(padding?.left ?? 6) / 4}rem`,
     margin:
       typeof margin == "number"
         ? `${(margin ?? 0) / 4}rem`
@@ -159,11 +161,11 @@ export default function AppBar({
           classNames?.container
         } ${responsiveStylesContainer} ${
           sticky === "bottom"
-            ? appBarStylesClasses.backdrop[background ?? "material"].replace(
+            ? appBarStylesClasses.backdrop[background ?? "clear"].replace(
                 "bg-gradient-to-b ",
                 "bg-gradient-to-t "
               )
-            : appBarStylesClasses.backdrop[background ?? "material"]
+            : appBarStylesClasses.backdrop[background ?? "clear"]
         }}`}
       >
         {(leading || title || center || actions) && toolbar}

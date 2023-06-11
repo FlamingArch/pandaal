@@ -26,14 +26,14 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 import { useAppStore } from "../hooks";
-import { useNavigate } from "@tanstack/router";
+import { useNavigate } from "react-router-dom";
 
 export default function PageSignIn() {
   const { auth } = useAppStore((state) => ({
     auth: state.auth,
   }));
 
-  const navigate = useNavigate({ from: "/signin" });
+  const navigate = useNavigate();
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [codeSent, setCodeSent] = useState<boolean | null>(null);
@@ -64,7 +64,7 @@ export default function PageSignIn() {
 
   const verifyCode = (code: string) => {
     response?.confirm(code).then((result) => {
-      navigate({ to: "/" });
+      navigate("/");
     });
   };
 
@@ -79,14 +79,21 @@ export default function PageSignIn() {
       buttonStyle="emphasis"
     >
       {loading && <IconPreloader className="w-6 h-6 stroke-white" />}
-      Send Code
+      <p className="text-white font-medium">Send Code</p>
     </Button>
   );
 
   return (
-    <Page>
-      <ColorBackdrop />
-      <Branding padding={16} color="white" className="sticky top-0 flex-grow" />
+    <Page
+      leading={
+        <Branding
+          padding={16}
+          color="white"
+          className="sticky top-0 flex-grow min-h-fit min-w-fit"
+        />
+      }
+      backdrop={<ColorBackdrop />}
+    >
       <Card>
         <IllustrationBanner illustration={illustration} />
         <Stack padding={8} gap={6}>
@@ -115,7 +122,11 @@ export default function PageSignIn() {
       <VerifySignInCode
         codeSent={!!codeSent}
         phoneNumber={"+91 " + phoneNumber}
-        onClose={() => navigate({ to: "/signin", replace: true })}
+        onClose={() =>
+          navigate("/signin", {
+            replace: true,
+          })
+        }
         onVerifyCode={verifyCode}
         onError={(e) => console.log(e)}
       />

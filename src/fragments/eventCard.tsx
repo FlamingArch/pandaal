@@ -1,22 +1,15 @@
-import { useNavigate } from "@tanstack/router";
+import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import { convertToTextDate } from "../functions";
 
 export default function EventCard({ event }: { event: any }) {
-  const navigate = useNavigate({ from: "/" });
+  const navigate = useNavigate();
 
   return (
     <div
       key={event.id}
-      onClick={() =>
-        navigate({
-          to: `$eventId`,
-          params: {
-            eventId: event.id,
-          },
-        })
-      }
-      className="flex flex-col hover:bg-primary-50 rounded-3xl cursor-pointer w-40 hover:scale-105 transition"
+      onClick={() => navigate(event.id)}
+      className="flex flex-col hover:bg-primary-50 nodark:hover:bg-primary-800 nodark:hover:bg-opacity-70  rounded-3xl cursor-pointer w-40 hover:scale-105 transition"
     >
       <img
         src={event.bannerURL}

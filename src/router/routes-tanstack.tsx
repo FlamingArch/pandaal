@@ -5,12 +5,12 @@ import {
   Outlet,
   RouterProvider,
 } from "@tanstack/router";
-import PageHome from "./app/home";
-import PageCity from "./app/city";
-import PageSignIn from "./app/signIn";
-import PageEvent from "./app/event";
-import PageInstructions from "./app/instructions";
-import PageRegister from "./app/register";
+import PageHome from "../pages/home";
+import PageCity from "../pages/city";
+import PageSignIn from "../app/signIn";
+import PageEvent from "../pages/event";
+import PageInstructions from "../app/instructions";
+import PageRegister from "../app/register";
 
 function Root() {
   return <Outlet />;

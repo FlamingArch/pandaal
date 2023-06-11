@@ -1,5 +1,5 @@
-import { useNavigate } from "@tanstack/router";
-import { AppBar, Button, Scaffold } from "../components";
+import { useNavigate } from "react-router-dom";
+import { AppBar, Button, Page } from "../components";
 import { IconBack } from "../components/icons";
 
 import { useAppStore } from "../hooks/useAppStore";
@@ -10,12 +10,14 @@ export default function PageCity() {
     setCity: state.setCity,
   }));
 
-  const navigate = useNavigate({ from: "/city" });
+  document.title = "Choose your City";
+
+  const navigate = useNavigate();
 
   const cities = ["Delhi", "Greater Noida", "Lucknow"];
 
   return (
-    <Scaffold
+    <Page
       appBar={
         <AppBar
           sticky
@@ -26,12 +28,11 @@ export default function PageCity() {
               Icon={IconBack}
               buttonStyle="action"
               label="Home"
-              onClick={() => navigate({ to: "/" })}
+              onClick={() => navigate(-1)}
             />
           }
-        >
-          <p className="text-2xl font-bold">Change your Location City</p>
-        </AppBar>
+          heading="Change your Location City"
+        />
       }
       padding={{ top: 0 }}
     >
@@ -41,13 +42,11 @@ export default function PageCity() {
             id={city}
             onClick={() => {
               setCity(city);
-              navigate({ to: "/" });
+              navigate(-1);
             }}
+            buttonStyle={city == citySelected ? "primary" : "secondary"}
             className={
-              "rounded-none " +
-              (city == citySelected
-                ? "bg-primary-500 text-white hover:bg-primary-500 hover:text-white"
-                : "bg-primary-50")
+              (city == citySelected ? "text-white " : "") + "rounded-none "
             }
           >
             {city}
@@ -55,6 +54,6 @@ export default function PageCity() {
           </Button>
         ))}
       </div>
-    </Scaffold>
+    </Page>
   );
 }

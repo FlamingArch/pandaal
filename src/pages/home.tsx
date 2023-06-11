@@ -1,5 +1,5 @@
 import { or, where } from "firebase/firestore";
-import { AppBar, Button, Scaffold } from "../components";
+import { AppBar, Button, Page } from "../components";
 import { groupData } from "../functions";
 import { useAppStore, useEvents } from "../hooks";
 import {
@@ -8,7 +8,8 @@ import {
   IconPreloader,
 } from "../components/icons";
 import { UserBadge, EventCard } from "../fragments";
-import { useNavigate } from "@tanstack/router";
+import { useNavigate } from "react-router-dom";
+import { QueryClient } from "@tanstack/react-query";
 
 const today = new Date().toISOString().slice(0, 10).replace(/-/g, ""); // Today date in YYYYMMDD string
 
@@ -32,20 +33,22 @@ export default function PageHome() {
     error,
   } = useEvents(firestore, queries, city);
 
-  const navigate = useNavigate({ from: "/" });
+  document.title = "pandaal: An event ecosystem";
+
+  const navigate = useNavigate();
 
   if (isLoading) {
     return (
-      <div className="w-screen h-screen place-content-center grid grid-flow-col gap-3">
-        <IconPreloader className="w-6 h-6 stroke-primary-500" />{" "}
-        <p className="font-medium">Loading</p>
-      </div>
+      <Page contentClassName="justify-center items-center">
+        <div className="flex gap-2">
+          <IconPreloader className="w-6 h-6 stroke-primary-500 nodark:stroke-white" />
+          <p className="font-medium">Loading</p>
+        </div>
+      </Page>
     );
   }
 
-  if (isError) {
-    return <div>{`Error fetching events: ${error}`}</div>;
-  }
+  if (isError) return <div>{`Error fetching events: ${error}`}</div>;
 
   const groupedEvents = groupData(events, "Category");
 
@@ -53,9 +56,9 @@ export default function PageHome() {
     <Button
       label={city}
       Icon={IconLocationEdit}
-      buttonStyle="cardSecondary"
+      buttonStyle="cardSecondaryReverse"
       className="mt-4 md:mt-0 md:w-[50vw] lg:w-[30vw] font-medium"
-      onClick={() => navigate({ to: "city" })}
+      onClick={() => navigate("/city")}
     />
   );
 
@@ -77,7 +80,7 @@ export default function PageHome() {
   );
 
   return (
-    <Scaffold padding={6} appBar={topBar}>
+    <Page padding={6} appBar={topBar}>
       {Object.keys(groupedEvents).map((category, index) => {
         return (
           <div className="flex gap-4 flex-col pb-6" key={index}>
@@ -88,6 +91,6 @@ export default function PageHome() {
           </div>
         );
       })}
-    </Scaffold>
+    </Page>
   );
 }

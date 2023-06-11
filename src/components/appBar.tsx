@@ -73,7 +73,9 @@ export default function AppBar({
     ...styles?.container,
   };
 
-  const responsiveStylesContainer = responsive ? "md:w-2/3 lg:w-1/2" : "";
+  const responsiveStylesContainer = responsive
+    ? "flex-grow md:flex-grow-0 md:w-2/3 lg:w-1/2"
+    : "";
   const responsiveStylesRoot = responsive ? "flex md:justify-center" : "";
 
   const stickyStyles = sticky

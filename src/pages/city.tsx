@@ -28,7 +28,7 @@ export default function PageCity() {
               Icon={IconBack}
               buttonStyle="action"
               label="Home"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate("/")}
             />
           }
           heading="Change your Location City"
@@ -42,7 +42,7 @@ export default function PageCity() {
             id={city}
             onClick={() => {
               setCity(city);
-              navigate(-1);
+              navigate("/");
             }}
             buttonStyle={city == citySelected ? "primary" : "secondary"}
             className={

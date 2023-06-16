@@ -13,10 +13,10 @@ import {
   IconWeb,
 } from "../components/icons";
 import { useAppStore } from "../hooks/useAppStore";
-import { parseHTML } from "../functions";
+import { convertToTextDate, parseHTML } from "../functions";
 
 import useEvent from "../hooks/useEvent";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 export default function PageEvent() {
   const { eventId } = useParams();
@@ -88,7 +88,7 @@ export default function PageEvent() {
       leading={
         <Button
           buttonStyle="actionSecondaryTransparentWhite"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
           Icon={IconBack}
         />
       }
@@ -125,7 +125,7 @@ export default function PageEvent() {
       padding={0}
     >
       <div
-        className="card col responsive gap-4 fadeInBottom flex-grow"
+        className="card nodark:bg-black nodark:text-white col responsive gap-5 fadeInBottom flex-grow"
         // style={{ animationDelay: "0ms", animationDuration: "500ms" }}
       >
         <div className="border w-8 border-black mx-auto"></div>
@@ -137,7 +137,7 @@ export default function PageEvent() {
         <div className="flex gap-2 items-center pb-2">
           <IconClock className="w-6 h-6 fill-primary-500" />
           <Text>
-            {eventData.startDate} {eventData.startTime}
+            {convertToTextDate(eventData.startDate)} {eventData.startTime}
             {(eventData.endDate || eventData.endTime) &&
               " to " + (eventData.endDate ? eventData.endDate : "")}
             {eventData.endTime && " " + eventData.endTime}
@@ -200,6 +200,7 @@ export default function PageEvent() {
         <div className="h-20" />
       </div>
       <div className="flex-grow" />
+      <Outlet />
     </Page>
   );
 }

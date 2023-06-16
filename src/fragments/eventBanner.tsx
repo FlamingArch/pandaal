@@ -8,7 +8,9 @@ export default function EventBanner({
   className?: string;
 }) {
   return (
-    <div className={"relative overflow-hidden " + className}>
+    <div
+      className={"relative overflow-hidden rounded-xl shadow-xl " + className}
+    >
       <div className="absolute bg-black -z-10 w-full">
         <img
           src={event?.bannerURL}

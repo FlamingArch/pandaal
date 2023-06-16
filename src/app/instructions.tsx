@@ -1,16 +1,17 @@
 import { useMemo } from "react";
-import { AppBar, Button, Scaffold, StepsList, Text } from "../components";
-import { IconBack, IconPreloader } from "../components/icons";
-import { useNavigate, useParams } from "@tanstack/router";
+import { AppBar, Button, Card, Page, StepsList, Text } from "../components";
+import { IconBack, IconPreloader, IconTicketFill } from "../components/icons";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppStore, useEvent } from "../hooks";
-import { ErrorCard, EventBanner } from "../fragments";
+import { ErrorCard, EventBanner, EventCard } from "../fragments";
 import { parseHTML } from "../functions";
+import { motion } from "framer-motion";
 
 export default function PageInstructions() {
   const navigate = useNavigate();
   const { eventId } = useParams();
 
-  if (!eventId) navigate({ to: "/" });
+  if (!eventId) navigate("/");
 
   const { firestore } = useAppStore((state) => ({
     firestore: state.firestore,
@@ -23,88 +24,67 @@ export default function PageInstructions() {
     error,
   } = useEvent(firestore, eventId!);
 
-  const appBar = useMemo(
-    () => (
-      <div className="z-40 sticky top-0">
-        <AppBar
-          gap={4}
-          padding={{ right: 0 }}
-          responsive
-          background="materialShadow"
-          leading={
-            <Button
-              label="Event"
-              Icon={IconBack}
-              buttonStyle="action"
-              onClick={() => navigate({ to: `/${eventId}` })}
-            />
-          }
-        >
-          <StepsList
-            className="pr-6"
-            elements={["Instructions", "Register", "Payment", "Confirmation"]}
-            activeIndex={0}
-          />
-        </AppBar>
-      </div>
-    ),
-    []
-  );
-
   if (isLoading) {
     return (
-      <Scaffold appBar={appBar}>
+      <Page>
         <div className="flex mx-auto h-full items-center gap-4">
           <IconPreloader className="w-6 h-6 stroke-primary-500" /> Loading
         </div>
-      </Scaffold>
+      </Page>
     );
   }
 
   if (isError) {
     return (
-      <Scaffold appBar={appBar} responsive>
+      <Page responsive>
         <ErrorCard error={error} />
-      </Scaffold>
+      </Page>
     );
   }
 
   if (!event.exists) {
-    navigate({ to: "/" });
+    navigate("/");
   }
 
-  const bottomAppBar = (
-    <AppBar sticky="bottom" background="gradient">
-      <Button
-        className="responsive"
-        buttonStyle="emphasis"
-        onClick={() => navigate({ to: "/register/$eventId" })}
-      >
-        Continue
-      </Button>
-    </AppBar>
-  );
+  const eventData = event.data;
 
   return (
-    <Scaffold
-      responsive
-      appBar={appBar}
-      bottomAppBar={bottomAppBar}
-      leading={<EventBanner className="fadeIn" event={event.data} />}
-      gap={4}
+    <motion.div
+      className="fixed inset-0 backdrop-blur-xl backdrop-saturate-150 backdrop-brightness-50 z-50 flex flex-col text-white"
+      animate={{ opacity: [0, 1] }}
     >
-      <Text headingLevel={5} className="fadeIn" bold>
-        How to Register?
-      </Text>
-      <p className="highlight-anchor fadeIn">
-        {parseHTML(event.data?.howToRegisterHtmlText)}
-      </p>
-      <Text className="pt-6 fadeIn uppercase font-semibold">
-        Terms and Conditions
-      </Text>
-      <p className="highlight-anchor fadeIn">
-        {parseHTML(event.data?.termsAndConditions)}
-      </p>
-    </Scaffold>
+      <AppBar
+        responsive
+        backdrop="clear"
+        className="slideInTop"
+        leading={
+          <Button
+            Icon={IconBack}
+            buttonStyle="actionSecondaryTransparentWhite"
+            onClick={() => navigate(`/${eventId}`)}
+          />
+        }
+        heading="How to Register"
+      />
+      <motion.div
+        animate={{ opacity: [0, 1], y: [40, 0] }}
+        transition={{ duration: 0.3 }}
+        className="flex-grow responsive p-10 pt-0"
+      >
+        {parseHTML(eventData?.howToRegisterHtmlText)}
+      </motion.div>
+      <AppBar
+        responsive
+        sticky="bottom"
+        backdrop="clear"
+        className="slideInBottom"
+      >
+        <Button
+          buttonStyle="primary"
+          label="Continue"
+          onClick={() => navigate(`${eventId}/register`)}
+        />
+      </AppBar>
+    </motion.div>
   );
 }

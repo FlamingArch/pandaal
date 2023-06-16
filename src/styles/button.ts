@@ -214,7 +214,7 @@ export default {
     `,
     icon: "w-6 h-6 fill-primary-500",
     iconContainer: "rounded-full bg-white p-4 ml-auto",
-    label: "font-[400] text-white w-28 text-left",
+    label: "font-[400] text-white w-32 text-left",
   },
   cardSquareSecondary: {
     button: `
@@ -223,6 +223,6 @@ export default {
     `,
     icon: "w-6 h-6 fill-primary-500",
     iconContainer: "rounded-full bg-white p-4 ml-auto",
-    label: "font-[400] w-28 text-left text-primary-500",
+    label: "font-[400] w-32 text-left text-primary-500",
   },
 };

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { AppBar, Button, Scaffold, StepsList, Text } from "../components";
+import { AppBar, Button, Page, StepsList, Text } from "../components";
 import { IconBack, IconPreloader } from "../components/icons";
 import { useNavigate, useParams } from "@tanstack/router";
 import { useAppStore, useEvent } from "../hooks";
@@ -55,19 +55,19 @@ export default function PageRegister() {
 
   if (signingIn || isLoading) {
     return (
-      <Scaffold appBar={appBar}>
+      <Page appBar={appBar}>
         <div className="flex mx-auto h-full items-center gap-4">
           <IconPreloader className="w-6 h-6 stroke-primary-500" /> Loading
         </div>
-      </Scaffold>
+      </Page>
     );
   }
 
   if (signInError || isError) {
     return (
-      <Scaffold appBar={appBar} responsive>
+      <Page appBar={appBar} responsive>
         <ErrorCard error={signInError ?? error} />
-      </Scaffold>
+      </Page>
     );
   }
 
@@ -92,7 +92,7 @@ export default function PageRegister() {
   );
 
   return (
-    <Scaffold
+    <Page
       responsive
       appBar={appBar}
       bottomAppBar={bottomAppBar}
@@ -108,6 +108,6 @@ export default function PageRegister() {
         No. of Tickets
       </Text>
       <Text className="pt-6 fadeIn uppercase font-semibold">Details</Text>
-    </Scaffold>
+    </Page>
   );
 }

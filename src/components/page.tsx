@@ -1,4 +1,4 @@
-type ScaffoldProps = {
+type PageProps = {
   children: React.ReactNode;
   appBar?: React.ReactNode;
   bottomAppBar?: React.ReactNode;
@@ -19,7 +19,7 @@ type ScaffoldProps = {
   className?: string;
 };
 
-export default function Page(props: ScaffoldProps) {
+export default function Page(props: PageProps) {
   return (
     <div
       className={

@@ -50,7 +50,7 @@ export default function PageEvent() {
   }
 
   if (!event.exists) {
-    return <h2>Event not found</h2>;
+    navigate("/");
   }
 
   const eventData = event.data!;

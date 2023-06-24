@@ -3,15 +3,10 @@ import { Text } from "../components";
 export default function SignInPromptText() {
   return (
     <>
-      <Text className="font-medium text-2xl">Sign In</Text>
-
+      <p className="font-medium text-2xl">Sign In</p>
       <div className="flex flex-col gap-2">
-        <Text headingLevel={0.5} className="font-medium">
-          Enter your Phone Number
-        </Text>
-        <Text>
-          We need to validate your phone number by sending a 6-Digit Code
-        </Text>
+        <p className="text-lg font-medium">Enter your Phone Number</p>
+        <p>We need to validate your phone number by sending a 6-Digit Code</p>
       </div>
     </>
   );

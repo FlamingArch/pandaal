@@ -26,7 +26,7 @@ body {
 }
 
 .card {
-  @apply rounded-3xl shadow-2xl bg-white;
+  @apply rounded-2xl shadow-2xl bg-white;
 }
 
 .col {
@@ -73,7 +73,7 @@ body {
 }
 
 .steps {
-  @apply flex justify-between gap-4 text-gray-400 cursor-default;
+  @apply flex justify-between gap-4 text-black text-opacity-40 cursor-default;
 
   .active {
     @apply text-primary-500 font-medium;

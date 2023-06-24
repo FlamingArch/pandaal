@@ -1,31 +1,23 @@
-import {
-  AppBar,
-  Button,
-  Card,
-  ColorBackdrop,
-  Input,
-  Page,
-} from "../components";
-import { IconPhone, IconPreloader } from "../components/icons";
+import { AppBar, Button, ColorBackdrop, Page } from "../components";
+import { IconBack, IconPreloader } from "../components/icons";
 import {
   Branding,
   Legal,
   IllustrationBanner,
   VerifySignInCode,
-  SignInPromptText,
 } from "../fragments";
 import { useEffect, useState } from "react";
 import illustration from "../assets/signin.svg";
 import constants from "../constants";
 import Stack from "../components/Stack";
 import InputPhoneNumber from "../components/inputPhoneNumber";
-import Spacer from "../components/Spacer";
 import {
   ConfirmationResult,
   RecaptchaVerifier,
   signInWithPhoneNumber,
 } from "firebase/auth";
 import { useAppStore } from "../hooks";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 export default function PageSignIn() {
@@ -85,39 +77,47 @@ export default function PageSignIn() {
 
   return (
     <Page
+      padding={0}
+      appBar={
+        <AppBar
+          responsive
+          backdrop="clear"
+          leading={
+            <Button
+              buttonStyle="actionSecondaryTransparentWhite"
+              Icon={IconBack}
+              onClick={() => navigate("/")}
+            />
+          }
+        />
+      }
       leading={
         <Branding
-          padding={16}
           color="white"
-          className="sticky top-0 flex-grow min-h-fit min-w-fit"
+          padding={{ bottom: 20, top: 0 }}
+          className="sticky top-0 fadeIn"
         />
       }
       backdrop={<ColorBackdrop />}
     >
-      <Card>
+      <div className="card nodark:bg-black nodark:text-white col fadeInBottom responsive gap-5 flex-grow md:flex-grow-0">
         <IllustrationBanner illustration={illustration} />
-        <Stack padding={8} gap={6}>
-          <SignInPromptText />
-          <InputPhoneNumber
-            phoneNumber={phoneNumber}
-            onChange={setPhoneNumber}
-          />
-          <Stack className="hidden-mobile" gap={6}>
-            {<Legal />}
-            {sendCodeButton}
-          </Stack>
+        <p className="font-medium text-2xl">Sign In</p>
+        <p className="flex flex-col gap-2">
+          <span className="font-medium">Enter your Phone Number</span> We need
+          to validate your phone number by sending a 6-Digit Code
+        </p>
+        <InputPhoneNumber phoneNumber={phoneNumber} onChange={setPhoneNumber} />
+        <Legal />
+        <Stack className="hidden-mobile" gap={6}>
+          {sendCodeButton}
         </Stack>
-      </Card>
+      </div>
       <div id="rcv"></div>
-      <Spacer minHeight={48} />
-      <AppBar
-        className="md:hidden z-10 fixed bottom-0 left-0 right-0 bg-primary-50 bg-opacity-60 backdrop-blur-2xl shadow-xl"
-        center={
-          <div className="flex-grow grid">
-            {sendCodeButton} {<Legal />}
-          </div>
-        }
-      />
+      <div className="md:flex-grow" />
+      <AppBar className="md:hidden z-10 fixed bottom-0 left-0 right-0 bg-primary-50 bg-opacity-60 backdrop-blur-2xl shadow-xl">
+        {sendCodeButton}
+      </AppBar>
 
       <VerifySignInCode
         codeSent={!!codeSent}
@@ -133,3 +133,4 @@ export default function PageSignIn() {
     </Page>
   );
 }
+//

@@ -82,7 +82,7 @@ export default function PageInstructions() {
         <Button
           buttonStyle="primary"
           label="Continue"
-          onClick={() => navigate(`${eventId}/register`)}
+          onClick={() => navigate(`/${eventId}/register`)}
         />
       </AppBar>
     </motion.div>

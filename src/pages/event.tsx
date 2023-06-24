@@ -6,6 +6,7 @@ import {
   IconInstagram,
   IconLocationArrow,
   IconMail,
+  IconOrganisation,
   IconPlus,
   IconPreloader,
   IconShareAlt,
@@ -134,14 +135,20 @@ export default function PageEvent() {
 
         <p className="font-medium">{eventData.Category}</p>
 
-        <div className="flex gap-2 items-center pb-2">
-          <IconClock className="w-6 h-6 fill-primary-500" />
-          <Text>
-            {convertToTextDate(eventData.startDate)} {eventData.startTime}
-            {(eventData.endDate || eventData.endTime) &&
-              " to " + (eventData.endDate ? eventData.endDate : "")}
-            {eventData.endTime && " " + eventData.endTime}
-          </Text>
+        <div className="flex flex-col">
+          <div className="flex gap-2 items-center pb-2">
+            <IconClock className="w-6 h-6 fill-primary-500" />
+            <Text>
+              {convertToTextDate(eventData.startDate)} {eventData.startTime}
+              {(eventData.endDate || eventData.endTime) &&
+                " to " + (eventData.endDate ? eventData.endDate : "")}
+              {eventData.endTime && " " + eventData.endTime}
+            </Text>
+          </div>
+          <div className="flex gap-2 items-center pb-2">
+            <IconOrganisation className="w-6 h-6 fill-primary-500" />
+            <Text>{eventData.organisationName}</Text>
+          </div>
         </div>
 
         <p className="font-medium">
@@ -176,13 +183,36 @@ export default function PageEvent() {
         <Text>{parseHTML(eventData.description)}</Text>
 
         <p className="font-medium">Connect With Us On</p>
-        <Button
-          buttonStyle="cardSecondary"
-          label="Instagram"
-          Icon={IconInstagram}
-        />
-        <Button buttonStyle="cardSecondary" label="Mail" Icon={IconMail} />
-        <Button buttonStyle="cardSecondary" label="Website" Icon={IconWeb} />
+        {eventData?.instagramHandle && (
+          <Button
+            buttonStyle="cardSecondary"
+            label="Instagram"
+            Icon={IconInstagram}
+            onClick={() =>
+              (window.location.href = `https://www.instagram.com/${eventData.instagramHandle}`)
+            }
+          />
+        )}
+        {eventData.eventEmailAddress && (
+          <Button
+            buttonStyle="cardSecondary"
+            label="Mail"
+            Icon={IconMail}
+            onClick={() =>
+              (window.location.href = `mailto:${eventData.eventEmailAddress}`)
+            }
+          />
+        )}
+        {eventData.eventWebsite && (
+          <Button
+            buttonStyle="cardSecondary"
+            label="Website"
+            Icon={IconWeb}
+            onClick={() =>
+              (window.location.href = `https://${eventData.eventWebsite}`)
+            }
+          />
+        )}
 
         <p className="font-medium">Organise With Us</p>
         <Button

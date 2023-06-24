@@ -2,15 +2,21 @@ type StepsListProps = {
   activeIndex: number;
   elements: string[];
   className?: string;
+  responsive?: boolean;
 };
 
 export default function StepsList({
   activeIndex,
   elements,
   className,
+  responsive,
 }: StepsListProps) {
   return (
-    <ul className={"steps responsive stick top-0 overflow-scroll " + className}>
+    <ul
+      className={
+        "steps overflow-scroll " + (responsive ? "responsive " : "") + className
+      }
+    >
       {elements.map((e, i) => {
         let className =
           activeIndex == i ? "active" : i < activeIndex ? "complete" : "";

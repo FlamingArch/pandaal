@@ -21,7 +21,7 @@ export default function Button({
           <Icon className={styles.icon}></Icon>
         </section>
       )}
-      {label && <p className={styles.label}>{label}</p>}
+      {label && <div className={styles.label}>{label}</div>}
       {children}
     </button>
   );

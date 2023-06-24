@@ -10,7 +10,7 @@ import PageCity from "../pages/city";
 import PageSignIn from "../app/signIn";
 import PageEvent from "../pages/event";
 import PageInstructions from "../app/instructions";
-import PageRegister from "../app/register";
+import PageRegister from "../pages/register";
 
 function Root() {
   return <Outlet />;

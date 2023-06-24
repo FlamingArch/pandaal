@@ -1,16 +1,16 @@
 import { useMemo } from "react";
 import { AppBar, Button, Page, StepsList, Text } from "../components";
 import { IconBack, IconPreloader } from "../components/icons";
-import { useNavigate, useParams } from "@tanstack/router";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppStore, useEvent } from "../hooks";
-import { ErrorCard, EventBanner, UserCard } from "../fragments";
+import { ErrorCard, EventBanner, UserBadge, UserCard } from "../fragments";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function PageRegister() {
   const navigate = useNavigate();
   const { eventId } = useParams();
 
-  if (!eventId) navigate({ to: "/" });
+  if (!eventId) navigate("/");
 
   const { firestore, auth } = useAppStore((state) => ({
     firestore: state.firestore,
@@ -26,36 +26,9 @@ export default function PageRegister() {
     error,
   } = useEvent(firestore, eventId!);
 
-  const appBar = useMemo(
-    () => (
-      <div className="z-40 sticky top-0">
-        <AppBar
-          gap={4}
-          responsive
-          background="materialShadow"
-          leading={
-            <Button
-              label="Instructions"
-              Icon={IconBack}
-              buttonStyle="action"
-              className="fadeIn"
-              onClick={() => navigate({ to: `/instructions/${eventId}` })}
-            />
-          }
-        >
-          <StepsList
-            elements={["Instructions", "Register", "Payment", "Confirmation"]}
-            activeIndex={0}
-          />
-        </AppBar>
-      </div>
-    ),
-    []
-  );
-
   if (signingIn || isLoading) {
     return (
-      <Page appBar={appBar}>
+      <Page>
         <div className="flex mx-auto h-full items-center gap-4">
           <IconPreloader className="w-6 h-6 stroke-primary-500" /> Loading
         </div>
@@ -65,29 +38,53 @@ export default function PageRegister() {
 
   if (signInError || isError) {
     return (
-      <Page appBar={appBar} responsive>
+      <Page responsive>
         <ErrorCard error={signInError ?? error} />
       </Page>
     );
   }
 
-  // if (!signingIn && !user) {
-  //   navigate({ to: "/signin" });
-  // }
+  if (!signingIn && !user) {
+    navigate("/signin");
+  }
 
   if (!event.exists) {
-    navigate({ to: "/" });
+    navigate("/");
   }
+
+  const appBar = (
+    <div className="z-40 sticky top-0">
+      <AppBar
+        gap={4}
+        responsive
+        heading="Register"
+        leading={
+          <Button
+            Icon={IconBack}
+            buttonStyle="action"
+            className="fadeIn"
+            onClick={() => navigate(`/${eventId}/instructions`)}
+          />
+        }
+        actions={<UserBadge user={user} />}
+      >
+        <StepsList
+          elements={["Instructions", "Register", "Payment", "Confirmation"]}
+          activeIndex={1}
+          className="p-4"
+        />
+      </AppBar>
+    </div>
+  );
 
   const bottomAppBar = (
     <AppBar sticky="bottom" background="gradient">
       <Button
         className="responsive"
         buttonStyle="emphasis"
-        onClick={() => navigate({ to: "/register/$eventId" })}
-      >
-        Continue
-      </Button>
+        label="Continue"
+        onClick={() => navigate(`/${eventId}/confirmation`)}
+      ></Button>
     </AppBar>
   );
 
@@ -99,15 +96,14 @@ export default function PageRegister() {
       leading={<EventBanner className="fadeIn" event={event.data} />}
       gap={4}
     >
-      <Text headingLevel={5} className="fadeIn" bold>
+      <Text headingLevel={5} className="fadeIn">
         Details
       </Text>
-      <Text className="pt-6 fadeIn uppercase font-semibold">Signed In as</Text>
+
+      <p className="pt-6 fadeIn uppercase font-semibold">Signed In as</p>
       <UserCard user={user!} />
-      <Text className="pt-6 fadeIn uppercase font-semibold">
-        No. of Tickets
-      </Text>
-      <Text className="pt-6 fadeIn uppercase font-semibold">Details</Text>
+      <p className="pt-6 fadeIn uppercase font-semibold">No. of Tickets</p>
+      <p className="pt-6 fadeIn uppercase font-semibold">Details</p>
     </Page>
   );
 }

@@ -85,8 +85,8 @@ export default function PageHome() {
         return (
           <div className="flex gap-4 flex-col pb-6" key={index}>
             <p className="font-semibold uppercase">{category}</p>
-            {groupedEvents[category].map((event: any) => (
-              <EventCard event={event} />
+            {groupedEvents[category].map((event: any, index: number) => (
+              <EventCard event={event} key={index} />
             ))}
           </div>
         );

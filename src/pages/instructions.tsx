@@ -1,9 +1,8 @@
-import { useMemo } from "react";
-import { AppBar, Button, Card, Page, StepsList, Text } from "../components";
-import { IconBack, IconPreloader, IconTicketFill } from "../components/icons";
+import { AppBar, Button, Page } from "../components";
+import { IconBack, IconPreloader } from "../components/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppStore, useEvent } from "../hooks";
-import { ErrorCard, EventBanner, EventCard } from "../fragments";
+import { ErrorCard } from "../fragments";
 import { parseHTML } from "../functions";
 import { motion } from "framer-motion";
 
@@ -47,6 +46,10 @@ export default function PageInstructions() {
   }
 
   const eventData = event.data;
+
+  if (!eventData?.howToRegisterHtmlText) {
+    navigate(`/${eventId}/register`);
+  }
 
   return (
     <motion.div

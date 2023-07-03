@@ -3,9 +3,9 @@ import PageHome from "../pages/home";
 import PageEvent from "../pages/event";
 import PageDev from "../pages/dev";
 import PageCity from "../pages/city";
-import PageSignIn from "../app/signIn";
+import PageSignIn from "../pages/signIn";
 import PageRegister from "../pages/register";
-import PageInstructions from "../app/instructions";
+import PageInstructions from "../pages/instructions";
 
 const routes = createBrowserRouter([
   { path: "/", element: <PageHome /> },

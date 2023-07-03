@@ -1,14 +1,17 @@
-import { useMemo } from "react";
 import { AppBar, Button, Page, StepsList, Text } from "../components";
 import { IconBack, IconPreloader } from "../components/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppStore, useEvent } from "../hooks";
 import { ErrorCard, EventBanner, UserBadge, UserCard } from "../fragments";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useState } from "react";
+import Counter from "../components/counter";
 
 export default function PageRegister() {
   const navigate = useNavigate();
   const { eventId } = useParams();
+
+  const [noTickets, setNoTickets] = useState(1);
 
   if (!eventId) navigate("/");
 
@@ -102,7 +105,10 @@ export default function PageRegister() {
 
       <p className="pt-6 fadeIn uppercase font-semibold">Signed In as</p>
       <UserCard user={user!} />
+
       <p className="pt-6 fadeIn uppercase font-semibold">No. of Tickets</p>
+      <Counter onChange={(val) => setNoTickets(val)} />
+
       <p className="pt-6 fadeIn uppercase font-semibold">Details</p>
     </Page>
   );

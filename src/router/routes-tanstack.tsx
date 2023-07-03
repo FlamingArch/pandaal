@@ -7,9 +7,9 @@ import {
 } from "@tanstack/router";
 import PageHome from "../pages/home";
 import PageCity from "../pages/city";
-import PageSignIn from "../app/signIn";
+import PageSignIn from "../pages/signIn";
 import PageEvent from "../pages/event";
-import PageInstructions from "../app/instructions";
+import PageInstructions from "../pages/instructions";
 import PageRegister from "../pages/register";
 
 function Root() {

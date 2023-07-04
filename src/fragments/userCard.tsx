@@ -13,7 +13,7 @@ export default function userCard({ user }: { user: User }) {
         className="w-24 h-fit rounded-2xl max-w-[50%] aspect-square object-cover"
       />
       <div className="flex flex-grow">
-        <div className="flex flex-col justify-center flex-grow pb-4 gap-1">
+        <div className="flex flex-col justify-center flex-grow gap-1">
           <p className="text-lg font-medium">
             {user?.displayName ?? "User Not Signed In"}
           </p>

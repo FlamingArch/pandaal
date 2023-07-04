@@ -21,7 +21,11 @@ export default function StepsList({
         let className =
           activeIndex == i ? "active" : i < activeIndex ? "complete" : "";
 
-        return <li className={className}>{e}</li>;
+        return (
+          <li key={i} className={className}>
+            {e}
+          </li>
+        );
       })}
     </ul>
   );

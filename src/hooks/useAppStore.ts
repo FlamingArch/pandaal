@@ -4,6 +4,7 @@ import { Auth, getAuth } from "firebase/auth";
 import { Functions, getFunctions } from "firebase/functions";
 import { create } from "zustand";
 import { getCityStorage, setCityStorage } from "../functions";
+import { Attendee } from "../types/attendee";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAzkEwuLhZwpL57SkaAY1ee2ym91fQLIGk",
@@ -23,6 +24,7 @@ export type AppStoreData = {
   firestore: Firestore;
   auth: Auth;
   functions: Functions;
+  savedAttendees: Attendee[];
 };
 
 export const useAppStore = create<AppStoreData>((set) => ({
@@ -35,6 +37,23 @@ export const useAppStore = create<AppStoreData>((set) => ({
   firestore: getFirestore(app),
   auth: getAuth(app),
   functions: getFunctions(app),
+  savedAttendees: [
+    {
+      name: "Harsh Chaturvedi",
+      age: 22,
+      id: "3csdc",
+    },
+    {
+      name: "Manu Yadav",
+      age: 22,
+      id: "3cdsc",
+    },
+    {
+      name: "Niggasur Singh Niggapuriya",
+      age: 22,
+      id: "32cesd",
+    },
+  ],
 }));
 
 export default useAppStore;

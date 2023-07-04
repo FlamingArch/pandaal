@@ -11,7 +11,7 @@ export default function EventCard({ event }: { event: any }) {
       onClick={() => navigate(event.id)}
       className="flex flex-col hover:bg-primary-50 nodark:hover:bg-primary-800 nodark:hover:bg-opacity-70  rounded-3xl cursor-pointer w-40 hover:scale-105 transition"
     >
-      <div className=" relative aspect-[9/12] rounded-3xl bg-secondary-100">
+      <div className=" relative aspect-[9/12] rounded-3xl bg-primary-50">
         <img
           src={event.bannerURL}
           className="aspect-[9/12] object-cover rounded-3xl z-10"

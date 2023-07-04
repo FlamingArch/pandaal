@@ -1,26 +1,38 @@
 import { AppBar, Button, Page, StepsList, Text } from "../components";
-import { IconBack, IconPreloader } from "../components/icons";
+import {
+  IconBack,
+  IconDone,
+  IconPlus,
+  IconPreloader,
+} from "../components/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppStore, useEvent } from "../hooks";
 import { ErrorCard, EventBanner, UserBadge, UserCard } from "../fragments";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
-import Counter from "../components/counter";
+import { AttendeeID } from "../types/attendee";
+import EventQuestionsForm from "../fragments/eventQuestionsForm";
+import { parseHTML } from "../functions";
 
 export default function PageRegister() {
   const navigate = useNavigate();
   const { eventId } = useParams();
 
-  const [noTickets, setNoTickets] = useState(1);
-
   if (!eventId) navigate("/");
 
-  const { firestore, auth } = useAppStore((state) => ({
+  const { firestore, auth, savedAttendees } = useAppStore((state) => ({
     firestore: state.firestore,
     auth: state.auth,
+    savedAttendees: state.savedAttendees,
   }));
 
   const [user, signingIn, signInError] = useAuthState(auth);
+
+  const [attendees, setAttendees] = useState<AttendeeID[]>([
+    savedAttendees[0].id,
+  ]);
+
+  const [formValidationPass, setFormValidationPass] = useState(false);
 
   const {
     data: event,
@@ -83,6 +95,7 @@ export default function PageRegister() {
   const bottomAppBar = (
     <AppBar sticky="bottom" background="gradient">
       <Button
+        disabled={attendees.length < 1 || !formValidationPass}
         className="responsive"
         buttonStyle="emphasis"
         label="Continue"
@@ -99,17 +112,59 @@ export default function PageRegister() {
       leading={<EventBanner className="fadeIn" event={event.data} />}
       gap={4}
     >
-      <Text headingLevel={5} className="fadeIn">
-        Details
-      </Text>
-
-      <p className="pt-6 fadeIn uppercase font-semibold">Signed In as</p>
+      <p className="pt-6 fadeIn font-semibold">Signed In as</p>
       <UserCard user={user!} />
 
-      <p className="pt-6 fadeIn uppercase font-semibold">No. of Tickets</p>
-      <Counter onChange={(val) => setNoTickets(val)} />
+      {event?.data?.questions && (
+        <>
+          <p className="pt-6 fadeIn font-semibold">Questions</p>
+          <EventQuestionsForm
+            questions={event.data?.questions}
+            onFormValidationChange={setFormValidationPass}
+          />
+        </>
+      )}
 
-      <p className="pt-6 fadeIn uppercase font-semibold">Details</p>
+      <p className="pt-6 fadeIn font-semibold">Attendees</p>
+
+      <Button Icon={IconPlus} label="New Attendee" />
+      {savedAttendees.map((attendee) => (
+        <Button
+          key={attendee.id}
+          buttonStyle={
+            attendees.filter((e) => e == attendee.id).length > 0
+              ? "cardBigReverse"
+              : "cardBigSecondaryReverse"
+          }
+          label={
+            <div className="flex gap-2 items-center">
+              <p className="font-medium">{attendee.name}</p> ·
+              <p className="text-sm">{attendee.age} Years</p>
+            </div>
+          }
+          Icon={
+            attendees.filter((e) => e == attendee.id).length > 0
+              ? IconDone
+              : IconPlus
+          }
+          onClick={() => {
+            if (attendees.filter((e) => e == attendee.id).length > 0) {
+              setAttendees(attendees.filter((e) => e != attendee.id));
+            } else {
+              setAttendees([...attendees, attendee.id]);
+            }
+          }}
+        />
+      ))}
+
+      {event?.data?.termsAndConditions && (
+        <>
+          <p className="pt-6 fadeIn font-semibold">Terms and Conditions</p>
+          <div className="highlight-anchor">
+            {parseHTML(event?.data?.termsAndConditions)}
+          </div>
+        </>
+      )}
     </Page>
   );
 }

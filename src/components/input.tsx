@@ -1,4 +1,4 @@
-import StyleObject from "../styleObject";
+import StyleObject from "../types/styleObject";
 
 type InputProps = {
   children?: React.ReactNode;

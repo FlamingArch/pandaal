@@ -1,3 +1,5 @@
+import EventQuestion from "./eventQuestion";
+
 type EventQuestionsFormProps = {
   questions: EventQuestion[];
   onDataChange?: (data: any) => void;

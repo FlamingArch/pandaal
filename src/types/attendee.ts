@@ -1,7 +1,7 @@
 export type Attendee = {
-  id: string;
+  id: AttendeeID;
   name: string;
-  age: AttendeeID;
+  age: number;
 };
 
 export type AttendeeID = string;

@@ -27,6 +27,10 @@ export type AppStoreData = {
   savedAttendees: Attendee[];
 };
 
+const firestore = getFirestore(app);
+const auth = getAuth(app);
+const functions = getFunctions(app);
+
 export const useAppStore = create<AppStoreData>((set) => ({
   city: getCityStorage() ?? "Greater Noida",
   setCity: (city) =>
@@ -34,9 +38,9 @@ export const useAppStore = create<AppStoreData>((set) => ({
       setCityStorage(city);
       return { ...state, city: city };
     }),
-  firestore: getFirestore(app),
-  auth: getAuth(app),
-  functions: getFunctions(app),
+  firestore: firestore,
+  auth: auth,
+  functions: functions,
   savedAttendees: [
     {
       name: "Harsh Chaturvedi",
@@ -49,7 +53,7 @@ export const useAppStore = create<AppStoreData>((set) => ({
       id: "3cdsc",
     },
     {
-      name: "Niggasur Singh Niggapuriya",
+      name: "Niggasur Kumar Niggapuriya",
       age: 22,
       id: "32cesd",
     },

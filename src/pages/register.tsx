@@ -5,7 +5,7 @@ import {
   IconPlus,
   IconPreloader,
 } from "../components/icons";
-import { useNavigate, useParams } from "react-router-dom";
+import { ScrollRestoration, useNavigate, useParams } from "react-router-dom";
 import { useAppStore, useEvent } from "../hooks";
 import { ErrorCard, EventBanner, UserBadge, UserCard } from "../fragments";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -13,6 +13,7 @@ import { useState } from "react";
 import { AttendeeID } from "../types/attendee";
 import EventQuestionsForm from "../fragments/eventQuestionsForm";
 import { parseHTML } from "../functions";
+import { getFunctions } from "firebase/functions";
 
 export default function PageRegister() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export default function PageRegister() {
   ]);
 
   const [formValidationPass, setFormValidationPass] = useState(false);
+  const [answers, setAnswers] = useState([]);
 
   const {
     data: event,
@@ -99,7 +101,20 @@ export default function PageRegister() {
         className="responsive"
         buttonStyle="emphasis"
         label="Continue"
-        onClick={() => navigate(`/${eventId}/confirmation`)}
+        onClick={() => {
+          console.log(answers);
+
+          console.log(
+            attendees.map((attendee) => {
+              const attendeeObj = savedAttendees.filter(
+                (a) => attendee == a.id
+              )[0];
+              return { name: attendeeObj.name, age: attendeeObj.age };
+            })
+          );
+
+          // navigate(`/${eventId}/confirmation`);
+        }}
       ></Button>
     </AppBar>
   );
@@ -112,6 +127,11 @@ export default function PageRegister() {
       leading={<EventBanner className="fadeIn" event={event.data} />}
       gap={4}
     >
+      <ScrollRestoration
+        getKey={(location, matches) => {
+          return location.pathname;
+        }}
+      />
       <p className="pt-6 fadeIn font-semibold">Signed In as</p>
       <UserCard user={user!} />
 
@@ -121,6 +141,7 @@ export default function PageRegister() {
           <EventQuestionsForm
             questions={event.data?.questions}
             onFormValidationChange={setFormValidationPass}
+            onDataChange={setAnswers}
           />
         </>
       )}

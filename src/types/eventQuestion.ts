@@ -10,3 +10,5 @@ type EventQuestion = {
   ques: string;
   choices?: string[];
 };
+
+export default EventQuestion;

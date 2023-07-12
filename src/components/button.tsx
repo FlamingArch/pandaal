@@ -1,4 +1,4 @@
-import buttonStyles from "../styles/button";
+import buttonStyles from "../tailwind/button";
 import { ButtonProps, ButtonStyles } from "../types/button";
 
 function getButtonStyles(style: ButtonStyles) {

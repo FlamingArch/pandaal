@@ -14,7 +14,9 @@ export default function StepsList({
   return (
     <ul
       className={
-        "steps overflow-scroll " + (responsive ? "responsive " : "") + className
+        "steps max-w-[90vw] overflow-scroll " +
+        (responsive ? "responsive " : "") +
+        className
       }
     >
       {elements.map((e, i) => {

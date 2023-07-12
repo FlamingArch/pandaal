@@ -66,7 +66,12 @@ export default function PageHome() {
     <AppBar
       sticky
       background="material"
-      leading={<p className="font-bold text-xl text-primary-500">pandaal</p>}
+      className="z-10"
+      leading={
+        <p className="font-bold text-xl text-primary-500">
+          pandaal <span className="text-red-500 font-black">ALPHA</span>
+        </p>
+      }
       center={<div className="hidden-mobile flex flex-col">{locationBar}</div>}
       actions={
         <>

@@ -17,7 +17,12 @@ import { useAppStore } from "../hooks/useAppStore";
 import { convertToTextDate, parseHTML } from "../functions";
 
 import useEvent from "../hooks/useEvent";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import {
+  Outlet,
+  ScrollRestoration,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 export default function PageEvent() {
   const { eventId } = useParams();
@@ -125,6 +130,11 @@ export default function PageEvent() {
       bottomAppBar={bottomAppBar}
       padding={0}
     >
+      <ScrollRestoration
+        getKey={(location, matches) => {
+          return location.pathname;
+        }}
+      />
       <div
         className="card nodark:bg-black nodark:text-white col responsive gap-5 fadeInBottom flex-grow"
         // style={{ animationDelay: "0ms", animationDuration: "500ms" }}

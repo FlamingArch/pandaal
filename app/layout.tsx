@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins as PrimaryFont } from "next/font/google";
 import "./globals.css";
-import ViewHeader from "@/views/header";
+import HeaderView from "@/view/header";
 
 const primaryFont = PrimaryFont({
   subsets: ["latin"],
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={primaryFont.className}>
-        <ViewHeader />
+        <HeaderView />
         {children}
       </body>
     </html>

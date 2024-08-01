@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 
-export default function ViewHeader() {
+export default function HeaderView() {
   const placeholderProfilePicture =
     "https://unsplash.com/photos/p9tCx5hQZ9U/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzIyNTA5Mzg1fA&force=true&w=640";
   const branding = (
@@ -21,3 +21,4 @@ export default function ViewHeader() {
     </Header>
   );
 }
+

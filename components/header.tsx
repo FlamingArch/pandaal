@@ -5,15 +5,15 @@ export default function Header(props: {
   trailing?: React.ReactNode;
   hideBrandingOnSmallerViewport?: boolean;
 }) {
+  const brandingClassNames = props.hideBrandingOnSmallerViewport
+    ? "hidden md:flex"
+    : "flex";
+
   return (
     <header className="p-6 backdrop-filter backdrop-blur-3xl backdrop-saturate-150 flex sticky top-0 border-b border-black/10 items-center">
       {props.leading}
-
-      {props.branding && (
-        <div className="flex-grow hidden md:flex">{props.branding}</div>
-      )}
-
-      {props.children}
+      <div className={brandingClassNames}>{props.branding}</div>
+      <div className="flex-grow">{props.children}</div>
       {props.trailing}
     </header>
   );

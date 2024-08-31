@@ -25,7 +25,7 @@ export default function CategoryFilterView() {
     <>
       <div
         className={
-          "rounded-full text-sm p-2 5 px-6 whitespace-nowrap transition-colors duration-300 " +
+          "rounded-full flex items-center text-sm p-2.5 px-6 whitespace-nowrap transition-colors duration-300 cursor-pointer " +
           (selectedCategory == undefined
             ? "bg-branding-500 text-white"
             : "bg-black/10")
@@ -38,7 +38,7 @@ export default function CategoryFilterView() {
         <div
           key={c.id}
           className={
-            "rounded-full text-sm p-2.5 px-6 whitespace-nowrap transition-colors duration-300 " +
+            "rounded-full flex items-center text-sm p-2.5 px-6 whitespace-nowrap transition-colors duration-300 cursor-pointer " +
             (c.id == selectedCategory
               ? "bg-branding-500 text-white"
               : "bg-black/10")

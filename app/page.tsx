@@ -9,6 +9,10 @@ export default function Home() {
           <CategoryFilterView />
         </div>
       </LocationView>
+      <img
+        src="https://unsplash.com/photos/9vDdkxSCAD4/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzIyNTI0Nzg2fA&force=true&w=2400"
+        className="w-screen h-[34vh] object-cover"
+      />
     </main>
   );
 }
